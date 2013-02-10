@@ -1,0 +1,37 @@
+{
+    "ships":{
+        "ship1":{
+            "position":[
+            -205.0,
+            0.0,
+            -200.0
+            ],
+            "hullMaterial":{
+                "name": "Common/MatDefs/Light/Lighting.j3md",
+                "textures": [{"key":"DiffuseMap","value":{"textureName":"Textures/wood.jpeg"}}]
+            },
+            "sailMaterial":{
+                "name": "Common/MatDefs/Light/Lighting.j3md",
+                "textures": [{"key":"DiffuseMap","value":{"textureName":"Textures/sail.jpg"}}]
+            }
+        }
+    },
+    "wind":{
+        "vector":[1,0]
+    },
+    "sun":{
+        "vector":[-20,-20,20],
+        "color":[1,1,1,0]
+    },
+    "water":{
+        "exists": false
+    },
+    "harness":{
+        "shipName": "ship1"
+    },
+    "sky":{
+        "scale":1,
+        "skyTexture":"Scenes/c.jpeg",
+        "spheric":true
+    }
+}
