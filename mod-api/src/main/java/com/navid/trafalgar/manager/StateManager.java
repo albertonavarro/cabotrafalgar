@@ -59,8 +59,11 @@ public class StateManager implements EventListener {
             } else if (event.equals(EventManager.FAILED)) {
                 currentState = STATES.FAILED;
             }
-        } else if (event.equals(EventManager.UNLOAD)) {
+        } 
+        
+        if (event.equals(EventManager.UNLOAD)) {
             currentState = STATES.UNLOAD;
+            update(0);
         }
 
     }
