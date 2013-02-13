@@ -10,13 +10,10 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 
-
 public class MillestoneModel extends AMillestoneModel {
 
     private RigidBodyControl millestone;
-    
     private Spatial spatial;
-    
 
     public MillestoneModel(AssetManager assetManager) {
         super();
@@ -29,11 +26,11 @@ public class MillestoneModel extends AMillestoneModel {
         millestone = new RigidBodyControl(sceneShape, 0);
         this.addControl(millestone);
         millestone.setPhysicsLocation(new Vector3f(-200, 0, 100));
-        
+
     }
-    
+
     @Override
-    public void setLocalTranslation(Vector3f pos){
+    public void setLocalTranslation(Vector3f pos) {
         super.setLocalTranslation(pos);
         millestone.setPhysicsLocation(pos);
     }
@@ -47,12 +44,12 @@ public class MillestoneModel extends AMillestoneModel {
 
     public void render(RenderManager rm, ViewPort vp) {
     }
-    
-    public boolean isEnabled(){
+
+    public boolean isEnabled() {
         return true;
     }
-    
-    public void setEnabled(boolean value){
+
+    public void setEnabled(boolean value) {
         //todo
     }
 }
