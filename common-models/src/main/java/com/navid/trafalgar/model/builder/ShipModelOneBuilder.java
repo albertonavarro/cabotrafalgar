@@ -46,6 +46,7 @@ public class ShipModelOneBuilder implements BuilderInterface {
 
     public Object build(String instanceName, Map<String, String> customValues) {
         ShipOneModel model = new ShipOneModel(assetManager, eventManager);
+        model.setName(instanceName);
         
         model.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md"){{
             setTexture("DiffuseMap", assetManager.loadTexture("Textures/wood.jpeg"));
@@ -55,7 +56,7 @@ public class ShipModelOneBuilder implements BuilderInterface {
             setTexture("DiffuseMap", assetManager.loadTexture("Textures/sail.jpg"));
         }});
         
-        if(customValues.containsKey("position")){
+        if(customValues != null && customValues.containsKey("position")){
             model.setLocalTranslation(FormatUtils.getVector3fFromString(customValues.get("position")));
         }
         

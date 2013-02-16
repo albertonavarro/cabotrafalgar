@@ -39,8 +39,7 @@ public class StartedListener implements PrestartState, StartedState {
     public void onStarted(float tpf) {
         gameStatus.getTime().setValue(gameStatus.getTime().getValue() + tpf);
 
-        gameStatus.getGameNode().updateLogicalState(tpf);
-        gameStatus.getGameGUINode().updateLogicalState(tpf);
+        
     }
 
     public void onUnload() {

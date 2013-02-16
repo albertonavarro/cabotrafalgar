@@ -9,16 +9,6 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
-import com.navid.trafalgar.model.Dependent;
-import com.navid.trafalgar.model.Dependent;
-import com.navid.trafalgar.model.GameModel;
-import com.navid.trafalgar.model.GameModel;
-import com.navid.trafalgar.model.IContext;
-import com.navid.trafalgar.model.IContext;
-import com.navid.trafalgar.model.IWind;
-import com.navid.trafalgar.model.IWind;
-import com.navid.trafalgar.model.TrafalgarNode;
-import com.navid.trafalgar.model.TrafalgarNode;
 import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.StepRecord;
 

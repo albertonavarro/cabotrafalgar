@@ -3,7 +3,6 @@ package com.navid.trafalgar.mod.counterclock;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
-import com.navid.trafalgar.persistence.RecordPersistenceServiceFactory;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
@@ -44,6 +43,9 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     private String selectedMap;
     private Boolean showGhost = Boolean.TRUE;
     private static final Logger logger = Logger.getLogger(ScreenSelectMap.class.getName());
+    
+    @Autowired
+    private RecordPersistenceService persistence;
     
     @Autowired
     private GameConfiguration gameConfiguration;
@@ -171,8 +173,6 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
 
     private void setSelectedMap(String map) {
 
-        RecordPersistenceService persistence = RecordPersistenceServiceFactory.getFactory(RecordPersistenceServiceFactory.Type.LOCAL);
-
         List<CompetitorInfo> list = persistence.getTopCompetitors(4, map);
 
         ListBox dropDown1 = screen.findNiftyControl("listLocalTimes", ListBox.class);
@@ -194,6 +194,13 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
 
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = (XmlBeanFactory) beanFactory;
+    }
+
+    /**
+     * @param persistence the persistence to set
+     */
+    public void setPersistence(RecordPersistenceService persistence) {
+        this.persistence = persistence;
     }
 
 }

@@ -11,6 +11,7 @@
     <bean id="mod.counterclock.mainscreen" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreen" autowire="byType"/>
     <bean id="mod.counterclock.mapselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMap" autowire="byType"/>
     <bean id="mod.counterclock.shipselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectShip" autowire="byType"/>
-     <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
+    <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
+    <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService" />
 
 </beans>

@@ -6,7 +6,6 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.system.AppSettings;
 import com.navid.trafalgar.manager.InitState;
-import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,8 +19,6 @@ public class InitStateListener implements InitState {
     private RenderManager renderManager;
     @Autowired
     private GameStatus gameStatus;
-    @Autowired
-    private GameConfiguration gameConfiguration;
     @Autowired
     private AppSettings settings;
 
@@ -75,13 +72,6 @@ public class InitStateListener implements InitState {
      */
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
-    }
-
-    /**
-     * @param gameConfiguration the gameConfiguration to set
-     */
-    public void setGameConfiguration(GameConfiguration gameConfiguration) {
-        this.gameConfiguration = gameConfiguration;
     }
 
     /**

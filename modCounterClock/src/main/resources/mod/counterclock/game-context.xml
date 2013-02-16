@@ -17,12 +17,13 @@
     <bean id="mod.counterclock.gameModel" class="com.navid.trafalgar.mod.counterclock.CounterClockGameModel" autowire="byType"></bean>
     
     <!-- Listeners -->
-    <bean id="mod.counterclock.LoadMap" class="com.navid.trafalgar.mod.counterclock.statelisteners.LoadMapStateListener" autowire="byType"></bean>
-    <bean id="mod.counterclock.LoadCam" class="com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener" autowire="byType"></bean>
-    <bean id="mod.counterclock.Started" class="com.navid.trafalgar.mod.counterclock.statelisteners.StartedListener"  autowire="byType"></bean>
-    <bean id="mod.counterclock.GameRecorder" class="com.navid.trafalgar.mod.counterclock.statelisteners.GameRecorder" autowire="byType"></bean>
-    <bean id="mod.counterclock.InitListener" class="com.navid.trafalgar.mod.counterclock.statelisteners.InitStateListener" autowire="byType"></bean>
-    <bean id="mod.counterclock.LoadEventListener" class="com.navid.trafalgar.mod.counterclock.statelisteners.LoadEventsListener" autowire="byType"></bean>
-    <bean id="mod.counterclock.GUIUpdater" class="com.navid.trafalgar.mod.counterclock.statelisteners.GUIUpdater" autowire="byType"></bean>
+    <bean id="mod.counterclock.LoadMap" class="com.navid.trafalgar.mod.counterclock.statelisteners.LoadMapStateListener" autowire="byType"/>
+    <bean id="mod.counterclock.LoadCam" class="com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener" autowire="byType"/>
+    <bean id="mod.counterclock.Started" class="com.navid.trafalgar.mod.counterclock.statelisteners.StartedListener"  autowire="byType"/>
+    <bean id="mod.counterclock.GameRecorder" class="com.navid.trafalgar.mod.counterclock.statelisteners.GameRecorder" autowire="byType"/>
+    <bean id="mod.counterclock.InitListener" class="com.navid.trafalgar.mod.counterclock.statelisteners.InitStateListener" autowire="byType"/>
+    <bean id="mod.counterclock.LoadEventListener" class="com.navid.trafalgar.mod.counterclock.statelisteners.LoadEventsListener" autowire="byType"/>
+    <bean id="mod.counterclock.GUIUpdater" class="com.navid.trafalgar.mod.counterclock.statelisteners.GUIUpdater" autowire="byType"/>
+    <bean id="mod.counterclock.GhostViewer" class="com.navid.trafalgar.mod.counterclock.statelisteners.GhostViewer" autowire="byType"/>
     
 </beans>

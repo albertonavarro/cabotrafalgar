@@ -28,7 +28,7 @@ public abstract class AShipOneModel extends AShipModel {
     @Override
     public final CandidateRecord getCandidateRecordInstance() {
         ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
-        candidateRecord.getHeader().setShipModel("ModelOne");
+        candidateRecord.getHeader().setShipModel("ShipModelOneX");
         return candidateRecord;
     }
 

@@ -7,7 +7,6 @@ import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
 import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
-import com.navid.trafalgar.persistence.RecordPersistenceServiceFactory;
 import com.navid.trafalgar.persistence.StepRecord;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +22,11 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
     private GameStatus gameStatus;
     @Autowired
     private GameConfiguration gameConfiguration;
-    private CandidateRecord candidateRecord;
-    private RecordPersistenceService persistenceService = RecordPersistenceServiceFactory.getFactory(RecordPersistenceServiceFactory.Type.LOCAL);
-    
+    @Autowired
+    private RecordPersistenceService persistenceService;
     @Autowired
     private CounterClockGameModel gameModel;
+    private CandidateRecord candidateRecord;
     private AShipModel ship;
     private List<String> eventList = new ArrayList<String>();
 
@@ -80,14 +79,21 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
     public void setGameConfiguration(GameConfiguration gameConfiguration) {
         this.gameConfiguration = gameConfiguration;
     }
-    
+
     @Autowired
-    public void setEventManager(EventManager eventManager){
+    public void setEventManager(EventManager eventManager) {
         eventManager.registerListener(new EventListener() {
 
             public void onEvent(String event) {
                 eventList.add(event);
             }
         }, new String[]{"MILLESTONE_REACHED"});
+    }
+
+    /**
+     * @param persistenceService the persistenceService to set
+     */
+    public void setPersistenceService(RecordPersistenceService persistenceService) {
+        this.persistenceService = persistenceService;
     }
 }
