@@ -38,13 +38,14 @@ public class LoadMapStateListener implements LoadModelState {
     @Autowired
     private CounterClockGameModel counterClockGameModel;
 
+    @Override
     public void onLoadModel(float tpf) {
 
         GameDefinition2 gameDefinition = (GameDefinition2) assetManager.loadAsset(gameConfiguration.getMap());
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
-        
+
         counterClockGameModel.init(gameModel);
 
         IContext iContext = counterClockGameModel.getIContext();
@@ -55,7 +56,6 @@ public class LoadMapStateListener implements LoadModelState {
         gameStatus.getGameNode().addControl(currentShip);
         currentShip.setStatisticsManager(statisticsManager);
 
-
         List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
         for (AMillestoneModel currentMillestone : millestones) {
             currentMillestone.setEventManager(eventManager);
@@ -63,28 +63,26 @@ public class LoadMapStateListener implements LoadModelState {
             gameStatus.getGameNode().addControl(currentMillestone);
         }
 
-       FilterPostProcessor fpp = new FilterPostProcessor(assetManager);
+        FilterPostProcessor fpp = new FilterPostProcessor(assetManager);
         for (Filter currentFilter : counterClockGameModel.getFpp()) {
             fpp.addFilter(currentFilter);
         }
-        
+
         gameStatus.getViewPort().addProcessor(fpp);
-        
+
         gameStatus.getGameNode().attachChild(counterClockGameModel.getGameNode());
     }
 
+    @Override
     public void onUnload() {
-
         gameStatus.getGameNode().removeControl(counterClockGameModel.getShip());
 
-        List< AMillestoneModel> millestones = counterClockGameModel.getMillestones();
+        List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
         for (AMillestoneModel currentMillestone : millestones) {
             gameStatus.getGameNode().removeControl(currentMillestone);
         }
         gameStatus.getGameNode().detachAllChildren();
         gameStatus.setGameDefinition(null);
-       
-
     }
 
     /**

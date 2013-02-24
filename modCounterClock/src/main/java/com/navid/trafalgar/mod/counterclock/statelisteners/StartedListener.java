@@ -39,7 +39,9 @@ public class StartedListener implements PrestartState, StartedState {
     public void onStarted(float tpf) {
         gameStatus.getTime().setValue(gameStatus.getTime().getValue() + tpf);
 
-        
+        //This shouldn't be here, but we need to tell jME to not update Controls if we are on pause
+        gameStatus.getGameNode().updateLogicalState(tpf);
+        gameStatus.getGameGUINode().updateLogicalState(tpf);
     }
 
     public void onUnload() {

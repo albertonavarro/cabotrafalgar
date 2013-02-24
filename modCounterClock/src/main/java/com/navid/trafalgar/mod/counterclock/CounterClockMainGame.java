@@ -63,8 +63,6 @@ public class CounterClockMainGame extends AbstractAppState {
             stateManager.update(tpf);
         }
         
-        gameStatus.getGameNode().updateLogicalState(tpf);
-        gameStatus.getGameGUINode().updateLogicalState(tpf);
         gameStatus.getGameNode().updateGeometricState();
         gameStatus.getGameGUINode().updateGeometricState();
     }
