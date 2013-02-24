@@ -4,8 +4,6 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
-import com.navid.trafalgar.manager.statistics.StatisticsManager;
-import com.navid.trafalgar.mod.counterclock.statelisteners.GUIUpdater;
 import com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
@@ -24,7 +22,7 @@ import org.springframework.core.io.ClassPathResource;
  *
  * @author anf
  */
-public class CounterClockMainScreen implements ScreenController, BeanFactoryAware {
+public final class CounterClockMainScreen implements ScreenController, BeanFactoryAware {
 
     /*
      * Comes from bind
@@ -34,36 +32,39 @@ public class CounterClockMainScreen implements ScreenController, BeanFactoryAwar
      * Comes from bind
      */
     private Screen screen;
-    /*
-     * Comes from initialize
-     */
     @Autowired
     private AppStateManager appStateManager;
     @Autowired
     private Application app;
     @Autowired
     private LoadCameraStateListener cameraManager;
-    private BeanFactory beanFactory;
-    private CounterClockMainGame game;
-        @Autowired
+    @Autowired
     private EventManager eventManager;
+    private CounterClockMainGame game;
     private boolean showMenu;
-
     private XmlBeanFactory ctx;
+    /*
+     * From BeanFactoryAware
+     */
+    private BeanFactory beanFactory;
+
     /**
      * Nifty GUI ScreenControl methods
      */
+    @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
     }
 
+    @Override
     public void onStartScreen() {
         showMenu = false;
         showMenuFunction(showMenu); //nifty keeps the status, we need to reset it.
-         
+
         app.enqueue(new Callable<Void>() {
 
+            @Override
             public Void call() {
                 ctx = new XmlBeanFactory(new ClassPathResource("mod/counterclock/game-context.xml"), beanFactory);
                 game = (CounterClockMainGame) ctx.getBean("mod.counterclock.maingame");
@@ -75,23 +76,23 @@ public class CounterClockMainScreen implements ScreenController, BeanFactoryAwar
         });
     }
 
+    @Override
     public void onEndScreen() {
         app.enqueue(new Callable<Void>() {
 
+            @Override
             public Void call() {
-                
+
                 eventManager.fireEvent("UNLOAD");
 
                 appStateManager.detach(game);
-                
+
                 ctx.destroySingletons();
 
                 return null;
             }
         });
     }
-
-    
 
     public void showMenu() {
         toggleMenu();
@@ -132,18 +133,18 @@ public class CounterClockMainScreen implements ScreenController, BeanFactoryAwar
             eventManager.fireEvent("RESUME");
         }
     }
-    
+
     synchronized public void toggleMenu() {
         showMenu = !showMenu;
         showMenuFunction(showMenu);
     }
-    
+
     synchronized public void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        nifty.gotoScreen("counterClock.Game");
+        nifty.gotoScreen("counterClock.GameScreen");
     }
-    
+
     synchronized public void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
@@ -157,6 +158,7 @@ public class CounterClockMainScreen implements ScreenController, BeanFactoryAwar
         this.cameraManager = cameraManager;
     }
 
+    @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
     }
