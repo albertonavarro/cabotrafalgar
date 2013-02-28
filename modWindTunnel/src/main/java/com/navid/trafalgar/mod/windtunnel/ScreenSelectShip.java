@@ -22,26 +22,23 @@ public class ScreenSelectShip implements ScreenController {
      * From bind
      */
     private Nifty nifty;
-    
     /**
      * From bind
      */
     private Screen screen;
-    
     /**
      * Singleton
      */
     @Autowired
     private GameConfiguration gameConfiguration;
-    
     /**
      * Singleton
      */
     @Autowired
     private Builder2 builder;
-    
     private ScreenSelectShip.ListItem selectedItem;
 
+    @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
@@ -100,10 +97,12 @@ public class ScreenSelectShip implements ScreenController {
         }
     }
 
+    @Override
     public void onStartScreen() {
         fillListWithShips();
     }
 
+    @Override
     public void onEndScreen() {
         emptyList();
     }
@@ -118,7 +117,7 @@ public class ScreenSelectShip implements ScreenController {
             item1.setName(currentBuilder.getType());
             shipList.addItem(item1);
         }
-        
+
         selectedItem = (ListItem) shipList.getItems().get(0);
     }
 
@@ -136,6 +135,6 @@ public class ScreenSelectShip implements ScreenController {
     public void goTo(String nextScreen) {
         gameConfiguration.setShipName(selectedItem.getName());
 
-        nifty.gotoScreen(nextScreen); 
+        nifty.gotoScreen(nextScreen);
     }
 }

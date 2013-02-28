@@ -40,7 +40,7 @@ public class LoadMapStateListener implements LoadModelState {
     @Override
     public void onLoadModel(float tpf) {
 
-        GameDefinition2 gameDefinition = (GameDefinition2) assetManager.loadAsset(gameConfiguration.getMap());
+        GameDefinition2 gameDefinition = (GameDefinition2) assetManager.loadAsset("mod/windtunnel/WindTunnel.json2");
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);

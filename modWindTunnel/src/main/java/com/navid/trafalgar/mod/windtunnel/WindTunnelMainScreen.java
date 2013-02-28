@@ -66,8 +66,8 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
 
             @Override
             public Void call() {
-                ctx = new XmlBeanFactory(new ClassPathResource("mod/counterclock/game-context.xml"), beanFactory);
-                game = ctx.getBean("mod.counterclock.maingame", WindTunnelMainGame.class);
+                ctx = new XmlBeanFactory(new ClassPathResource("mod/windtunnel/game-context.xml"), beanFactory);
+                game = ctx.getBean("mod.windtunnel.maingame", WindTunnelMainGame.class);
 
                 appStateManager.attach(game);
 
