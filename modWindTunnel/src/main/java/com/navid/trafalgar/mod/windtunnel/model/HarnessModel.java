@@ -1,7 +1,7 @@
-package com.navid.trafalgar.modwindtunnel.model;
+package com.navid.trafalgar.mod.windtunnel.model;
 
 import com.jme3.asset.AssetManager;
-import com.navid.trafalgar.modwindtunnel.model.AHarnessModel;
+import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 
 /**
  *

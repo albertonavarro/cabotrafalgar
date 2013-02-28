@@ -20,11 +20,8 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class InterfaceGenerator implements ModRegisterer, BuilderProvider {
 
-    private Nifty nifty;
-
+    @Override
     public void generate(final Nifty nifty, Screen parent, AppSettings settings, Application app, BeanFactory beanFactory) {
-        this.nifty = nifty;
-
         XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("mod/counterclock/application-context.xml"), beanFactory);
 
         CounterClockMainScreen mainController = ctx.getBean("mod.counterclock.mainscreen", CounterClockMainScreen.class);
@@ -35,6 +32,7 @@ public class InterfaceGenerator implements ModRegisterer, BuilderProvider {
         nifty.addXml("mod/counterclock/interface_counterclock.xml");
     }
 
+    @Override
     public void registerModels(BeanFactory beanFactory) {
         XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("mod/counterclock/builders-declaration.xml"), beanFactory);
 

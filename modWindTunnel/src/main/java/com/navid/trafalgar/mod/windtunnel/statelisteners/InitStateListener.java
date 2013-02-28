@@ -1,14 +1,13 @@
 package com.navid.trafalgar.mod.windtunnel.statelisteners;
 
-import com.jme3.app.Application;
 import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.system.AppSettings;
 import com.navid.trafalgar.manager.InitState;
-import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -16,18 +15,12 @@ import com.navid.trafalgar.model.GameStatus;
  */
 public class InitStateListener implements InitState {
 
+    @Autowired
     private RenderManager renderManager;
+    @Autowired
     private GameStatus gameStatus;
-    private GameConfiguration gameConfiguration;
+    @Autowired
     private AppSettings settings;
-
-    public InitStateListener(Application app, GameStatus gameStatus, GameConfiguration gameConfiguration) {
-
-        this.renderManager = app.getRenderManager();
-        this.settings = gameConfiguration.getAppSettings();
-        this.gameStatus = gameStatus;
-        this.gameConfiguration = gameConfiguration;
-    }
 
     public void onInit(float tpf) {
 
@@ -65,5 +58,26 @@ public class InitStateListener implements InitState {
         gameStatus.getGameNode().detachAllChildren();
         gameStatus.getGameGUINode().detachAllChildren();
 
+    }
+
+    /**
+     * @param renderManager the renderManager to set
+     */
+    public void setRenderManager(RenderManager renderManager) {
+        this.renderManager = renderManager;
+    }
+
+    /**
+     * @param gameStatus the gameStatus to set
+     */
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
+    /**
+     * @param settings the settings to set
+     */
+    public void setSettings(AppSettings settings) {
+        this.settings = settings;
     }
 }

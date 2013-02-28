@@ -18,39 +18,38 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.reflections.Reflections;
 
-
 public class Main extends Application {
 
     private static boolean record = false;
-    
+
     public static void main(String[] args) {
-        
-        if (args.length == 1 && args[0].equals("record")){
+
+        if (args.length == 1 && args[0].equals("record")) {
             record = true;
         }
-        
+
         Main app = new Main();
         app.start();
     }
 
     @Override
     public void start(JmeContext.Type contextType) {
-        
+
         settings = new AppSettings(true);
         if (!JmeSystem.showSettingsDialog(settings, true)) {
             return;
         }
-        
+
         setSettings(settings);
         super.start(contextType);
     }
 
     @Override
     public void initialize() {
-        
+
         super.initialize();
         super.setPauseOnLostFocus(false);
-        assetManager.registerLoader( Json2AssetLoader.class, "json2");
+        assetManager.registerLoader(Json2AssetLoader.class, "json2");
 
         registerBean("common.assetManager", assetManager);
         registerBean("common.inputManager", inputManager);
@@ -58,32 +57,32 @@ public class Main extends Application {
         registerBean("common.renderManager", renderManager);
         registerBean("common.appSettings", settings);
         registerBean("common.app", this);
-        
-        
+
+
         MyStartScreen startScreen = (MyStartScreen) ctx.getBean("common.StartScreen");
-        
+
         stateManager.attach(startScreen);
-        
-        if (record ){
+
+        if (record) {
             stateManager.attach(new VideoRecorderAppState());
         }
 
         /**
-         * Activate the Nifty-JME integration: 
+         * Activate the Nifty-JME integration:
          */
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
                 assetManager, inputManager, audioRenderer, guiViewPort);
-        Nifty nifty = niftyDisplay.getNifty(); 
+        Nifty nifty = niftyDisplay.getNifty();
         guiViewPort.addProcessor(niftyDisplay);
         nifty.fromXml("Interface/interface.xml", "start", startScreen);
-        
+
         loadModules(nifty, nifty.getScreen("start"), settings, this);
-        
+
     }
-    
-    private void loadModules(Nifty nifty, Screen screen, AppSettings settings, Application app){
-    Reflections reflections = new Reflections("com.navid.trafalgar");
-        
+
+    private void loadModules(Nifty nifty, Screen screen, AppSettings settings, Application app) {
+        Reflections reflections = new Reflections("com.navid.trafalgar");
+
         Set<Class<? extends BuilderProvider>> resultBuilders = reflections.getSubTypesOf(BuilderProvider.class);
         for (Class<? extends BuilderProvider> currentBuilder : resultBuilders) {
             try {
@@ -93,7 +92,7 @@ public class Main extends Application {
                 Logger.getLogger(MyStartScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         Set<Class<? extends ModRegisterer>> result = reflections.getSubTypesOf(ModRegisterer.class);
         for (Class<? extends ModRegisterer> currentClass : result) {
             try {
@@ -105,20 +104,19 @@ public class Main extends Application {
         }
     }
 
-   @Override
+    @Override
     public void update() {
         // necessary stuff
         super.update();
-        
+
         // do some animation
         float tpf = timer.getTimePerFrame();
-        
+
         // update elements in all enabled states.
         stateManager.update(tpf);
         stateManager.render(renderManager);
-       
+
         // render the viewports
         renderManager.render(tpf, context.isRenderable());
     }
-
 }

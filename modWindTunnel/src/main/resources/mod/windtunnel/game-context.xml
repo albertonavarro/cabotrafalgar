@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:annotation-config/>
+    
+    <!-- Game Scoped -->
+    <bean id="mod.windtunnel.maingame" class="com.navid.trafalgar.mod.counterclock.CounterClockMainGame" autowire="byType"></bean>
+    <bean id="mod.windtunnel.stats" class="com.navid.trafalgar.manager.statistics.StatisticsManager" autowire="byType"></bean>
+    <bean id="common.GameStateManager" class="com.navid.trafalgar.manager.StateManager" autowire="byType"></bean>
+    <bean id="common.GameStatus" class="com.navid.trafalgar.model.GameStatus" autowire="byType"  ></bean>
+    <bean id="mod.windtunnel.gameModel" class="com.navid.trafalgar.mod.counterclock.CounterClockGameModel" autowire="byType"></bean>
+    
+    <!-- Listeners -->
+    <bean id="mod.windtunnel.LoadMap" class="com.navid.trafalgar.mod.windtunnel.statelisteners.LoadMapStateListener" autowire="byType"/>
+    <bean id="mod.windtunnel.LoadCam" class="com.navid.trafalgar.mod.windtunnel.statelisteners.LoadCameraStateListener" autowire="byType"/>
+    <bean id="mod.windtunnel.Started" class="com.navid.trafalgar.mod.windtunnel.statelisteners.StartedListener"  autowire="byType"/>
+    <bean id="mod.windtunnel.GameRecorder" class="com.navid.trafalgar.mod.windtunnel.statelisteners.GameRecorder" autowire="byType"/>
+    <bean id="mod.windtunnel.InitListener" class="com.navid.trafalgar.mod.windtunnel.statelisteners.InitStateListener" autowire="byType"/>
+    <bean id="mod.windtunnel.LoadEventListener" class="com.navid.trafalgar.mod.windtunnel.statelisteners.LoadEventsListener" autowire="byType"/>
+    <bean id="mod.windtunnel.GUIUpdater" class="com.navid.trafalgar.mod.windtunnel.statelisteners.GUIUpdater" autowire="byType"/>
+    <bean id="mod.windtunnel.GhostViewer" class="com.navid.trafalgar.mod.windtunnel.statelisteners.GhostViewer" autowire="byType"/>
+    
+  
+</beans>

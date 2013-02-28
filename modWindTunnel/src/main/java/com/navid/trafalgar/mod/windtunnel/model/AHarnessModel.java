@@ -1,4 +1,4 @@
-package com.navid.trafalgar.modwindtunnel.model;
+package com.navid.trafalgar.mod.windtunnel.model;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;

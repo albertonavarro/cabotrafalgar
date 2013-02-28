@@ -1,6 +1,5 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
-import com.jme3.app.Application;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.KeyTrigger;
@@ -16,6 +15,7 @@ public class LoadEventsListener implements InitState {
     @Autowired
     private InputManager inputManager;
 
+    @Override
     public void onInit(float tpf) {
         inputManager.addMapping("SHIP_RudderRight", new KeyTrigger(KeyInput.KEY_T));
         inputManager.addMapping("SHIP_RudderLeft", new KeyTrigger(KeyInput.KEY_R));
@@ -31,6 +31,7 @@ public class LoadEventsListener implements InitState {
         inputManager.addMapping("Menu", new KeyTrigger(KeyInput.KEY_ESCAPE));
     }
 
+    @Override
     public void onUnload() {
         inputManager.clearMappings();
     }
@@ -41,7 +42,4 @@ public class LoadEventsListener implements InitState {
     public void setInputManager(InputManager inputManager) {
         this.inputManager = inputManager;
     }
-    
-    
-    
 }
