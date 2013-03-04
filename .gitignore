@@ -3,3 +3,5 @@
 /common-models/target/
 /modCounterClock/target/
 /JMonkeyClient/target/
+/JMonkeyClient/dependency-reduced-pom.xml
+/modWindTunnel/target/
