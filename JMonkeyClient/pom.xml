@@ -31,6 +31,12 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>com.navid.trafalgar</groupId>
+            <artifactId>modWindTunnel</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>com.jme3</groupId>
             <artifactId>jME3-core</artifactId>
         </dependency>

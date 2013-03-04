@@ -2,36 +2,29 @@ package com.navid.trafalgar.mod.windtunnel;
 
 import com.jme3.app.Application;
 import com.jme3.system.AppSettings;
+import com.navid.trafalgar.modapi.ModRegisterer;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  *
  * @author alberto
  */
-public class InterfaceGenerator {
+public class InterfaceGenerator implements ModRegisterer {
+    
+    @Override
+    public void generate(Nifty nifty, Screen parent, AppSettings settings, Application app, BeanFactory beanFactory) {
+        XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("mod/windtunnel/application-context.xml"), beanFactory);
 
-    private Nifty nifty;
-    private Screen screen;
-    private AppSettings settings;
-    private Application app;
+        WindTunnelMainScreen mainController = ctx.getBean("mod.windtunnel.mainscreen", WindTunnelMainScreen.class);
+        ScreenSelectShip shipController = (ScreenSelectShip) ctx.getBean("mod.windtunnel.shipselector");
 
-    public InterfaceGenerator(final Nifty nifty, Screen parent, AppSettings settings, Application app) {
-        this.nifty = nifty;
-        this.screen = parent;
-        this.settings = settings;
-        this.app = app;
+        nifty.registerScreenController(new ScreenController[]{shipController, mainController});
+        nifty.addXml("mod/windtunnel/interface_windtunnel.xml");
     }
 
-    public void generate() {
-        WindTunnelMain windMain = new WindTunnelMain(settings);
-        PreWindTunnelController preWind = new PreWindTunnelController( app, settings, windMain);
-        nifty.registerScreenController(preWind, windMain);
-        nifty.addXml("Interface/interface_windtunnel.xml");
-        app.getStateManager().attach(windMain);
-    }
-
-    public void onClick() {
-        nifty.gotoScreen("preWindTunnelScreen");
-    }
 }

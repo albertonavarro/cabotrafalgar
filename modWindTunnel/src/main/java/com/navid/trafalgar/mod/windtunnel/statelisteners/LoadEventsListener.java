@@ -1,10 +1,10 @@
 package com.navid.trafalgar.mod.windtunnel.statelisteners;
 
-import com.jme3.app.Application;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.KeyTrigger;
 import com.navid.trafalgar.manager.InitState;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -12,13 +12,10 @@ import com.navid.trafalgar.manager.InitState;
  */
 public class LoadEventsListener implements InitState {
 
+    @Autowired
     private InputManager inputManager;
 
-    public LoadEventsListener(Application app) {
-        inputManager = app.getInputManager();
-
-    }
-
+    @Override
     public void onInit(float tpf) {
         inputManager.addMapping("SHIP_RudderRight", new KeyTrigger(KeyInput.KEY_T));
         inputManager.addMapping("SHIP_RudderLeft", new KeyTrigger(KeyInput.KEY_R));
@@ -32,16 +29,17 @@ public class LoadEventsListener implements InitState {
         inputManager.addMapping("Cam3", new KeyTrigger(KeyInput.KEY_3));
 
         inputManager.addMapping("Menu", new KeyTrigger(KeyInput.KEY_ESCAPE));
-        inputManager.addMapping("DEBUG", new KeyTrigger(KeyInput.KEY_Z));
-        
-        inputManager.addMapping("WindTunnel_RotateRight", new KeyTrigger(KeyInput.KEY_J));
-        inputManager.addMapping("WindTunnel_RotateLeft", new KeyTrigger(KeyInput.KEY_K));
     }
 
+    @Override
     public void onUnload() {
         inputManager.clearMappings();
     }
-    
-    
-    
+
+    /**
+     * @param inputManager the inputManager to set
+     */
+    public void setInputManager(InputManager inputManager) {
+        this.inputManager = inputManager;
+    }
 }

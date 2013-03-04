@@ -1,4 +1,4 @@
-package com.navid.trafalgar.mod.counterclock;
+package com.navid.trafalgar.mod.windtunnel;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class CounterClockMainGame extends AbstractAppState {
+public class WindTunnelMainGame extends AbstractAppState {
 
     /*
      * EventManager (Broadcasting of events)
