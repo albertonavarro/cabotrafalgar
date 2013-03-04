@@ -3,11 +3,9 @@ package com.navid.trafalgar.mod.counterclock.model.builder;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.navid.trafalgar.manager.EventManager;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.mod.counterclock.model.MillestoneModel;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
-import com.navid.trafalgar.mod.counterclock.model.MillestoneModel;
 import com.navid.trafalgar.util.FormatUtils;
 import java.util.Collections;
 import java.util.Map;
@@ -21,8 +19,6 @@ public class MillestoneBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
-    @Autowired
-    private EventManager eventManager;
 
     public Iterable<Category> getCategories() {
         return Collections.singleton(Category.other);
@@ -33,13 +29,6 @@ public class MillestoneBuilder implements BuilderInterface {
      */
     public void setAssetManager(AssetManager assetManager) {
         this.assetManager = assetManager;
-    }
-
-    /**
-     * @param eventManager the eventManager to set
-     */
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
     }
 
     public Object build(String instanceName, Map<String, String> customValues) {
