@@ -2,10 +2,14 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- * @author anf
+ *  
  */
 public interface EventListener {
 
+    /**
+     *
+     * @param event
+     */
     public void onEvent(String event);
     
 }

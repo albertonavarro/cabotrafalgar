@@ -2,9 +2,13 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- * @author alberto
+ *   
  */
 public interface AbortedState extends StateListener{
 
+    /**
+     *
+     * @param tpf
+     */
     void onAborted(float tpf);
 }

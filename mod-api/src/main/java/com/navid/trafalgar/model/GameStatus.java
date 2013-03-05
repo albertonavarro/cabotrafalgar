@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author alberto
+ *   
  */
 public class GameStatus {
 
@@ -28,6 +28,9 @@ public class GameStatus {
     private Camera camera;
     private Camera cameraGUI;
 
+    /**
+     *
+     */
     public GameStatus() {
         gameNode.setCullHint(CullHint.Never);
 
@@ -37,6 +40,10 @@ public class GameStatus {
         
     }
     
+    /**
+     *
+     * @param statisticsManager
+     */
     @Autowired
     public void setStatisticsManager(StatisticsManager statisticsManager){
     time = statisticsManager.createStatistic("root", "time", 0f);
@@ -44,42 +51,82 @@ public class GameStatus {
     
 
 
+    /**
+     *
+     * @return
+     */
     public GameDefinition2 getGameDefinition() {
         return gameDefinition;
     }
 
+    /**
+     *
+     * @param gameDefinition
+     */
     public void setGameDefinition(GameDefinition2 gameDefinition) {
         this.gameDefinition = gameDefinition;
     }
 
+    /**
+     *
+     * @return
+     */
     public Node getGameNode() {
         return gameNode;
     }
 
+    /**
+     *
+     * @return
+     */
     public ViewPort getViewPort() {
         return viewPort;
     }
 
+    /**
+     *
+     * @param viewPort
+     */
     public void setViewPort(ViewPort viewPort) {
         this.viewPort = viewPort;
     }
 
+    /**
+     *
+     * @return
+     */
     public Camera getCamera() {
         return camera;
     }
 
+    /**
+     *
+     * @param camera
+     */
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
 
+    /**
+     *
+     * @return
+     */
     public Node getGameGUINode() {
         return gameGUINode;
     }
 
+    /**
+     *
+     * @param cameraGUI
+     */
     public void setCameraGUI(Camera cameraGUI) {
         this.cameraGUI = cameraGUI;
     }
 
+    /**
+     *
+     * @param viewPortGUI
+     */
     public void setViewPortGUI(ViewPort viewPortGUI) {
         this.viewPortGUI = viewPortGUI;
     }

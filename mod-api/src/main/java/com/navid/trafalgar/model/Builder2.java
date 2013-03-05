@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author alberto
+ *   
  */
 public class Builder2 {
 
@@ -33,7 +33,22 @@ public class Builder2 {
      */
     public enum Category {
 
-        ship, item, context, other
+        /**
+         *
+         */
+        ship,
+        /**
+         *
+         */
+        item,
+        /**
+         *
+         */
+        context,
+        /**
+         *
+         */
+        other
     }
 
     /**
@@ -41,9 +56,23 @@ public class Builder2 {
      */
     public enum Interactivity {
 
-        none, player, ghost
+        /**
+         *
+         */
+        none,
+        /**
+         *
+         */
+        player,
+        /**
+         *
+         */
+        ghost
     }
 
+    /**
+     *
+     */
     public Builder2() {
         buildersByCategory.put(Category.ship, new LinkedList<BuilderInterface>());
         buildersByCategory.put(Category.context, new LinkedList<BuilderInterface>());
@@ -51,6 +80,12 @@ public class Builder2 {
         buildersByCategory.put(Category.other, new LinkedList<BuilderInterface>());
     }
 
+    /**
+     *
+     * @param gameConfiguration
+     * @param gameDef
+     * @return
+     */
     public GameModel build(GameConfiguration gameConfiguration, GameDefinition2 gameDef) {
         GameModel gameModel = new GameModel();
 
@@ -70,6 +105,10 @@ public class Builder2 {
         return gameModel;
     }
 
+    /**
+     *
+     * @param builder
+     */
     public void registerBuilder(BuilderInterface builder) {
         LOG.info("Registring builder %s", builder);
 
@@ -85,10 +124,20 @@ public class Builder2 {
         LOG.info("Registring builder %s done", builder);
     }
 
+    /**
+     *
+     * @param category
+     * @return
+     */
     public Collection<BuilderInterface> getBuilder(Category category) {
         return buildersByCategory.get(category);
     }
 
+    /**
+     *
+     * @param entry
+     * @return
+     */
     public Object build(Entry entry) {
         if (buildersByName.get(entry.getType()) == null) {
             throw new IllegalArgumentException("Builder " + entry.getType() + " doesn't exist");

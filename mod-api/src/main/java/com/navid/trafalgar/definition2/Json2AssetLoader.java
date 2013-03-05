@@ -8,11 +8,18 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 /**
+ * Json2 jme3 custom loader
  *
- * @author alberto
  */
 public class Json2AssetLoader implements AssetLoader {
     
+    /**
+     *
+     * @param assetInfo
+     * @return
+     * @throws IOException
+     */
+    @Override
     public Object load(AssetInfo assetInfo) throws IOException {
         
         Reader r =new InputStreamReader(assetInfo.openStream());
@@ -20,7 +27,6 @@ public class Json2AssetLoader implements AssetLoader {
         r.close();
         
         return game;
-
     }
     
 }

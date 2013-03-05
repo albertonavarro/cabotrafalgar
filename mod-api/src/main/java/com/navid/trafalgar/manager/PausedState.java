@@ -2,9 +2,13 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- * @author alberto
+ *   
  */
 public interface PausedState extends StateListener {
 
+    /**
+     *
+     * @param tpf
+     */
     void onPaused(float tpf);
 }

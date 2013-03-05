@@ -5,13 +5,27 @@ import java.util.Map;
 
 /**
  *
- * @author alberto
+ *   
  */
 public interface BuilderInterface {
 
+    /**
+     *
+     * @param instanceName
+     * @param customValues
+     * @return
+     */
     Object build( String instanceName, Map<String, String> customValues);
     
+    /**
+     *
+     * @return
+     */
     String getType();
     
+    /**
+     *
+     * @return
+     */
     Iterable<Category> getCategories();
 }

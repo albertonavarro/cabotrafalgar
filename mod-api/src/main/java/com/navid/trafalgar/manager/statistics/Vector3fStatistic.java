@@ -4,27 +4,44 @@ import com.jme3.math.Vector3f;
 import com.navid.trafalgar.util.FormatUtils;
 
 /**
- *
- * @author alberto
+ * Vector3f implementation for AbstactStatistic
  */
 public class Vector3fStatistic extends AbstractStatistic<Vector3f>{
     
+    /*
+     * Initial value
+     */
     private Vector3f value = new Vector3f(1,0,0);
 
+    /*
+     * Constructor
+     */
     Vector3fStatistic(String parentId, String id) {
         super(parentId, id);
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public Vector3f getValue() {
         return value.clone();
     }
 
+    /**
+     *
+     * @param newValue
+     */
     @Override
     public void setValue(Vector3f newValue) {
         this.value = newValue.clone();
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString(){
         return new StringBuilder()

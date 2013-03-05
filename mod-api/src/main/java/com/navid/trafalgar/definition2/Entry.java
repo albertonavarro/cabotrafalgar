@@ -3,15 +3,24 @@ package com.navid.trafalgar.definition2;
 import java.util.Map;
 
 /**
- *
- * @author alberto
+ * Representation for a json2 entry
+ * 
  */
 public class Entry {
     
+    /*
+     * Classname for the entry
+     */
     private String type;
     
+    /*
+     * Id for the object
+     */
     private String name;
     
+    /*
+     * Custom parameters
+     */
     private Map<String, String> values;
 
     /**

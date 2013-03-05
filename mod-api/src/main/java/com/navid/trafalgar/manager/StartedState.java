@@ -2,8 +2,12 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- * @author anf
+ *  
  */
 public interface StartedState extends StateListener{
+    /**
+     *
+     * @param tpf
+     */
     void onStarted(float tpf);
 }

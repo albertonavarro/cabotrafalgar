@@ -8,16 +8,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author anf
+ *  
  */
 public class StateManager implements EventListener {
 
     @Autowired
     private EventManager eventManager;
 
+    /**
+     *
+     */
     public static enum STATES {
 
-        INIT, LOADMODEL, LOADCAM, PRESTART, STARTED, ABORTED, SUCCESSFUL, FAILED, FINISHED, UNLOAD, PAUSED
+        /**
+         *
+         */
+        INIT,
+        /**
+         *
+         */
+        LOADMODEL,
+        /**
+         *
+         */
+        LOADCAM,
+        /**
+         *
+         */
+        PRESTART,
+        /**
+         *
+         */
+        STARTED,
+        /**
+         *
+         */
+        ABORTED,
+        /**
+         *
+         */
+        SUCCESSFUL,
+        /**
+         *
+         */
+        FAILED,
+        /**
+         *
+         */
+        FINISHED,
+        /**
+         *
+         */
+        UNLOAD,
+        /**
+         *
+         */
+        PAUSED
     };
     private EnumMap<STATES, List<StateListener>> stateListener = new EnumMap<STATES, List<StateListener>>(STATES.class);
     private STATES currentState = STATES.INIT;
@@ -29,6 +75,9 @@ public class StateManager implements EventListener {
         return currentState;
     }
 
+    /**
+     *
+     */
     public void reset() {
         stateListener.clear();
         this.setCurrentState(STATES.INIT);
@@ -42,6 +91,10 @@ public class StateManager implements EventListener {
         this.currentState = currentState;
     }
 
+    /**
+     *
+     * @param event
+     */
     public void onEvent(String event) {
         if (currentState == STATES.STARTED) {
             if (event.equals(EventManager.ABORTED)) {
@@ -68,6 +121,10 @@ public class StateManager implements EventListener {
 
     }
 
+    /**
+     *
+     * @param listener
+     */
     public void register(StateListener listener) {
         getStateListener(STATES.UNLOAD).add(listener);
 
@@ -110,6 +167,10 @@ public class StateManager implements EventListener {
         return listeners;
     }
 
+    /**
+     *
+     * @param tpf
+     */
     public void update(float tpf) {
 
         List<StateListener> listeners = getStateListener(currentState);

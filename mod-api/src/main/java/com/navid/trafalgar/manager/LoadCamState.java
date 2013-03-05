@@ -2,9 +2,13 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- * @author anf
+ *  
  */
 public interface LoadCamState extends StateListener {
 
+    /**
+     *
+     * @param tpf
+     */
     void onLoadCam(float tpf);
 }

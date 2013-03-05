@@ -9,10 +9,18 @@ import org.springframework.beans.factory.BeanFactory;
 
 /**
  *
- * @author alberto
+ *   
  */
 public interface ModRegisterer {
     
-    void generate(final Nifty nifty, Screen parent, AppSettings settings, Application app, BeanFactory beanFactory) ;
+    /**
+     *
+     * @param nifty
+     * @param parent
+     * @param settings
+     * @param app
+     * @param beanFactory
+     */
+    void generate(final Nifty nifty, Screen parent, AppSettings settings, Application app, BeanFactory beanFactory);
     
 }

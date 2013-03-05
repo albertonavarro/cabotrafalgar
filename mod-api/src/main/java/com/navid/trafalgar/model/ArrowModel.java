@@ -9,10 +9,15 @@ import com.jme3.scene.debug.Arrow;
 
 /**
  *
- * @author alberto
+ *   
  */
 public class ArrowModel extends Geometry{
     
+    /**
+     *
+     * @param assetManager
+     * @param orientation
+     */
     public ArrowModel(AssetManager assetManager, Vector3f orientation){
         super("arrow", new Arrow(Vector3f.UNIT_Z));
         

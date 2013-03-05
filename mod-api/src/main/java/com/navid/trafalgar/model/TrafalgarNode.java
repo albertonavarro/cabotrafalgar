@@ -12,7 +12,7 @@ import com.navid.trafalgar.manager.EventManager;
 
 /**
  *
- * @author alberto
+ *   
  */
 abstract class TrafalgarNode extends Node {
     

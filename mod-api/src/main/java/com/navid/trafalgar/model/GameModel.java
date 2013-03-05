@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  *
- * @author alberto
+ *   
  */
 public class GameModel {
 
@@ -34,11 +34,21 @@ public class GameModel {
         }
     }
 
+    /**
+     *
+     * @param className
+     * @return
+     */
     public List getByType(Class className) {
         List list = mapByClass.get(className);
         return list != null ? list : new ArrayList();
     }
     
+    /**
+     *
+     * @param className
+     * @return
+     */
     public Object getSingleByType(Class className) {
         List list = getByType(className);
         

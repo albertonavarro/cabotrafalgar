@@ -2,10 +2,14 @@ package com.navid.trafalgar.model;
 
 /**
  *
- * @author alberto
+ *   
  */
 public interface IWater {
     
+    /**
+     *
+     * @return
+     */
     float getHeight();
     
 }

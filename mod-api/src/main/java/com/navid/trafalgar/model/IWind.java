@@ -7,16 +7,31 @@ import com.jme3.scene.control.Control;
 
 /**
  *
- * @author alberto
+ *   
  */
 public interface IWind {
     
+    /**
+     *
+     * @return
+     */
     Vector2f getWind();
     
+    /**
+     *
+     * @return
+     */
     Geometry getGeometry();
     
+    /**
+     *
+     * @return
+     */
     WindGeometry createWindGeometryNode();
     
+    /**
+     *
+     */
     public  abstract class WindGeometry extends Node implements Control{}
     
 }

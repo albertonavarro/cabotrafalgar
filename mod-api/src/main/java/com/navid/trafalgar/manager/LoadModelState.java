@@ -2,10 +2,14 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- * @author anf
+ *  
  */
 public interface LoadModelState extends StateListener {
 
+    /**
+     *
+     * @param tpf
+     */
     public void onLoadModel(float tpf);
     
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author anf
+ *  
  */
 public class GameConfiguration {
     
@@ -48,6 +48,10 @@ public class GameConfiguration {
         this.showGhost = showGhost;
     }
 
+    /**
+     *
+     * @param gc
+     */
     public void fromGameConfiguration(GameConfiguration gc) {
         if(gc.getMap()!=null){
             this.setMap(gc.getMap());

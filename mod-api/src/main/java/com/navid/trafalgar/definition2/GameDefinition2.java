@@ -3,8 +3,8 @@ package com.navid.trafalgar.definition2;
 import java.util.List;
 
 /**
- *
- * @author alberto
+ * Representation for a json2 file content
+ * 
  */
 public class GameDefinition2 {
     
