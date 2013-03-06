@@ -12,6 +12,7 @@ public class SimpleContext implements IContext, Dependent{
     /**
      * @return the iWind
      */
+    @Override
     public IWind getWind() {
         return iWind;
     }
@@ -26,6 +27,7 @@ public class SimpleContext implements IContext, Dependent{
     /**
      * @return the iWater
      */
+    @Override
     public IWater getWater() {
         return iWater;
     }
@@ -37,8 +39,9 @@ public class SimpleContext implements IContext, Dependent{
         this.iWater = iWater;
     }
 
+    @Override
     public void resolveDependencies(GameModel gameModel) {
-        setWind((IWind)gameModel.getSingleByType(IWind.class));
+        setWind(gameModel.getSingleByType(IWind.class));
     }
     
 }

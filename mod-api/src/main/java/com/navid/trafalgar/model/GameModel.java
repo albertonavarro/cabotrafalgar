@@ -3,14 +3,18 @@ package com.navid.trafalgar.model;
 import java.util.*;
 
 /**
- *
- *   
+ * This class represents a generic Game Model representation
  */
 public class GameModel {
 
     private Map<Class, List<Object>> mapByClass = new HashMap();
     
-    private Iterable<Class> getSuperTypes(Object o){
+    /**
+     * Returns a collection with all interfaces and superclasses from an object
+     * @param o Object
+     * @return Class List
+     */
+    private List<Class> getSuperTypes(final Object o){
         List<Class> collection = new LinkedList<Class>();
         
         Class currentSuperClass = o.getClass();
@@ -23,7 +27,11 @@ public class GameModel {
         return collection;
     }
 
-    void addToModel(Object o) {
+    /**
+     * Adds an object to the model
+     * @param o 
+     */
+    public void addToModel(Object o) {
         for (Class currentClass : getSuperTypes(o) ) {
             List list = mapByClass.get(currentClass);
             if (list == null) {
@@ -35,28 +43,30 @@ public class GameModel {
     }
 
     /**
-     *
-     * @param className
-     * @return
+     * Retrieves a List with all the registered objects that inherit from a class
+     * @param className Class name
+     * @return List of objects
      */
-    public List getByType(Class className) {
+    public <T extends Object> List<T> getByType(Class<T> className) {
         List list = mapByClass.get(className);
         return list != null ? list : new ArrayList();
     }
     
     /**
-     *
+     * Utility method to retrieve a single existing object of a type
+     * 
      * @param className
-     * @return
+     * @return requested object
+     * @throws IllegalStateException if there a number of those objects different than one
      */
-    public Object getSingleByType(Class className) {
+    public <T extends Object> T getSingleByType(Class<T>  className) {
         List list = getByType(className);
         
         if(list.size() != 1){
             throw new IllegalStateException("Required 1, found " + list.size() + " objects of type " + className);
         }
         
-        return list.get(0);
+        return (T) list.get(0);
     }
     
 }

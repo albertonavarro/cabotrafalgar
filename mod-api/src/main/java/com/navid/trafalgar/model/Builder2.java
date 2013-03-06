@@ -8,8 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- *   
+ * Generic Builder for all objects in the game
  */
 public class Builder2 {
 
@@ -34,19 +33,19 @@ public class Builder2 {
     public enum Category {
 
         /**
-         *
+         * Ship category in a palette (future use)
          */
         ship,
         /**
-         *
+         * Item category in a palette (future use)
          */
         item,
         /**
-         *
+         * Context category in a palette (future use)
          */
         context,
         /**
-         *
+         * Other category in a palette (future use)
          */
         other
     }
@@ -71,7 +70,7 @@ public class Builder2 {
     }
 
     /**
-     *
+     * Constructor
      */
     public Builder2() {
         buildersByCategory.put(Category.ship, new LinkedList<BuilderInterface>());
@@ -81,7 +80,8 @@ public class Builder2 {
     }
 
     /**
-     *
+     * Builds all the GameModel from a GameDefinition2 and a GameConfiguration objects
+     * 
      * @param gameConfiguration
      * @param gameDef
      * @return
@@ -106,6 +106,7 @@ public class Builder2 {
     }
 
     /**
+     * Registers a BuilderInterface builder in the Builder2, so it can be used by its name.
      *
      * @param builder
      */
@@ -125,7 +126,8 @@ public class Builder2 {
     }
 
     /**
-     *
+     * Gets the collection of builders for a given category (future use)
+     * 
      * @param category
      * @return
      */
@@ -134,9 +136,11 @@ public class Builder2 {
     }
 
     /**
+     * Builds an object given some information in an Entry object
      *
      * @param entry
      * @return
+     * @throws IllegalArgumentException if the object's type is not registered
      */
     public Object build(Entry entry) {
         if (buildersByName.get(entry.getType()) == null) {
