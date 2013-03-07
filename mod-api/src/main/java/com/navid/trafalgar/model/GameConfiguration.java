@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
- * This class (to change) represents a generic configuration Bean
- * 
- * Quite tailored for windtunnel and modCounterClock yet.
+ *
  *  
  */
 public class GameConfiguration {

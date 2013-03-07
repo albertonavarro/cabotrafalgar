@@ -11,10 +11,8 @@ import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
 
 /**
- * This class extends node with some basic manipulation and debug information
- * - Set new direction for a node, rotating it automatically
- * - Gets local and global direction
- * - Displays an arrow with node direction in DEBUG mode
+ *
+ *   
  */
 abstract class TrafalgarNode extends Node {
     
@@ -22,16 +20,10 @@ abstract class TrafalgarNode extends Node {
     private Geometry lineGeometry;
     protected EventManager eventManager;
     
-    /**
-     * Constructor for Trafalgar node
-     * 
-     * @param lookAt Initial director for the vector
-     * @param assetManager necessary for creating vector material 
-     * @param eventManager necessary for listening for DEBUG event
-     */
     public TrafalgarNode(Vector3f lookAt, AssetManager assetManager, EventManager eventManager) {
         
         this.eventManager = eventManager;
+        //this.lookAt(lookAt, Vector3f.UNIT_Y);
         
         Line line = new Line(new Vector3f(0, 0, 0), lookAt.mult(20));
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -44,41 +36,24 @@ abstract class TrafalgarNode extends Node {
         onDebugDisabled();
         
         eventManager.registerListener(new EventListener() {
-            @Override
             public void onEvent(String event) {
                 setDebug(!debug);
             }
         }, new String[]{"DEBUG"});
     }
     
-    /**
-     * Moves this node towards a new direction
-     * @param newDirection 
-     */
     public void setDirection(Vector3f newDirection) {
         this.lookAt(newDirection, Vector3f.UNIT_Y);
     }
     
-    /**
-     * Gets the Vector3f where the node is pointing to (local)
-     * @return Vector3f with the direction
-     */
     public Vector3f getLocalDirection() {
         return this.getLocalRotation().getRotationColumn(0);
     }
     
-    /**
-     * Get the Vector3f where the node is pointing to (global)
-     * @return Vector3f with the direction
-     */
     public Vector3f getGlobalDirection() {
         return this.getWorldRotation().getRotationColumn(0);
     }
     
-    /**
-     * Set debug mode for this node
-     * @param value new debug mode
-     */
     public final void setDebug(boolean value) {
         if (debug && !value) {
             onDebugEnabled();
@@ -88,17 +63,11 @@ abstract class TrafalgarNode extends Node {
         this.debug = value;
     }
     
-    /**
-     * This method puts lineGeometry element in a render mode
-     */
-    final protected void onDebugEnabled() {
+    protected void onDebugEnabled() {
         lineGeometry.setCullHint(CullHint.Never);
     }
     
-    /**
-     * This method puts lineGeometry element in a non-render mode
-     */
-    final protected void onDebugDisabled() {
+    protected void onDebugDisabled() {
         lineGeometry.setCullHint(CullHint.Always);
     }
 }

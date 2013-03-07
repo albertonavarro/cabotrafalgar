@@ -2,7 +2,7 @@ package com.navid.trafalgar.manager.statistics;
 
 /**
  * This class represents a Statistic to be evaluated.
- * @param <T> Value type
+ * @param <T> 
  */
 public abstract class AbstractStatistic<T> {
 
