@@ -40,8 +40,6 @@ public class WindTunnelGameModel {
         context = (IContext) gameModel.getSingleByType(IContext.class);
         harness = (AHarnessModel) gameModel.getSingleByType(AHarnessModel.class);
         
-        gameNode.addLight( (SunModel) gameModel.getSingleByType(SunModel.class));
-
         fpp = gameModel.getByType(Filter.class);
         
         gameNode.attachChild(ship);
