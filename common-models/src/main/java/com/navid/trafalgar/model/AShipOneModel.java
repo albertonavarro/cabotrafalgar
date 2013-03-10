@@ -142,6 +142,7 @@ public abstract class AShipOneModel extends AShipModel {
     private float shipInertia = 500;
     private float sailSurface = 100;
     private TimedIntertia  timedIntertia = new TimedIntertia();
+    private float lastPitch = 0f;
 
     protected AShipOneModel(AssetManager assetManager, EventManager eventManager) {
         super(new Vector3f(1, 0, 0), assetManager, eventManager);
@@ -231,6 +232,19 @@ public abstract class AShipOneModel extends AShipModel {
      * @param tpf
      */
     private void updateShipPitch(float tpf) {
+        
+        Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
+        Vector3f shipOrientation3f = this.getGlobalDirection();
+
+        double windOverVela = Math.cos(sail.getGlobalDirection().angleBetween(windDirection));
+        float angleBetween = shipOrientation3f.angleBetween(sail.getGlobalDirection());
+    	
+        double velaOverShip = Math.sin(angleBetween);
+       
+        this.rotate(((float)windOverVela * (float)velaOverShip) - lastPitch,0,0);
+       
+        lastPitch = (((float)windOverVela * (float)velaOverShip));
+       
     }
 
     /**
@@ -239,7 +253,9 @@ public abstract class AShipOneModel extends AShipModel {
      * @param tpf
      */
     private void updateShipYaw(float tpf) {
+        this.rotate(-lastPitch,0,0);
         this.rotate(0, rudder.getRudderValue() * speed.getValue() * tpf / 100, 0);
+        this.rotate(lastPitch,0,0);
     }
 
     /**
