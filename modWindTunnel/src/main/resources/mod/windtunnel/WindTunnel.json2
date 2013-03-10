@@ -2,5 +2,6 @@
 {"name" : "player", "values" : { "position" : "-205,0,-200" } },
 {"type" : "Context"},
 {"type" : "RotateSimpleWind"},
-{"type" : "Harness"}
+{"type" : "Harness"},
+{"type" : "Sun"}
 ] }
