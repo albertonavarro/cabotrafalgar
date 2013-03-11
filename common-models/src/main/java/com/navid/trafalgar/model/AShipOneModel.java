@@ -253,9 +253,7 @@ public abstract class AShipOneModel extends AShipModel {
      * @param tpf
      */
     private void updateShipYaw(float tpf) {
-        this.rotate(-lastPitch,0,0);
-        this.rotate(0, rudder.getRudderValue() * speed.getValue() * tpf / 100, 0);
-        this.rotate(lastPitch,0,0);
+        this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * speed.getValue() * tpf / 100, 0).mult(this.getLocalRotation()));
     }
 
     /**

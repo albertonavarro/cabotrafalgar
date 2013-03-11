@@ -1,6 +1,7 @@
 package com.navid.trafalgar.mod.windtunnel.model.builder;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.input.InputManager;
 import com.navid.trafalgar.mod.windtunnel.model.HarnessModel;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
@@ -19,9 +20,14 @@ public class HarnessBuilder implements BuilderInterface {
     @Autowired
     private AssetManager assetManager;
     
+    @Autowired
+    private InputManager inputManager;
+    
     @Override
     public Object build(String instanceName, Map<String, String> customValues) {
-        return new HarnessModel(assetManager);
+        HarnessModel harness = new HarnessModel(assetManager);
+        harness.registerInputManager(inputManager);
+        return harness;
     }
 
     @Override
@@ -39,6 +45,13 @@ public class HarnessBuilder implements BuilderInterface {
      */
     public void setAssetManager(AssetManager assetManager) {
         this.assetManager = assetManager;
+    }
+
+    /**
+     * @param inputManager the inputManager to set
+     */
+    public void setInputManager(InputManager inputManager) {
+        this.inputManager = inputManager;
     }
 
 }

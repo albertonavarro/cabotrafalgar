@@ -88,9 +88,6 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
                 if (name.equals("Cam2")) {
                     setCamera2();
                 }
-                if (name.equals("Cam3")) {
-                    setCamera3();
-                }
             }
         }
     };
@@ -103,15 +100,6 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
     public void setCamera2() {
         eventManager.fireEvent("DEACTIVATE_CAM");
         eventManager.fireEvent("ACTIVATE_CAM2");
-    }
-
-    public void setCamera3() {
-        if (selectedCam == LoadCameraStateListener.Cameras.TARGETCAM) {
-            eventManager.fireEvent(EventManager.VIEW_NEXTTARGET);
-        } else {
-            eventManager.fireEvent("DEACTIVATE_CAM");
-            eventManager.fireEvent("ACTIVATE_CAM3");
-        }
     }
 
     public void onLoadCam(float tpf) {
@@ -129,12 +117,14 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         // Enable a chasing cam
         chaseCamControl = new ChaseCamera(camera, player, inputManager);
         chaseCamControl.setSmoothMotion(true);
+        chaseCamControl.setMinDistance(100);
+        chaseCamControl.setMinDistance(150);
 
         inputManager.addListener(actionListener, mappings); // load my custom keybinding
 
         eventManager.registerListener(this, new String[]{"DEACTIVATE_CAM", "ACTIVATE_CAM1", "ACTIVATE_CAM2", "PAUSE", "RESUME"});
         eventManager.fireEvent("DEACTIVATE_CAM");
-        eventManager.fireEvent("ACTIVATE_CAM3");
+        eventManager.fireEvent("ACTIVATE_CAM2");
     }
 
     public void onStarted(float tpf) {
