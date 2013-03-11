@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.windtunnel.model;
 import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
 import com.jme3.input.controls.AnalogListener;
+import com.jme3.math.Quaternion;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
@@ -30,7 +31,7 @@ public abstract class AHarnessModel extends Node implements Control, Dependent {
 
             @Override
             public void onAnalog(String string, float f, float f1) {
-                target.rotate(0, f, 0);
+                target.setLocalRotation(new Quaternion().fromAngles(0, f, 0).mult(target.getLocalRotation()));
             }
         }, new String[]{"WindTunnel_RotateLeft"});
 
@@ -38,7 +39,7 @@ public abstract class AHarnessModel extends Node implements Control, Dependent {
 
             @Override
             public void onAnalog(String string, float f, float f1) {
-                target.rotate(0, -f, 0);
+                target.setLocalRotation(new Quaternion().fromAngles(0, -f, 0).mult(target.getLocalRotation()));
             }
         }, new String[]{"WindTunnel_RotateRight"});
     }
