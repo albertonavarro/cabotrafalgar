@@ -102,10 +102,6 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
         cameraManager.setCamera2();
     }
 
-    public void clickCamera3() {
-        cameraManager.setCamera3();
-    }
-
     public void updateShipStats() {
         ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
         listBox.refresh();
@@ -142,13 +138,13 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
     synchronized public void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        nifty.gotoScreen("counterClock.GameScreen");
+        nifty.gotoScreen("windTunnelScreen");
     }
 
     synchronized public void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        nifty.gotoScreen("counterClock.ScreenSelectMap");
+        nifty.gotoScreen("preWindTunnelScreen");
     }
 
     /**
