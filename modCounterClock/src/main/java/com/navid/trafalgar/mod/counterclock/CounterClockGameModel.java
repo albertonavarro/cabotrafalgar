@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.counterclock;
 import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
 import com.navid.trafalgar.model.*;
 import java.util.ArrayList;
@@ -43,13 +44,15 @@ public class CounterClockGameModel {
         gameNode.addLight( (SunModel) gameModel.getSingleByType(SunModel.class));
         
         gameNode.attachChild(ship);
-        for(Node currentNode : millestones){
+        
+        
+        for(Spatial currentNode : gameModel.getByType(Spatial.class)){
             gameNode.attachChild(currentNode);
         }
         
         gameNode.addLight(new AmbientLight());
         
-        gameNode.attachChild((SkyModel) gameModel.getSingleByType(SkyModel.class));
+       // gameNode.attachChild((SkyModel) gameModel.getSingleByType(SkyModel.class));
     }
     
     /**
