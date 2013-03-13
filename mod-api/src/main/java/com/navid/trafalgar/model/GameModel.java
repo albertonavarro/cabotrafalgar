@@ -35,28 +35,30 @@ public class GameModel {
     }
 
     /**
-     *
+     * 
+     * @param <T>
      * @param className
-     * @return
+     * @return 
      */
-    public List getByType(Class className) {
+    public <T>  List<T> getByType(Class<T> className) {
         List list = mapByClass.get(className);
         return list != null ? list : new ArrayList();
     }
     
     /**
-     *
+     * 
+     * @param <T>
      * @param className
-     * @return
+     * @return 
      */
-    public Object getSingleByType(Class className) {
+    public <T> T getSingleByType(Class<T> className) {
         List list = getByType(className);
         
         if(list.size() != 1){
             throw new IllegalStateException("Required 1, found " + list.size() + " objects of type " + className);
         }
         
-        return list.get(0);
+        return (T) list.get(0);
     }
     
 }
