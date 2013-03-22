@@ -139,6 +139,7 @@ public abstract class AShipOneModel extends AShipModel {
     private FloatStatistic mass;
     private FloatStatistic windOverVela;
     private FloatStatistic velaOverShip;
+    private FloatStatistic sailForcing;
     private Vector3fStatistic realWind;
     private Vector3fStatistic apparentWind;
     private Vector3fStatistic shipDirection;
@@ -172,6 +173,7 @@ public abstract class AShipOneModel extends AShipModel {
         velaOverShip = statisticsManager.createStatistic(STATS_NAME, "VelaOverShip", 0f);
         realWind = statisticsManager.createStatistic(STATS_NAME, "Real wind", Vector3f.UNIT_X);
         apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
+        sailForcing = statisticsManager.createStatistic(STATS_NAME, "Sail forcing", 0f);
     }
 
     protected abstract void initGeometry(AssetManager assetManager, EventManager eventManager);
@@ -195,7 +197,7 @@ public abstract class AShipOneModel extends AShipModel {
         float sailRegulation = (float) ((angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection);
         velaOverShip.setValue((float)Math.cos(angleBetween + sailRegulation));
 
-        float force = (float) (apparentWind3f.length() * windOverVela.getValue() * velaOverShip.getValue() );
+        float force = (float) (apparentWind3f.length() * windOverVela.getValue() * velaOverShip.getValue() * sailForcing.getValue() );
         
         float acceleration = force / mass.getValue();
 
@@ -236,13 +238,16 @@ public abstract class AShipOneModel extends AShipModel {
             if (helperDirection.angleBetween(vectorshipDirection) > ropeLenght.getValue()) {
                 //Sail hasn't yet arrived to the limit
                 sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+                sailForcing.setValue(0f);
             } else {
                 //Sail adjusts to the limit
                 sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght.getValue()) * tpf * sailRotateSpeed);
+                sailForcing.setValue(1f);
             }
         } else {
             //Sail is moving towards the back
             sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+            sailForcing.setValue(0f);
         }
     }
 
@@ -261,9 +266,9 @@ public abstract class AShipOneModel extends AShipModel {
     	
         double velaOverShip = Math.sin(angleBetween);
        
-        this.rotate(((float)windOverVela * (float)velaOverShip) - lastPitch,0,0);
+        this.rotate(((float)windOverVela * (float)velaOverShip) * sailForcing.getValue() - lastPitch,0,0);
        
-        lastPitch = (((float)windOverVela * (float)velaOverShip));
+        lastPitch = (((float)windOverVela * (float)velaOverShip) * sailForcing.getValue());
        
     }
 
