@@ -261,16 +261,24 @@ public abstract class AShipOneModel extends AShipModel {
         Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
-        double windOverVela = Math.cos(sail.getGlobalDirection().angleBetween(windDirection));
+        double windOverVelaPitch = Math.cos(sail.getGlobalDirection().angleBetween(windDirection));
         float angleBetween = shipOrientation3f.angleBetween(sail.getGlobalDirection());
     	
-        double velaOverShip = Math.sin(angleBetween);
+        double velaOverShipPitch = Math.sin(angleBetween);
+        
+        float targetPitch = (float)windOverVelaPitch * (float)velaOverShipPitch * sailForcing.getValue();
+        float resistance = ((float) Math.sin(inclinacion));
+        float totalForce = targetPitch - resistance;
        
-        this.rotate(((float)windOverVela * (float)velaOverShip) * sailForcing.getValue() - lastPitch,0,0);
+        inclinacion += totalForce * tpf;
+        this.rotate(totalForce * tpf,0,0);
+        
        
-        lastPitch = (((float)windOverVela * (float)velaOverShip) * sailForcing.getValue());
+        lastPitch = totalForce;
        
     }
+    
+    private float inclinacion = 0;
 
     /**
      * Rotation on Y
