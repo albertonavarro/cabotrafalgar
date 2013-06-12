@@ -11,6 +11,7 @@ import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.navid.trafalgar.manager.EventManager;
+import com.navid.trafalgar.manager.statistics.Auditable;
 import com.navid.trafalgar.manager.statistics.FloatStatistic;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
 import com.navid.trafalgar.persistence.CandidateRecord;
@@ -131,19 +132,29 @@ public abstract class AShipOneModel extends AShipModel {
     private Material matSail;
     private float rudderRotation;
     private boolean previousTransparent = false;
-    private FloatStatistic ropeLenght;
-    private FloatStatistic speed;
-    private FloatStatistic speedPerSecond;
-    private FloatStatistic lastRudderRotation;
-    private FloatStatistic lastSailRotation;
-    private FloatStatistic mass;
-    private FloatStatistic windOverVela;
-    private FloatStatistic velaOverShip;
-    private FloatStatistic sailForcing;
+    @Auditable
+    private float ropeLenght = MINIMUM_ROPE;
+    @Auditable
+    private float speed;
+    @Auditable
+    private float speedPerSecond;
+    @Auditable
+    private float lastRudderRotation;
+    @Auditable
+    private float lastSailRotation;
+    @Auditable
+    private float mass = 1f;
+    @Auditable
+    private float windOverVela;
+    @Auditable
+    private float velaOverShip;
+    @Auditable
+    private float sailForcing;
     private Vector3fStatistic realWind;
     private Vector3fStatistic apparentWind;
     private Vector3fStatistic shipDirection;
     public static String STATS_NAME = "shipOneStats";
+    
     private float sailCorrection = 0.2f;
     private float sailRotateSpeed = 2f;
     private float sailSurface = 100;
@@ -162,18 +173,9 @@ public abstract class AShipOneModel extends AShipModel {
     }
 
     protected final void initStatisticsManager() {
-        ropeLenght = statisticsManager.createStatistic(STATS_NAME, "Rope lenght", MINIMUM_ROPE);
-        speed = statisticsManager.createStatistic(STATS_NAME, "Speed per frame", 0f);
-        speedPerSecond = statisticsManager.createStatistic(STATS_NAME, "Speed per second", 0f);
-        lastRudderRotation = statisticsManager.createStatistic(STATS_NAME, "Rudder rotation", 0f);
-        lastSailRotation = statisticsManager.createStatistic(STATS_NAME, "Sail rotation", 0f);
         shipDirection = statisticsManager.createStatistic(STATS_NAME, "Ship direction", this.getGlobalDirection());
-        mass = statisticsManager.createStatistic(STATS_NAME, "Ship mass", 1f);        
-        windOverVela = statisticsManager.createStatistic(STATS_NAME, "WindOverVela", 0f);
-        velaOverShip = statisticsManager.createStatistic(STATS_NAME, "VelaOverShip", 0f);
         realWind = statisticsManager.createStatistic(STATS_NAME, "Real wind", Vector3f.UNIT_X);
         apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
-        sailForcing = statisticsManager.createStatistic(STATS_NAME, "Sail forcing", 0f);
     }
 
     protected abstract void initGeometry(AssetManager assetManager, EventManager eventManager);
@@ -186,27 +188,27 @@ public abstract class AShipOneModel extends AShipModel {
         realwindDirection3f.multLocal(100);
         realWind.setValue(realwindDirection3f);
         
-        Vector3f apparentWind3f = realwindDirection3f.subtract(this.getGlobalDirection().mult(speed.getValue()));
+        Vector3f apparentWind3f = realwindDirection3f.subtract(this.getGlobalDirection().mult(speed));
         apparentWind.setValue(apparentWind3f);
         
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
-        windOverVela.setValue((float)Math.cos(sail.getGlobalDirection().angleBetween(apparentWind3f.normalize())));
+        windOverVela = (float)Math.cos(sail.getGlobalDirection().angleBetween(apparentWind3f.normalize()));
 
         float angleBetween = shipOrientation3f.angleBetween(sail.getGlobalDirection());
         float sailRegulation = (float) ((angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection);
-        velaOverShip.setValue((float)Math.cos(angleBetween + sailRegulation));
+        velaOverShip = (float)Math.cos(angleBetween + sailRegulation);
 
-        float force = (float) (apparentWind3f.length() * windOverVela.getValue() * velaOverShip.getValue() * sailForcing.getValue() );
+        float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing );
         
-        float acceleration = force / mass.getValue();
+        float acceleration = force / mass;
 
-        float newspeed = speed.getValue() + acceleration * tpf;
+        float newspeed = speed + acceleration * tpf;
         
         newspeed /= 1.01; //rozamiento
 
-        speed.setValue(newspeed);
-        speedPerSecond.setValue(newspeed/tpf);
+        speed = newspeed;
+        speedPerSecond = newspeed/tpf;
     }
 
     private void updateRudder(float tpf) {
@@ -216,7 +218,7 @@ public abstract class AShipOneModel extends AShipModel {
             rudder.rotateY(rudderRotation);
         }
 
-        lastRudderRotation.setValue(rudderRotation);
+        lastRudderRotation = rudderRotation;
         rudderRotation = 0f;
     }
 
@@ -235,19 +237,19 @@ public abstract class AShipOneModel extends AShipModel {
 
         if (resMultVectWindSail.y * resMultVectSailShip.y > 0) {
             //Sail is moving towards the front
-            if (helperDirection.angleBetween(vectorshipDirection) > ropeLenght.getValue()) {
+            if (helperDirection.angleBetween(vectorshipDirection) > ropeLenght) {
                 //Sail hasn't yet arrived to the limit
                 sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
-                sailForcing.setValue(0f);
+                sailForcing = 0f;
             } else {
                 //Sail adjusts to the limit
-                sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght.getValue()) * tpf * sailRotateSpeed);
-                sailForcing.setValue(1f);
+                sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght) * tpf * sailRotateSpeed);
+                sailForcing = 1f;
             }
         } else {
             //Sail is moving towards the back
             sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
-            sailForcing.setValue(0f);
+            sailForcing = 0f;
         }
     }
 
@@ -266,7 +268,7 @@ public abstract class AShipOneModel extends AShipModel {
     	
         double velaOverShipPitch = Math.sin(angleBetween);
         
-        float targetPitch = (float)windOverVelaPitch * (float)velaOverShipPitch * sailForcing.getValue();
+        float targetPitch = (float)windOverVelaPitch * (float)velaOverShipPitch * sailForcing;
         float resistance = ((float) Math.sin(inclinacion));
         float totalForce = targetPitch - resistance;
        
@@ -286,7 +288,7 @@ public abstract class AShipOneModel extends AShipModel {
      * @param tpf
      */
     private void updateShipYaw(float tpf) {
-        this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * speed.getValue() * tpf / 100, 0).mult(this.getLocalRotation()));
+        this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * speed * tpf / 100, 0).mult(this.getLocalRotation()));
     }
 
     /**
@@ -304,7 +306,7 @@ public abstract class AShipOneModel extends AShipModel {
      */
     private void updatePosition(float tpf) {
         Vector3f shipOrientation3f = this.getGlobalDirection();
-        this.move(shipOrientation3f.x * speed.getValue() * tpf, 0, shipOrientation3f.z * speed.getValue() * tpf);
+        this.move(shipOrientation3f.x * speed * tpf, 0, shipOrientation3f.z * speed * tpf);
         shipDirection.setValue(shipOrientation3f);
     }
 
@@ -327,18 +329,18 @@ public abstract class AShipOneModel extends AShipModel {
     }
 
     public void sailTrim(float tpf) {
-        if (ropeLenght.getValue() <= MINIMUM_ROPE + (1 * tpf)) {
-            ropeLenght.setValue(MINIMUM_ROPE);
+        if (ropeLenght <= MINIMUM_ROPE + (1 * tpf)) {
+            ropeLenght = MINIMUM_ROPE;
         } else {
-            ropeLenght.setValue(ropeLenght.getValue() - (1 * tpf * TRIMMING_SPEED));
+            ropeLenght = ropeLenght - (1 * tpf * TRIMMING_SPEED);
         }
     }
 
     public void sailLoose(float tpf) {
-        if (ropeLenght.getValue() >= MAXIMUM_ROPE - (1 * tpf)) {
-            ropeLenght.setValue(MAXIMUM_ROPE);
+        if (ropeLenght >= MAXIMUM_ROPE - (1 * tpf)) {
+            ropeLenght = MAXIMUM_ROPE;
         } else {
-            ropeLenght.setValue(ropeLenght.getValue() + (1 * tpf * TRIMMING_SPEED));
+            ropeLenght = ropeLenght + (1 * tpf * TRIMMING_SPEED);
         }
     }
     private final AnalogListener analogListener = new AnalogListener() {
@@ -366,7 +368,7 @@ public abstract class AShipOneModel extends AShipModel {
 
     @Override
     public final float getSpeed() {
-        return speed.getValue();
+        return speed;
     }
 
     public final void setSailMaterial(Material mat) {

@@ -19,6 +19,7 @@ public class StartedListener implements PrestartState, StartedState {
 
     @Autowired
     private GameStatus gameStatus;
+    
     @Autowired
     private EventManager eventManager;
     
@@ -26,10 +27,12 @@ public class StartedListener implements PrestartState, StartedState {
     private WindTunnelGameModel model;
 
 
+    @Override
     public void onPrestart(float tpf) {
         gameStatus.getTime().setValue(0f);
     }
 
+    @Override
     public void onStarted(float tpf) {
         gameStatus.getTime().setValue(gameStatus.getTime().getValue() + tpf);
 
@@ -38,6 +41,7 @@ public class StartedListener implements PrestartState, StartedState {
         gameStatus.getGameGUINode().updateLogicalState(tpf);
     }
 
+    @Override
     public void onUnload() {
     }
 

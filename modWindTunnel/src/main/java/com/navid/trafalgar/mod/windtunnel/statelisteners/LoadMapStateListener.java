@@ -4,7 +4,6 @@ import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
-import com.jme3.scene.control.Control;
 import com.navid.trafalgar.definition2.GameDefinition2;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
@@ -12,8 +11,6 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.windtunnel.WindTunnelGameModel;
 import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 import com.navid.trafalgar.model.*;
-import java.util.Collections;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
