@@ -12,7 +12,6 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.Auditable;
-import com.navid.trafalgar.manager.statistics.FloatStatistic;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
 import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.StepRecord;
@@ -137,8 +136,6 @@ public abstract class AShipOneModel extends AShipModel {
     @Auditable
     private float speed;
     @Auditable
-    private float speedPerSecond;
-    @Auditable
     private float lastRudderRotation;
     @Auditable
     private float lastSailRotation;
@@ -150,12 +147,16 @@ public abstract class AShipOneModel extends AShipModel {
     private float velaOverShip;
     @Auditable
     private float sailForcing;
+    @Auditable
+    private float acceleration;
+    @Auditable
+    private float friction;
     private Vector3fStatistic realWind;
     private Vector3fStatistic apparentWind;
     private Vector3fStatistic shipDirection;
     public static String STATS_NAME = "shipOneStats";
     
-    private float sailCorrection = 0.2f;
+    private float sailCorrection = 0.3f;
     private float sailRotateSpeed = 2f;
     private float sailSurface = 100;
     private float lastPitch = 0f;
@@ -201,14 +202,13 @@ public abstract class AShipOneModel extends AShipModel {
 
         float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing );
         
-        float acceleration = force / mass;
+        acceleration = force / mass;
+        friction = speed*speed / 80 * Math.signum(speed);
 
-        float newspeed = speed + acceleration * tpf;
+        float newspeed = speed + (acceleration - friction) * tpf ;
         
-        newspeed /= 1.01; //rozamiento
-
+        
         speed = newspeed;
-        speedPerSecond = newspeed/tpf;
     }
 
     private void updateRudder(float tpf) {
