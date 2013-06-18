@@ -56,18 +56,30 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
 
     public abstract void setWindNode(IWind.WindGeometry windGeometry);
 
+    @Override
     public final Control cloneForSpatial(Spatial spatial) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public final void setSpatial(Spatial spatial) {
     }
 
+    @Override
     public final void render(RenderManager rm, ViewPort vp) {
     }
     
+    IWind.WindGeometry windGeometry;
     
+    @Override
     public void resolveDependencies(GameModel gameModel) {
         this.context = (IContext) gameModel.getSingleByType(IContext.class);
+        windGeometry = this.context.getWind().createWindGeometryNode();
+        windGeometry.setLocalTranslation(-20, 20, 0);
+        this.attachChild(windGeometry);
+    }
+    
+    public void update(float tpf) {
+       windGeometry.update(tpf);
     }
 }

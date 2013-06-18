@@ -156,6 +156,7 @@ public abstract class AShipOneModel extends AShipModel {
     private Vector3fStatistic shipDirection;
     public static String STATS_NAME = "shipOneStats";
     
+    
     private float sailCorrection = 0.3f;
     private float sailRotateSpeed = 2f;
     private float sailSurface = 100;
@@ -311,6 +312,7 @@ public abstract class AShipOneModel extends AShipModel {
     }
 
     public final void update(float tpf) {
+        super.update(tpf);
         updateSpeed(tpf);
         updateRudder(tpf);
         updateSailAutomaticRotation(tpf);
