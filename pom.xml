@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.navid.trafalgar</groupId>
     <artifactId>parent-trafalgar</artifactId>
-    <version>0.6</version>
+    <version>0.7-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>cabo-trafalgar</name>
     
