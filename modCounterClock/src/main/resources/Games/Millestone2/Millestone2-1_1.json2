@@ -4,10 +4,10 @@
 {"type" : "Sun"},
 {"type" : "Water2"},
 {"name" : "player", "values" : { "position" : "0,0,0" } },
-{"type" : "Millestone", "name" : "mil1", "values" : { "position" : "300,0,0" } },
-{"type" : "Millestone", "name" : "mil2", "values" : { "position" : "200,0,200" } },
-{"type" : "Millestone", "name" : "mil3", "values" : { "position" : "0,0,200" } },
-{"type" : "Millestone", "name" : "mil4", "values" : { "position" : "100,0,-200" } },
-{"type" : "Millestone", "name" : "mil5", "values" : { "position" : "100,0,-400" } },
+{"type" : "Millestone", "name" : "mil1", "values" : { "position" : "500,0,0" } },
+{"type" : "Millestone", "name" : "mil2", "values" : { "position" : "400,0,400" } },
+{"type" : "Millestone", "name" : "mil3", "values" : { "position" : "0,0,400" } },
+{"type" : "Millestone", "name" : "mil4", "values" : { "position" : "100,0,-400" } },
+{"type" : "Millestone", "name" : "mil5", "values" : { "position" : "-300,0,-800" } },
 {"type" : "Sky"}
 ] }
