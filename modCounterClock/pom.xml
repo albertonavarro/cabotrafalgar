@@ -5,13 +5,12 @@
 
     <groupId>com.navid.trafalgar</groupId>
     <artifactId>modCounterClock</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>com.navid.trafalgar</groupId>
         <artifactId>parent-trafalgar</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.7-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -33,11 +32,6 @@
         <dependency>
             <groupId>com.jme3</groupId>
             <artifactId>jME3-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.jme3</groupId>
-            <artifactId>jME3-jbullet</artifactId>
-            <scope>runtime</scope>
         </dependency>
        <dependency>
             <groupId>com.jme3</groupId>
