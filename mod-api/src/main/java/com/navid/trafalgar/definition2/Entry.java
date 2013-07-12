@@ -48,7 +48,7 @@ public class Entry {
      * @param values the values to set
      */
     public void setValues(Map<String, String> values) {
-        this.setValues(values);
+        this.values = values;
     }
 
     /**

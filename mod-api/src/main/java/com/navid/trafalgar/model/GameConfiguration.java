@@ -19,6 +19,11 @@ public class GameConfiguration {
     
     private String shipName;
     
+    private GameModel preGameModel;
+    
+    public GameConfiguration(){
+        preGameModel = new GameModel();
+    }
 
     /**
      * @return the map
@@ -98,8 +103,11 @@ public class GameConfiguration {
         this.shipName = shipName;
     }
 
-    
-    
-    
+    /**
+     * @return the preGameModel
+     */
+    public GameModel getPreGameModel() {
+        return preGameModel;
+    }
     
 }

@@ -11,5 +11,5 @@
     <bean id="common.StartScreen" class="com.navid.trafalgar.games.MyStartScreen" autowire="byType"/>
     <bean id="common.EventManager" class="com.navid.trafalgar.manager.EventManager" autowire="byType"/>
     <bean id="common.Builder" class="com.navid.trafalgar.model.Builder2" autowire="byType" />
-    
+    <bean id="common.InputBuilder" class="com.navid.trafalgar.input.GeneratorBuilder" autowire="byType" />
 </beans>

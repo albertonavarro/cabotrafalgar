@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.counterclock;
 
+import com.navid.trafalgar.model.AShipModel;
 import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;

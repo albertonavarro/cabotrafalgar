@@ -7,6 +7,7 @@ import com.navid.trafalgar.mod.counterclock.model.MillestoneModel;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.util.FormatUtils;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class MillestoneBuilder implements BuilderInterface {
     @Autowired
     private AssetManager assetManager;
 
+    @Override
     public Iterable<Category> getCategories() {
         return Collections.singleton(Category.other);
     }
@@ -31,7 +33,8 @@ public class MillestoneBuilder implements BuilderInterface {
         this.assetManager = assetManager;
     }
 
-    public Object build(String instanceName, Map<String, String> customValues) {
+    @Override
+    public Collection build(String instanceName, Map<String, String> customValues) {
         MillestoneModel millestone = new MillestoneModel(assetManager);
         
         millestone.setMaterialOn(new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md"){{
@@ -46,9 +49,10 @@ public class MillestoneBuilder implements BuilderInterface {
             millestone.setLocalTranslation(FormatUtils.getVector3fFromString(customValues.get("position")));
         }
         
-        return millestone;
+        return Collections.singleton(millestone);
     }
 
+    @Override
     public String getType() {
         return "Millestone";
     }

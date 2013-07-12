@@ -1,5 +1,15 @@
 package com.navid.trafalgar.mod.windtunnel;
 
+import com.google.common.collect.HashMultimap;
+import com.jme3.input.KeyInput;
+import com.navid.trafalgar.definition2.Entry;
+import com.navid.trafalgar.input.Command;
+import com.navid.trafalgar.input.CommandGenerator;
+import com.navid.trafalgar.input.CommandStateListener;
+import com.navid.trafalgar.input.GeneratorBuilder;
+import com.navid.trafalgar.input.KeyboardCommandStateListener;
+import com.navid.trafalgar.model.AShipModel;
+import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
@@ -10,6 +20,12 @@ import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -36,6 +52,9 @@ public class ScreenSelectShip implements ScreenController {
      */
     @Autowired
     private Builder2 builder;
+    
+    @Autowired
+    private GeneratorBuilder generatorBuilder;
     private ScreenSelectShip.ListItem selectedItem;
 
     @Override
@@ -57,6 +76,15 @@ public class ScreenSelectShip implements ScreenController {
     public void setBuilder(Builder2 builder) {
         this.builder = builder;
     }
+
+    /**
+     * @param generatorBuilder the generatorBuilder to set
+     */
+    public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
+        this.generatorBuilder = generatorBuilder;
+    }
+
+   
 
     private static class ListItem {
 
@@ -134,7 +162,38 @@ public class ScreenSelectShip implements ScreenController {
 
     public void goTo(String nextScreen) {
         gameConfiguration.setShipName(selectedItem.getName());
-
+        
+        Collection c = builder.build(new Entry(){{
+            setType(selectedItem.getName());
+            setName("player1");
+            setValues(new HashMap<String, String>());
+        }});
+        
+        AShipModelTwo s = (AShipModelTwo) c.iterator().next(); 
+        
+        Set<Command> commands = s.getCommands();
+        
+        HashMultimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
+        
+        Set<CommandStateListener> commandListeners = new HashSet<CommandStateListener>();
+        for(Map.Entry<Command, CommandGenerator> currentEntry : gens.entries()){
+            CommandStateListener commandStateListener = currentEntry.getValue().generateCommandStateListener(currentEntry.getKey());
+            commandListeners.add(commandStateListener);
+            
+        }
+        
+        gameConfiguration.getPreGameModel().addToModel(Collections.singleton(s));
+        
+        gameConfiguration.getPreGameModel().addToModel(commandListeners);
+        
+        int key0 = KeyInput.KEY_A;
+        List<KeyboardCommandStateListener> keyboards = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
+        for(KeyboardCommandStateListener currentkey : keyboards){
+            currentkey.setKeycode(key0++);
+        }
+        
         nifty.gotoScreen(nextScreen);
     }
+    
+    
 }

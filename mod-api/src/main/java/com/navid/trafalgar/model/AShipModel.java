@@ -9,8 +9,11 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
-import com.navid.trafalgar.persistence.CandidateRecord;
-import com.navid.trafalgar.persistence.StepRecord;
+import com.navid.trafalgar.model.Dependent;
+import com.navid.trafalgar.model.GameModel;
+import com.navid.trafalgar.model.IContext;
+import com.navid.trafalgar.model.IWind;
+import com.navid.trafalgar.model.TrafalgarNode;
 
 /**
  *
@@ -32,11 +35,8 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
 
     public abstract void setTransparent(boolean b);
 
-    public abstract StepRecord getSnapshot();
 
-    public abstract void updateFromRecord(StepRecord currentStepRecord);
 
-    public abstract CandidateRecord getCandidateRecordInstance();
 
     public final boolean isEnabled() {
         return true;

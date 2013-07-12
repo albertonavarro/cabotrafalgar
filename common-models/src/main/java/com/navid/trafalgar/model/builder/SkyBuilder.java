@@ -5,6 +5,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.util.SkyFactory;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class SkyBuilder implements BuilderInterface {
     }
 
     @Override
-    public Object build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, String> customValues) {
         Spatial sky = SkyFactory.createSky(assetManager, "Scenes/Beach/FullskiesSunset0068.dds", false);
-        return sky;
+        return Collections.singleton(sky);
     }
 
     @Override

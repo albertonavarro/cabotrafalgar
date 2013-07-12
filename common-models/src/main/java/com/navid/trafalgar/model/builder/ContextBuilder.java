@@ -5,6 +5,7 @@ import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.SimpleContext;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class ContextBuilder implements BuilderInterface {
     @Autowired
     private AssetManager assetManager;
 
+    @Override
     public Iterable<Category> getCategories() {
         return Collections.singleton(Category.context);
     }
@@ -29,10 +31,12 @@ public class ContextBuilder implements BuilderInterface {
         this.assetManager = assetManager;
     }
 
-    public Object build(String instanceName, Map<String, String> customValues) {
-        return new SimpleContext();
+    @Override
+    public Collection build(String instanceName, Map<String, String> customValues) {
+        return Collections.singleton(new SimpleContext());
     }
 
+    @Override
     public String getType() {
         return "Context";
     }

@@ -6,6 +6,7 @@ import com.jme3.app.state.AppStateManager;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.StateListener;
 import com.navid.trafalgar.manager.StateManager;
+import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class WindTunnelMainGame extends AbstractAppState {
     @Autowired
     private List<StateListener> stateListeners;
 
+    @Autowired
+    private GameConfiguration gameConfiguration;
+    
     /**
      * jME3 AppState methods
      */
@@ -45,6 +49,10 @@ public class WindTunnelMainGame extends AbstractAppState {
         stateManager.reset();
 
         for (StateListener currentStateListener : stateListeners) {
+            stateManager.register(currentStateListener);
+        }
+        
+        for(StateListener currentStateListener : gameConfiguration.getPreGameModel().getByType(StateListener.class)){
             stateManager.register(currentStateListener);
         }
 
@@ -94,4 +102,13 @@ public class WindTunnelMainGame extends AbstractAppState {
     public final void setStateListeners(final List<StateListener> inStateListeners) {
         this.stateListeners = inStateListeners;
     }
+
+    /**
+     * @param gameConfiguration the gameConfiguration to set
+     */
+    public void setGameConfiguration(GameConfiguration gameConfiguration) {
+        this.gameConfiguration = gameConfiguration;
+    }
+    
+    
 }

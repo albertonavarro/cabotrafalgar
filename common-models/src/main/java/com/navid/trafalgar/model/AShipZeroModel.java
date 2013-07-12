@@ -46,7 +46,6 @@ public abstract class AShipZeroModel extends AShipModel {
         }
     }
 
-    @Override
     public final StepRecord getSnapshot() {
         ShipSnapshot snapshot = new ShipSnapshot();
 
@@ -56,7 +55,6 @@ public abstract class AShipZeroModel extends AShipModel {
         return snapshot;
     }
 
-    @Override
     public final void updateFromRecord(StepRecord currentStepRecord) {
 
         ShipSnapshot snapshot = (ShipSnapshot) currentStepRecord;
@@ -66,7 +64,6 @@ public abstract class AShipZeroModel extends AShipModel {
 
     }
 
-    @Override
     public final CandidateRecord getCandidateRecordInstance() {
         ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
         candidateRecord.getHeader().setShipModel("ModelZero");

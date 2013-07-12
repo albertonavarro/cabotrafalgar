@@ -1,8 +1,8 @@
 package com.navid.trafalgar.model;
 
+import com.navid.trafalgar.input.Interactive;
+import com.navid.trafalgar.input.Command;
 import com.jme3.asset.AssetManager;
-import com.jme3.input.InputManager;
-import com.jme3.input.controls.AnalogListener;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.Quaternion;
@@ -15,19 +15,23 @@ import com.navid.trafalgar.manager.statistics.Auditable;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
 import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.StepRecord;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
  * @author alberto
  */
-public abstract class AShipOneModel extends AShipModel {
+public abstract class AShipModelTwo extends AShipModel implements Interactive {
 
     public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
     }
 
     public final CandidateRecord getCandidateRecordInstance() {
         ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
-        candidateRecord.getHeader().setShipModel("ShipModelOneX");
+        candidateRecord.getHeader().setShipModel("ShipModelOneXX");
         return candidateRecord;
     }
 
@@ -126,6 +130,7 @@ public abstract class AShipOneModel extends AShipModel {
     protected Rudder rudder;
     private Material matHull;
     private Material matSail;
+    @Auditable
     private float rudderRotation;
     private boolean previousTransparent = false;
     @Auditable
@@ -159,7 +164,7 @@ public abstract class AShipOneModel extends AShipModel {
     private float sailSurface = 100;
     private float lastPitch = 0f;
 
-    protected AShipOneModel(AssetManager assetManager, EventManager eventManager) {
+    protected AShipModelTwo(AssetManager assetManager, EventManager eventManager) {
         super(new Vector3f(1, 0, 0), assetManager, eventManager);
 
         initGeometry(assetManager, eventManager);
@@ -342,28 +347,7 @@ public abstract class AShipOneModel extends AShipModel {
             ropeLenght = ropeLenght + (1 * tpf * TRIMMING_SPEED);
         }
     }
-    private final AnalogListener analogListener = new AnalogListener() {
-
-        public void onAnalog(String name, float value, float tpf) {
-            if (name.equals("SHIP_RudderRight")) {
-                rudderRight(tpf);
-            }
-            if (name.equals("SHIP_RudderLeft")) {
-                rudderLeft(tpf);
-            }
-            if (name.equals("SHIP_SailTrim")) {
-                sailTrim(tpf);
-            }
-            if (name.equals("SHIP_SailLoose")) {
-                sailLoose(tpf);
-            }
-        }
-    };
-
-    @Override
-    public void registerInput(InputManager inputManager) {
-        inputManager.addListener(analogListener, new String[]{"SHIP_RudderRight", "SHIP_RudderLeft", "SHIP_SailTrim", "SHIP_SailLoose"});
-    }
+    
 
     @Override
     public final float getSpeed() {
@@ -400,5 +384,34 @@ public abstract class AShipOneModel extends AShipModel {
         this.addControl(windGeometry);
         windGeometry.move(-10, 10, 0);
     }
+    
+    @Override
+    public Set<Command> getCommands(){
+        return new HashSet<Command>(){{
+            add(new Command() {
+                @Override
+                public String getName() {
+                    return "rudderLeft";
+                }
+
+                @Override
+                public void execute(float tpf) {
+                    rudderRight(tpf);
+                }
+            });
+            add(new Command() {
+                @Override
+                public String getName() {
+                    return "rudderRight";
+                }
+
+                @Override
+                public void execute(float tpf) {
+                    rudderLeft(tpf);
+                }
+            });
+        }};
+    }
+   
     
 }

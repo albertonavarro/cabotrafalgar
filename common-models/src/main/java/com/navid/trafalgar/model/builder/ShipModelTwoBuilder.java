@@ -3,10 +3,9 @@ package com.navid.trafalgar.model.builder;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.navid.trafalgar.manager.EventManager;
-import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
-import com.navid.trafalgar.model.ShipOneModel;
+import com.navid.trafalgar.model.ShipModelTwo;
 import com.navid.trafalgar.util.FormatUtils;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class ShipModelOneBuilder implements BuilderInterface {
+public class ShipModelTwoBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
@@ -48,7 +47,7 @@ public class ShipModelOneBuilder implements BuilderInterface {
 
     @Override
     public Collection build(String instanceName, Map<String, String> customValues) {
-        ShipOneModel model = new ShipOneModel(assetManager, eventManager);
+        ShipModelTwo model = new ShipModelTwo(assetManager, eventManager);
         model.setName(instanceName);
         
         model.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md"){{
@@ -68,7 +67,7 @@ public class ShipModelOneBuilder implements BuilderInterface {
 
     @Override
     public String getType() {
-        return "ShipModelOneX";
+        return "ShipModelOneY";
     }
     
 }
