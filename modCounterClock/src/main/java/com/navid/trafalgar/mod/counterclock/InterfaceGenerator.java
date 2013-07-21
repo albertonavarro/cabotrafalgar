@@ -2,7 +2,6 @@ package com.navid.trafalgar.mod.counterclock;
 
 import com.jme3.app.Application;
 import com.jme3.system.AppSettings;
-import com.navid.trafalgar.modapi.BuilderProvider;
 import com.navid.trafalgar.modapi.ModRegisterer;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
@@ -18,7 +17,7 @@ import org.springframework.core.io.ClassPathResource;
  *
  * @author alberto
  */
-public class InterfaceGenerator implements ModRegisterer, BuilderProvider {
+public class InterfaceGenerator implements ModRegisterer {
 
     @Override
     public void generate(final Nifty nifty, Screen parent, AppSettings settings, Application app, BeanFactory beanFactory) {
@@ -32,7 +31,6 @@ public class InterfaceGenerator implements ModRegisterer, BuilderProvider {
         nifty.addXml("mod/counterclock/interface_counterclock.xml");
     }
 
-    @Override
     public void registerModels(BeanFactory beanFactory) {
         XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("mod/counterclock/builders-declaration.xml"), beanFactory);
 

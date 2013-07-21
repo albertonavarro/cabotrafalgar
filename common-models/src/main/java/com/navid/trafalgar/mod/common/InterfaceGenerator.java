@@ -1,11 +1,21 @@
 package com.navid.trafalgar.mod.common;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.jme3.app.Application;
+import com.jme3.system.AppSettings;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
-import com.navid.trafalgar.modapi.BuilderProvider;
+import com.navid.trafalgar.modapi.GenericModRegisterer;
+import com.navid.trafalgar.modapi.ModConfiguration;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -14,23 +24,18 @@ import org.springframework.core.io.ClassPathResource;
  *
  * @author alberto
  */
-public class InterfaceGenerator implements BuilderProvider {
+public class InterfaceGenerator extends GenericModRegisterer{
 
-    public void registerModels(BeanFactory beanFactory) {
-        XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("mod/common/builders-declaration.xml"), beanFactory);
-
-        Map<String,BuilderInterface> builders = ctx.getBeansOfType(BuilderInterface.class);
-        Builder2 builder2 = beanFactory.getBean(Builder2.class);
+    @Override
+    public void generate(Nifty nifty, Screen parent, AppSettings settings, Application app, BeanFactory beanFactory) {
         
-        for(BuilderInterface currentBuilder : builders.values()){
-            builder2.registerBuilder(currentBuilder);
-        }
-        
-        Map<String,CommandGenerator> commandGenerators = ctx.getBeansOfType(CommandGenerator.class);
-        GeneratorBuilder generatorBuilder = beanFactory.getBean(GeneratorBuilder.class);
-        
-        for(CommandGenerator currentGenerator : commandGenerators.values()){
-            generatorBuilder.registerBuilder(currentGenerator);
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        try {
+            ModConfiguration config = mapper.readValue(this.getClass().getResourceAsStream("commonmodconfig.yml"), ModConfiguration.class);
+            //ModConfiguration config = mapper.readValue(this.getClass().getResourceAsStream("mod/common/builders-declaration.xml"), ModConfiguration.class);
+            super.generate(nifty, parent, settings, app, beanFactory, config);
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

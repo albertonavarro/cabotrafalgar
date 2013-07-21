@@ -8,8 +8,12 @@
     <context:component-scan base-package="com.navid.trafalgar"/>
     <context:annotation-config/>
   
-    <bean id="common.StartScreen" class="com.navid.trafalgar.games.MyStartScreen" autowire="byType"/>
     <bean id="common.EventManager" class="com.navid.trafalgar.manager.EventManager" autowire="byType"/>
     <bean id="common.Builder" class="com.navid.trafalgar.model.Builder2" autowire="byType" />
     <bean id="common.InputBuilder" class="com.navid.trafalgar.input.GeneratorBuilder" autowire="byType" />
+    <bean id="common.ScreenFlowManager" class="com.navid.trafalgar.screenflow.ScreenFlowManager" autowire="byType"/> 
+    <bean id="common.RedirectorScreenController" class="com.navid.trafalgar.screenflow.RedirectorScreenController" autowire="byType" />  
+    
+    <bean id="common.RootScreenGenerator" class="com.navid.trafalgar.games.RootScreenGenerator" autowire="byType" />
+    <bean id="common.RootScreenController" class="com.navid.trafalgar.games.StartScreenController" autowire="byType"/>
 </beans>
