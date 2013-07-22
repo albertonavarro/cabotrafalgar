@@ -12,17 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class ShipSelectorInterfaceGenerator implements ScreenGenerator {
+public class WindTunnelMainScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
     
     @Autowired
-    private ScreenSelectShip screenSelectShip;
+    private WindTunnelMainScreen screenSelectShip;
             
     @Override
     public void buildScreen() {
-        nifty.addXml("mod/windtunnel/interface_shipselector.xml");
+        nifty.addXml("mod/windtunnel/interface_windtunnel.xml");
     }
 
     /**
@@ -35,7 +35,7 @@ public class ShipSelectorInterfaceGenerator implements ScreenGenerator {
     /**
      * @param screenSelectShip the screenSelectShip to set
      */
-    public void setScreenSelectShip(ScreenSelectShip screenSelectShip) {
+    public void setScreenSelectShip(WindTunnelMainScreen screenSelectShip) {
         this.screenSelectShip = screenSelectShip;
     }
     

@@ -5,5 +5,8 @@ buildersSpringConfig: mod/windtunnel/builders-declaration.xml
 screenConfigurations: 
   - screenName: selectShip
     interfaceConstructor: mod.windtunnel.shipselectorgenerator
-    controller: mod.windtunnel.shipselector
+    controller: mod.windtunnel.shipselectorcontroller
+  - screenName: windTunnelScreen
+    interfaceConstructor: mod.windtunnel.mainscreengenerator
+    controller: mod.windtunnel.mainscreencontroller
 

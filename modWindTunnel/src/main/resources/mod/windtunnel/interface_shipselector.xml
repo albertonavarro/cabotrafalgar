@@ -30,13 +30,13 @@
                 <panel id="panel_bottom_right" height="50%" width="25%" valign="center" childLayout="center">  
                     <control name="button" label="Back" id="QuitButton" align="center" valign="center" 
           visibleToMouse="true" > 
-                        <interact onClick="goTo(start)"/>
+                        <interact onClick="back()"/>
                     </control>
                 </panel>
                 <panel id="panel_bottom_right3" height="50%" width="25%" valign="center" childLayout="center">  
                     <control name="button" label="Play!" id="MillestoneGame2" align="center" valign="center" 
           visibleToMouse="true" > 
-                        <interact onClick="goTo(preWindTunnelScreen2)"/>
+                        <interact onClick="next()"/>
                     </control>
                 </panel>
             </panel>

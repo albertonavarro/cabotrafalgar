@@ -7,9 +7,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
-import de.lessvoid.nifty.builder.TextBuilder;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
-import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.DefaultScreenController;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -114,6 +112,14 @@ public class ScreenSelectControlls implements ScreenController {
     @Override
     public void onEndScreen() {
         System.out.println("sdf");
+    }
+    
+    public void next(){
+        nifty.gotoScreen("redirector");
+    }
+    
+    public void back(){
+        nifty.gotoScreen("redirector");
     }
 
     public void goTo(String nextScreen) {

@@ -7,8 +7,9 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:annotation-config/>
   
-    <bean id="mod.windtunnel.mainscreen" class="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen" autowire="byType"/>
-    <bean id="mod.windtunnel.shipselector" class="com.navid.trafalgar.mod.windtunnel.ScreenSelectShip" autowire="byType"/>
+    <bean id="mod.windtunnel.mainscreencontroller" class="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen" autowire="byType"/>
+    <bean id="mod.windtunnel.mainscreengenerator" class="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreenGenerator" autowire="byType" />
+    <bean id="mod.windtunnel.shipselectorcontroller" class="com.navid.trafalgar.mod.windtunnel.ScreenSelectShip" autowire="byType"/>
     <bean id="mod.windtunnel.shipselectorgenerator" class="com.navid.trafalgar.mod.windtunnel.ShipSelectorInterfaceGenerator" autowire="byType" />
     <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
 

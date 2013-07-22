@@ -8,11 +8,11 @@ import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.CommandStateListener;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
-import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
+import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
@@ -56,6 +56,9 @@ public class ScreenSelectShip implements ScreenController {
     @Autowired
     private GeneratorBuilder generatorBuilder;
     private ScreenSelectShip.ListItem selectedItem;
+    
+    @Autowired
+    private ScreenFlowManager screenFlowManager;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
@@ -82,6 +85,13 @@ public class ScreenSelectShip implements ScreenController {
      */
     public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
         this.generatorBuilder = generatorBuilder;
+    }
+
+    /**
+     * @param screenFlowManager the screenFlowManager to set
+     */
+    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
+        this.screenFlowManager = screenFlowManager;
     }
 
    
@@ -194,6 +204,17 @@ public class ScreenSelectShip implements ScreenController {
         
         nifty.gotoScreen(nextScreen);
     }
+    
+    public void next(){
+        screenFlowManager.changeNextScreen();
+        goTo("redirector");
+    }
+    
+    public void back(){
+        nifty.gotoScreen("redirector");
+    }
+    
+    
     
     
 }
