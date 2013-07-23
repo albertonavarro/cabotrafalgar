@@ -9,8 +9,11 @@
   
     <bean id="mod.windtunnel.mainscreencontroller" class="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen" autowire="byType"/>
     <bean id="mod.windtunnel.mainscreengenerator" class="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreenGenerator" autowire="byType" />
-    <bean id="mod.windtunnel.shipselectorcontroller" class="com.navid.trafalgar.mod.windtunnel.ScreenSelectShip" autowire="byType"/>
-    <bean id="mod.windtunnel.shipselectorgenerator" class="com.navid.trafalgar.mod.windtunnel.ShipSelectorInterfaceGenerator" autowire="byType" />
+    <bean id="mod.windtunnel.selectshipcontroller" class="com.navid.trafalgar.mod.windtunnel.SelectShipScreenController" autowire="byType"/>
+    <bean id="mod.windtunnel.selectshipgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectShipScreenGenerator" autowire="byType" />
+    <bean id="mod.windtunnel.selectcontrolcontroller" class="com.navid.trafalgar.mod.windtunnel.SelectControlsScreenController" autowire="byType" />
+    <bean id="mod.windtunnel.selectcontrolgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectControlsScreenGenerator" autowire="byType" />
+
     <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
 
 </beans>

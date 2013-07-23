@@ -4,7 +4,6 @@
  */
 package com.navid.trafalgar.input;
 
-import com.navid.trafalgar.input.Command;
 import java.util.Set;
 
 /**

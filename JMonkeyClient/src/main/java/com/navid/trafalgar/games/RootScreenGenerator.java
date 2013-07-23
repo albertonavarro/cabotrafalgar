@@ -34,7 +34,7 @@ public class RootScreenGenerator implements ScreenGenerator {
         
         final PanelBuilder panelBuilder = new PanelBuilder("Panel_ID") {
             {
-                childLayoutCenter(); // panel properties, add more...               
+                childLayoutVertical();
             }
         };
 

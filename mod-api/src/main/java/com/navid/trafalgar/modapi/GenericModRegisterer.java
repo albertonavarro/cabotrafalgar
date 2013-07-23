@@ -6,6 +6,8 @@ package com.navid.trafalgar.modapi;
 
 import com.jme3.app.Application;
 import com.jme3.system.AppSettings;
+import com.navid.trafalgar.input.CommandGenerator;
+import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.screenflow.ScreenFlowGraph;
@@ -35,6 +37,17 @@ public abstract class GenericModRegisterer implements ModRegisterer {
             builder2.registerBuilder(currentBuilder);
         }
     }
+    
+    private void registerInputs(BeanFactory beanFactory, String fileName) {
+        XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(fileName), beanFactory);
+
+        Map<String, CommandGenerator> commandGenerators = ctx.getBeansOfType(CommandGenerator.class);
+        GeneratorBuilder generatorBuilder = beanFactory.getBean("common.InputBuilder", GeneratorBuilder.class);
+
+        for (CommandGenerator currentCommandGenerator : commandGenerators.values()) {
+            generatorBuilder.registerBuilder(currentCommandGenerator);
+        }
+    }
 
     private XmlBeanFactory registerSpringConfig(BeanFactory beanFactory, ModConfiguration modConfiguration) {
         XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getModPreGameSpringConfig()), beanFactory);
@@ -61,6 +74,10 @@ public abstract class GenericModRegisterer implements ModRegisterer {
 
         if (modConfiguration.getBuildersSpringConfig() != null) {
             registerModels(beanFactory, modConfiguration.getBuildersSpringConfig());
+        }
+        
+        if (modConfiguration.getBuildersSpringConfig() != null) {
+            registerInputs(beanFactory, modConfiguration.getBuildersSpringConfig());
         }
 
         if (modConfiguration.getModName() != null) {

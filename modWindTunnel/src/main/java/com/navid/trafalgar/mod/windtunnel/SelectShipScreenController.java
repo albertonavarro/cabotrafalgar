@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class ScreenSelectShip implements ScreenController {
+public class SelectShipScreenController implements ScreenController {
 
     /**
      * From bind
@@ -55,7 +55,7 @@ public class ScreenSelectShip implements ScreenController {
     
     @Autowired
     private GeneratorBuilder generatorBuilder;
-    private ScreenSelectShip.ListItem selectedItem;
+    private SelectShipScreenController.ListItem selectedItem;
     
     @Autowired
     private ScreenFlowManager screenFlowManager;

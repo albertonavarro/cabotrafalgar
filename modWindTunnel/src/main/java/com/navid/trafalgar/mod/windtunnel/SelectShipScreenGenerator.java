@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class ShipSelectorInterfaceGenerator implements ScreenGenerator {
+public class SelectShipScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
     
     @Autowired
-    private ScreenSelectShip screenSelectShip;
+    private SelectShipScreenController screenSelectShip;
             
     @Override
     public void buildScreen() {
@@ -35,7 +35,7 @@ public class ShipSelectorInterfaceGenerator implements ScreenGenerator {
     /**
      * @param screenSelectShip the screenSelectShip to set
      */
-    public void setScreenSelectShip(ScreenSelectShip screenSelectShip) {
+    public void setScreenSelectShip(SelectShipScreenController screenSelectShip) {
         this.screenSelectShip = screenSelectShip;
     }
     
