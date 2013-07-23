@@ -35,5 +35,10 @@ public class KeyboardCommandGenerator implements CommandGenerator {
         this.inputManager = inputManager;
     }
     
+    @Override
+    public String toString(){
+        return "Keyboard";
+    }
+    
     
 }

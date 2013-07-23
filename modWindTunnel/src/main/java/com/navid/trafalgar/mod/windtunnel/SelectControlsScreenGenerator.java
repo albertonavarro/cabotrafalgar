@@ -13,6 +13,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
+import de.lessvoid.nifty.builder.TextBuilder;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.screen.Screen;
 import java.util.Set;
@@ -24,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class SelectControlsScreenGenerator implements ScreenGenerator {
 
-    
     /**
      * Singleton
      */
@@ -36,52 +36,68 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
     @Autowired
     private Builder2 builder;
     /**
-     * 
+     *
      */
     @Autowired
     private GeneratorBuilder generatorBuilder;
-    
     @Autowired
     private SelectControlsScreenController screenControlScreenController;
-    
     @Autowired
     private Nifty nifty;
-   
 
     @Override
     public void buildScreen() {
-        
+
         AShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelTwo.class);
-        
+
         Set<Command> commands = ship.getCommands();
-        
+
         HashMultimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
-        
-        
-        final PanelBuilder panelBuilder = new PanelBuilder("Panel_ID") {
+
+
+
+        final PanelBuilder outerPanelBuilder = new PanelBuilder("Panel_ID") {
             {
-                childLayoutHorizontal();
+                childLayoutVertical();
             }
         };
-        
-        
 
-        for( final Command currentCommand: gens.keySet()){
-            for ( final CommandGenerator commandGenerator : gens.get(currentCommand)){
-                panelBuilder.control(new ButtonBuilder(commandGenerator.toString() + "Button", commandGenerator.toString() +"ButtonLabel") {
+
+
+        for (final Command currentCommand : gens.keySet()) {
+
+            final PanelBuilder innerPanelBuilder = new PanelBuilder("Panel_ID") {
                 {
+                    childLayoutHorizontal();
+                }
+            };
+            
+            outerPanelBuilder.panel(innerPanelBuilder);
+
+            for (final CommandGenerator commandGenerator : gens.get(currentCommand)) {
+                innerPanelBuilder.text(new TextBuilder("text"){{
+                    text(currentCommand.toString());
+                    style("nifty-label");
                     alignCenter();
                     valignCenter();
                     height("5%");
                     width("15%");
-                    interactOnClick("chooseCommand("+ commandGenerator.toString() +")");
-                }
-            });
+                }});
+                
+                innerPanelBuilder.control(new ButtonBuilder(commandGenerator.toString() + "Button", commandGenerator.toString() + "ButtonLabel") {
+                    {
+                        alignCenter();
+                        valignCenter();
+                        height("5%");
+                        width("15%");
+                        interactOnClick("chooseCommand(" + commandGenerator.toString() + ")");
+                    }
+                });
             }
-            
-        
+
+
         }
-        
+
 
         Screen screen = new ScreenBuilder("selectControl") {
             {
@@ -93,7 +109,7 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
                         childLayoutVertical(); // layer properties, add more...
 
                         // <panel>
-                        panel(panelBuilder);
+                        panel(outerPanelBuilder);
                         // </panel>
                     }
                 });
@@ -132,13 +148,10 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
     }
 
     /**
-     * @param screenControlScreenController the screenControlScreenController to set
+     * @param screenControlScreenController the screenControlScreenController to
+     * set
      */
     public void setScreenControlScreenController(SelectControlsScreenController screenControlScreenController) {
         this.screenControlScreenController = screenControlScreenController;
     }
-
-    
-    
-    
 }
