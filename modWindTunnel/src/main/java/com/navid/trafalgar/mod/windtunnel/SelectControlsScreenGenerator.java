@@ -7,7 +7,6 @@ import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
@@ -15,7 +14,11 @@ import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.builder.TextBuilder;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
+import de.lessvoid.nifty.controls.radiobutton.builder.RadioButtonBuilder;
+import de.lessvoid.nifty.controls.radiobutton.builder.RadioGroupBuilder;
 import de.lessvoid.nifty.screen.Screen;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,9 +47,11 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
     private SelectControlsScreenController screenControlScreenController;
     @Autowired
     private Nifty nifty;
+    private Map<String, PanelBuilder> panels;
 
     @Override
     public void buildScreen() {
+        panels = new HashMap<String, PanelBuilder>();
 
         AShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelTwo.class);
 
@@ -58,44 +63,57 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
 
         final PanelBuilder outerPanelBuilder = new PanelBuilder("Panel_ID") {
             {
-                childLayoutVertical();
+                height("80%");
+                childLayoutHorizontal();
             }
         };
 
+        final PanelBuilder commandNamePanelBuilder = new PanelBuilder("CommandNamePanel") {
+            {
+                childLayoutVertical();
+                text(new TextBuilder("text") {
+                    {
+                        text("Command");
+                        style("nifty-label");
+                        alignCenter();
+                        valignCenter();
+                        height("10%");
+                    }
+                });
+            }
+        };
+
+        outerPanelBuilder.panel(commandNamePanelBuilder);
 
 
         for (final Command currentCommand : gens.keySet()) {
 
-            final PanelBuilder innerPanelBuilder = new PanelBuilder("Panel_ID") {
+            commandNamePanelBuilder.text(new TextBuilder("text") {
                 {
-                    childLayoutHorizontal();
-                }
-            };
-            
-            outerPanelBuilder.panel(innerPanelBuilder);
-
-            for (final CommandGenerator commandGenerator : gens.get(currentCommand)) {
-                innerPanelBuilder.text(new TextBuilder("text"){{
                     text(currentCommand.toString());
                     style("nifty-label");
                     alignCenter();
                     valignCenter();
-                    height("5%");
-                    width("15%");
-                }});
-                
-                innerPanelBuilder.control(new ButtonBuilder(commandGenerator.toString() + "Button", commandGenerator.toString() + "ButtonLabel") {
+                    height("10%");
+
+                }
+            });
+
+            commandNamePanelBuilder.control(new RadioGroupBuilder(currentCommand.toString())); // the RadioGroup id is used to link radiobuttons logical together so that only one of them can be active at a certain time
+
+            for (final CommandGenerator commandGenerator : gens.get(currentCommand)) {
+
+                PanelBuilder commandGeneratorPanel = getPanel(commandGenerator.toString(), outerPanelBuilder);
+
+                commandGeneratorPanel.control(new RadioButtonBuilder(commandGenerator.toString()) {
                     {
-                        alignCenter();
-                        valignCenter();
-                        height("5%");
-                        width("15%");
-                        interactOnClick("chooseCommand(" + commandGenerator.toString() + ")");
+                        group(currentCommand.toString());
+                        height("10%");
                     }
                 });
+
+
             }
-
-
         }
 
 
@@ -111,12 +129,61 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
                         // <panel>
                         panel(outerPanelBuilder);
                         // </panel>
+                        panel(new PanelBuilder("Panel_ID") {
+                            {
+                                height("20%");
+                                childLayoutHorizontal();
+                                control(new ButtonBuilder("PreviousButton", "Back") {
+                                    {
+                                        alignCenter();
+                                        valignCenter();
+                                        interactOnClick("previous()");
+                                    }
+                                });
+
+                                control(new ButtonBuilder("NextButton", "Next") {
+                                    {
+                                        alignCenter();
+                                        valignCenter();
+                                        interactOnClick("next()");
+                                    }
+                                });
+                            }
+                        });
+
                     }
                 });
                 // </layer>
             }
         }.build(nifty);
         // <screen>
+    }
+
+    private PanelBuilder createPanel(String panelName) {
+        return new PanelBuilder(panelName) {
+            {
+                childLayoutVertical();
+            }
+        };
+    }
+
+    private PanelBuilder getPanel(final String panelName, PanelBuilder parent) {
+        if (!panels.containsKey(panelName)) {
+            PanelBuilder panel = createPanel(panelName);
+            parent.panel(panel);
+            panel.text(new TextBuilder("text") {
+                {
+                    text(panelName);
+                    style("nifty-label");
+                    alignCenter();
+                    valignCenter();
+                    height("10%");
+                }
+            });
+            panels.put(panelName, panel);
+        }
+
+        return panels.get(panelName);
     }
 
     /**

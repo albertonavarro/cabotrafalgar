@@ -51,11 +51,13 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     private GameConfiguration gameConfiguration;
     private XmlBeanFactory beanFactory;
 
+    @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
     }
 
+    @Override
     public void onStartScreen() {
         
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
@@ -65,6 +67,7 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
         
     }
 
+    @Override
     public void onEndScreen() {
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.clear();
@@ -152,6 +155,7 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
         // Get the list of the files contained in the package
         File[] files = directory.listFiles(new FileFilter() {
 
+            @Override
             public boolean accept(File file) {
                 return file.getName().contains(".json2");
             }
@@ -192,6 +196,7 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
         this.gameConfiguration = gameConfiguration;
     }
 
+    @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = (XmlBeanFactory) beanFactory;
     }

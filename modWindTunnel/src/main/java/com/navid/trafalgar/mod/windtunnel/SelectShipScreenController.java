@@ -179,28 +179,14 @@ public class SelectShipScreenController implements ScreenController {
             setValues(new HashMap<String, String>());
         }});
         
-        AShipModelTwo s = (AShipModelTwo) c.iterator().next(); 
+        gameConfiguration.getPreGameModel().addToModel(c);
         
-        Set<Command> commands = s.getCommands();
         
-        HashMultimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
-        
-        Set<CommandStateListener> commandListeners = new HashSet<CommandStateListener>();
-        for(Map.Entry<Command, CommandGenerator> currentEntry : gens.entries()){
-            CommandStateListener commandStateListener = currentEntry.getValue().generateCommandStateListener(currentEntry.getKey());
-            commandListeners.add(commandStateListener);
-            
-        }
-        
-        gameConfiguration.getPreGameModel().addToModel(Collections.singleton(s));
-        
-        gameConfiguration.getPreGameModel().addToModel(commandListeners);
-        
-        int key0 = KeyInput.KEY_A;
+        /*int key0 = KeyInput.KEY_A;
         List<KeyboardCommandStateListener> keyboards = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
         for(KeyboardCommandStateListener currentkey : keyboards){
             currentkey.setKeycode(key0++);
-        }
+        }*/
         
         nifty.gotoScreen(nextScreen);
     }

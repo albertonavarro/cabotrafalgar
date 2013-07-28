@@ -5,10 +5,8 @@
 package com.navid.trafalgar.input;
 
 import com.jme3.input.InputManager;
-import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
-import com.navid.trafalgar.input.CommandStateListener;
 import com.navid.trafalgar.manager.PrestartState;
 
 /**
