@@ -13,7 +13,9 @@
     <bean id="mod.windtunnel.selectshipgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectShipScreenGenerator" autowire="byType" />
     <bean id="mod.windtunnel.selectcontrolcontroller" class="com.navid.trafalgar.mod.windtunnel.SelectControlsScreenController" autowire="byType" />
     <bean id="mod.windtunnel.selectcontrolgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectControlsScreenGenerator" autowire="byType" />
-
+    <bean id="mod.windtunnel.selectkeyscontroller" class="com.navid.trafalgar.mod.windtunnel.SelectKeyboardControlsScreenController" autowire="byType" />
+    <bean id="mod.windtunnel.selectkeysgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectKeyboardControlsScreenGenerator" autowire="byType" />
+    
     <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
 
 </beans>

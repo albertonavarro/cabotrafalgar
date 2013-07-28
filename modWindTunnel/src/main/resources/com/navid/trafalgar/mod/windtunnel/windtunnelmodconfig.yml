@@ -9,6 +9,9 @@ screenConfigurations:
   - screenName: selectControl
     interfaceConstructor: mod.windtunnel.selectcontrolgenerator
     controller: mod.windtunnel.selectcontrolcontroller
+  - screenName: selectKeys
+    interfaceConstructor: mod.windtunnel.selectkeysgenerator
+    controller: mod.windtunnel.selectkeyscontroller
   - screenName: windTunnelScreen
     interfaceConstructor: mod.windtunnel.mainscreengenerator
     controller: mod.windtunnel.mainscreencontroller

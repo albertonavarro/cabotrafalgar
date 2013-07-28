@@ -15,9 +15,7 @@ import com.navid.trafalgar.manager.statistics.Auditable;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
 import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.StepRecord;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

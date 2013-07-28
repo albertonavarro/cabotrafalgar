@@ -33,20 +33,19 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
      */
     @Autowired
     private GameConfiguration gameConfiguration;
-    /**
-     * Singleton
-     */
-    @Autowired
-    private Builder2 builder;
+
     /**
      *
      */
     @Autowired
     private GeneratorBuilder generatorBuilder;
+    
     @Autowired
     private SelectControlsScreenController screenControlScreenController;
+    
     @Autowired
     private Nifty nifty;
+    
     private Map<String, PanelBuilder> panels;
 
     @Override
@@ -198,13 +197,6 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
      */
     public void setGameConfiguration(GameConfiguration gameConfiguration) {
         this.gameConfiguration = gameConfiguration;
-    }
-
-    /**
-     * @param builder the builder to set
-     */
-    public void setBuilder(Builder2 builder) {
-        this.builder = builder;
     }
 
     /**

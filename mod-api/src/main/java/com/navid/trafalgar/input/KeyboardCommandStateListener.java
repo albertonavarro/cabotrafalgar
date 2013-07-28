@@ -49,4 +49,9 @@ public class KeyboardCommandStateListener implements CommandStateListener, Prest
         inputManager.addListener(listener, key.getName());
         inputManager.addMapping(key.getName(), new KeyTrigger(keycode));
     }
+    
+    @Override
+    public String toString(){
+        return key.getName();
+    }
 }

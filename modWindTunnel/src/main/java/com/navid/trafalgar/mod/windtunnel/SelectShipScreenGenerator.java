@@ -16,9 +16,6 @@ public class SelectShipScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
-    
-    @Autowired
-    private SelectShipScreenController screenSelectShip;
             
     @Override
     public void buildScreen() {
@@ -31,14 +28,4 @@ public class SelectShipScreenGenerator implements ScreenGenerator {
     public void setNifty(Nifty nifty) {
         this.nifty = nifty;
     }
-
-    /**
-     * @param screenSelectShip the screenSelectShip to set
-     */
-    public void setScreenSelectShip(SelectShipScreenController screenSelectShip) {
-        this.screenSelectShip = screenSelectShip;
-    }
-    
-    
-    
 }
