@@ -13,13 +13,15 @@ import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.RadioButtonGroup;
+import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.controls.radiobutton.RadioButtonControl;
-import de.lessvoid.nifty.controls.radiobutton.RadioButtonGroupControl;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import org.bushe.swing.event.EventTopicSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,7 +32,6 @@ public class SelectControlsScreenController implements ScreenController {
 
     @Autowired
     private ScreenFlowManager screenFlowManager;
-
     /**
      * From bind
      */
@@ -39,64 +40,70 @@ public class SelectControlsScreenController implements ScreenController {
      * From bind
      */
     private Screen screen;
-    
     /**
      * Singleton
      */
     @Autowired
     private GameConfiguration gameConfiguration;
-    
     /**
      *
      */
     @Autowired
     private GeneratorBuilder generatorBuilder;
-    
     private HashMultimap<Command, CommandGenerator> generatedCommands;
-    
+
     @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
     }
+    private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler2;
+    private Map<String, String> generated = new HashMap<String, String>();
 
     @Override
     public void onStartScreen() {
+
+        eventHandler2 = new EventTopicSubscriber<RadioButtonStateChangedEvent>() {
+            @Override
+            public void onEvent(String string, RadioButtonStateChangedEvent t) {
+                if (t.isSelected()) {
+                    generated.put(t.getRadioButton().getGroup().getId(), string);
+                }
+            }
+        };
+
         AShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelTwo.class);
-
         Set<Command> commands = ship.getCommands();
+        HashMultimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
 
-        generatedCommands = generatorBuilder.getGeneratorsFor(commands);
+        for (final Command currentCommand : gens.keySet()) {
+            for (final CommandGenerator currentGenerator : gens.get(currentCommand)) {
+                nifty.subscribe(screen, currentGenerator.toString(), RadioButtonStateChangedEvent.class, eventHandler2);
+                
+                RadioButtonControl radioControl = screen.findControl(currentGenerator.toString(), RadioButtonControl.class);
+                if (radioControl.isActivated()) {
+                    generated.put(currentCommand.toString(), currentGenerator.toString());
+                }
+            }
+        }
     }
 
     @Override
     public void onEndScreen() {
+    }
 
+    public void previous() {
     }
-    
-    public void previous(){
-        
-    }
-    
+
     public void goTo(String nextScreen) {
         Set<CommandStateListener> commandListeners = new HashSet<CommandStateListener>();
-        
-        for(Command currentCommand : generatedCommands.keySet()){
-            for(CommandGenerator currentGenerator : generatedCommands.get(currentCommand)){
-                RadioButtonControl radioControl = screen.findControl(currentGenerator.toString(), RadioButtonControl.class);
-                if (radioControl.isActivated()){
-                    CommandStateListener commandStateListener = currentGenerator.generateCommandStateListener(currentCommand);
-                    commandListeners.add(commandStateListener);
-                }
-            }
-        }
-        
+**
         gameConfiguration.getPreGameModel().addToModel(commandListeners);
-        
+
         nifty.gotoScreen(nextScreen);
     }
-    
-    public void next(){
+
+    public void next() {
         screenFlowManager.changeNextScreen();
         goTo("redirector");
     }
@@ -121,6 +128,4 @@ public class SelectControlsScreenController implements ScreenController {
     public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
         this.generatorBuilder = generatorBuilder;
     }
-    
-    
 }

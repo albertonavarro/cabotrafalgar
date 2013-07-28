@@ -10,8 +10,6 @@ package com.navid.trafalgar.input;
  */
 public interface Command {
     
-    String getName();
-    
     void execute(float tpf);
     
 }

@@ -32,7 +32,7 @@ public class KeyboardCommandStateListener implements CommandStateListener, Prest
     @Override
     public void onUnload() {
         inputManager.removeListener(listener);
-        inputManager.deleteMapping(key.getName());
+        inputManager.deleteMapping(key.toString());
     }
 
     @Override
@@ -46,12 +46,12 @@ public class KeyboardCommandStateListener implements CommandStateListener, Prest
             }
         };
 
-        inputManager.addListener(listener, key.getName());
-        inputManager.addMapping(key.getName(), new KeyTrigger(keycode));
+        inputManager.addListener(listener, key.toString());
+        inputManager.addMapping(key.toString(), new KeyTrigger(keycode));
     }
     
     @Override
     public String toString(){
-        return key.getName();
+        return key.toString();
     }
 }

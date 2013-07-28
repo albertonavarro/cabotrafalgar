@@ -92,7 +92,8 @@
         <dependency>
             <groupId>com.jme3</groupId>
             <artifactId>eventbus</artifactId>
-            <scope>runtime</scope>
+            <version>3.0.0.20121220-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>

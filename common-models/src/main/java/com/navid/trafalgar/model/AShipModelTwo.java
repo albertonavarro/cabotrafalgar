@@ -311,6 +311,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
         shipDirection.setValue(shipOrientation3f);
     }
 
+    @Override
     public final void update(float tpf) {
         super.update(tpf);
         updateSpeed(tpf);
@@ -388,7 +389,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
         return new HashSet<Command>(){{
             add(new Command() {
                 @Override
-                public String getName() {
+                public String toString() {
                     return "rudderLeft";
                 }
 
@@ -399,7 +400,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
             });
             add(new Command() {
                 @Override
-                public String getName() {
+                public String toString() {
                     return "rudderRight";
                 }
 
