@@ -1,14 +1,7 @@
 package com.navid.trafalgar.mod.windtunnel;
 
-import com.google.common.collect.HashMultimap;
-import com.jme3.input.KeyInput;
 import com.navid.trafalgar.definition2.Entry;
-import com.navid.trafalgar.input.Command;
-import com.navid.trafalgar.input.CommandGenerator;
-import com.navid.trafalgar.input.CommandStateListener;
 import com.navid.trafalgar.input.GeneratorBuilder;
-import com.navid.trafalgar.input.KeyboardCommandStateListener;
-import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
@@ -20,12 +13,7 @@ import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

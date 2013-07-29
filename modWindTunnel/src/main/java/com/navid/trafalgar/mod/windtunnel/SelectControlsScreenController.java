@@ -4,7 +4,9 @@
  */
 package com.navid.trafalgar.mod.windtunnel;
 
+import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Maps;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.CommandStateListener;
@@ -30,8 +32,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class SelectControlsScreenController implements ScreenController {
 
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
     /**
      * From bind
      */
@@ -50,20 +50,26 @@ public class SelectControlsScreenController implements ScreenController {
      */
     @Autowired
     private GeneratorBuilder generatorBuilder;
-    private HashMultimap<Command, CommandGenerator> generatedCommands;
+    /**
+     *
+     */
+    @Autowired
+    private ScreenFlowManager screenFlowManager;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
     }
-    private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler2;
+    private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler;
     private Map<String, String> generated = new HashMap<String, String>();
+    private Map<String, Command> commandsMap;
+    private Map<String, CommandGenerator> generatorMap;
 
     @Override
     public void onStartScreen() {
 
-        eventHandler2 = new EventTopicSubscriber<RadioButtonStateChangedEvent>() {
+        eventHandler = new EventTopicSubscriber<RadioButtonStateChangedEvent>() {
             @Override
             public void onEvent(String string, RadioButtonStateChangedEvent t) {
                 if (t.isSelected()) {
@@ -74,12 +80,22 @@ public class SelectControlsScreenController implements ScreenController {
 
         AShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelTwo.class);
         Set<Command> commands = ship.getCommands();
+
+        commandsMap = Maps.uniqueIndex(commands, new Function<Command, String>() {
+            @Override
+            public String apply(Command input) {
+                return input.toString();
+            }
+        });
+
+        generatorMap = generatorBuilder.getGenerators();
+
         HashMultimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
 
         for (final Command currentCommand : gens.keySet()) {
             for (final CommandGenerator currentGenerator : gens.get(currentCommand)) {
-                nifty.subscribe(screen, currentGenerator.toString(), RadioButtonStateChangedEvent.class, eventHandler2);
-                
+                nifty.subscribe(screen, currentGenerator.toString(), RadioButtonStateChangedEvent.class, eventHandler);
+
                 RadioButtonControl radioControl = screen.findControl(currentGenerator.toString(), RadioButtonControl.class);
                 if (radioControl.isActivated()) {
                     generated.put(currentCommand.toString(), currentGenerator.toString());
@@ -96,9 +112,15 @@ public class SelectControlsScreenController implements ScreenController {
     }
 
     public void goTo(String nextScreen) {
-        Set<CommandStateListener> commandListeners = new HashSet<CommandStateListener>();
-**
-        gameConfiguration.getPreGameModel().addToModel(commandListeners);
+        Map<Command, CommandGenerator> assignments = new HashMap<Command, CommandGenerator>();
+
+        for (Map.Entry<String, String> entry : generated.entrySet()) {
+            assignments.put(commandsMap.get(entry.getKey()), generatorMap.get(entry.getValue()));
+        }
+
+        Set<CommandStateListener> listeners = generatorBuilder.generateControllers(assignments);
+
+        gameConfiguration.getPreGameModel().addToModel(listeners);
 
         nifty.gotoScreen(nextScreen);
     }

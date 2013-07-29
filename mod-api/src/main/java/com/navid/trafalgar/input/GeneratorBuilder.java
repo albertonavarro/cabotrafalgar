@@ -6,6 +6,7 @@ package com.navid.trafalgar.input;
 
 import com.google.common.collect.HashMultimap;
 import com.navid.trafalgar.util.ReflexionUtils;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -23,9 +24,11 @@ public class GeneratorBuilder {
      */
     private static final Logger LOG = LoggerFactory.getLogger(GeneratorBuilder.class);
     private HashMultimap<Class<Command>, CommandGenerator> generatorMap = HashMultimap.create();
+    private Map<String, CommandGenerator> generatorOnlyMap = new HashMap<String, CommandGenerator>();
 
     public void registerBuilder(CommandGenerator commandGenerator) {
         LOG.info("Registring builder %s");
+        generatorOnlyMap.put(commandGenerator.toString(), commandGenerator);
 
         Set<Class<Command>> currentClasses = commandGenerator.getPossibleCommands();
 
@@ -35,6 +38,10 @@ public class GeneratorBuilder {
                 generatorMap.put(finalClass, commandGenerator);
             }
         }
+    }
+    
+    public Map<String, CommandGenerator> getGenerators(){
+        return generatorOnlyMap;
     }
 
     public HashMultimap<Command, CommandGenerator> getGeneratorsFor(Set<Command> commands) {
@@ -60,4 +67,6 @@ public class GeneratorBuilder {
 
         return commandStateListeners;
     }
+
+    
 }

@@ -58,7 +58,7 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
             final PanelBuilder commandNamePanelBuilder = new PanelBuilder(currentCommandListener.toString() + "Panel") {
                 {
                     childLayoutHorizontal();
-                    
+
                     text(new TextBuilder("text") {
                         {
                             text(currentCommandListener.toString());
@@ -70,7 +70,7 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
                         }
                     });
 
-                    control(new ListBoxBuilder(currentCommandListener.toString() + "List") {
+                    control(new ListBoxBuilder(currentCommandListener.toString()) {
                         {
                             displayItems(4);
                             selectionModeMutliple();
@@ -83,9 +83,9 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
                             margin("1%");
                         }
                     });
-                   
-                    
-                    
+
+
+
                 }
             };
 
@@ -95,7 +95,7 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
         Screen screen = new ScreenBuilder("selectKeys") {
             {
                 controller(controller); // Screen properties   
-                
+
 
                 // <layer>
                 layer(new LayerBuilder("Layer_ID") {
@@ -133,7 +133,7 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
             }
         }.build(nifty);
         // <screen>
-        
+
     }
 
     /**
@@ -156,4 +156,6 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
     public void setGameConfiguration(GameConfiguration gameConfiguration) {
         this.gameConfiguration = gameConfiguration;
     }
+
+    
 }
