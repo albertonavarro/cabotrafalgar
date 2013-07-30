@@ -4,18 +4,20 @@
  */
 package com.navid.trafalgar.mod.windtunnel;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 import com.jme3.input.KeyInput;
-import com.jme3.input.controls.KeyTrigger;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import java.util.Collection;
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
+import java.util.Map;
+import org.bushe.swing.event.EventTopicSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -23,10 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author alberto
  */
 public class SelectKeyboardControlsScreenController implements ScreenController {
-    
+
     @Autowired
     private ScreenFlowManager screenFlowManager;
-
     /**
      * From bind
      */
@@ -35,13 +36,11 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
      * From bind
      */
     private Screen screen;
-    
     /**
      * Singleton
      */
     @Autowired
     private GameConfiguration gameConfiguration;
-    
     /**
      *
      */
@@ -53,33 +52,48 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
         this.nifty = nifty;
         this.screen = screen;
     }
+    
+    private EventTopicSubscriber<ListBoxSelectionChangedEvent> eventHandler;
 
     @Override
     public void onStartScreen() {
-
-        Collection<KeyboardCommandStateListener> keyListeners = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
         
-        for(KeyboardCommandStateListener currentListener : keyListeners){
+        final Map<String, KeyboardCommandStateListener> keyListeners = Maps.uniqueIndex(gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class), new Function<KeyboardCommandStateListener, String>() {
+            @Override
+            public String apply(KeyboardCommandStateListener input) {
+                return input.toString();
+            }
+        }) ;
+        
+        eventHandler = new EventTopicSubscriber<ListBoxSelectionChangedEvent>() {
+            @Override
+            public void onEvent(String string, ListBoxSelectionChangedEvent t) {
+                keyListeners.get(string).setKeycode(((ListItem)t.getSelection().get(0)).getValue()) ;
+            }
+        };
+
+        for (KeyboardCommandStateListener currentListener : keyListeners.values()) {
             ListBox listBoxController = screen.findNiftyControl(currentListener.toString(), ListBox.class);
             listBoxController.addItem(new ListItem("A", KeyInput.KEY_A));
             listBoxController.addItem(new ListItem("S", KeyInput.KEY_S));
             listBoxController.addItem(new ListItem("D", KeyInput.KEY_D));
             listBoxController.addItem(new ListItem("F", KeyInput.KEY_F));
+            
+            nifty.subscribe(screen, currentListener.toString(), ListBoxSelectionChangedEvent.class, eventHandler);
         }
     }
 
     @Override
     public void onEndScreen() {
-
     }
-    
+
     public void goTo(String nextScreen) {
-        
-        
+
+
         nifty.gotoScreen(nextScreen);
     }
-    
-    public void next(){
+
+    public void next() {
         screenFlowManager.changeNextScreen();
         goTo("redirector");
     }
@@ -104,7 +118,7 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
     public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
         this.generatorBuilder = generatorBuilder;
     }
-    
+
     private static class ListItem {
 
         private String keyName;
@@ -148,5 +162,4 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
             this.value = value;
         }
     }
-    
 }

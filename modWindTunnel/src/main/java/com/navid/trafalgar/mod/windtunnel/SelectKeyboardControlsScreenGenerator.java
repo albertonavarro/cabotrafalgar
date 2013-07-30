@@ -4,11 +4,7 @@
  */
 package com.navid.trafalgar.mod.windtunnel;
 
-import com.google.common.collect.HashMultimap;
-import com.navid.trafalgar.input.Command;
-import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
-import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
@@ -18,12 +14,8 @@ import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.builder.TextBuilder;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.listbox.builder.ListBoxBuilder;
-import de.lessvoid.nifty.controls.radiobutton.builder.RadioButtonBuilder;
-import de.lessvoid.nifty.controls.radiobutton.builder.RadioGroupBuilder;
 import de.lessvoid.nifty.screen.Screen;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -73,7 +65,7 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
                     control(new ListBoxBuilder(currentCommandListener.toString()) {
                         {
                             displayItems(4);
-                            selectionModeMutliple();
+                            selectionModeSingle();
                             optionalHorizontalScrollbar();
                             optionalVerticalScrollbar();
                             alignCenter();

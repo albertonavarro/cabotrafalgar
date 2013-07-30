@@ -40,9 +40,9 @@ public class KeyboardCommandStateListener implements CommandStateListener, Prest
         listener = new ActionListener() {
             @Override
             public void onAction(String string, boolean bln, float tpf) {
-                if (bln) {
+                //if (bln) {
                     key.execute(tpf);
-                }
+               // }
             }
         };
 
