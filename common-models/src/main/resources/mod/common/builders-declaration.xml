@@ -7,7 +7,6 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:annotation-config/>
     <!-- builders -->
-    <bean id="mod.counterclock.ShipModelOneBuilder" class="com.navid.trafalgar.model.builder.ShipModelOneBuilder" autowire="byType" />
     <bean id="mod.counterclock.ShipModelTwoBuilder" class="com.navid.trafalgar.model.builder.ShipModelTwoBuilder" autowire="byType" />
     <bean id="mod.counterclock.RotateSimpleWindBuilder" class="com.navid.trafalgar.model.builder.RotateSimpleWindBuilder" autowire="byType" />
     <bean id="mod.counterclock.ContextBuilder" class="com.navid.trafalgar.model.builder.ContextBuilder" autowire="byType" />

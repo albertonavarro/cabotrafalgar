@@ -409,6 +409,26 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
                     rudderLeft(tpf);
                 }
             });
+            add(new Command() {
+                @Override
+                public String toString() {
+                    return "sailTrim";
+                }
+                @Override
+                public void execute(float tpf) {
+                    sailTrim(tpf);
+                }
+            });
+            add(new Command() {
+                @Override
+                public String toString() {
+                    return "sailLoose";
+                }
+                @Override
+                public void execute(float tpf) {
+                    sailLoose(tpf);
+                }
+            });
         }};
     }
    
