@@ -54,15 +54,23 @@ public abstract class GenericModRegisterer implements ModRegisterer {
         ctx.registerSingleton("mod.common.ModConfig", modConfiguration);
         return ctx;
     }
+    
+    private void registerScreens(Nifty nifty, BeanFactory beanFactory, ModConfiguration modConfiguration) {
+        ScreenFlowManager screenFlowManager = beanFactory.getBean("common.ScreenFlowManager", ScreenFlowManager.class);
+        
+        for (ModScreenConfiguration currentScreenConfig : modConfiguration.getScreenDeclarations()) {
+            ScreenFlowUnit screenFlowUnit = new ScreenFlowUnit(currentScreenConfig, beanFactory);
+            nifty.registerScreenController(screenFlowUnit.getController());
+            screenFlowManager.addScreenDeclaration(screenFlowUnit);
+        }
+    }
 
     private void registerFlow(Nifty nifty, BeanFactory beanFactory, ModConfiguration modConfiguration) {
         ScreenFlowManager screenFlowManager = beanFactory.getBean("common.ScreenFlowManager", ScreenFlowManager.class);
         ScreenFlowGraph flow = screenFlowManager.addFlowGraph(modConfiguration.getModName());
         
-        for (ModScreenConfiguration currentScreenConfig : modConfiguration.getScreenConfigurations()) {
-            ScreenFlowUnit screenFlowUnit = new ScreenFlowUnit(currentScreenConfig, beanFactory);
-            nifty.registerScreenController(screenFlowUnit.getController());
-            flow.addScreen(screenFlowUnit);
+        for (String screenName : modConfiguration.getModuleScreenFlow()) {
+            flow.addScreen(screenFlowManager.getScreen(screenName));
         }
     }
 
@@ -78,6 +86,10 @@ public abstract class GenericModRegisterer implements ModRegisterer {
         
         if (modConfiguration.getBuildersSpringConfig() != null) {
             registerInputs(beanFactory, modConfiguration.getBuildersSpringConfig());
+        }
+        
+        if (! modConfiguration.getScreenDeclarations().isEmpty()){
+            registerScreens(nifty, beanFactory, modConfiguration);
         }
 
         if (modConfiguration.getModName() != null) {

@@ -52,5 +52,19 @@
             <version>2.2.2</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>nifty</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>nifty-default-controls</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>eventbus</artifactId>
+            <version>3.0.0.20121220-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

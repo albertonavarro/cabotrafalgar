@@ -4,6 +4,7 @@
  */
 package com.navid.trafalgar.screenflow;
 
+import com.navid.trafalgar.modapi.ModScreenConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,8 @@ import org.springframework.context.ApplicationContextAware;
  * @author alberto
  */
 public class ScreenFlowManager implements ApplicationContextAware {
+    
+    private Map<String, ScreenFlowUnit> mapScreenDeclarations = new HashMap<String, ScreenFlowUnit>();
     
     private ScreenFlowState screenFlowState = new ScreenFlowState();
     
@@ -65,6 +68,14 @@ public class ScreenFlowManager implements ApplicationContextAware {
 
     public void changeNextScreen() {
         screenFlowState.setScreenCommand("next");
+    }
+
+    public ScreenFlowUnit getScreen(String screenName) {
+        return mapScreenDeclarations.get(screenName);
+    }
+
+    public void addScreenDeclaration(ScreenFlowUnit screenFlowUnit) {
+        mapScreenDeclarations.put(screenFlowUnit.getScreenName(), screenFlowUnit);
     }
     
     

@@ -1,2 +1,13 @@
 buildersSpringConfig: mod/common/builders-declaration.xml
+modPreGameSpringConfig: mod/common/application-context.xml
+screenDeclarations:
+  - screenName: selectShip
+    interfaceConstructor: mod.windtunnel.selectshipgenerator
+    controller: mod.windtunnel.selectshipcontroller
+  - screenName: selectControl
+    interfaceConstructor: mod.windtunnel.selectcontrolgenerator
+    controller: mod.windtunnel.selectcontrolcontroller
+  - screenName: selectKeys
+    interfaceConstructor: mod.windtunnel.selectkeysgenerator
+    controller: mod.windtunnel.selectkeyscontroller
 

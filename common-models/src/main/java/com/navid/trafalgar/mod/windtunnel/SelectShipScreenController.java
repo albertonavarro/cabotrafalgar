@@ -31,6 +31,10 @@ public class SelectShipScreenController implements ScreenController {
      */
     private Screen screen;
     /**
+     * Internal usage
+     */
+    private SelectShipScreenController.ListItem selectedItem;
+    /**
      * Singleton
      */
     @Autowired
@@ -40,11 +44,9 @@ public class SelectShipScreenController implements ScreenController {
      */
     @Autowired
     private Builder2 builder;
-    
-    @Autowired
-    private GeneratorBuilder generatorBuilder;
-    private SelectShipScreenController.ListItem selectedItem;
-    
+    /**
+     * 
+     */
     @Autowired
     private ScreenFlowManager screenFlowManager;
 
@@ -69,20 +71,11 @@ public class SelectShipScreenController implements ScreenController {
     }
 
     /**
-     * @param generatorBuilder the generatorBuilder to set
-     */
-    public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
-        this.generatorBuilder = generatorBuilder;
-    }
-
-    /**
      * @param screenFlowManager the screenFlowManager to set
      */
     public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
     }
-
-   
 
     private static class ListItem {
 
@@ -153,6 +146,12 @@ public class SelectShipScreenController implements ScreenController {
         shipList.clear();
     }
 
+    /**
+     * Subscribing to changes in the file list
+     *
+     * @param id
+     * @param event
+     */
     @NiftyEventSubscriber(id = "shipList")
     public void onShipChanged(final String id, final ListBoxSelectionChangedEvent<ListItem> event) {
         selectedItem = event.getSelection().get(0);
@@ -160,35 +159,26 @@ public class SelectShipScreenController implements ScreenController {
 
     public void goTo(String nextScreen) {
         gameConfiguration.setShipName(selectedItem.getName());
-        
-        Collection c = builder.build(new Entry(){{
-            setType(selectedItem.getName());
-            setName("player1");
-            setValues(new HashMap<String, String>());
-        }});
-        
+
+        Collection c = builder.build(new Entry() {
+            {
+                setType(selectedItem.getName());
+                setName("player1");
+                setValues(new HashMap<String, String>());
+            }
+        });
+
         gameConfiguration.getPreGameModel().addToModel(c);
-        
-        
-        /*int key0 = KeyInput.KEY_A;
-        List<KeyboardCommandStateListener> keyboards = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
-        for(KeyboardCommandStateListener currentkey : keyboards){
-            currentkey.setKeycode(key0++);
-        }*/
-        
+
         nifty.gotoScreen(nextScreen);
     }
-    
-    public void next(){
+
+    public void next() {
         screenFlowManager.changeNextScreen();
         goTo("redirector");
     }
-    
-    public void back(){
+
+    public void back() {
         nifty.gotoScreen("redirector");
     }
-    
-    
-    
-    
 }

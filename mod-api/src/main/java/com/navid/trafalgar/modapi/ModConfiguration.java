@@ -21,6 +21,10 @@ public class ModConfiguration {
     private String buildersSpringConfig;
     
     private List<ModScreenConfiguration> screenConfigurations;
+    
+    private List<ModScreenConfiguration> screenDeclarations;
+    
+    private List<String> moduleScreenFlow;
 
     /**
      * @return the modName
@@ -90,6 +94,34 @@ public class ModConfiguration {
      */
     public void setBuildersSpringConfig(String buildersSpringConfig) {
         this.buildersSpringConfig = buildersSpringConfig;
+    }
+
+    /**
+     * @return the screenDeclarations
+     */
+    public List<ModScreenConfiguration> getScreenDeclarations() {
+        return screenDeclarations;
+    }
+
+    /**
+     * @param screenDeclarations the screenDeclarations to set
+     */
+    public void setScreenDeclarations(List<ModScreenConfiguration> screenDeclarations) {
+        this.screenDeclarations = screenDeclarations;
+    }
+
+    /**
+     * @return the moduleScreenFlow
+     */
+    public List<String> getModuleScreenFlow() {
+        return moduleScreenFlow;
+    }
+
+    /**
+     * @param moduleScreenFlow the moduleScreenFlow to set
+     */
+    public void setModuleScreenFlow(List<String> moduleScreenFlow) {
+        this.moduleScreenFlow = moduleScreenFlow;
     }
     
     
