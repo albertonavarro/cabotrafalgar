@@ -5,6 +5,8 @@
 package com.navid.trafalgar.modapi;
 
 import java.util.List;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 
 /**
  *
@@ -25,6 +27,8 @@ public class ModConfiguration {
     private List<ModScreenConfiguration> screenDeclarations;
     
     private List<String> moduleScreenFlow;
+    
+    private BeanFactory beanFactory;
 
     /**
      * @return the modName
@@ -123,7 +127,19 @@ public class ModConfiguration {
     public void setModuleScreenFlow(List<String> moduleScreenFlow) {
         this.moduleScreenFlow = moduleScreenFlow;
     }
-    
-    
-    
+
+    /**
+     * @return the beanFactory
+     */
+    public BeanFactory getBeanFactory() {
+        return beanFactory;
+    }
+
+    /**
+     * @param beanFactory the beanFactory to set
+     */
+    public void setBeanFactory(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+    }
+
 }

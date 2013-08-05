@@ -1,5 +1,8 @@
 package com.navid.trafalgar.games;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.jme3.app.Application;
 import com.jme3.app.state.VideoRecorderAppState;
 import com.jme3.niftygui.NiftyJmeDisplay;
@@ -10,7 +13,6 @@ import com.navid.trafalgar.definition2.Json2AssetLoader;
 import static com.navid.trafalgar.games.SpringStaticHolder.ctx;
 import static com.navid.trafalgar.games.SpringStaticHolder.registerBean;
 import com.navid.trafalgar.modapi.ModRegisterer;
-import com.navid.trafalgar.modapi.ModScreenConfiguration;
 import com.navid.trafalgar.screenflow.RedirectorScreenController;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.screenflow.ScreenFlowUnit;
@@ -19,6 +21,8 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,7 +62,6 @@ public class Main extends Application {
         super.setPauseOnLostFocus(false);
         assetManager.registerLoader(Json2AssetLoader.class, "json2");
 
-        
         registerBean("common.assetManager", assetManager);
         registerBean("common.inputManager", inputManager);
         registerBean("common.stateManager", stateManager);
@@ -76,9 +79,9 @@ public class Main extends Application {
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
                 assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
-        
+
         registerBean("common.nifty", nifty);
-        
+
         guiViewPort.addProcessor(niftyDisplay);
 
         loadModules(nifty, nifty.getScreen("start"), settings, this);
@@ -86,11 +89,11 @@ public class Main extends Application {
     }
 
     private void initScreen(Nifty nifty, final BeanFactory beanFactory) {
-        
+
         ScreenFlowManager screenFlowManager = beanFactory.getBean(ScreenFlowManager.class);
         screenFlowManager.addFlowGraph("root").addScreen(new ScreenFlowUnit("start", beanFactory.getBean("common.RootScreenGenerator", ScreenGenerator.class), beanFactory.getBean("common.RootScreenController", ScreenController.class)));
         screenFlowManager.changeFlow("root");
-        
+
         nifty.addScreen("redirector", new ScreenBuilder("start", beanFactory.getBean(RedirectorScreenController.class)).build(nifty));
         nifty.gotoScreen("redirector");
     }
@@ -98,15 +101,43 @@ public class Main extends Application {
     private void loadModules(Nifty nifty, Screen screen, AppSettings settings, Application app) {
         Reflections reflections = new Reflections("com.navid.trafalgar");
 
+
         Set<Class<? extends ModRegisterer>> result = reflections.getSubTypesOf(ModRegisterer.class);
-        for (Class<? extends ModRegisterer> currentClass : result) {
-            try {
-                ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
-                currentLoader.generate(nifty, screen, settings, app, SpringStaticHolder.ctx);
-            } catch (Exception ex) {
-                Logger.getLogger(StartScreenController.class.getName()).log(Level.SEVERE, null, ex);
+
+        Collection<ModRegisterer> resultInstances = Collections2.transform(result, new Function<Class<? extends ModRegisterer>, ModRegisterer>() {
+            @Override
+            public ModRegisterer apply(Class<? extends ModRegisterer> f) {
+                try {
+                    return (ModRegisterer) Class.forName(f.getCanonicalName()).newInstance();
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    return null;
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    return null;
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    return null;
+                }
             }
+        });
+
+        for(ModRegisterer currentRegisterer : resultInstances){
+            currentRegisterer.registerSpringConfig(ctx);
         }
+        for(ModRegisterer currentRegisterer : resultInstances){
+            currentRegisterer.registerInputs();
+        }
+        for(ModRegisterer currentRegisterer : resultInstances){
+            currentRegisterer.registerModels();
+        }
+        for(ModRegisterer currentRegisterer : resultInstances){
+            currentRegisterer.registerScreens(nifty);   
+        }
+        for(ModRegisterer currentRegisterer : resultInstances){
+            currentRegisterer.registerFlow(nifty);
+        }
+        
     }
 
     @Override
