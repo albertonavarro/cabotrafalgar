@@ -21,6 +21,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -103,24 +104,17 @@ public class Main extends Application {
 
 
         Set<Class<? extends ModRegisterer>> result = reflections.getSubTypesOf(ModRegisterer.class);
+        
+        Collection<ModRegisterer> resultInstances = new ArrayList();
 
-        Collection<ModRegisterer> resultInstances = Collections2.transform(result, new Function<Class<? extends ModRegisterer>, ModRegisterer>() {
-            @Override
-            public ModRegisterer apply(Class<? extends ModRegisterer> f) {
-                try {
-                    return (ModRegisterer) Class.forName(f.getCanonicalName()).newInstance();
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    return null;
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    return null;
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    return null;
-                }
+        for (Class<? extends ModRegisterer> currentClass : result) {
+            try {
+                ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
+                resultInstances.add(currentLoader);
+            } catch (Exception ex) {
+                Logger.getLogger(StartScreenController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }
 
         for(ModRegisterer currentRegisterer : resultInstances){
             currentRegisterer.registerSpringConfig(ctx);

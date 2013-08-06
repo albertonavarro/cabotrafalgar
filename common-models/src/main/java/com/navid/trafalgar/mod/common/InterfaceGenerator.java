@@ -9,6 +9,6 @@ import com.navid.trafalgar.modapi.GenericModRegisterer;
 public class InterfaceGenerator extends GenericModRegisterer{
     
     public InterfaceGenerator(){
-        super(InterfaceGenerator.class.getResourceAsStream("com.navid.trafalgar.mod.common/commonmodconfig.yml"));
+        super(InterfaceGenerator.class.getResourceAsStream("commonmodconfig.yml"));
     }
 }
