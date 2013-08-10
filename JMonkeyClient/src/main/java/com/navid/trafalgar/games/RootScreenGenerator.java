@@ -7,6 +7,7 @@ import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
+import de.lessvoid.nifty.tools.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -14,19 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author alberto
  */
 public class RootScreenGenerator implements ScreenGenerator {
-    
+
     @Autowired
     private Nifty nifty;
-    
     @Autowired
     private StartScreenController startScreenController;
-    
     @Autowired
     private ScreenFlowManager screenFlowManager;
-    
+
     @Override
     public void buildScreen() {
-        
+
         final PanelBuilder panelBuilder = new PanelBuilder("Panel_ID") {
             {
                 childLayoutVertical();
@@ -34,35 +33,33 @@ public class RootScreenGenerator implements ScreenGenerator {
         };
 
         for (final String moduleName : screenFlowManager.getModuleNames()) {
-            panelBuilder.control(new ButtonBuilder(moduleName + "Button", moduleName +"ButtonLabel") {
+            panelBuilder.control(new ButtonBuilder(moduleName + "Button", moduleName + "ButtonLabel") {
                 {
                     alignCenter();
                     valignCenter();
                     height("5%");
                     width("15%");
-                    interactOnClick("executeModule("+ moduleName +")");
+                    interactOnClick("executeModule(" + moduleName + ")");
                 }
             });
         }
 
         new ScreenBuilder("start") {
             {
-                controller(startScreenController); // Screen properties       
+                controller(startScreenController);
 
-                // <layer>
-                layer(new LayerBuilder("Layer_ID") {
+                layer(new LayerBuilder("Panel_ID") {
                     {
-                        childLayoutVertical(); // layer properties, add more...
+                        backgroundColor(Color.randomColor());
+                        childLayoutVertical();
 
-                        // <panel>
                         panel(panelBuilder);
-                        // </panel>
                     }
                 });
-                // </layer>
+
             }
         }.build(nifty);
-        // <screen>
+
     }
 
     /**
@@ -85,7 +82,4 @@ public class RootScreenGenerator implements ScreenGenerator {
     public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
     }
-    
-    
-    
 }

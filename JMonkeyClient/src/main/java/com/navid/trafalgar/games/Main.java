@@ -78,8 +78,9 @@ public class Main extends Application {
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
                 assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
-        nifty.setDebugOptionPanelColors(true);
 
+        nifty.loadStyleFile("nifty-default-styles.xml");
+        nifty.loadControlFile("nifty-default-controls.xml");
         registerBean("common.nifty", nifty);
 
         guiViewPort.addProcessor(niftyDisplay);
@@ -103,7 +104,7 @@ public class Main extends Application {
 
 
         Set<Class<? extends ModRegisterer>> result = reflections.getSubTypesOf(ModRegisterer.class);
-        
+
         Collection<ModRegisterer> resultInstances = new ArrayList();
 
         for (Class<? extends ModRegisterer> currentClass : result) {
@@ -115,22 +116,22 @@ public class Main extends Application {
             }
         }
 
-        for(ModRegisterer currentRegisterer : resultInstances){
+        for (ModRegisterer currentRegisterer : resultInstances) {
             currentRegisterer.registerSpringConfig(ctx);
         }
-        for(ModRegisterer currentRegisterer : resultInstances){
+        for (ModRegisterer currentRegisterer : resultInstances) {
             currentRegisterer.registerInputs();
         }
-        for(ModRegisterer currentRegisterer : resultInstances){
+        for (ModRegisterer currentRegisterer : resultInstances) {
             currentRegisterer.registerModels();
         }
-        for(ModRegisterer currentRegisterer : resultInstances){
-            currentRegisterer.registerScreens(nifty);   
+        for (ModRegisterer currentRegisterer : resultInstances) {
+            currentRegisterer.registerScreens(nifty);
         }
-        for(ModRegisterer currentRegisterer : resultInstances){
+        for (ModRegisterer currentRegisterer : resultInstances) {
             currentRegisterer.registerFlow(nifty);
         }
-        
+
     }
 
     @Override
@@ -148,27 +149,26 @@ public class Main extends Application {
         // render the viewports
         renderManager.render(tpf, context.isRenderable());
     }
-    
     public static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
-    
-    public static void registerSingletonBeanDefinition( String name, String className ){
+
+    public static void registerSingletonBeanDefinition(String name, String className) {
         GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
         beanDefinition.setScope(BeanDefinition.SCOPE_SINGLETON);
         beanDefinition.setBeanClassName(className);
         beanDefinition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
         ctx.registerBeanDefinition(name, beanDefinition);
-        
+
     }
-    
-    public static void registerPrototypeBeanDefinition( String name, String className){
+
+    public static void registerPrototypeBeanDefinition(String name, String className) {
         GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
         beanDefinition.setScope(BeanDefinition.SCOPE_PROTOTYPE);
         beanDefinition.setBeanClassName(className);
         beanDefinition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
         ctx.registerBeanDefinition(name, beanDefinition);
     }
-    
-    public static void registerBean(String name, Object object){
-            ctx.registerSingleton(name, object);
+
+    public static void registerBean(String name, Object object) {
+        ctx.registerSingleton(name, object);
     }
 }
