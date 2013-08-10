@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.games;
 
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
@@ -11,7 +7,6 @@ import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
-import de.lessvoid.nifty.screen.Screen;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -50,7 +45,7 @@ public class RootScreenGenerator implements ScreenGenerator {
             });
         }
 
-        Screen screen = new ScreenBuilder("start") {
+        new ScreenBuilder("start") {
             {
                 controller(startScreenController); // Screen properties       
 

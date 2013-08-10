@@ -1,8 +1,5 @@
 package com.navid.trafalgar.games;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import com.jme3.app.Application;
 import com.jme3.app.state.VideoRecorderAppState;
 import com.jme3.niftygui.NiftyJmeDisplay;
@@ -10,8 +7,6 @@ import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import com.jme3.system.JmeSystem;
 import com.navid.trafalgar.definition2.Json2AssetLoader;
-import static com.navid.trafalgar.games.SpringStaticHolder.ctx;
-import static com.navid.trafalgar.games.SpringStaticHolder.registerBean;
 import com.navid.trafalgar.modapi.ModRegisterer;
 import com.navid.trafalgar.screenflow.RedirectorScreenController;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
@@ -23,12 +18,15 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 public class Main extends Application {
 
@@ -80,6 +78,7 @@ public class Main extends Application {
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
                 assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
+        nifty.setDebugOptionPanelColors(true);
 
         registerBean("common.nifty", nifty);
 
@@ -148,5 +147,28 @@ public class Main extends Application {
 
         // render the viewports
         renderManager.render(tpf, context.isRenderable());
+    }
+    
+    public static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
+    
+    public static void registerSingletonBeanDefinition( String name, String className ){
+        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+        beanDefinition.setScope(BeanDefinition.SCOPE_SINGLETON);
+        beanDefinition.setBeanClassName(className);
+        beanDefinition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
+        ctx.registerBeanDefinition(name, beanDefinition);
+        
+    }
+    
+    public static void registerPrototypeBeanDefinition( String name, String className){
+        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+        beanDefinition.setScope(BeanDefinition.SCOPE_PROTOTYPE);
+        beanDefinition.setBeanClassName(className);
+        beanDefinition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
+        ctx.registerBeanDefinition(name, beanDefinition);
+    }
+    
+    public static void registerBean(String name, Object object){
+            ctx.registerSingleton(name, object);
     }
 }

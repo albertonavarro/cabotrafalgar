@@ -92,13 +92,10 @@ public class Builder2 {
             if (entry.getName() != null && entry.getName().equals("player")) {
                 entry.setType(gameConfiguration.getShipName());
                 gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModel.class));
-            }else{
+            } else {
                 gameModel.addToModel(build(entry));
             }
-
-            
         }
-        
 
         for (Dependent currentDependant : (List<Dependent>) gameModel.getByType(Dependent.class)) {
             currentDependant.resolveDependencies(gameModel);
@@ -112,7 +109,7 @@ public class Builder2 {
      * @param builder
      */
     public void registerBuilder(BuilderInterface builder) {
-        LOG.info("Registring builder %s", builder);
+        LOG.info("Registring builder " + builder);
 
         for (Category currentCategory : builder.getCategories()) {
             buildersByCategory.get(currentCategory).add(builder);
@@ -123,7 +120,7 @@ public class Builder2 {
         }
 
         buildersByName.put(builder.getType(), builder);
-        LOG.info("Registring builder %s done", builder);
+        LOG.info("Registring builder " + builder + " done");
     }
 
     /**

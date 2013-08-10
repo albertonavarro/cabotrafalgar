@@ -14,6 +14,6 @@
     <bean id="mod.windtunnel.selectkeyscontroller" class="com.navid.trafalgar.mod.windtunnel.SelectKeyboardControlsScreenController" autowire="byType" />
     <bean id="mod.windtunnel.selectkeysgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectKeyboardControlsScreenGenerator" autowire="byType" />
     
-    <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
+    
 
 </beans>

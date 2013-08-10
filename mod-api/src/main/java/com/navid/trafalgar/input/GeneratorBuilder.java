@@ -27,7 +27,7 @@ public class GeneratorBuilder {
     private Map<String, CommandGenerator> generatorOnlyMap = new HashMap<String, CommandGenerator>();
 
     public void registerBuilder(CommandGenerator commandGenerator) {
-        LOG.info("Registring builder %s");
+        LOG.info("Registring builder " + commandGenerator);
         generatorOnlyMap.put(commandGenerator.toString(), commandGenerator);
 
         Set<Class<Command>> currentClasses = commandGenerator.getPossibleCommands();

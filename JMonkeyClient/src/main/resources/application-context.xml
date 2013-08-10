@@ -16,4 +16,5 @@
     
     <bean id="common.RootScreenGenerator" class="com.navid.trafalgar.games.RootScreenGenerator" autowire="byType" />
     <bean id="common.RootScreenController" class="com.navid.trafalgar.games.StartScreenController" autowire="byType"/>
+    <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
 </beans>
