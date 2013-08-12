@@ -29,7 +29,6 @@ public class StartScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        System.out.print("");
     }
 
     @Override

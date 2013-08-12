@@ -1,8 +1,11 @@
-package com.navid.trafalgar.mod.counterclock;
+package com.navid.trafalgar.mod.common;
 
+import com.navid.trafalgar.definition2.Entry;
+import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
+import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
@@ -10,38 +13,44 @@ import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author alberto
  */
-public class ScreenSelectShip implements ScreenController {
+public class SelectShipScreenController implements ScreenController {
 
     /**
      * From bind
      */
     private Nifty nifty;
-    
     /**
      * From bind
      */
     private Screen screen;
-    
+    /**
+     * Internal usage
+     */
+    private SelectShipScreenController.ListItem selectedItem;
     /**
      * Singleton
      */
     @Autowired
     private GameConfiguration gameConfiguration;
-    
     /**
      * Singleton
      */
     @Autowired
     private Builder2 builder;
-    
-    private ScreenSelectShip.ListItem selectedItem;
+    /**
+     * 
+     */
+    @Autowired
+    private ScreenFlowManager screenFlowManager;
 
+    @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
@@ -59,6 +68,13 @@ public class ScreenSelectShip implements ScreenController {
      */
     public void setBuilder(Builder2 builder) {
         this.builder = builder;
+    }
+
+    /**
+     * @param screenFlowManager the screenFlowManager to set
+     */
+    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
+        this.screenFlowManager = screenFlowManager;
     }
 
     private static class ListItem {
@@ -100,10 +116,12 @@ public class ScreenSelectShip implements ScreenController {
         }
     }
 
+    @Override
     public void onStartScreen() {
         fillListWithShips();
     }
 
+    @Override
     public void onEndScreen() {
         emptyList();
     }
@@ -114,11 +132,11 @@ public class ScreenSelectShip implements ScreenController {
         Collection<BuilderInterface> builders = builder.getBuilder(Builder2.Category.ship);
 
         for (BuilderInterface currentBuilder : builders) {
-            com.navid.trafalgar.mod.counterclock.ScreenSelectShip.ListItem item1 = new com.navid.trafalgar.mod.counterclock.ScreenSelectShip.ListItem();
+            ListItem item1 = new ListItem();
             item1.setName(currentBuilder.getType());
             shipList.addItem(item1);
         }
-        
+
         selectedItem = (ListItem) shipList.getItems().get(0);
     }
 
@@ -128,14 +146,39 @@ public class ScreenSelectShip implements ScreenController {
         shipList.clear();
     }
 
+    /**
+     * Subscribing to changes in the file list
+     *
+     * @param id
+     * @param event
+     */
     @NiftyEventSubscriber(id = "shipList")
-    public void onShipChanged(final String id, final ListBoxSelectionChangedEvent<com.navid.trafalgar.mod.counterclock.ScreenSelectShip.ListItem> event) {
+    public void onShipChanged(final String id, final ListBoxSelectionChangedEvent<ListItem> event) {
         selectedItem = event.getSelection().get(0);
     }
 
     public void goTo(String nextScreen) {
         gameConfiguration.setShipName(selectedItem.getName());
 
-        nifty.gotoScreen(nextScreen); 
+        Collection c = builder.build(new Entry() {
+            {
+                setType(selectedItem.getName());
+                setName("player1");
+                setValues(new HashMap<String, String>());
+            }
+        });
+
+        gameConfiguration.getPreGameModel().addToModel(c);
+
+        nifty.gotoScreen(nextScreen);
+    }
+
+    public void next() {
+        screenFlowManager.changeNextScreen();
+        goTo("redirector");
+    }
+
+    public void back() {
+        nifty.gotoScreen("redirector");
     }
 }

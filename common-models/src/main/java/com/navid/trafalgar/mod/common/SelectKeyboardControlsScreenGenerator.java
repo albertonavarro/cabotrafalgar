@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.navid.trafalgar.mod.windtunnel;
+package com.navid.trafalgar.mod.common;
 
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;

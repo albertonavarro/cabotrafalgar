@@ -7,13 +7,11 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:annotation-config/>
   
-    <bean id="mod.windtunnel.selectshipcontroller" class="com.navid.trafalgar.mod.windtunnel.SelectShipScreenController" autowire="byType"/>
-    <bean id="mod.windtunnel.selectshipgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectShipScreenGenerator" autowire="byType" />
-    <bean id="mod.windtunnel.selectcontrolcontroller" class="com.navid.trafalgar.mod.windtunnel.SelectControlsScreenController" autowire="byType" />
-    <bean id="mod.windtunnel.selectcontrolgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectControlsScreenGenerator" autowire="byType" />
-    <bean id="mod.windtunnel.selectkeyscontroller" class="com.navid.trafalgar.mod.windtunnel.SelectKeyboardControlsScreenController" autowire="byType" />
-    <bean id="mod.windtunnel.selectkeysgenerator" class="com.navid.trafalgar.mod.windtunnel.SelectKeyboardControlsScreenGenerator" autowire="byType" />
+    <bean id="mod.common.selectshipcontroller" class="com.navid.trafalgar.mod.common.SelectShipScreenController" autowire="byType"/>
+    <bean id="mod.common.selectshipgenerator" class="com.navid.trafalgar.mod.common.SelectShipScreenGenerator" autowire="byType" />
+    <bean id="mod.common.selectcontrolcontroller" class="com.navid.trafalgar.mod.common.SelectControlsScreenController" autowire="byType" />
+    <bean id="mod.common.selectcontrolgenerator" class="com.navid.trafalgar.mod.common.SelectControlsScreenGenerator" autowire="byType" />
+    <bean id="mod.common.selectkeyscontroller" class="com.navid.trafalgar.mod.common.SelectKeyboardControlsScreenController" autowire="byType" />
+    <bean id="mod.common.selectkeysgenerator" class="com.navid.trafalgar.mod.common.SelectKeyboardControlsScreenGenerator" autowire="byType" />
     
-    
-
 </beans>

@@ -88,7 +88,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
                 ScreenFlowUnit screenFlowUnit = new ScreenFlowUnit(currentScreenConfig, ctx);
                 nifty.registerScreenController(screenFlowUnit.getController());
                 screenFlowManager.addScreenDeclaration(screenFlowUnit);
-            }
+             }
         }
     }
 

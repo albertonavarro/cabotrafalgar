@@ -11,6 +11,7 @@
         <module>common-models</module>
         <module>mod-api</module>
         <module>modWindTunnel</module>
+        <module>modCounterClock</module>
         <module>persistence</module>
         <module>JMonkeyClient</module>
     </modules>

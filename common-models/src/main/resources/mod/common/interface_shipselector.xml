@@ -4,7 +4,7 @@
     <useStyles filename="nifty-default-styles.xml" />
     <useControls filename="nifty-default-controls.xml" />
 
-    <screen id="selectShip" controller="com.navid.trafalgar.mod.windtunnel.SelectShipScreenController">
+    <screen id="selectShip" controller="com.navid.trafalgar.mod.common.SelectShipScreenController">
         <layer id="background" childLayout="center">
         </layer>
         <layer id="foreground" childLayout="vertical" style="nifty-panel-no-shadow">

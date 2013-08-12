@@ -1,4 +1,4 @@
-package com.navid.trafalgar.mod.windtunnel;
+package com.navid.trafalgar.mod.common;
 
 import com.google.common.collect.HashMultimap;
 import com.navid.trafalgar.input.Command;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.navid.trafalgar.mod.windtunnel;
+package com.navid.trafalgar.mod.common;
 
 import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
@@ -19,7 +19,7 @@ public class SelectShipScreenGenerator implements ScreenGenerator {
             
     @Override
     public void buildScreen() {
-        nifty.addXml("mod/windtunnel/interface_shipselector.xml");
+        nifty.addXml("mod/common/interface_shipselector.xml");
     }
 
     /**
