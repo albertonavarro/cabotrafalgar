@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.navid.trafalgar.mod.windtunnel;
+package com.navid.trafalgar.mod.counterclock;
 
 import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class WindTunnelMainScreenGenerator implements ScreenGenerator {
+public class ScreenSelectMapGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
             
     @Override
     public void buildScreen() {
-        nifty.addXml("mod/windtunnel/interface_windtunnel.xml");
+        nifty.addXml("mod/windtunnel/interface_mapselector.xml");
     }
 
     /**

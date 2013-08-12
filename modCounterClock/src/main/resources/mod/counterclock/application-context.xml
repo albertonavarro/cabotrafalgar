@@ -12,6 +12,8 @@
     <bean id="mod.counterclock.mainscreengenerator" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreenGenerator" autowire="byType" />
 
     <bean id="mod.counterclock.mapselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMap" autowire="byType"/>
+    <bean id="mod.counterclock.mapselectorgenerator" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMapGenerator" autowire="byType"/>
+    
     <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService" />
 
     
