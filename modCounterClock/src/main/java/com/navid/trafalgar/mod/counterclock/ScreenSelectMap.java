@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.counterclock;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
+import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.util.FileUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
@@ -31,11 +32,18 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     private Boolean showGhost = Boolean.TRUE;
     private static final Logger logger = Logger.getLogger(ScreenSelectMap.class.getName());
     
+    /**
+     * 
+     */
+    @Autowired
+    private ScreenFlowManager screenFlowManager;
+    
     @Autowired
     private RecordPersistenceService persistence;
     
     @Autowired
     private GameConfiguration gameConfiguration;
+    
     private XmlBeanFactory beanFactory;
 
     @Override
@@ -46,12 +54,9 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
 
     @Override
     public void onStartScreen() {
-        
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.addAllItems(getMaps());
         setSelectedMap((String) dropDown1.getSelection().get(0));
-        
-        
     }
 
     @Override
@@ -86,7 +91,11 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
         List<String> result = FileUtils.findFilesInFolder("Games/Millestone2/", false);
         return result;
     }
-
+    
+    public void next() {
+        screenFlowManager.changeNextScreen();
+        goTo("redirector");
+    }
     
     private void setSelectedMap(String map) {
 
@@ -120,5 +129,14 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     public void setPersistence(RecordPersistenceService persistence) {
         this.persistence = persistence;
     }
+
+    /**
+     * @param screenFlowManager the screenFlowManager to set
+     */
+    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
+        this.screenFlowManager = screenFlowManager;
+    }
+    
+    
 
 }

@@ -19,7 +19,7 @@ public class CounterClockMainScreenGenerator implements ScreenGenerator {
             
     @Override
     public void buildScreen() {
-        nifty.addXml("mod/windtunnel/interface_counterclock.xml");
+        nifty.addXml("mod/counterclock/interface_counterclock.xml");
     }
 
     /**

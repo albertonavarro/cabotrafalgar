@@ -4,7 +4,7 @@
     <useStyles filename="nifty-default-styles.xml" />
     <useControls filename="nifty-default-controls.xml" />
     
-    <screen id="counterClock.GameScreen" controller="com.navid.trafalgar.mod.counterclock.CounterClockMainScreen">
+    <screen id="counterclockScreen" controller="com.navid.trafalgar.mod.counterclock.CounterClockMainScreen">
         <layer id="foreground" childLayout="horizontal">
             <panel id="panel_left" width="3%" height="100%" childLayout="vertical" backgroundColor="#ffffff30" >    
             </panel>

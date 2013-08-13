@@ -1,7 +1,6 @@
 package com.navid.trafalgar.mod.common;
 
 import com.navid.trafalgar.definition2.Entry;
-import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
