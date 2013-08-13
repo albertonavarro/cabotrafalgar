@@ -19,12 +19,6 @@ public class StartedListener implements PrestartState, StartedState {
 
     @Autowired
     private GameStatus gameStatus;
-    
-    @Autowired
-    private EventManager eventManager;
-    
-    @Autowired
-    private WindTunnelGameModel model;
 
 
     @Override
@@ -50,20 +44,5 @@ public class StartedListener implements PrestartState, StartedState {
      */
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
-    }
-
-    /**
-     * @param eventManager the eventManager to set
-     */
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
-    }
-
-    /**
-     * @param model the model to set
-     */
-    public void setModel(WindTunnelGameModel model) {
-        this.model = model;
-    }
-    
+    }    
 }

@@ -88,8 +88,6 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
     }
 
     public void goTo(String nextScreen) {
-
-
         nifty.gotoScreen(nextScreen);
     }
 
