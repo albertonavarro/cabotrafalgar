@@ -5,7 +5,6 @@ import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.AShipModelTwo;
-import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;

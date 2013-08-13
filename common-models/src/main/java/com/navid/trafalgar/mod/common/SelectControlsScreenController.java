@@ -20,7 +20,6 @@ import de.lessvoid.nifty.controls.radiobutton.RadioButtonControl;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.bushe.swing.event.EventTopicSubscriber;
