@@ -36,6 +36,12 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
 
     @Override
     public void buildScreen() {
+        if (nifty.getScreen("selectKeys") == null){
+            buildScreenNow();
+        }
+    }
+    
+    public void buildScreenNow() {
 
         Collection<KeyboardCommandStateListener> keyListeners = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
 
@@ -105,7 +111,7 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
                                     {
                                         alignCenter();
                                         valignCenter();
-                                        interactOnClick("previous()");
+                                        interactOnClick("back()");
                                     }
                                 });
 

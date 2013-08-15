@@ -95,6 +95,11 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
         screenFlowManager.changeNextScreen();
         goTo("redirector");
     }
+    
+    public void back() {
+        screenFlowManager.changePreviousScreen();
+        nifty.gotoScreen("redirector");
+    }
 
     /**
      * @param screenFlowManager the screenFlowManager to set

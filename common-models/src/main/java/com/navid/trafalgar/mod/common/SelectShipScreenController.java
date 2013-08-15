@@ -178,6 +178,7 @@ public class SelectShipScreenController implements ScreenController {
     }
 
     public void back() {
+        screenFlowManager.changePreviousScreen();
         nifty.gotoScreen("redirector");
     }
 }

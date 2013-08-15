@@ -49,6 +49,12 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
 
     @Override
     public void buildScreen() {
+        if (nifty.getScreen("selectControl") == null){
+            buildScreenNow();
+        }
+    }
+    
+    public void buildScreenNow() {
         panels = new HashMap<String, PanelBuilder>();
 
         AShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelTwo.class);
@@ -135,7 +141,7 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
                                     {
                                         alignCenter();
                                         valignCenter();
-                                        interactOnClick("previous()");
+                                        interactOnClick("back()");
                                     }
                                 });
 

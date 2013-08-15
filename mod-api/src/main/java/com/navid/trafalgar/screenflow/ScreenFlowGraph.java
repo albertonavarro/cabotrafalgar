@@ -42,6 +42,12 @@ public class ScreenFlowGraph {
             }else{
                 return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) +1).getScreenName();
             }
+        } else if("back".equals(screenFlowState.getScreenCommand())){
+            if(screenFlowState.getCurrentScreen() == null){
+                return modScreenConfigurations.get(0).getScreenName();
+            }else{
+                return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) -1).getScreenName();
+            }
         } else {
             return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getScreenCommand())) +1).getScreenName();
 
