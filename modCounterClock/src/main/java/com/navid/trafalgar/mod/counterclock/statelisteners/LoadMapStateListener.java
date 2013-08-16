@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
+import com.navid.trafalgar.model.AShipModel;
 import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
 import com.jme3.post.Filter;

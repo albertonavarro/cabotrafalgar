@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- *   
+ *
  */
 public class Builder2 {
 
@@ -17,7 +17,6 @@ public class Builder2 {
      * Logger
      */
     private static final Logger LOG = LoggerFactory.getLogger(Builder2.class);
-    
     /**
      * Maps builder categories and builders
      */
@@ -92,10 +91,10 @@ public class Builder2 {
         for (Entry entry : gameDef.getEntries()) {
             if (entry.getName() != null && entry.getName().equals("player")) {
                 entry.setType(gameConfiguration.getShipName());
+                gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModel.class));
+            } else {
+                gameModel.addToModel(build(entry));
             }
-
-            Object o = build(entry);
-            gameModel.addToModel(o);
         }
 
         for (Dependent currentDependant : (List<Dependent>) gameModel.getByType(Dependent.class)) {
@@ -110,7 +109,7 @@ public class Builder2 {
      * @param builder
      */
     public void registerBuilder(BuilderInterface builder) {
-        LOG.info("Registring builder %s", builder);
+        LOG.info("Registring builder " + builder);
 
         for (Category currentCategory : builder.getCategories()) {
             buildersByCategory.get(currentCategory).add(builder);
@@ -121,7 +120,7 @@ public class Builder2 {
         }
 
         buildersByName.put(builder.getType(), builder);
-        LOG.info("Registring builder %s done", builder);
+        LOG.info("Registring builder " + builder + " done");
     }
 
     /**
@@ -138,16 +137,11 @@ public class Builder2 {
      * @param entry
      * @return
      */
-    public Object build(Entry entry) {
+    public Collection build(Entry entry) {
         if (buildersByName.get(entry.getType()) == null) {
             throw new IllegalArgumentException("Builder " + entry.getType() + " doesn't exist");
         }
 
-        try{
-            return buildersByName.get(entry.getType()).build(entry.getName(), entry.getValues());
-        } catch (Exception e){
-            return new Node();
-        }
-        
+        return buildersByName.get(entry.getType()).build(entry.getName(), entry.getValues());
     }
 }

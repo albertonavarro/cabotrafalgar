@@ -7,10 +7,13 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:annotation-config/>
     <!-- builders -->
-    <bean id="mod.counterclock.ShipModelOneBuilder" class="com.navid.trafalgar.model.builder.ShipModelOneBuilder" autowire="byType" />
+    <bean id="mod.counterclock.ShipModelTwoBuilder" class="com.navid.trafalgar.model.builder.ShipModelTwoBuilder" autowire="byType" />
     <bean id="mod.counterclock.RotateSimpleWindBuilder" class="com.navid.trafalgar.model.builder.RotateSimpleWindBuilder" autowire="byType" />
     <bean id="mod.counterclock.ContextBuilder" class="com.navid.trafalgar.model.builder.ContextBuilder" autowire="byType" />
     <bean id="mod.counterclock.WaterBuilder2" class="com.navid.trafalgar.model.builder.WaterBuilder2" autowire="byType" />
     <bean id="mod.counterclock.SunBuilder" class="com.navid.trafalgar.model.builder.SunBuilder" autowire="byType" />
     <bean id="mod.counterclock.SkyBuilder" class="com.navid.trafalgar.model.builder.SkyBuilder" autowire="byType" />
+    
+    <bean id="common.input.Keyboard" class="com.navid.trafalgar.input.KeyboardCommandGenerator" autowire="byType" />
+    <bean id="common.input.Null" class="com.navid.trafalgar.input.NullCommandGenerator" autowire="byType" />
 </beans>

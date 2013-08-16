@@ -20,7 +20,8 @@
     <bean id="mod.windtunnel.Started" class="com.navid.trafalgar.mod.windtunnel.statelisteners.StartedListener"  autowire="byType"/>
     <bean id="mod.windtunnel.InitListener" class="com.navid.trafalgar.mod.windtunnel.statelisteners.InitStateListener" autowire="byType"/>
     <bean id="mod.windtunnel.LoadEventListener" class="com.navid.trafalgar.mod.windtunnel.statelisteners.LoadEventsListener" autowire="byType"/>
+    <bean id="mod.windtunnel.AnnotationToStatsManagerStartedListener" class="com.navid.trafalgar.mod.windtunnel.statelisteners.AnnotationToStatsManagerStartedListener" autowire="byType"/>
     <bean id="mod.windtunnel.GUIUpdater" class="com.navid.trafalgar.mod.windtunnel.statelisteners.GUIUpdater" autowire="byType"/>
+    <bean id="mod.windtunnel.CSVRecorder" class="com.navid.trafalgar.mod.windtunnel.statelisteners.CSVRecorder" autowire="byType"/>
     
-  
 </beans>

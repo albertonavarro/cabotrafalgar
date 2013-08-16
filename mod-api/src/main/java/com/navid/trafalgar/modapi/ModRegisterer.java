@@ -13,14 +13,14 @@ import org.springframework.beans.factory.BeanFactory;
  */
 public interface ModRegisterer {
     
-    /**
-     *
-     * @param nifty
-     * @param parent
-     * @param settings
-     * @param app
-     * @param beanFactory
-     */
-    void generate(final Nifty nifty, Screen parent, AppSettings settings, Application app, BeanFactory beanFactory);
+    void registerSpringConfig(BeanFactory beanFactory);
+
+    void registerModels();
+    
+    void registerInputs();
+    
+    void registerScreens(Nifty nifty);
+    
+    void registerFlow(Nifty nifty);
     
 }

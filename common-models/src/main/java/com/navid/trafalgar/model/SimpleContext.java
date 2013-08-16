@@ -37,6 +37,7 @@ public class SimpleContext implements IContext, Dependent{
         this.iWater = iWater;
     }
 
+    @Override
     public void resolveDependencies(GameModel gameModel) {
         setWind((IWind)gameModel.getSingleByType(IWind.class));
     }

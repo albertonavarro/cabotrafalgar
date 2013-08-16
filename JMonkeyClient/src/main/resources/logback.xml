@@ -10,7 +10,11 @@
     </encoder>
   </appender>
 
-  <logger name="com.lordofthejars.foo" level="INFO" additivity="false">
+  <logger name="com.jme3" level="ERROR" additivity="false">
+   <appender-ref ref="STDOUT" />
+  </logger>
+  
+  <logger name="de.lessvoid.nifty" level="ERROR" additivity="false">
    <appender-ref ref="STDOUT" />
   </logger>
 

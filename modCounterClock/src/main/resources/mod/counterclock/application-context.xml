@@ -8,10 +8,14 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-    <bean id="mod.counterclock.mainscreen" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreen" autowire="byType"/>
+    <bean id="mod.counterclock.mainscreencontroller" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreen" autowire="byType"/>
+    <bean id="mod.counterclock.mainscreengenerator" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreenGenerator" autowire="byType" />
+
     <bean id="mod.counterclock.mapselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMap" autowire="byType"/>
-    <bean id="mod.counterclock.shipselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectShip" autowire="byType"/>
-    <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
+    <bean id="mod.counterclock.mapselectorgenerator" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMapGenerator" autowire="byType"/>
+    
     <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService" />
 
+    
+    
 </beans>

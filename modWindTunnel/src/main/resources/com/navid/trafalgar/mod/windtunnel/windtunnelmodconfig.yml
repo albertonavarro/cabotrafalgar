@@ -1,0 +1,13 @@
+modName: windtunnel
+modPreGameSpringConfig: mod/windtunnel/application-context.xml
+modGameSpringConfig: mod/windtunnel/game-context.xml
+buildersSpringConfig: mod/windtunnel/builders-declaration.xml
+screenDeclarations:
+  - screenName: windTunnelScreen
+    interfaceConstructor: mod.windtunnel.mainscreengenerator
+    controller: mod.windtunnel.mainscreencontroller
+moduleScreenFlow:
+  - selectShip
+  - selectControl
+  - selectKeys
+  - windTunnelScreen

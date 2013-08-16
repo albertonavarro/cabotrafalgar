@@ -7,16 +7,26 @@ import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import com.jme3.system.JmeSystem;
 import com.navid.trafalgar.definition2.Json2AssetLoader;
-import static com.navid.trafalgar.games.SpringStaticHolder.ctx;
-import static com.navid.trafalgar.games.SpringStaticHolder.registerBean;
-import com.navid.trafalgar.modapi.BuilderProvider;
 import com.navid.trafalgar.modapi.ModRegisterer;
+import com.navid.trafalgar.screenflow.RedirectorScreenController;
+import com.navid.trafalgar.screenflow.ScreenFlowManager;
+import com.navid.trafalgar.screenflow.ScreenFlowUnit;
+import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.reflections.Reflections;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 public class Main extends Application {
 
@@ -58,11 +68,6 @@ public class Main extends Application {
         registerBean("common.appSettings", settings);
         registerBean("common.app", this);
 
-
-        MyStartScreen startScreen = (MyStartScreen) ctx.getBean("common.StartScreen");
-
-        stateManager.attach(startScreen);
-
         if (record) {
             stateManager.attach(new VideoRecorderAppState());
         }
@@ -73,35 +78,60 @@ public class Main extends Application {
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
                 assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
+
+        nifty.loadStyleFile("nifty-default-styles.xml");
+        nifty.loadControlFile("nifty-default-controls.xml");
+        registerBean("common.nifty", nifty);
+
         guiViewPort.addProcessor(niftyDisplay);
-        nifty.fromXml("Interface/interface.xml", "start", startScreen);
 
         loadModules(nifty, nifty.getScreen("start"), settings, this);
+        initScreen(nifty, ctx);
+    }
 
+    private void initScreen(Nifty nifty, final BeanFactory beanFactory) {
+
+        ScreenFlowManager screenFlowManager = beanFactory.getBean(ScreenFlowManager.class);
+        screenFlowManager.addFlowGraph("root").addScreen(new ScreenFlowUnit("start", beanFactory.getBean("common.RootScreenGenerator", ScreenGenerator.class), beanFactory.getBean("common.RootScreenController", ScreenController.class)));
+        screenFlowManager.changeFlow("root");
+
+        nifty.addScreen("redirector", new ScreenBuilder("start", beanFactory.getBean(RedirectorScreenController.class)).build(nifty));
+        nifty.gotoScreen("redirector");
     }
 
     private void loadModules(Nifty nifty, Screen screen, AppSettings settings, Application app) {
         Reflections reflections = new Reflections("com.navid.trafalgar");
 
-        Set<Class<? extends BuilderProvider>> resultBuilders = reflections.getSubTypesOf(BuilderProvider.class);
-        for (Class<? extends BuilderProvider> currentBuilder : resultBuilders) {
-            try {
-                BuilderProvider instancedBuilder = (BuilderProvider) Class.forName(currentBuilder.getCanonicalName()).newInstance();
-                instancedBuilder.registerModels(SpringStaticHolder.ctx);
-            } catch (Exception ex) {
-                Logger.getLogger(MyStartScreen.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
 
         Set<Class<? extends ModRegisterer>> result = reflections.getSubTypesOf(ModRegisterer.class);
+
+        Collection<ModRegisterer> resultInstances = new ArrayList();
+
         for (Class<? extends ModRegisterer> currentClass : result) {
             try {
                 ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
-                currentLoader.generate(nifty, screen, settings, app, SpringStaticHolder.ctx);
+                resultInstances.add(currentLoader);
             } catch (Exception ex) {
-                Logger.getLogger(MyStartScreen.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(StartScreenController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+        for (ModRegisterer currentRegisterer : resultInstances) {
+            currentRegisterer.registerSpringConfig(ctx);
+        }
+        for (ModRegisterer currentRegisterer : resultInstances) {
+            currentRegisterer.registerInputs();
+        }
+        for (ModRegisterer currentRegisterer : resultInstances) {
+            currentRegisterer.registerModels();
+        }
+        for (ModRegisterer currentRegisterer : resultInstances) {
+            currentRegisterer.registerScreens(nifty);
+        }
+        for (ModRegisterer currentRegisterer : resultInstances) {
+            currentRegisterer.registerFlow(nifty);
+        }
+
     }
 
     @Override
@@ -118,5 +148,27 @@ public class Main extends Application {
 
         // render the viewports
         renderManager.render(tpf, context.isRenderable());
+    }
+    public static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
+
+    public static void registerSingletonBeanDefinition(String name, String className) {
+        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+        beanDefinition.setScope(BeanDefinition.SCOPE_SINGLETON);
+        beanDefinition.setBeanClassName(className);
+        beanDefinition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
+        ctx.registerBeanDefinition(name, beanDefinition);
+
+    }
+
+    public static void registerPrototypeBeanDefinition(String name, String className) {
+        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+        beanDefinition.setScope(BeanDefinition.SCOPE_PROTOTYPE);
+        beanDefinition.setBeanClassName(className);
+        beanDefinition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
+        ctx.registerBeanDefinition(name, beanDefinition);
+    }
+
+    public static void registerBean(String name, Object object) {
+        ctx.registerSingleton(name, object);
     }
 }

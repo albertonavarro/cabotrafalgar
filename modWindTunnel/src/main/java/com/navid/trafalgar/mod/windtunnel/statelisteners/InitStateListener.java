@@ -22,6 +22,7 @@ public class InitStateListener implements InitState {
     @Autowired
     private AppSettings settings;
 
+    @Override
     public void onInit(float tpf) {
 
         Camera camera = new Camera(settings.getWidth(), settings.getHeight());
@@ -45,6 +46,7 @@ public class InitStateListener implements InitState {
         gameStatus.setViewPortGUI(viewPortGUI);
     }
 
+    @Override
     public void onUnload() {
         
         renderManager.removeMainView("CounterClock");

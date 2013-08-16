@@ -7,6 +7,7 @@ import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.Dependent;
 import com.navid.trafalgar.model.GameModel;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,10 @@ public class HarnessBuilder implements BuilderInterface {
     private InputManager inputManager;
     
     @Override
-    public Object build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, String> customValues) {
         HarnessModel harness = new HarnessModel(assetManager);
         harness.registerInputManager(inputManager);
-        return harness;
+        return Collections.singleton(harness);
     }
 
     @Override
