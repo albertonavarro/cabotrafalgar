@@ -49,9 +49,10 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
 
     @Override
     public void buildScreen() {
-        if (nifty.getScreen("selectControl") == null){
-            buildScreenNow();
+        if (nifty.getScreen("selectControl") != null){
+            nifty.removeScreen("selectControl");
         }
+        buildScreenNow();
     }
     
     public void buildScreenNow() {

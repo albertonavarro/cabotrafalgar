@@ -36,9 +36,10 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
 
     @Override
     public void buildScreen() {
-        if (nifty.getScreen("selectKeys") == null){
-            buildScreenNow();
+        if (nifty.getScreen("selectKeys") != null){
+            nifty.removeScreen("selectKeys");
         }
+        buildScreenNow();
     }
     
     public void buildScreenNow() {

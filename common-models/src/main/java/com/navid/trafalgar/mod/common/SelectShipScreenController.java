@@ -1,6 +1,7 @@
 package com.navid.trafalgar.mod.common;
 
 import com.navid.trafalgar.definition2.Entry;
+import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
@@ -117,6 +118,8 @@ public class SelectShipScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
+        
         fillListWithShips();
     }
 

@@ -67,6 +67,9 @@ public class SelectControlsScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        
+        gameConfiguration.getPreGameModel().removeFromModel(CommandStateListener.class);
+
 
         eventHandler = new EventTopicSubscriber<RadioButtonStateChangedEvent>() {
             @Override

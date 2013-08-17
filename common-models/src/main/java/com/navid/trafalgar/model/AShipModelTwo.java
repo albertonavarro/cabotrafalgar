@@ -331,7 +331,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
         rudderRotation = 1 * tpf;
     }
 
-    public void sailTrim(float tpf) {
+    public void sailLoose(float tpf) {
         if (ropeLenght <= MINIMUM_ROPE + (1 * tpf)) {
             ropeLenght = MINIMUM_ROPE;
         } else {
@@ -339,7 +339,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
         }
     }
 
-    public void sailLoose(float tpf) {
+    public void sailTrim(float tpf) {
         if (ropeLenght >= MAXIMUM_ROPE - (1 * tpf)) {
             ropeLenght = MAXIMUM_ROPE;
         } else {

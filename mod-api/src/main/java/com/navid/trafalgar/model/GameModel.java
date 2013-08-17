@@ -7,10 +7,11 @@ import java.util.*;
  *
  *
  */
-public class GameModel {
+public class GameModel implements GameModelInterface {
 
     private Map<Class, List<Object>> mapByClass = new HashMap();
 
+    @Override
     public void addToModel(Collection collection) {
 
         for (Object o : collection) {
@@ -31,6 +32,7 @@ public class GameModel {
      * @param className
      * @return
      */
+    @Override
     public <T> List<T> getByType(Class<T> className) {
         List list = mapByClass.get(className);
         return list != null ? list : new ArrayList();
@@ -42,6 +44,7 @@ public class GameModel {
      * @param className
      * @return
      */
+    @Override
     public <T> T getSingleByType(Class<T> className) {
         List list = getByType(className);
 
@@ -50,5 +53,14 @@ public class GameModel {
         }
 
         return (T) list.get(0);
+    }
+
+    @Override
+    public void removeFromModel(Class className) {
+        List list = getByType(className);
+        
+        for(Object o : list){
+            mapByClass.remove(o.getClass());
+        }
     }
 }
