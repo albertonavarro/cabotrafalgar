@@ -18,20 +18,20 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jme3.version>3.0.0.20121220-SNAPSHOT</jme3.version>
+        <jme3.version>3-NIGHTLY-SNAPSHOT</jme3.version>
         <spring.version>3.2.0.RELEASE</spring.version>
     </properties>
     
     <repositories>
         <repository>
-            <id>sonatype-public</id>
-            <name>sonatype public</name>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <id>repo.cabotrafalgar</id>
+            <name>snapshots</name>
+            <url>http://repo.cabotrafalgar.mooo.com/ext-snapshot-local</url>
         </repository>
     </repositories>
     
     <build>
-         <plugins>
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
