@@ -18,17 +18,27 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jme3.version>3-NIGHTLY-SNAPSHOT</jme3.version>
+        <jme3.version>3.0.10-pre-alpha-svn</jme3.version>
+        <nifty.version>1.3.3</nifty.version>
         <spring.version>3.2.0.RELEASE</spring.version>
+        <eventbus.version>1.4</eventbus.version>
+        <vecmath.version>1.3.1</vecmath.version>
+        <jbullet.version>20101010</jbullet.version>
+        <lwjgl.version>2.9.0</lwjgl.version>
+        <jME3-lwjgl-natives.version>3.0.0.20121220-SNAPSHOT</jME3-lwjgl-natives.version>
+        <j-ogg-all.version>1.0.0</j-ogg-all.version>
+        <xpp3.version>1.1.4c</xpp3.version>
     </properties>
+    
     
     <repositories>
         <repository>
             <id>repo.cabotrafalgar</id>
             <name>snapshots</name>
-            <url>http://repo.cabotrafalgar.mooo.com/ext-snapshot-local</url>
+            <url>http://repo.cabotrafalgar.mooo.com/repo</url>
         </repository>
     </repositories>
+    
     
     <build>
         <plugins>
@@ -59,103 +69,105 @@
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>jME3-core</artifactId>
+                <artifactId>jme3-core</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>jME3-effects</artifactId>
+                <artifactId>jme3-effects</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>jME3-blender</artifactId>
+                <artifactId>jme3-blender</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>jME3-niftygui</artifactId>
+                <artifactId>jme3-niftygui</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>jME3-jbullet</artifactId>
+                <artifactId>jme3-jbullet</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>cz.advel.jbullet</groupId>
                 <artifactId>jbullet</artifactId>
-                <version>${jme3.version}</version>
+                <version>${jbullet.version}</version>
             </dependency>
+            
             <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>java3d</groupId>
                 <artifactId>vecmath</artifactId>
+                <version>${vecmath.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jme3</groupId>
+                <artifactId>jme3-terrain</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>jME3-terrain</artifactId>
+                <artifactId>jme3-desktop</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jme3</groupId>
-                <artifactId>jME3-desktop</artifactId>
-                <version>${jme3.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>org.lwjgl.lwjgl</groupId>
                 <artifactId>lwjgl</artifactId>
-                <version>${jme3.version}</version>
+                <version>${lwjgl.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>jME3-lwjgl</artifactId>
+                <artifactId>jme3-lwjgl</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>net.sf.sociaal</groupId>
                 <artifactId>jME3-lwjgl-natives</artifactId>
-                <version>${jme3.version}</version>
+                <version>3.0.0.20130526</version>
             </dependency>
+            
             <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>org.bushe</groupId>
                 <artifactId>eventbus</artifactId>
-                <version>${jme3.version}</version>
+                <version>${eventbus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.jarnbjo</groupId>
+                <artifactId>j-ogg-all</artifactId>
+                <version>${j-ogg-all.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>j-ogg-oggd</artifactId>
+                <artifactId>jme3-jogg</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jme3</groupId>
-                <artifactId>jME3-jogg</artifactId>
-                <version>${jme3.version}</version>
+                <groupId>xpp3</groupId>
+                <artifactId>xpp3</artifactId>
+                <version>${xpp3.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
-                <artifactId>xmlpull-xpp3</artifactId>
+                <artifactId>jme3-plugins</artifactId>
                 <version>${jme3.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jme3</groupId>
-                <artifactId>jME3-plugins</artifactId>
-                <version>${jme3.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>lessvoid</groupId>
                 <artifactId>nifty</artifactId>
-                <version>${jme3.version}</version>
+                <version>${nifty.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>lessvoid</groupId>
                 <artifactId>nifty-default-controls</artifactId>
-                <version>${jme3.version}</version>
+                <version>${nifty.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jme3</groupId>
+                <groupId>lessvoid</groupId>
                 <artifactId>nifty-style-black</artifactId>
-                <version>${jme3.version}</version>
+                <version>${nifty.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>

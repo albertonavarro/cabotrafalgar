@@ -37,95 +37,95 @@
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-core</artifactId>
+            <artifactId>jme3-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-effects</artifactId>
+            <artifactId>jme3-effects</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-blender</artifactId>
+            <artifactId>jme3-blender</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-niftygui</artifactId>
+            <artifactId>jme3-niftygui</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-jbullet</artifactId>
+            <artifactId>jme3-jbullet</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>cz.advel.jbullet</groupId>
             <artifactId>jbullet</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>java3d</groupId>
             <artifactId>vecmath</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-terrain</artifactId>
+            <artifactId>jme3-terrain</artifactId>
         </dependency>
         
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-desktop</artifactId>
+            <artifactId>jme3-desktop</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>org.lwjgl.lwjgl</groupId>
             <artifactId>lwjgl</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-lwjgl</artifactId>
+            <artifactId>jme3-lwjgl</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>net.sf.sociaal</groupId>
             <artifactId>jME3-lwjgl-natives</artifactId>
+            
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>org.bushe</groupId>
             <artifactId>eventbus</artifactId>
-            <version>3.0.0.20121220-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
-            <artifactId>j-ogg-oggd</artifactId>
+            <groupId>de.jarnbjo</groupId>
+            <artifactId>j-ogg-all</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-jogg</artifactId>
+            <artifactId>jme3-jogg</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>xpp3</groupId>
+            <artifactId>xpp3</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>xmlpull-xpp3</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jme3</groupId>
-            <artifactId>jME3-plugins</artifactId>
+            <artifactId>jme3-plugins</artifactId>
             <scope>runtime</scope>
         </dependency>
         
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>lessvoid</groupId>
             <artifactId>nifty</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>lessvoid</groupId>
             <artifactId>nifty-default-controls</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>lessvoid</groupId>
             <artifactId>nifty-style-black</artifactId>
             <scope>runtime</scope>
         </dependency>

@@ -17,7 +17,7 @@
         
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-core</artifactId>
+            <artifactId>jme3-core</artifactId>
         </dependency>
         
         <dependency>
@@ -33,7 +33,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>lessvoid</groupId>
             <artifactId>nifty</artifactId>
         </dependency>
         <dependency>

@@ -26,11 +26,11 @@
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-core</artifactId>
+            <artifactId>jme3-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
-            <artifactId>jME3-effects</artifactId>
+            <artifactId>jme3-effects</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -52,15 +52,15 @@
             <version>2.2.2</version>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>lessvoid</groupId>
             <artifactId>nifty</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>lessvoid</groupId>
             <artifactId>nifty-default-controls</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jme3</groupId>
+            <groupId>org.bushe</groupId>
             <artifactId>eventbus</artifactId>
         </dependency>
     </dependencies>
