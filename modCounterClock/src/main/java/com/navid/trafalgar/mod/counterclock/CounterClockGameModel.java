@@ -17,7 +17,7 @@ import java.util.List;
 public class CounterClockGameModel {
 
     private List<AMillestoneModel> millestones;
-    private AShipModel ship;
+    private AShipModelTwo ship;
     private IContext context;
     
     private Node gameNode = new Node("reflexion");
@@ -37,7 +37,7 @@ public class CounterClockGameModel {
         
         inited = true;
         
-        ship = (AShipModel) gameModel.getByType(AShipModel.class).iterator().next();
+        ship = (AShipModelTwo) gameModel.getByType(AShipModel.class).iterator().next();
         millestones = gameModel.getByType(AMillestoneModel.class);
         context = (IContext) gameModel.getSingleByType(IContext.class);
         fpp = gameModel.getByType(Filter.class);
@@ -81,7 +81,7 @@ public class CounterClockGameModel {
     /**
      * @return the ship
      */
-    public AShipModel getShip() {
+    public AShipModelTwo getShip() {
         return ship;
     }
 
