@@ -4,42 +4,52 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.navid.trafalgar</groupId>
-    <artifactId>common-models</artifactId>
+    <artifactId>mod-api</artifactId>
     <packaging>jar</packaging>
-    
+
     <parent>
         <groupId>com.navid.trafalgar</groupId>
         <artifactId>parent-trafalgar</artifactId>
-        <version>0.8-SNAPSHOT</version>
+        <version>0.7-SNAPSHOT</version>
     </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>com.navid.trafalgar</groupId>
-            <artifactId>mod-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.navid.trafalgar</groupId>
-            <artifactId>persistence</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+        
         <dependency>
             <groupId>com.jme3</groupId>
             <artifactId>jme3-core</artifactId>
         </dependency>
+        
         <dependency>
-            <groupId>com.jme3</groupId>
-            <artifactId>jme3-effects</artifactId>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lessvoid</groupId>
+            <artifactId>nifty</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>spring-context</artifactId>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -50,18 +60,7 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>lessvoid</groupId>
-            <artifactId>nifty</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>lessvoid</groupId>
-            <artifactId>nifty-default-controls</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.bushe</groupId>
-            <artifactId>eventbus</artifactId>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>
