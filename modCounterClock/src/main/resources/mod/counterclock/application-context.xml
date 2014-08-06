@@ -16,6 +16,24 @@
     
     <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService" />
 
+    <bean id="test.clientRecordServer" class="com.navid.recordserver.v1.RankingResource" factory-bean="test.clientFactoryRecordServer" factory-method="create" />
+    <bean id="test.clientFactoryRecordServer" class="org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean">
+        <property name="address" value="${recordserver.url}/rest"/>
+        <property name="serviceClass" value="com.navid.recordserver.v1.RankingResource"/>
+        <property name="providers">
+            <list>
+                <bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
+                <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+            </list>
+        </property>
+        <property name="outInterceptors">
+            <list>
+                <bean class="com.navid.lazylogin.context.interceptors.RequestIdInterceptor"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="test.requestContextContainer" class="com.navid.lazylogin.context.RequestContextContainer" />
+
     
     
 </beans>
