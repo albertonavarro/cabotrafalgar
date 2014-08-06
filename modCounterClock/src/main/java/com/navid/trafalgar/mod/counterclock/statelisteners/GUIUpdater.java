@@ -41,7 +41,7 @@ public class GUIUpdater implements StartedState, PrestartState {
     }
 
     
-    private ActionListener actionListener = new ActionListener() {
+    private final ActionListener actionListener = new ActionListener() {
 
         @Override
         public void onAction(String name, boolean isPressed, float tpf) {

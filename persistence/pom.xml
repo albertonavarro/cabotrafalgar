@@ -9,7 +9,7 @@
   <parent>
         <groupId>com.navid.trafalgar</groupId>
         <artifactId>parent-trafalgar</artifactId>
-        <version>0.7-SNAPSHOT</version>
+        <version>0.8-SNAPSHOT</version>
     </parent>
 
   <dependencies>
@@ -17,5 +17,16 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.navid.lazylogin</groupId>
+            <artifactId>client</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.navid.record-server</groupId>
+            <artifactId>contract</artifactId>
+            <version>1.2</version>
+        </dependency>
+        
     </dependencies>
 </project>

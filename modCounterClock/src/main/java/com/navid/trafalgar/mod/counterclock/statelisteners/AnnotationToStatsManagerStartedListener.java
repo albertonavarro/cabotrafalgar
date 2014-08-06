@@ -74,9 +74,7 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
             } catch (IllegalAccessException ex) {
                 Logger.getLogger(AnnotationToStatsManagerStartedListener.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        System.out.println("Time evaluating internal values: " + (System.currentTimeMillis() - timeA));
-        
+        }        
     }
 
     /**
