@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.counterclock;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
+import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.util.FileUtils;
 import de.lessvoid.nifty.Nifty;
@@ -39,7 +40,7 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     private ScreenFlowManager screenFlowManager;
     
     @Autowired
-    private RecordPersistenceService persistence;
+    private FileRecordPersistenceService persistence;
     
     @Autowired
     private GameConfiguration gameConfiguration;
@@ -126,7 +127,7 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     /**
      * @param persistence the persistence to set
      */
-    public void setPersistence(RecordPersistenceService persistence) {
+    public void setPersistence(FileRecordPersistenceService persistence) {
         this.persistence = persistence;
     }
 

@@ -3,15 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.navid.trafalgar</groupId>
-    <artifactId>common-models</artifactId>
-    <packaging>jar</packaging>
-    
     <parent>
         <groupId>com.navid.trafalgar</groupId>
         <artifactId>parent-trafalgar</artifactId>
         <version>0.8-SNAPSHOT</version>
     </parent>
+    
+    <artifactId>common-models</artifactId>
+    <name>Trafalgar - common-models</name>
 
     <dependencies>
         <dependency>

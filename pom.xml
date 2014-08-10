@@ -5,7 +5,7 @@
     <artifactId>parent-trafalgar</artifactId>
     <version>0.8-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>cabo-trafalgar</name>
+    <name>Trafalgar - Parent</name>
     
     <modules>
         <module>common-models</module>

@@ -3,15 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.navid.trafalgar</groupId>
-    <artifactId>modCounterClock</artifactId>
-    <packaging>jar</packaging>
-
     <parent>
         <groupId>com.navid.trafalgar</groupId>
         <artifactId>parent-trafalgar</artifactId>
         <version>0.8-SNAPSHOT</version>
     </parent>
+    
+    <artifactId>modCounterClock</artifactId>
+    <name>Trafalgar - CounterClock</name>
+    
 
     <dependencies>
         <dependency>
@@ -67,6 +67,26 @@
         <dependency>
             <groupId>com.jme3</groupId>
             <artifactId>jme3-jbullet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.0.0-milestone2</version>
+        </dependency>
+         <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.13</version>
         </dependency>
         
     </dependencies>

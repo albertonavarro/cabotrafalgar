@@ -15,15 +15,23 @@
     <bean id="mod.counterclock.mapselectorgenerator" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMapGenerator" autowire="byType"/>
     
     <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService" />
+    <bean id="mod.counterclock.persistenceOnline" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService" >
+        <property name="rankingClient" ref="mod.counterclock.clientRecordServer"></property>
+        <property name="userCommandsClient" ref="mod.counterclock.clientUser"></property>
+        <property name="container" ref="mod.counterclock.requestContextContainer" />
+    </bean>
 
-    <bean id="test.clientRecordServer" class="com.navid.recordserver.v1.RankingResource" factory-bean="test.clientFactoryRecordServer" factory-method="create" />
-    <bean id="test.clientFactoryRecordServer" class="org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean">
-        <property name="address" value="${recordserver.url}/rest"/>
+    <bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
+    <bean id="mod.counterclock.clientRecordServer" class="com.navid.recordserver.v1.RankingResource" factory-bean="mod.counterclock.clientFactoryRecordServer" factory-method="create" />
+    <bean id="mod.counterclock.clientFactoryRecordServer" class="org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean">
+        <property name="address" value="http://recordserver-dev:8080/rest"/>
         <property name="serviceClass" value="com.navid.recordserver.v1.RankingResource"/>
         <property name="providers">
             <list>
-                <bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
-                <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+                <ref bean="jacksonMapper"/>
+                <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+                    <property name="mapper" ref="jacksonMapper" />
+                </bean>
             </list>
         </property>
         <property name="outInterceptors">
@@ -32,8 +40,20 @@
             </list>
         </property>
     </bean>
-    <bean id="test.requestContextContainer" class="com.navid.lazylogin.context.RequestContextContainer" />
+    <bean id="mod.counterclock.requestContextContainer" class="com.navid.lazylogin.context.RequestContextContainer" />
 
+    <bean id="mod.counterclock.clientUser" class="com.navid.lazylogin.UserCommands" factory-bean="mod.counterclock.clientUserFactory" factory-method="create"/>
+    <bean id="mod.counterclock.clientUserFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+        <property name="serviceClass" value="com.navid.lazylogin.UserCommands"/>
+        <property name="address" value="http://lazylogin.ws:8080/user"/>
+        <property name="handlers">
+            <list>
+                <bean class="com.navid.lazylogin.context.interceptors.RequestIdHandler">
+                    <property name="requestContextContainer" ref="mod.counterclock.requestContextContainer"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
     
     
 </beans>

@@ -1,18 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.navid.trafalgar</groupId>
-  <artifactId>persistence</artifactId>
-  <packaging>jar</packaging>
-  
-  <parent>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
         <groupId>com.navid.trafalgar</groupId>
         <artifactId>parent-trafalgar</artifactId>
         <version>0.8-SNAPSHOT</version>
     </parent>
 
-  <dependencies>
+    <artifactId>persistence</artifactId>
+    <name>Trafalgar - persistence</name>
+  
+    <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -25,7 +24,17 @@
         <dependency>
             <groupId>com.navid.record-server</groupId>
             <artifactId>contract</artifactId>
-            <version>1.2</version>
+            <version>1.2.64</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <version>3.0.0-milestone1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.navid.lazylogin</groupId>
+            <artifactId>common-context</artifactId>
+            <version>1.2.108</version>
         </dependency>
         
     </dependencies>

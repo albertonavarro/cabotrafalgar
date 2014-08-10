@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
 import com.navid.trafalgar.manager.AbortedState;
@@ -13,46 +7,43 @@ import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.manager.SuccessfulState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
-import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.model.GameModel;
 import com.navid.trafalgar.model.GameStatus;
-import com.navid.trafalgar.model.ShipModelTwo;
 import com.navid.trafalgar.persistence.CandidateRecord;
-import com.navid.trafalgar.persistence.RecordPersistenceService;
-import com.navid.trafalgar.persistence.RecordPersistenceServiceFactory;
 import com.navid.trafalgar.persistence.StepRecord;
+import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
+import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class GameRecorder implements StartedState, PrestartState, SuccessfulState, AbortedState{
-    
+public class GameRecorder implements StartedState, PrestartState, SuccessfulState, AbortedState {
+
     @Autowired
     private GameStatus gameStatus;
-    
+
     @Autowired
     private GameConfiguration gameConfiguration;
-   
+
     @Autowired
     private CounterClockGameModel model;
-    
+
     @Autowired
     private EventManager eventManager;
-    
+
     private CandidateRecord candidateRecord;
+
+    @Autowired
+    private FileRecordPersistenceService fileRecordPersistenceService;
     
-    private RecordPersistenceService persistenceService = RecordPersistenceServiceFactory.getFactory(RecordPersistenceServiceFactory.Type.LOCAL);
-   
+    @Autowired
+    private RecordServerPersistenceService recordServerPersistenceService;
+
     private List<String> eventList = new ArrayList<String>();
 
-    public GameRecorder() {
-        
-    }
-    
     @PostConstruct
-    public void init () {
+    public void init() {
         eventManager.registerListener(new EventListener() {
 
             public void onEvent(String event) {
@@ -78,16 +69,17 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
 
     @Override
     public void onSuccess(float tpf) {
-        persistenceService.addCandidate(candidateRecord);
+        fileRecordPersistenceService.addCandidate(candidateRecord);
+        recordServerPersistenceService.addCandidate(candidateRecord);
     }
-   
+
     @Override
-    public void onAborted(float tpf){
+    public void onAborted(float tpf) {
         candidateRecord = null;
     }
 
     public void onUnload() {
-       
+
     }
 
     /**
@@ -117,7 +109,22 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
     }
-    
-    
 
+    /**
+     * @param fileRecordPersistenceService the fileRecordPersistenceService to set
+     */
+    public void setFileRecordPersistenceService(FileRecordPersistenceService fileRecordPersistenceService) {
+        this.fileRecordPersistenceService = fileRecordPersistenceService;
+    }
+
+    /**
+     * @param recordServerPersistenceService the recordServerPersistenceService to set
+     */
+    public void setRecordServerPersistenceService(RecordServerPersistenceService recordServerPersistenceService) {
+        this.recordServerPersistenceService = recordServerPersistenceService;
+    }
+
+
+    
+    
 }
