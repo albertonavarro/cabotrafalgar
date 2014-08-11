@@ -20,24 +20,20 @@
         <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>mod-api</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>modCounterClock</artifactId>
-            <version>${project.parent.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>common-models</artifactId>
-            <version>${project.parent.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>modWindTunnel</artifactId>
-            <version>${project.parent.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

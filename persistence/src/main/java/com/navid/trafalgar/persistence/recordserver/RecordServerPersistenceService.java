@@ -35,7 +35,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
 
     @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
-        container.create().setRequestId(UUID.randomUUID().toString());
+        container.create();
 
         CreateTokenRequest ctr = new CreateTokenRequest();
         ctr.setEmail("fakeclient@email.com");
@@ -44,13 +44,17 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
         container.get().setRequestId(response.getSessionid().getSessionid());
 
         AddRecordRequest addRecordRequest = new AddRecordRequest();
-        addRecordRequest.setPayload(gson.toJson(candidateRecord));
+        addRecordRequest.setPayload(getPayload("map1", "62.0"));
         AddRecordResponse addRecordResponse = rankingClient.post(addRecordRequest);
 
         CandidateInfo returned = new CandidateInfo();
         returned.setAccepted(true);
         returned.setPosition(addRecordResponse.getPosition());
         return returned;
+    }
+    
+    private String getPayload(String map, String finalTime) {
+        return "{\"version\":1,\"header\":{\"map\":\"" + map + "\",\"shipModel\":\"ShipModelOneX\"},\"stepRecordList\":[{\"position\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0},\"timestamp\":0.13044842,\"eventList\":[]},{\"position\":{\"x\":-267.15237,\"y\":0.0,\"z\":-784.9582},\"rotation\":{\"x\":-0.08990571,\"y\":-0.89595354,\"z\":0.21214685,\"w\":-0.3796915},\"timestamp\":"+finalTime+",\"eventList\":[\"MILLESTONE_REACHED\"]}]}";
     }
 
     @Override
