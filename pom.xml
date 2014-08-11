@@ -28,6 +28,19 @@
         <jME3-lwjgl-natives.version>3.0.0.20121220-SNAPSHOT</jME3-lwjgl-natives.version>
         <j-ogg-all.version>1.0.0</j-ogg-all.version>
         <xpp3.version>1.1.4c</xpp3.version>
+        <slf4j.version>1.7.2</slf4j.version>
+        <logback.version>1.0.9</logback.version>
+        <gson.version>2.2.4</gson.version>
+        <cglib.version>2.2</cglib.version>
+        <reflections.version>0.9.9-RC2</reflections.version>
+        <fasterxml.version>2.4.1</fasterxml.version>
+        <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
+        <guava.version>17.0</guava.version>
+        <commons.io.version>2.4</commons.io.version>
+        <opencsv.version>2.3</opencsv.version>
+        <cxf.version>3.0.1</cxf.version>
+        <lazylogin.version>1.2.108</lazylogin.version>
+        <recordserver.version>1.2.64</recordserver.version>
     </properties>
     
     
@@ -61,16 +74,69 @@
     
     <dependencyManagement>
         <dependencies>
+            <!--modules-->
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>JMonkeyClient</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>common-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>mod-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>modCounterClock</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>modWindTunnel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+           
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${fasterxml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${fasterxml.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
            
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
-                <version>2.2</version>
+                <version>${cglib.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
-                <version>0.9.8</version>
+                <version>${reflections.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jme3</groupId>
@@ -177,7 +243,7 @@
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>2.2.2</version>
+                <version>${gson.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -197,12 +263,52 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.2</version>
+                <version>${slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.0.9</version>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.opencsv</groupId>
+                <artifactId>opencsv</artifactId>
+                <version>${opencsv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>${cxf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-rs-client</artifactId>
+                <version>${cxf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${codehaus.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-jaxrs</artifactId>
+                <version>${codehaus.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${codehaus.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.lazylogin</groupId>
+                <artifactId>common-context</artifactId>
+                <version>${lazylogin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.record-server</groupId>
+                <artifactId>contract</artifactId>
+                <version>${recordserver.version}</version>
             </dependency>
         </dependencies>
         

@@ -1,7 +1,6 @@
 package com.navid.trafalgar.persistence.recordserver;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonWriter;
 import com.navid.lazylogin.CreateTokenRequest;
 import com.navid.lazylogin.CreateTokenResponse;
 import com.navid.lazylogin.UserCommands;
@@ -13,17 +12,9 @@ import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
-import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
-import com.navid.trafalgar.persistence.localfile.Qualification;
-import java.io.FileWriter;
-import java.io.IOError;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *

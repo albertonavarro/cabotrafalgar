@@ -17,17 +17,14 @@
         <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>persistence</artifactId>
-            <version>${project.parent.version}</version> 
         </dependency>
         <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>mod-api</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>common-models</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
@@ -71,22 +68,14 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>3.0.0-milestone2</version>
         </dependency>
          <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
-            <version>1.9.13</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
-            <version>1.9.13</version>
         </dependency>
         
     </dependencies>
