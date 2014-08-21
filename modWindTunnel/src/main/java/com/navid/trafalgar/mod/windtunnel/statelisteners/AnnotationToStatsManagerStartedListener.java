@@ -66,7 +66,7 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
 
     @Override
     public void onStarted(float tpf) {
-        long timeA = System.currentTimeMillis();
+        //long timeA = System.currentTimeMillis();
         for (Map.Entry<Field, AbstractStatistic> field : fields.entrySet()){
             try {
                 Object value = field.getKey().get(ship);
@@ -77,8 +77,7 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
                 Logger.getLogger(AnnotationToStatsManagerStartedListener.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("Time evaluating internal values: " + (System.currentTimeMillis() - timeA));
-        
+        //System.out.println("Time evaluating internal values: " + (System.currentTimeMillis() - timeA));
     }
 
     /**

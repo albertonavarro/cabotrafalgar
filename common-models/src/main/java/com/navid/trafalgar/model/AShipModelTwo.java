@@ -259,7 +259,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
      *
      * @param tpf
      */
-    private void updateShipPitch(float tpf) {
+    private void updateShipRoll(float tpf) {
         
         Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
         Vector3f shipOrientation3f = this.getGlobalDirection();
@@ -292,13 +292,6 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
         this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * speed * tpf / 100, 0).mult(this.getLocalRotation()));
     }
 
-    /**
-     * Rotation on X
-     *
-     * @param tpf
-     */
-    private void updateShipRoll(float tpf) {
-    }
 
     /**
      * Update position
@@ -318,9 +311,8 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
         updateRudder(tpf);
         updateSailAutomaticRotation(tpf);
         updatePosition(tpf);
-        updateShipPitch(tpf);
-        updateShipYaw(tpf);
         updateShipRoll(tpf);
+        updateShipYaw(tpf);
     }
 
     public void rudderRight(float tpf) {
