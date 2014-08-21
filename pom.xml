@@ -39,8 +39,8 @@
         <commons.io.version>2.4</commons.io.version>
         <opencsv.version>2.3</opencsv.version>
         <cxf.version>3.0.1</cxf.version>
-        <lazylogin.version>1.2.110</lazylogin.version>
-        <recordserver.version>1.2.65</recordserver.version>
+        <lazylogin.version>1.2.122</lazylogin.version>
+        <recordserver.version>1.2.66</recordserver.version>
     </properties>
     
     
@@ -68,6 +68,19 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

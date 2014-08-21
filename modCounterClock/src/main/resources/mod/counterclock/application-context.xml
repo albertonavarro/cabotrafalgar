@@ -36,7 +36,9 @@
         </property>
         <property name="outInterceptors">
             <list>
-                <bean class="com.navid.lazylogin.context.interceptors.RequestIdInterceptor"/>
+                <bean class="com.navid.lazylogin.context.interceptors.RequestIdInterceptor">
+                    <property name="requestContextContainer" ref="mod.counterclock.requestContextContainer"/>
+                </bean>
             </list>
         </property>
     </bean>

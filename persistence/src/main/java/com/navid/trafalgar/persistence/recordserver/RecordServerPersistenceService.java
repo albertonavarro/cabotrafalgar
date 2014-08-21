@@ -15,12 +15,16 @@ import com.navid.trafalgar.persistence.RecordPersistenceService;
 import java.util.List;
 import java.util.UUID;
 import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author anf
  */
 public class RecordServerPersistenceService implements RecordPersistenceService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RecordServerPersistenceService.class);
 
     private Gson gson = new Gson();
 
@@ -35,26 +39,38 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
 
     @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
-        container.create();
-
         CreateTokenRequest ctr = new CreateTokenRequest();
         ctr.setEmail("fakeclient@email.com");
         CreateTokenResponse response = userCommandsClient.createToken(ctr);
 
-        container.get().setRequestId(response.getSessionid().getSessionid());
+        container.get().setSessionId(response.getSessionid().getSessionid());
 
+        AddRecordResponse addRecordResponse = null;
+        String sampleReal = gson.toJson(candidateRecord);
         AddRecordRequest addRecordRequest = new AddRecordRequest();
-        addRecordRequest.setPayload(getPayload("map1", "62.0"));
-        AddRecordResponse addRecordResponse = rankingClient.post(addRecordRequest);
+        addRecordRequest.setPayload(sampleReal);
+        LOGGER.info("Trying with size " + sampleReal.length());
+        addRecordResponse = rankingClient.post(addRecordRequest);
 
+        //addRecordRequest.setPayload();
+       /* int index = 0;
+         while (index++ < 1000) {
+         AddRecordRequest addRecordRequest = new AddRecordRequest();
+         String sampleFake = generatePayload(index);
+
+         String sampleReal = gson.toJson(candidateRecord);
+         addRecordRequest.setPayload(sampleReal);
+         LOGGER.info("Trying with size " + sampleFake.length());
+         addRecordResponse = rankingClient.post(addRecordRequest);
+         }*/
         CandidateInfo returned = new CandidateInfo();
         returned.setAccepted(true);
         returned.setPosition(addRecordResponse.getPosition());
         return returned;
     }
-    
+
     private String getPayload(String map, String finalTime) {
-        return "{\"version\":1,\"header\":{\"map\":\"" + map + "\",\"shipModel\":\"ShipModelOneX\"},\"stepRecordList\":[{\"position\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0},\"timestamp\":0.13044842,\"eventList\":[]},{\"position\":{\"x\":-267.15237,\"y\":0.0,\"z\":-784.9582},\"rotation\":{\"x\":-0.08990571,\"y\":-0.89595354,\"z\":0.21214685,\"w\":-0.3796915},\"timestamp\":"+finalTime+",\"eventList\":[\"MILLESTONE_REACHED\"]}]}";
+        return "{\"version\":1,\"header\":{\"map\":\"" + map + "\",\"shipModel\":\"ShipModelOneX\"},\"stepRecordList\":[{\"position\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0},\"timestamp\":0.13044842,\"eventList\":[]},{\"position\":{\"x\":-267.15237,\"y\":0.0,\"z\":-784.9582},\"rotation\":{\"x\":-0.08990571,\"y\":-0.89595354,\"z\":0.21214685,\"w\":-0.3796915},\"timestamp\":" + finalTime + ",\"eventList\":[\"MILLESTONE_REACHED\"]}]}";
     }
 
     @Override
@@ -88,4 +104,17 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
         this.container = container;
     }
 
+    /*private String generatePayload(int index) {
+     StringBuilder sb = new StringBuilder();
+     sb.append("{\"version\":1,\"header\":{\"map\":\"" + "map" + "\",\"shipModel\":\"ShipModelOneX\"},\"stepRecordList\":[");
+     sb.append("{\"position\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0},\"timestamp\":0.13044842,\"eventList\":[]},");
+
+     for (int indexindex = 0; indexindex < index; indexindex++) {
+     for(int index3 = 0; index3 < 10000; index3++){
+     sb.append(",{\"position\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0},\"timestamp\":0.13044842,\"eventList\":[]}");
+     }
+     }
+     sb.append("]}");
+     return sb.toString();
+     }*/
 }
