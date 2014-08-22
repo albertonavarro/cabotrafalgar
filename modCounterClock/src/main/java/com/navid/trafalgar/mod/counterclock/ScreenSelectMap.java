@@ -16,17 +16,14 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.List;
 import java.util.logging.Logger;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 
 /**
  *
  * @author anf
  */
-public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
+public class ScreenSelectMap implements ScreenController{
 
     private Nifty nifty;
     private Screen screen;
@@ -40,13 +37,15 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     @Autowired
     private ScreenFlowManager screenFlowManager;
     
-    @Autowired
-    private RecordServerPersistenceService persistence;
+    @Resource
+    private FileRecordPersistenceService localPersistence;
+    
+    @Resource
+    private RecordServerPersistenceService remotePersistence;
     
     @Autowired
     private GameConfiguration gameConfiguration;
     
-    private XmlBeanFactory beanFactory;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
@@ -101,16 +100,21 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
     
     private void setSelectedMap(String map) {
 
-        List<CompetitorInfo> list = persistence.getTopCompetitors(4, map);
-
-        ListBox dropDown1 = screen.findNiftyControl("listLocalTimes", ListBox.class);
-        dropDown1.clear();
-        for (CompetitorInfo currentTime : list) {
-            dropDown1.addItem(currentTime.getTime());
+        List<CompetitorInfo> listLocal = localPersistence.getTopCompetitors(4, map);
+        ListBox listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
+        listLocalTimes.clear();
+        for (CompetitorInfo currentTime : listLocal) {
+            listLocalTimes.addItem(currentTime.getTime());
+        }
+        
+        List<CompetitorInfo> listRemote = remotePersistence.getTopCompetitors(4, map);
+        ListBox listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
+        listRemoteTimes.clear();
+        for (CompetitorInfo currentTime : listRemote) {
+            listRemoteTimes.addItem(currentTime.getTime());
         }
 
         selectedMap = map;
-
     }
 
     /**
@@ -120,25 +124,27 @@ public class ScreenSelectMap implements ScreenController, BeanFactoryAware{
         this.gameConfiguration = gameConfiguration;
     }
 
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = (XmlBeanFactory) beanFactory;
-    }
-
-    /**
-     * @param persistence the persistence to set
-     */
-    public void setPersistence(RecordServerPersistenceService persistence) {
-        this.persistence = persistence;
-    }
-
     /**
      * @param screenFlowManager the screenFlowManager to set
      */
     public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
     }
-    
+
+    /**
+     * @param localPersistence the localPersistence to set
+     */
+    public void setLocalPersistence(FileRecordPersistenceService localPersistence) {
+        this.localPersistence = localPersistence;
+    }
+
+    /**
+     * @param remotePersistence the remotePersistence to set
+     */
+    public void setRemotePersistence(RecordServerPersistenceService remotePersistence) {
+        this.remotePersistence = remotePersistence;
+    }
+
     
 
 }
