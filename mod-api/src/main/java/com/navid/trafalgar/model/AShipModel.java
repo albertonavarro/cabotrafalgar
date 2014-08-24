@@ -15,13 +15,16 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
  * @author alberto
  */
 public abstract class AShipModel extends TrafalgarNode implements Control, Dependent {
+    
+    private final String role;
 
     protected IContext context;
     
     protected StatisticsManager statisticsManager;
 
-    public AShipModel(Vector3f lookAt, AssetManager assetManager, EventManager eventManager) {
+    public AShipModel(String role, Vector3f lookAt, AssetManager assetManager, EventManager eventManager) {     
         super(lookAt, assetManager, eventManager);
+        this.role = role;
     }
 
     public abstract void registerInput(InputManager inputManager);
@@ -78,4 +81,9 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     public void update(float tpf) {
        windGeometry.update(tpf);
     }
+
+    public Object getRole() {
+        return role;
+    }
+
 }

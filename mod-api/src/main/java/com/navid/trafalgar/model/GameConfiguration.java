@@ -1,6 +1,7 @@
 package com.navid.trafalgar.model;
 
 import com.jme3.system.AppSettings;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -9,10 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
  *  
  */
 public class GameConfiguration {
+
+    /**
+     * @return the showGhost
+     */
+    public ShowGhost getShowGhost() {
+        return showGhost;
+    }
+    
+    public static enum ShowGhost {noghost, bestLocal, bestRemote}
+
     
     private String map;
     
-    private Boolean showGhost;
+    private ShowGhost showGhost;
     
     @Autowired
     private AppSettings appSettings;
@@ -38,20 +49,17 @@ public class GameConfiguration {
     public void setMap(String map) {
         this.map = map;
     }
-
-    /**
-     * @return the showGhost
-     */
-    public Boolean isShowGhost() {
-        return showGhost;
-    }
+    
+    
 
     /**
      * @param showGhost the showGhost to set
      */
-    public void setShowGhost(Boolean showGhost) {
+    public void setShowGhost(ShowGhost showGhost) {
         this.showGhost = showGhost;
     }
+    
+    
 
     /**
      *
@@ -70,8 +78,8 @@ public class GameConfiguration {
             this.setShipName( gc.getShipName());
         }
         
-        if(gc.isShowGhost() != null){
-            this.setShowGhost(gc.isShowGhost());
+        if(gc.getShowGhost() != null){
+            this.setShowGhost(gc.getShowGhost());
         }
     }
 

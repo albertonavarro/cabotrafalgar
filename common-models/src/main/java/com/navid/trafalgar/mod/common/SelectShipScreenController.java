@@ -166,7 +166,9 @@ public class SelectShipScreenController implements ScreenController {
             {
                 setType(selectedItem.getName());
                 setName("player1");
-                setValues(new HashMap<String, String>());
+                setValues(new HashMap<String, String>(){{
+                    put("role", "Player");
+                }});
             }
         });
 

@@ -49,12 +49,16 @@
                                 <onActive name="border" color="#0008" />
                             </effect>
                             <panel childLayout="horizontal">
-                                <control name="label" text="Best time" width="60px" />
-                                <control name="radioButton" id="besttime" group="RadioGroupGhostConfig" />
+                                <control name="label" text="Best local" width="60px" />
+                                <control name="radioButton" id="bestLocal" group="RadioGroupGhostConfig" />
+                            </panel>
+                            <panel childLayout="horizontal">
+                                <control name="label" text="Best remote" width="60px" />
+                                <control name="radioButton" id="bestRemote" group="RadioGroupGhostConfig" />
                             </panel>
                             <panel childLayout="horizontal">
                                 <control name="label" text="No ghost" width="60px" />
-                                <control name="radioButton" id="noghost" group="RadioGroupGhostConfig" />
+                                <control name="radioButton" id="noGhost" group="RadioGroupGhostConfig" />
                             </panel>
                         </panel>
                     </panel>

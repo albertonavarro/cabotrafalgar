@@ -47,7 +47,7 @@ public class ShipModelTwoBuilder implements BuilderInterface {
 
     @Override
     public Collection build(String instanceName, Map<String, String> customValues) {
-        ShipModelTwo model = new ShipModelTwo(assetManager, eventManager);
+        ShipModelTwo model = new ShipModelTwo(customValues.get("role"), assetManager, eventManager);
         model.setName(instanceName);
         
         model.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md"){{
@@ -58,7 +58,7 @@ public class ShipModelTwoBuilder implements BuilderInterface {
             setTexture("DiffuseMap", assetManager.loadTexture("Textures/sail.jpg"));
         }});
         
-        if(customValues != null && customValues.containsKey("position")){
+        if(customValues.containsKey("position")){
             model.setLocalTranslation(FormatUtils.getVector3fFromString(customValues.get("position")));
         }
         

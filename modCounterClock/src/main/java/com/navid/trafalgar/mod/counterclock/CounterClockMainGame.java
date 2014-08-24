@@ -76,37 +76,22 @@ public class CounterClockMainGame extends AbstractAppState {
         gameStatus.getGameGUINode().updateGeometricState();
     }
 
-    /**
-     * @param eventManager the eventManager to set
-     */
     public final void setEventManager(final EventManager inEventManager) {
         this.eventManager = inEventManager;
     }
 
-    /**
-     * @param stateManager the stateManager to set
-     */
     public final void setStateManager(final StateManager inStateManager) {
         this.stateManager = inStateManager;
     }
 
-    /**
-     * @param gameStatus the gameStatus to set
-     */
     public final void setGameStatus(final GameStatus inGameStatus) {
         this.gameStatus = inGameStatus;
     }
 
-    /**
-     * @param stateListeners the stateListeners to set
-     */
     public final void setStateListeners(final List<StateListener> inStateListeners) {
         this.stateListeners = inStateListeners;
     }
 
-    /**
-     * @param gameConfiguration the gameConfiguration to set
-     */
     public void setGameConfiguration(GameConfiguration gameConfiguration) {
         this.gameConfiguration = gameConfiguration;
     }

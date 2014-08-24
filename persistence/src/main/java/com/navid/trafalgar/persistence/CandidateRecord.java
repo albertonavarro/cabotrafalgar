@@ -6,14 +6,15 @@ import java.util.List;
 /**
  *
  * @author anf
+ * @param <T>
  */
 public abstract class CandidateRecord<T extends StepRecord> {
     
     private final int version = 1;
     
-    private Header header = new Header();
+    private final Header header = new Header();
     
-    private List<T> stepRecordList = new LinkedList<T>();
+    private final List<T> stepRecordList = new LinkedList<T>();
    
     public CandidateRecord() {
         
