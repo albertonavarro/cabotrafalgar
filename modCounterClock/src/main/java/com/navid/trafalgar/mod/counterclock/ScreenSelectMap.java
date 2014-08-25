@@ -101,9 +101,9 @@ public class ScreenSelectMap implements ScreenController {
             {
                 setType(cr.getHeader().getShipModel());
                 setName("playerGhost");
-                setValues(new HashMap<String, String>(){{
+                setValues(new HashMap<String, Object>(){{
                     put("role", "Ghost");
-                    //put("record", cr);
+                    put("record", cr);
                 }});
             }
         }));

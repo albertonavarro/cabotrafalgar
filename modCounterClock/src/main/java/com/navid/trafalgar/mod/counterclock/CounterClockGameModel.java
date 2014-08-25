@@ -42,8 +42,10 @@ public class CounterClockGameModel {
         for (AShipModelTwo currentShip : ships) {
             if (currentShip.getRole().equals("Player")) {
                 ship = currentShip;
+                gameNode.attachChild(ship);
             } else {
                 ghost = currentShip;
+                gameNode.attachChild(ghost);
             }
         }
 
@@ -52,8 +54,6 @@ public class CounterClockGameModel {
         fpp = gameModel.getByType(Filter.class);
 
         gameNode.addLight((SunModel) gameModel.getSingleByType(SunModel.class));
-
-        gameNode.attachChild(ship);
 
         for (Spatial currentNode : gameModel.getByType(Spatial.class)) {
             gameNode.attachChild(currentNode);

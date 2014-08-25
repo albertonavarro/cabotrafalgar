@@ -56,6 +56,10 @@ public class LoadMapStateListener implements LoadModelState {
         currentShip.registerInput(inputManager);
         gameStatus.getGameNode().addControl(currentShip);
         currentShip.setStatisticsManager(statisticsManager);
+        
+        if(counterClockGameModel.getGhost() != null){
+            gameStatus.getGameNode().addControl(counterClockGameModel.getGhost());
+        }
 
         List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
         for (AMillestoneModel currentMillestone : millestones) {

@@ -27,7 +27,7 @@ public class RotateSimpleWindBuilder implements BuilderInterface {
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, Object> customValues) {
         return Collections.singleton(new RotateSimpleWind(assetManager));
     }
 

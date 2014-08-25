@@ -8,6 +8,7 @@ import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.ShipModelTwo;
 import com.navid.trafalgar.model.ShipModelTwoGhost;
+import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.util.FormatUtils;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,14 +49,14 @@ public class ShipModelTwoBuilder implements BuilderInterface {
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, Object> customValues) {
         AShipModelTwo model;
         
-        String role = customValues.get("role");
+        String role = (String) customValues.get("role");
         if(role.equals("Player")){
             model = new ShipModelTwo("Player", assetManager, eventManager);
         } else if (role.equals("Ghost")) {
-            model = new ShipModelTwoGhost("Ghost", assetManager, eventManager, null);
+            model = new ShipModelTwoGhost("Ghost", assetManager, eventManager, (CandidateRecord<AShipModelTwo.ShipSnapshot>) customValues.get("record"));
         } else {
             throw new IllegalArgumentException("Illegal role: " + role);
         }
@@ -71,7 +72,7 @@ public class ShipModelTwoBuilder implements BuilderInterface {
         }});
         
         if(customValues.containsKey("position")){
-            model.setLocalTranslation(FormatUtils.getVector3fFromString(customValues.get("position")));
+            model.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
         }
         
         return Collections.singleton(model);

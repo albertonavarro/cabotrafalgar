@@ -21,7 +21,7 @@ public class Entry {
     /*
      * Custom parameters
      */
-    private Map<String, String> values;
+    private Map<String, Object> values;
 
     /**
      * @return the name
@@ -40,14 +40,14 @@ public class Entry {
     /**
      * @return the values
      */
-    public Map<String, String> getValues() {
+    public Map<String, Object> getValues() {
         return values;
     }
 
     /**
      * @param values the values to set
      */
-    public void setValues(Map<String, String> values) {
+    public void setValues(Map<String, Object> values) {
         this.values = values;
     }
 

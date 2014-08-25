@@ -28,7 +28,7 @@ public class SunBuilder implements BuilderInterface{
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, Object> customValues) {
         return Collections.singleton(new SunModel(new Vector3f(-1,-1,-1), ColorRGBA.Yellow));
     }
 

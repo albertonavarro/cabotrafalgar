@@ -25,7 +25,7 @@ public class HarnessBuilder implements BuilderInterface {
     private InputManager inputManager;
     
     @Override
-    public Collection build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, Object> customValues) {
         HarnessModel harness = new HarnessModel(assetManager);
         harness.registerInputManager(inputManager);
         return Collections.singleton(harness);

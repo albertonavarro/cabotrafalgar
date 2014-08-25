@@ -34,7 +34,7 @@ public class MillestoneBuilder implements BuilderInterface {
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, Object> customValues) {
         MillestoneModel millestone = new MillestoneModel(assetManager);
         
         millestone.setMaterialOn(new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md"){{
@@ -46,7 +46,7 @@ public class MillestoneBuilder implements BuilderInterface {
         }});
         
         if(customValues.containsKey("position")){
-            millestone.setLocalTranslation(FormatUtils.getVector3fFromString(customValues.get("position")));
+            millestone.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
         }
         
         return Collections.singleton(millestone);

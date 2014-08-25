@@ -16,7 +16,7 @@ public interface BuilderInterface {
      * @param customValues
      * @return
      */
-    Collection build( String instanceName, Map<String, String> customValues);
+    Collection build( String instanceName, Map<String, Object> customValues);
     
     /**
      *

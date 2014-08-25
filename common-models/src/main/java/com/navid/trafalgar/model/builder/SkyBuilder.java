@@ -27,7 +27,7 @@ public class SkyBuilder implements BuilderInterface {
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, String> customValues) {
+    public Collection build(String instanceName, Map<String, Object> customValues) {
         Spatial sky = SkyFactory.createSky(assetManager, "Scenes/Beach/FullskiesSunset0068.dds", false);
         return Collections.singleton(sky);
     }
