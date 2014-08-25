@@ -8,6 +8,8 @@ import com.jme3.scene.Spatial;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.persistence.CandidateRecord;
+import com.navid.trafalgar.persistence.StepRecord;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -17,6 +19,9 @@ import java.util.Set;
 public class ShipModelTwoGhost extends AShipModelTwo {
     
     private final CandidateRecord<ShipSnapshot> candidateRecord;
+    
+    private final Iterator<ShipSnapshot> iterator;
+    private ShipSnapshot currentStep;
 
     public ShipModelTwoGhost(   String role, 
                                 AssetManager assetManager, 
@@ -24,6 +29,11 @@ public class ShipModelTwoGhost extends AShipModelTwo {
                                 CandidateRecord<ShipSnapshot> candidateRecord) {
         super(role, assetManager, eventManager);
         this.candidateRecord = candidateRecord;
+        iterator = (Iterator<ShipSnapshot>) candidateRecord.getStepRecord().iterator();
+        
+        if(iterator.hasNext()){
+            currentStep = iterator.next();
+        }
     }
 
     @Override
@@ -70,10 +80,23 @@ public class ShipModelTwoGhost extends AShipModelTwo {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    float time = 0;
+    
     @Override
     public void update(float tpf) {
        super.update(tpf);
        
+       time += tpf;
+       
+       if(currentStep != null){
+           if(currentStep.getTimestamp() < time) {
+               if(iterator.hasNext()){
+                   currentStep = iterator.next();
+               }
+           }
+           
+           this.updateFromRecord(currentStep);
+       }
        
     }
     
