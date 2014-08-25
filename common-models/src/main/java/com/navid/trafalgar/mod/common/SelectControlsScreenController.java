@@ -13,6 +13,7 @@ import com.navid.trafalgar.input.CommandStateListener;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.GameConfiguration;
+import com.navid.trafalgar.model.ShipModelTwo;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
@@ -80,7 +81,7 @@ public class SelectControlsScreenController implements ScreenController {
             }
         };
 
-        AShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelTwo.class);
+        ShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(ShipModelTwo.class);
         Set<Command> commands = ship.getCommands();
 
         commandsMap = Maps.uniqueIndex(commands, new Function<Command, String>() {

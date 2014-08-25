@@ -11,13 +11,19 @@ import com.navid.recordserver.v1.AddRecordRequest;
 import com.navid.recordserver.v1.AddRecordResponse;
 import com.navid.recordserver.v1.GetMapRecordsResponse;
 import com.navid.recordserver.v1.GetMapRecordsResponse.RankingEntry;
+import com.navid.recordserver.v1.GetRecordResponse;
 import com.navid.recordserver.v1.RankingResource;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
+import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
+import java.io.FileNotFoundException;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +50,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
     @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
         setUpSession();
-        
+
         candidateRecord.setMap(candidateRecord.getHeader().getMap().replace("/", "_"));
         AddRecordResponse addRecordResponse = null;
         String sampleReal = gson.toJson(candidateRecord);
@@ -62,7 +68,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
     @Override
     public List<CompetitorInfo> getTopCompetitors(int number, String map) {
         setUpSession();
-                 
+
         String newMapName = map.replace("/", "_");
         GetMapRecordsResponse response = rankingClient.getMapsmap(newMapName);
 
@@ -74,6 +80,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
                 result.setPosition(f.getPosition());
                 result.setTime(f.getTime());
                 result.setUserName(f.getId());
+                result.setGameId(f.getId());
                 return result;
             }
         });
@@ -91,7 +98,21 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
 
     @Override
     public CandidateRecord getGhost(int number, String map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setUpSession();
+
+        GetRecordResponse response = rankingClient.getIdid(getTopCompetitors(number, map).get(0).getGameId());
+
+        Class className;
+        try {
+            className = Class.forName("com.navid.trafalgar.model.AShipModelTwo$ShipCandidateRecord");
+        } catch (ClassNotFoundException ex) {
+            return null;
+        }
+        
+        CandidateRecord candidate = (CandidateRecord) gson.fromJson(response.getPayload(), className);
+
+        return candidate;
+
     }
 
     /**

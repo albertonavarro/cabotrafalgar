@@ -1,7 +1,9 @@
 package com.navid.trafalgar.mod.counterclock;
 
+import com.navid.trafalgar.definition2.Entry;
+import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.model.GameConfiguration.ShowGhost;
+import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
 import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
@@ -16,6 +18,7 @@ import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import static java.util.Collections.singleton;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -27,10 +30,21 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ScreenSelectMap implements ScreenController {
 
+    /**
+     * @param builder the builder to set
+     */
+    public void setBuilder(Builder2 builder) {
+        this.builder = builder;
+    }
+
+    private enum ShowGhost {
+        noGhost, bestLocal, bestRemote
+    };
+
     private Nifty nifty;
     private Screen screen;
     private String selectedMap;
-    private ShowGhost ghostOptions = ShowGhost.noghost;
+    private ShowGhost ghostOptions = ShowGhost.noGhost;
     private static final Logger logger = Logger.getLogger(ScreenSelectMap.class.getName());
 
     /**
@@ -47,6 +61,9 @@ public class ScreenSelectMap implements ScreenController {
 
     @Autowired
     private GameConfiguration gameConfiguration;
+
+    @Autowired
+    private Builder2 builder;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
@@ -69,7 +86,29 @@ public class ScreenSelectMap implements ScreenController {
 
     public void goTo(String nextScreen) {
         gameConfiguration.setMap(selectedMap);
-        gameConfiguration.setShowGhost(ghostOptions);
+
+        final CandidateRecord cr;
+        if (ghostOptions == ShowGhost.bestLocal) {
+            cr = localPersistence.getGhost(1, selectedMap);
+        } else if (ghostOptions == ShowGhost.bestRemote) {
+            cr = remotePersistence.getGhost(1, selectedMap);
+        } else {
+            cr = null;
+        }
+
+        if (cr != null) {
+            gameConfiguration.getPreGameModel().addToModel(builder.build(new Entry() {
+            {
+                setType(cr.getHeader().getShipModel());
+                setName("playerGhost");
+                setValues(new HashMap<String, String>(){{
+                    put("role", "Ghost");
+                    //put("record", cr);
+                }});
+            }
+        }));
+        }
+
         //gameConfiguration.getPreGameModel().addToModel(singleton(localPersistence.getGhost(1, selectedMap)));
         nifty.gotoScreen(nextScreen);  // switch to another screen
     }
@@ -83,7 +122,7 @@ public class ScreenSelectMap implements ScreenController {
     @NiftyEventSubscriber(id = "noGhost")
     public void onNoGhost(final String id, final RadioButtonStateChangedEvent event) {
         if (event.isSelected()) {
-            ghostOptions = ShowGhost.noghost;
+            ghostOptions = ShowGhost.noGhost;
         }
     }
 
@@ -97,7 +136,7 @@ public class ScreenSelectMap implements ScreenController {
     @NiftyEventSubscriber(id = "bestRemote")
     public void onBestRemote(final String id, final RadioButtonStateChangedEvent event) {
         if (event.isSelected()) {
-           ghostOptions = ShowGhost.bestRemote; 
+            ghostOptions = ShowGhost.bestRemote;
         }
     }
 
@@ -117,14 +156,14 @@ public class ScreenSelectMap implements ScreenController {
         ListBox listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
         listLocalTimes.clear();
         for (CompetitorInfo currentTime : listLocal) {
-            listLocalTimes.addItem(currentTime.getTime());
+            listLocalTimes.addItem(currentTime);
         }
 
         List<CompetitorInfo> listRemote = remotePersistence.getTopCompetitors(4, map);
         ListBox listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
         listRemoteTimes.clear();
         for (CompetitorInfo currentTime : listRemote) {
-            listRemoteTimes.addItem(currentTime.getTime());
+            listRemoteTimes.addItem(currentTime);
         }
 
         selectedMap = map;
@@ -157,5 +196,7 @@ public class ScreenSelectMap implements ScreenController {
     public void setRemotePersistence(RecordServerPersistenceService remotePersistence) {
         this.remotePersistence = remotePersistence;
     }
+    
+    
 
 }

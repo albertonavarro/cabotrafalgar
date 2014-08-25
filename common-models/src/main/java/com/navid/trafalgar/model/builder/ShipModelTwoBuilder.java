@@ -3,9 +3,11 @@ package com.navid.trafalgar.model.builder;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.navid.trafalgar.manager.EventManager;
+import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.ShipModelTwo;
+import com.navid.trafalgar.model.ShipModelTwoGhost;
 import com.navid.trafalgar.util.FormatUtils;
 import java.util.Collection;
 import java.util.Collections;
@@ -47,7 +49,17 @@ public class ShipModelTwoBuilder implements BuilderInterface {
 
     @Override
     public Collection build(String instanceName, Map<String, String> customValues) {
-        ShipModelTwo model = new ShipModelTwo(customValues.get("role"), assetManager, eventManager);
+        AShipModelTwo model;
+        
+        String role = customValues.get("role");
+        if(role.equals("Player")){
+            model = new ShipModelTwo("Player", assetManager, eventManager);
+        } else if (role.equals("Ghost")) {
+            model = new ShipModelTwoGhost("Ghost", assetManager, eventManager, null);
+        } else {
+            throw new IllegalArgumentException("Illegal role: " + role);
+        }
+
         model.setName(instanceName);
         
         model.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md"){{

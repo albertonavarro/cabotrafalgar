@@ -63,7 +63,7 @@ public class LoadMapStateListener implements LoadModelState {
             currentMillestone.setCollidable(Collections.singleton(currentShip));
             gameStatus.getGameNode().addControl(currentMillestone);
         }
-
+        
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);
         for (Filter currentFilter : counterClockGameModel.getFpp()) {
             fpp.addFilter(currentFilter);

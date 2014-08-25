@@ -10,6 +10,7 @@ public final class CompetitorInfo {
     private float time;
     private boolean local;
     private String userName;
+    private String gameId;
 
     /**
      * @return the position
@@ -66,4 +67,24 @@ public final class CompetitorInfo {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    /**
+     * @return the gameId
+     */
+    public String getGameId() {
+        return gameId;
+    }
+
+    /**
+     * @param gameId the gameId to set
+     */
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+    
+    @Override
+    public String toString() {
+        return Float.toString(time);
+    }
+    
 }

@@ -29,7 +29,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
 
     public final CandidateRecord getCandidateRecordInstance() {
         ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
-        candidateRecord.getHeader().setShipModel("ShipModelOneXX");
+        candidateRecord.getHeader().setShipModel("ShipModelOneY");
         return candidateRecord;
     }
 
@@ -155,6 +155,7 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
     
 
     protected abstract void initGeometry(AssetManager assetManager, EventManager eventManager);
+    
     public static final float MINIMUM_ROPE = 1.5f;
     public static final float MAXIMUM_ROPE = 3;
     public static final float TRIMMING_SPEED = 1;

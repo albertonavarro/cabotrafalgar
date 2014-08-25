@@ -11,19 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class GameConfiguration {
 
-    /**
-     * @return the showGhost
-     */
-    public ShowGhost getShowGhost() {
-        return showGhost;
-    }
-    
-    public static enum ShowGhost {noghost, bestLocal, bestRemote}
-
     
     private String map;
-    
-    private ShowGhost showGhost;
     
     @Autowired
     private AppSettings appSettings;
@@ -49,17 +38,6 @@ public class GameConfiguration {
     public void setMap(String map) {
         this.map = map;
     }
-    
-    
-
-    /**
-     * @param showGhost the showGhost to set
-     */
-    public void setShowGhost(ShowGhost showGhost) {
-        this.showGhost = showGhost;
-    }
-    
-    
 
     /**
      *
@@ -76,10 +54,6 @@ public class GameConfiguration {
         
         if(gc.getShipName() != null){
             this.setShipName( gc.getShipName());
-        }
-        
-        if(gc.getShowGhost() != null){
-            this.setShowGhost(gc.getShowGhost());
         }
     }
 
