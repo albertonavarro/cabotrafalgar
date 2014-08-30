@@ -73,6 +73,8 @@ public class ScreenSelectMap implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        gameConfiguration.reset();
+        
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.addAllItems(getMaps());
         setSelectedMap((String) dropDown1.getSelection().get(0));
@@ -97,7 +99,8 @@ public class ScreenSelectMap implements ScreenController {
         }
 
         if (cr != null) {
-            gameConfiguration.getPreGameModel().addToModel(builder.build(new Entry() {
+            gameConfiguration.getPreGameModel().addToModel(singleton(cr));
+            /*gameConfiguration.getPreGameModel().addToModel(builder.build(new Entry() {
             {
                 setType(cr.getHeader().getShipModel());
                 setName("playerGhost");
@@ -106,7 +109,7 @@ public class ScreenSelectMap implements ScreenController {
                     put("record", cr);
                 }});
             }
-        }));
+        } ));*/
         }
 
         //gameConfiguration.getPreGameModel().addToModel(singleton(localPersistence.getGhost(1, selectedMap)));

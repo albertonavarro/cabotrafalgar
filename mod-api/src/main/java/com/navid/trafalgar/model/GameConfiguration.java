@@ -22,7 +22,12 @@ public class GameConfiguration {
     private GameModel preGameModel;
     
     public GameConfiguration(){
+        reset();
+    }
+    
+    public final void reset() {
         preGameModel = new GameModel();
+        shipName = null;
     }
 
     /**

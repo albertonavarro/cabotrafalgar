@@ -1,12 +1,13 @@
 package com.navid.trafalgar.mod.counterclock;
 
-import com.navid.trafalgar.model.AShipModel;
 import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.navid.trafalgar.input.Interactive;
 import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
 import com.navid.trafalgar.model.*;
+import com.navid.trafalgar.model.AShipModel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,14 +24,15 @@ public class CounterClockGameModel {
     private IContext context;
     private List<Filter> fpp = new ArrayList<Filter>();
     private boolean inited = false;
-    private AShipModelTwo ship;
-    private AShipModelTwo ghost;
+    private ShipModelTwo ship;
+    private ShipModelTwoGhost ghost;
+    
 
     public boolean isInited() {
         return inited;
     }
 
-    public void init(GameModel gameModel) {
+    public void init(GameModel gameModel, GameModel preGameModel) {
 
         if (inited) {
             throw new IllegalStateException("Instance CounterClockGameModel already inited");
@@ -38,16 +40,13 @@ public class CounterClockGameModel {
 
         inited = true;
 
-        List<AShipModelTwo> ships = gameModel.getByType(AShipModelTwo.class);
-        for (AShipModelTwo currentShip : ships) {
-            if (currentShip.getRole().equals("Player")) {
-                ship = currentShip;
-                gameNode.attachChild(ship);
-            } else {
-                ghost = currentShip;
-                gameNode.attachChild(ghost);
-            }
-        }
+        ship = gameModel.getSingleByType(ShipModelTwo.class);
+        gameNode.attachChild(ship);
+        preGameModel.getSingleByType(ShipModelTwoControlProxy.class).setTarget(ship);
+        
+        //ghost = gameModel.getSingleByType(ShipModelTwoGhost.class);
+        //gameNode.attachChild(ghost);
+        
 
         millestones = gameModel.getByType(AMillestoneModel.class);
         context = (IContext) gameModel.getSingleByType(IContext.class);

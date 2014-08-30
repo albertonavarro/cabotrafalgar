@@ -172,7 +172,6 @@ public abstract class AShipModelTwo extends AShipModel implements Interactive {
         spatial.setMaterial(mat);
     }
 
-    @Override
     public final void setTransparent(boolean b) {
         if (!previousTransparent && b) {
             matHull.getAdditionalRenderState().setBlendMode(BlendMode.Color);

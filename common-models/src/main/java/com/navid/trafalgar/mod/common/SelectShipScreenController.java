@@ -161,18 +161,19 @@ public class SelectShipScreenController implements ScreenController {
 
     public void goTo(String nextScreen) {
         gameConfiguration.setShipName(selectedItem.getName());
-
+        
         Collection c = builder.build(new Entry() {
             {
                 setType(selectedItem.getName());
                 setName("player1");
                 setValues(new HashMap<String, Object>(){{
-                    put("role", "Player");
+                    put("role", "ControlProxy");
                 }});
             }
         });
 
         gameConfiguration.getPreGameModel().addToModel(c);
+
 
         nifty.gotoScreen(nextScreen);
     }

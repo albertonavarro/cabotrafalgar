@@ -20,8 +20,8 @@ public class Builder2 {
     /**
      * Maps builder categories and builders
      */
-    private Map<Category, Collection<BuilderInterface>> buildersByCategory =
-            new EnumMap<Category, Collection<BuilderInterface>>(Category.class);
+    private Map<Category, Collection<BuilderInterface>> buildersByCategory
+            = new EnumMap<Category, Collection<BuilderInterface>>(Category.class);
     /**
      * Maps builder names and builders
      */
@@ -85,13 +85,25 @@ public class Builder2 {
      * @param gameDef
      * @return
      */
-    public GameModel build(GameConfiguration gameConfiguration, GameDefinition2 gameDef) {
+    public GameModel build(final GameConfiguration gameConfiguration, GameDefinition2 gameDef) {
         GameModel gameModel = new GameModel();
 
         for (Entry entry : gameDef.getEntries()) {
             if (entry.getName() != null && entry.getName().equals("player")) {
-                entry.setType(gameConfiguration.getShipName());
-                gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModel.class));
+                //entry.setType(gameConfiguration.getShipName());
+                //gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModel.class));
+                Collection c = build(new Entry() {
+                    {
+                        setType(gameConfiguration.getShipName());
+                        setName("player1");
+                        setValues(new HashMap<String, Object>() {
+                            {
+                                put("role", "Player");
+                            }
+                        });
+                    }
+                });
+                gameModel.addToModel(c);
             } else {
                 gameModel.addToModel(build(entry));
             }

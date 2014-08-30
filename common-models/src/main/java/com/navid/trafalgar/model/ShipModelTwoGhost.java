@@ -23,21 +23,16 @@ public class ShipModelTwoGhost extends AShipModelTwo {
     private final Iterator<ShipSnapshot> iterator;
     private ShipSnapshot currentStep;
 
-    public ShipModelTwoGhost(   String role, 
-                                AssetManager assetManager, 
+    public ShipModelTwoGhost(   AssetManager assetManager, 
                                 EventManager eventManager, 
                                 CandidateRecord<ShipSnapshot> candidateRecord) {
-        super(role, assetManager, eventManager);
+        super("Ghost", assetManager, eventManager);
         this.candidateRecord = candidateRecord;
         iterator = (Iterator<ShipSnapshot>) candidateRecord.getStepRecord().iterator();
         
         if(iterator.hasNext()){
             currentStep = iterator.next();
         }
-    }
-
-    @Override
-    public void registerInput(InputManager inputManager) {
     }
 
     @Override
@@ -73,11 +68,6 @@ public class ShipModelTwoGhost extends AShipModelTwo {
 
         sail = new ShipModelTwoGhost.Sail(assetManager, eventManager);
         rudder = new ShipModelTwoGhost.Rudder(assetManager, eventManager);
-    }
-
-    @Override
-    public float getSpeed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     float time = 0;

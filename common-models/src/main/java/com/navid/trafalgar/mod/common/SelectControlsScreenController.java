@@ -11,6 +11,7 @@ import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.CommandStateListener;
 import com.navid.trafalgar.input.GeneratorBuilder;
+import com.navid.trafalgar.input.Interactive;
 import com.navid.trafalgar.model.AShipModelTwo;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.ShipModelTwo;
@@ -81,7 +82,7 @@ public class SelectControlsScreenController implements ScreenController {
             }
         };
 
-        ShipModelTwo ship = gameConfiguration.getPreGameModel().getSingleByType(ShipModelTwo.class);
+        Interactive ship = gameConfiguration.getPreGameModel().getSingleByType(Interactive.class);
         Set<Command> commands = ship.getCommands();
 
         commandsMap = Maps.uniqueIndex(commands, new Function<Command, String>() {

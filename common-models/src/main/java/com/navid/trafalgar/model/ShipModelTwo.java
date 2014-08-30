@@ -53,9 +53,6 @@ public final class ShipModelTwo extends AShipModelTwo {
     @Auditable
     private float speed;
 
-    @Override
-    public void registerInput(InputManager inputManager) {
-    }
 
     private final class Sail extends AShipModelTwo.Sail {
 
@@ -73,8 +70,8 @@ public final class ShipModelTwo extends AShipModelTwo {
         }
     }
 
-    public ShipModelTwo(String role, AssetManager assetManager, EventManager eventManager) {
-        super(role, assetManager, eventManager);
+    public ShipModelTwo(AssetManager assetManager, EventManager eventManager) {
+        super("Player", assetManager, eventManager);
     }
 
     @Override
@@ -144,11 +141,6 @@ public final class ShipModelTwo extends AShipModelTwo {
         shipDirection = statisticsManager.createStatistic(STATS_NAME, "Ship direction", this.getGlobalDirection());
         realWind = statisticsManager.createStatistic(STATS_NAME, "Real wind", Vector3f.UNIT_X);
         apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
-    }
-
-    @Override
-    public final float getSpeed() {
-        return speed;
     }
     
     private void updateSpeed(float tpf) {

@@ -27,15 +27,6 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
         this.role = role;
     }
 
-    public abstract void registerInput(InputManager inputManager);
-
-    public abstract float getSpeed();
-
-    public abstract void setTransparent(boolean b);
-
-
-
-
     public final boolean isEnabled() {
         return true;
     }
@@ -85,5 +76,7 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     public Object getRole() {
         return role;
     }
+
+    public abstract void setTransparent(boolean enabled);
 
 }

@@ -25,8 +25,6 @@ public class LoadMapStateListener implements LoadModelState {
     @Autowired
     private AssetManager assetManager;
     @Autowired
-    private InputManager inputManager;
-    @Autowired
     private GameStatus gameStatus;
     @Autowired
     private GameConfiguration gameConfiguration;
@@ -47,13 +45,12 @@ public class LoadMapStateListener implements LoadModelState {
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
 
-        counterClockGameModel.init(gameModel);
+        counterClockGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = counterClockGameModel.getIContext();
         gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());
 
         AShipModel currentShip = counterClockGameModel.getShip();
-        currentShip.registerInput(inputManager);
         gameStatus.getGameNode().addControl(currentShip);
         currentShip.setStatisticsManager(statisticsManager);
         
@@ -99,13 +96,6 @@ public class LoadMapStateListener implements LoadModelState {
      */
     public void setAssetManager(AssetManager assetManager) {
         this.assetManager = assetManager;
-    }
-
-    /**
-     * @param inputManager the inputManager to set
-     */
-    public void setInputManager(InputManager inputManager) {
-        this.inputManager = inputManager;
     }
 
     /**

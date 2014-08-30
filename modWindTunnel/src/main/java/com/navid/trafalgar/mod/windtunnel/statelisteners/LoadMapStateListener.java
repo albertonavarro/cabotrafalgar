@@ -51,7 +51,6 @@ public class LoadMapStateListener implements LoadModelState {
         gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());
 
         AShipModel currentShip = windTunnelGameModel.getShip();
-        currentShip.registerInput(inputManager);
         gameStatus.getGameNode().addControl(currentShip);
         AHarnessModel harness = windTunnelGameModel.getHarness();
         gameStatus.getGameNode().addControl(harness);
