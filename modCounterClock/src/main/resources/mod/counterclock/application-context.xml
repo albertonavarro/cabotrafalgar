@@ -24,7 +24,7 @@
     <bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
     <bean id="mod.counterclock.clientRecordServer" class="com.navid.recordserver.v1.RankingResource" factory-bean="mod.counterclock.clientFactoryRecordServer" factory-method="create" />
     <bean id="mod.counterclock.clientFactoryRecordServer" class="org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean">
-        <property name="address" value="http://recordserver-dev:8080/rest"/>
+        <property name="address" value="http://recordserver.trafalgar.ws:8080/rest"/>
         <property name="serviceClass" value="com.navid.recordserver.v1.RankingResource"/>
         <property name="providers">
             <list>

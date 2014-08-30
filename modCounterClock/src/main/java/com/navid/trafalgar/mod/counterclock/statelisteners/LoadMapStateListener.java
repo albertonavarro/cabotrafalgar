@@ -81,11 +81,15 @@ public class LoadMapStateListener implements LoadModelState {
     @Override
     public void onUnload() {
         gameStatus.getGameNode().removeControl(counterClockGameModel.getShip());
+        if(gameStatus.getGameNode() != null){
+            gameStatus.getGameNode().removeControl(counterClockGameModel.getGhost());
+        }
 
         List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
         for (AMillestoneModel currentMillestone : millestones) {
             gameStatus.getGameNode().removeControl(currentMillestone);
         }
+        
         gameStatus.getGameNode().detachAllChildren();
         gameStatus.setGameDefinition(null);
     }

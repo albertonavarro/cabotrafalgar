@@ -73,6 +73,10 @@ public class ScreenFlowManager implements ApplicationContextAware {
     public void changePreviousScreen() {
         screenFlowState.setScreenCommand("back");
     }
+    
+    public void changeNextScreen(String nextScreen) {
+        screenFlowState.setScreenCommand(nextScreen);
+    }
 
     public ScreenFlowUnit getScreen(String screenName) {
         return mapScreenDeclarations.get(screenName);

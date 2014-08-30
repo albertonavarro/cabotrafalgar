@@ -5,6 +5,7 @@ import com.jme3.app.state.AppStateManager;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener;
+import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
@@ -40,6 +41,9 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
     private LoadCameraStateListener cameraManager;
     @Autowired
     private EventManager eventManager;
+    @Autowired
+    private ScreenFlowManager screenFlowManager;
+    
     private CounterClockMainGame game;
     private boolean showMenu;
     private XmlBeanFactory ctx;
@@ -142,13 +146,15 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
     synchronized public void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        nifty.gotoScreen("counterClock.GameScreen");
+        screenFlowManager.changeNextScreen("counterclockScreen");
+        nifty.gotoScreen("redirector");
     }
 
     synchronized public void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        nifty.gotoScreen("counterClock.ScreenSelectMap");
+        screenFlowManager.changeNextScreen("selectMap");
+        nifty.gotoScreen("redirector");
     }
 
     /**
@@ -183,4 +189,13 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
     }
+
+    /**
+     * @param screenFlowManager the screenFlowManager to set
+     */
+    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
+        this.screenFlowManager = screenFlowManager;
+    }
+    
+    
 }
