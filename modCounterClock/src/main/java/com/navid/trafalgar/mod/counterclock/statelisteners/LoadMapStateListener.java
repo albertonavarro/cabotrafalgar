@@ -1,10 +1,10 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
-import com.navid.trafalgar.model.AShipModel;
 import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
+import com.navid.trafalgar.definition2.Entry;
 import com.navid.trafalgar.definition2.GameDefinition2;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
@@ -12,7 +12,11 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
 import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
 import com.navid.trafalgar.model.*;
+import com.navid.trafalgar.model.AShipModel;
+import com.navid.trafalgar.persistence.CandidateRecord;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,7 +48,25 @@ public class LoadMapStateListener implements LoadModelState {
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
-
+        
+        if (gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class) != null) {
+            final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class) ;
+            Collection c = builder2.buildWithDependencies(new Entry() {
+                    {
+                        setType(gameConfiguration.getShipName());
+                        setName("ghost1");
+                        setValues(new HashMap<String, Object>() {
+                            {
+                                put("role", "Ghost");
+                                put("record", cr);
+                            }
+                        });
+                    }
+                }, gameModel);
+            
+            gameModel.addToModel(c);
+        }
+        
         counterClockGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = counterClockGameModel.getIContext();

@@ -8,6 +8,7 @@ import com.navid.trafalgar.input.Interactive;
 import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
 import com.navid.trafalgar.model.*;
 import com.navid.trafalgar.model.AShipModel;
+import com.navid.trafalgar.persistence.CandidateRecord;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +27,6 @@ public class CounterClockGameModel {
     private boolean inited = false;
     private ShipModelTwo ship;
     private ShipModelTwoGhost ghost;
-    
 
     public boolean isInited() {
         return inited;
@@ -43,10 +43,11 @@ public class CounterClockGameModel {
         ship = gameModel.getSingleByType(ShipModelTwo.class);
         gameNode.attachChild(ship);
         preGameModel.getSingleByType(ShipModelTwoControlProxy.class).setTarget(ship);
-        
-        //ghost = gameModel.getSingleByType(ShipModelTwoGhost.class);
-        //gameNode.attachChild(ghost);
-        
+
+        ghost = gameModel.getSingleByType(ShipModelTwoGhost.class);
+        if (ghost != null) {
+            gameNode.attachChild(ghost);
+        }
 
         millestones = gameModel.getByType(AMillestoneModel.class);
         context = (IContext) gameModel.getSingleByType(IContext.class);

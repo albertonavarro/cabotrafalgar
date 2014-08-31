@@ -92,27 +92,12 @@ public class ScreenSelectMap implements ScreenController {
         final CandidateRecord cr;
         if (ghostOptions == ShowGhost.bestLocal) {
             cr = localPersistence.getGhost(1, selectedMap);
+            gameConfiguration.getPreGameModel().addToModel(singleton(cr));
         } else if (ghostOptions == ShowGhost.bestRemote) {
             cr = remotePersistence.getGhost(1, selectedMap);
-        } else {
-            cr = null;
-        }
-
-        if (cr != null) {
             gameConfiguration.getPreGameModel().addToModel(singleton(cr));
-            /*gameConfiguration.getPreGameModel().addToModel(builder.build(new Entry() {
-            {
-                setType(cr.getHeader().getShipModel());
-                setName("playerGhost");
-                setValues(new HashMap<String, Object>(){{
-                    put("role", "Ghost");
-                    put("record", cr);
-                }});
-            }
-        } ));*/
         }
-
-        //gameConfiguration.getPreGameModel().addToModel(singleton(localPersistence.getGhost(1, selectedMap)));
+        
         nifty.gotoScreen(nextScreen);  // switch to another screen
     }
 

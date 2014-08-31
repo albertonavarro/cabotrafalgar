@@ -21,15 +21,8 @@
                     </control>
                 </panel>
                 <panel id="separator" width="20%" height="1%" childLayout="vertical"   backgroundColor="#ffffff00"/>  
-                <panel id="panel_controls" width="20%" height="12%" childLayout="vertical"   backgroundColor="#ffffff30">  
-                    <text style="nifty-label" text="Turn right: R" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Turn left: T" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Sail right: F" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Sail left: G" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                </panel>
-                <panel id="separator" width="20%" height="1%" childLayout="vertical"   backgroundColor="#ffffff00"/>  
-                <panel id="panel_stats" width="20%" height="22%" childLayout="vertical"   backgroundColor="#ffffff30">  
-                    <control id="statsLists" name="listBox" vertical="optional" horizontal="optional" displayItems="10" selection="Multiple" />
+                <panel id="panel_stats" width="20%" height="50%" childLayout="vertical"   backgroundColor="#ffffff30">  
+                    <control id="statsLists" name="listBox" vertical="optional" horizontal="optional" displayItems="15" selection="Multiple" />
                 </panel>
 
             </panel>
