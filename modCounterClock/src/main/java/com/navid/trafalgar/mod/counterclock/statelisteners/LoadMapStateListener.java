@@ -49,7 +49,7 @@ public class LoadMapStateListener implements LoadModelState {
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
         
-        if (gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class) != null) {
+        if (gameConfiguration.getPreGameModel().contains(CandidateRecord.class)) {
             final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class) ;
             Collection c = builder2.buildWithDependencies(new Entry() {
                     {

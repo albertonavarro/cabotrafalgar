@@ -17,20 +17,20 @@ import java.util.Set;
  * @author casa
  */
 public class ShipModelTwoGhost extends AShipModelTwo {
-    
+
     private final CandidateRecord<ShipSnapshot> candidateRecord;
-    
+
     private final Iterator<ShipSnapshot> iterator;
     private ShipSnapshot currentStep;
 
-    public ShipModelTwoGhost(   AssetManager assetManager, 
-                                EventManager eventManager, 
-                                CandidateRecord<ShipSnapshot> candidateRecord) {
+    public ShipModelTwoGhost(AssetManager assetManager,
+            EventManager eventManager,
+            CandidateRecord<ShipSnapshot> candidateRecord) {
         super("Ghost", assetManager, eventManager);
         this.candidateRecord = candidateRecord;
         iterator = (Iterator<ShipSnapshot>) candidateRecord.getStepRecord().iterator();
-        
-        if(iterator.hasNext()){
+
+        if (iterator.hasNext()) {
             currentStep = iterator.next();
         }
     }
@@ -43,7 +43,14 @@ public class ShipModelTwoGhost extends AShipModelTwo {
     @Override
     protected void initStatisticsManager() {
     }
-    
+
+    /**
+     * @return the currentStep
+     */
+    public ShipSnapshot getCurrentStep() {
+        return currentStep;
+    }
+
     private final class Sail extends AShipModelTwo.Sail {
 
         public Sail(AssetManager assetManager, EventManager eventManager) {
@@ -59,7 +66,7 @@ public class ShipModelTwoGhost extends AShipModelTwo {
             super(assetManager, eventManager);
         }
     }
-    
+
     @Override
     protected void initGeometry(AssetManager assetManager, EventManager eventManager) {
         spatial = assetManager.loadModel("Models/ship2g/ship2g.j3o");
@@ -69,25 +76,22 @@ public class ShipModelTwoGhost extends AShipModelTwo {
         sail = new ShipModelTwoGhost.Sail(assetManager, eventManager);
         rudder = new ShipModelTwoGhost.Rudder(assetManager, eventManager);
     }
-    
+
     float time = 0;
-    
+
     @Override
     public void update(float tpf) {
-       super.update(tpf);
-       
-       time += tpf;
-       
-       if(currentStep != null){
-           if(currentStep.getTimestamp() < time) {
-               if(iterator.hasNext()){
-                   currentStep = iterator.next();
-               }
-           }
-           
-           this.updateFromRecord(currentStep);
-       }
-       
+        super.update(tpf);
+
+        time += tpf;
+        if (getCurrentStep() != null) {
+            while (iterator.hasNext() && getCurrentStep().getTimestamp() < time) {
+                currentStep = iterator.next();
+            }
+
+            this.updateFromRecord(getCurrentStep());
+        }
+
     }
-    
+
 }

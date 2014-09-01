@@ -63,4 +63,8 @@ public class GameModel implements GameModelInterface {
             mapByClass.remove(o.getClass());
         }
     }
+
+    public boolean contains(Class className) {
+        return ! getByType(className).isEmpty();
+    }
 }

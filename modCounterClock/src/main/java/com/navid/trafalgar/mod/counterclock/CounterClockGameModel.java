@@ -44,9 +44,11 @@ public class CounterClockGameModel {
         gameNode.attachChild(ship);
         preGameModel.getSingleByType(ShipModelTwoControlProxy.class).setTarget(ship);
 
-        ghost = gameModel.getSingleByType(ShipModelTwoGhost.class);
-        if (ghost != null) {
-            gameNode.attachChild(ghost);
+        if (gameModel.contains(ShipModelTwoGhost.class)) {
+            ghost = gameModel.getSingleByType(ShipModelTwoGhost.class);
+            if (ghost != null) {
+                gameNode.attachChild(ghost);
+            }
         }
 
         millestones = gameModel.getByType(AMillestoneModel.class);
@@ -109,7 +111,7 @@ public class CounterClockGameModel {
     /**
      * @return the ghost
      */
-    public AShipModelTwo getGhost() {
+    public ShipModelTwoGhost getGhost() {
         return ghost;
     }
 }
