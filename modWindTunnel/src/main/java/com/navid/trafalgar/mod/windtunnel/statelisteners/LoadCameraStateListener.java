@@ -4,6 +4,7 @@ import com.jme3.input.FlyByCamera;
 import com.jme3.input.InputManager;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.Node;
 import com.navid.trafalgar.camera.ChaseCamera;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
@@ -11,7 +12,7 @@ import com.navid.trafalgar.manager.LoadCamState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.mod.windtunnel.WindTunnelGameModel;
 import com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen;
-import com.navid.trafalgar.model.AShipModel;
+import com.navid.trafalgar.model.AShipModelPlayer;
 import com.navid.trafalgar.model.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -70,15 +71,16 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
     private FlyByCamera flyCamControl;
     private ChaseCamera chaseCamControl;
     private Camera camera;
-    private AShipModel player;
-    private String[] mappings = {"Cam1", "Cam2", "Cam3"};
+    private AShipModelPlayer player;
+    private final String[] mappings = {"Cam1", "Cam2", "Cam3"};
     private LoadCameraStateListener.Cameras selectedCam = LoadCameraStateListener.Cameras.NONE;
     
     @Autowired
     private WindTunnelGameModel gameModel;
     
-    private ActionListener actionListener = new ActionListener() {
+    private final ActionListener actionListener = new ActionListener() {
 
+        @Override
         public void onAction(String name, boolean isPressed, float tpf) {
             if (isPressed) {
 
@@ -102,6 +104,7 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         eventManager.fireEvent("ACTIVATE_CAM2");
     }
 
+    @Override
     public void onLoadCam(float tpf) {
 
         this.camera = gameStatus.getCamera();
@@ -115,7 +118,7 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
 
         
         // Enable a chasing cam
-        chaseCamControl = new ChaseCamera(camera, player, inputManager);
+        chaseCamControl = new ChaseCamera(camera, (Node) player, inputManager);
         chaseCamControl.setSmoothMotion(true);
         chaseCamControl.setMinDistance(100);
         chaseCamControl.setMinDistance(150);
@@ -127,9 +130,11 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         eventManager.fireEvent("ACTIVATE_CAM2");
     }
 
+    @Override
     public void onStarted(float tpf) {
     }
 
+    @Override
     public void onUnload() {
         //flyCamControl.unregisterInput();
 
@@ -139,6 +144,7 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         eventManager.fireEvent("DEACTIVATE_CAM");
     }
 
+    @Override
     public void onEvent(String event) {
         if ("DEACTIVATE_CAM".equals(event)) {
             flyCamControl.setEnabled(false);

@@ -2,8 +2,8 @@ package com.navid.trafalgar.mod.counterclock;
 
 import com.navid.trafalgar.definition2.Entry;
 import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.persistence.CandidateRecord;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
 import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
@@ -38,6 +38,7 @@ public class ScreenSelectMap implements ScreenController {
     }
 
     private enum ShowGhost {
+
         noGhost, bestLocal, bestRemote
     };
 
@@ -74,7 +75,7 @@ public class ScreenSelectMap implements ScreenController {
     @Override
     public void onStartScreen() {
         gameConfiguration.reset();
-        
+
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.addAllItems(getMaps());
         setSelectedMap((String) dropDown1.getSelection().get(0));
@@ -89,15 +90,17 @@ public class ScreenSelectMap implements ScreenController {
     public void goTo(String nextScreen) {
         gameConfiguration.setMap(selectedMap);
 
-        final CandidateRecord cr;
+        CandidateRecord cr = null;
         if (ghostOptions == ShowGhost.bestLocal) {
             cr = localPersistence.getGhost(1, selectedMap);
-            gameConfiguration.getPreGameModel().addToModel(singleton(cr));
         } else if (ghostOptions == ShowGhost.bestRemote) {
             cr = remotePersistence.getGhost(1, selectedMap);
+        }
+
+        if (cr != null) {
             gameConfiguration.getPreGameModel().addToModel(singleton(cr));
         }
-        
+
         nifty.gotoScreen(nextScreen);  // switch to another screen
     }
 
@@ -184,7 +187,5 @@ public class ScreenSelectMap implements ScreenController {
     public void setRemotePersistence(RecordServerPersistenceService remotePersistence) {
         this.remotePersistence = remotePersistence;
     }
-    
-    
 
 }

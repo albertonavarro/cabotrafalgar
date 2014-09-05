@@ -4,11 +4,8 @@ import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.navid.trafalgar.input.Interactive;
 import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
 import com.navid.trafalgar.model.*;
-import com.navid.trafalgar.model.AShipModel;
-import com.navid.trafalgar.persistence.CandidateRecord;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,8 +22,8 @@ public class CounterClockGameModel {
     private IContext context;
     private List<Filter> fpp = new ArrayList<Filter>();
     private boolean inited = false;
-    private ShipModelTwo ship;
-    private ShipModelTwoGhost ghost;
+    private AShipModelPlayer ship;
+    private AShipModelGhost ghost;
 
     public boolean isInited() {
         return inited;
@@ -40,14 +37,14 @@ public class CounterClockGameModel {
 
         inited = true;
 
-        ship = gameModel.getSingleByType(ShipModelTwo.class);
-        gameNode.attachChild(ship);
-        preGameModel.getSingleByType(ShipModelTwoControlProxy.class).setTarget(ship);
+        ship = gameModel.getSingleByType(AShipModelPlayer.class);
+        gameNode.attachChild((Spatial) ship);
+        preGameModel.getSingleByType(AShipModelInteractive.class).setTarget(ship);
 
-        if (gameModel.contains(ShipModelTwoGhost.class)) {
-            ghost = gameModel.getSingleByType(ShipModelTwoGhost.class);
+        if (gameModel.contains(AShipModelGhost.class)) {
+            ghost = gameModel.getSingleByType(AShipModelGhost.class);
             if (ghost != null) {
-                gameNode.attachChild(ghost);
+                gameNode.attachChild((Spatial) ghost);
             }
         }
 
@@ -89,7 +86,7 @@ public class CounterClockGameModel {
     /**
      * @return the ship
      */
-    public AShipModelTwo getShip() {
+    public AShipModelPlayer getShip() {
         return ship;
     }
 
@@ -111,7 +108,7 @@ public class CounterClockGameModel {
     /**
      * @return the ghost
      */
-    public ShipModelTwoGhost getGhost() {
+    public AShipModelGhost getGhost() {
         return ghost;
     }
 }

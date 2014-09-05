@@ -14,7 +14,7 @@ import com.navid.trafalgar.manager.EventManager;
  *
  *   
  */
-abstract class TrafalgarNode extends Node {
+public abstract class TrafalgarNode extends Node {
     
     private boolean debug = false;
     private Geometry lineGeometry;

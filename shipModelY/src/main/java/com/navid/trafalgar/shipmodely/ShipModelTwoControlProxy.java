@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-package com.navid.trafalgar.model;
+package com.navid.trafalgar.shipmodely;
 
 import com.navid.trafalgar.input.Command;
-import com.navid.trafalgar.input.Interactive;
+import com.navid.trafalgar.model.AShipModelInteractive;
+import com.navid.trafalgar.model.AShipModelPlayer;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,14 +11,14 @@ import java.util.Set;
  *
  * @author casa
  */
-public class ShipModelTwoControlProxy implements Interactive {
+public class ShipModelTwoControlProxy implements AShipModelInteractive {
     
-    private ShipModelTwo target;
+    private ShipModelTwoPlayer target;
 
-    public void setTarget(ShipModelTwo target){
-        this.target = target;
+    @Override
+    public void setTarget(AShipModelPlayer target){
+        this.target = (ShipModelTwoPlayer) target;
     }
-
 
     @Override
     public Set<Command> getCommands() {
@@ -91,8 +87,6 @@ public class ShipModelTwoControlProxy implements Interactive {
     public void sailTrim(float tpf){
         target.sailTrim(tpf);
     }
-
-    
    
     
 }

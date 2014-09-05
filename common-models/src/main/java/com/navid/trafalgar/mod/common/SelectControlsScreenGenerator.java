@@ -4,10 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
-import com.navid.trafalgar.input.Interactive;
-import com.navid.trafalgar.model.AShipModelTwo;
+import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.model.ShipModelTwo;
 import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
@@ -60,7 +58,7 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
     public void buildScreenNow() {
         panels = new HashMap<String, PanelBuilder>();
 
-        Interactive ship = gameConfiguration.getPreGameModel().getSingleByType(Interactive.class);
+        AShipModelInteractive ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class);
 
         Set<Command> commands = ship.getCommands();
 

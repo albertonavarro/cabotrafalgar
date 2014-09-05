@@ -5,6 +5,7 @@ import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
+import com.jme3.scene.control.Control;
 import com.navid.trafalgar.definition2.GameDefinition2;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
@@ -50,8 +51,8 @@ public class LoadMapStateListener implements LoadModelState {
         IContext iContext = windTunnelGameModel.getIContext();
         gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());
 
-        AShipModel currentShip = windTunnelGameModel.getShip();
-        gameStatus.getGameNode().addControl(currentShip);
+        AShipModelPlayer currentShip = windTunnelGameModel.getShip();
+        gameStatus.getGameNode().addControl((Control) currentShip);
         AHarnessModel harness = windTunnelGameModel.getHarness();
         gameStatus.getGameNode().addControl(harness);
         
@@ -69,7 +70,7 @@ public class LoadMapStateListener implements LoadModelState {
 
     @Override
     public void onUnload() {
-        gameStatus.getGameNode().removeControl(windTunnelGameModel.getShip());
+        gameStatus.getGameNode().removeControl((Control) windTunnelGameModel.getShip());
         gameStatus.getGameNode().detachAllChildren();
         gameStatus.setGameDefinition(null);
     }

@@ -1,4 +1,4 @@
-package com.navid.trafalgar.persistence;
+package com.navid.trafalgar.model;
 
 import java.util.ArrayList;
 import java.util.List;

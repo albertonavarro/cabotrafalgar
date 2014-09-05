@@ -4,6 +4,7 @@ import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
+import com.jme3.scene.control.Control;
 import com.navid.trafalgar.definition2.Entry;
 import com.navid.trafalgar.definition2.GameDefinition2;
 import com.navid.trafalgar.manager.EventManager;
@@ -13,7 +14,6 @@ import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
 import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
 import com.navid.trafalgar.model.*;
 import com.navid.trafalgar.model.AShipModel;
-import com.navid.trafalgar.persistence.CandidateRecord;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -72,18 +72,18 @@ public class LoadMapStateListener implements LoadModelState {
         IContext iContext = counterClockGameModel.getIContext();
         gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());
 
-        AShipModel currentShip = counterClockGameModel.getShip();
-        gameStatus.getGameNode().addControl(currentShip);
+        AShipModelPlayer currentShip = counterClockGameModel.getShip();
+        gameStatus.getGameNode().addControl((Control) currentShip);
         currentShip.setStatisticsManager(statisticsManager);
         
         if(counterClockGameModel.getGhost() != null){
-            gameStatus.getGameNode().addControl(counterClockGameModel.getGhost());
+            gameStatus.getGameNode().addControl((Control) counterClockGameModel.getGhost());
         }
 
         List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
         for (AMillestoneModel currentMillestone : millestones) {
             currentMillestone.setEventManager(eventManager);
-            currentMillestone.setCollidable(Collections.singleton(currentShip));
+            currentMillestone.setCollidable(Collections.singleton((AShipModel)currentShip));
             gameStatus.getGameNode().addControl(currentMillestone);
         }
         
@@ -99,9 +99,9 @@ public class LoadMapStateListener implements LoadModelState {
 
     @Override
     public void onUnload() {
-        gameStatus.getGameNode().removeControl(counterClockGameModel.getShip());
+        gameStatus.getGameNode().removeControl((Control) counterClockGameModel.getShip());
         if(gameStatus.getGameNode() != null){
-            gameStatus.getGameNode().removeControl(counterClockGameModel.getGhost());
+            gameStatus.getGameNode().removeControl((Control) counterClockGameModel.getGhost());
         }
 
         List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();

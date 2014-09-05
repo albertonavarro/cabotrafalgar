@@ -4,7 +4,6 @@
  */
 package com.navid.trafalgar.mod.windtunnel.statelisteners;
 
-import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
@@ -12,7 +11,7 @@ import com.navid.trafalgar.manager.statistics.Auditable;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.windtunnel.WindTunnelGameModel;
 import com.navid.trafalgar.model.AShipModel;
-import com.navid.trafalgar.model.GameStatus;
+import com.navid.trafalgar.model.AShipModelPlayer;
 import com.navid.trafalgar.util.ReflexionUtils;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -35,7 +34,7 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
     @Autowired
     private StatisticsManager statsManager;
     
-    private AShipModel ship;
+    private AShipModelPlayer ship;
     
     private Map<Field, AbstractStatistic> fields = new HashMap<Field,AbstractStatistic>();
 

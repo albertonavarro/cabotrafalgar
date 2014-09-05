@@ -7,7 +7,6 @@ import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
 import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
-import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.GameStatus;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ public class StartedListener implements PrestartState, StartedState {
 
     @Autowired
     private GameStatus gameStatus;
-    private AShipModel ship;
     private Collection<AMillestoneModel> millestones;
     @Autowired
     private EventManager eventManager;
@@ -31,7 +29,6 @@ public class StartedListener implements PrestartState, StartedState {
 
     public void onPrestart(float tpf) {
         gameStatus.getTime().setValue(0f);
-        ship = model.getShip();
         millestones = model.getMillestones();
 
     }

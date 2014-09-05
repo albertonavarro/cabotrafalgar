@@ -4,6 +4,7 @@ import com.navid.trafalgar.model.AShipModel;
 import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 import com.navid.trafalgar.model.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class WindTunnelGameModel {
 
-    private AShipModel ship;
+    private AShipModelPlayer ship;
     private IContext context;
     private AHarnessModel harness;
     
@@ -37,7 +38,7 @@ public class WindTunnelGameModel {
         
         inited = true;
         
-        ship = (AShipModel) gameModel.getSingleByType(AShipModel.class);
+        ship = (AShipModelPlayer) gameModel.getSingleByType(AShipModelPlayer.class);
         context = (IContext) gameModel.getSingleByType(IContext.class);
         harness = (AHarnessModel) gameModel.getSingleByType(AHarnessModel.class);
         
@@ -45,7 +46,7 @@ public class WindTunnelGameModel {
         
         fpp = gameModel.getByType(Filter.class);
         
-        gameNode.attachChild(ship);
+        gameNode.attachChild((Spatial) ship);
         gameNode.addLight(new AmbientLight());
     }
     
@@ -74,7 +75,7 @@ public class WindTunnelGameModel {
     /**
      * @return the ship
      */
-    public AShipModel getShip() {
+    public AShipModelPlayer getShip() {
         return ship;
     }
 

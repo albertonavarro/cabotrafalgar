@@ -124,6 +124,11 @@
             <artifactId>logback-classic</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.navid.trafalgar</groupId>
+            <artifactId>shipModelY</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     
     <build>

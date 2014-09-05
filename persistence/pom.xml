@@ -36,6 +36,10 @@
             <groupId>com.navid.lazylogin</groupId>
             <artifactId>common-context</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.navid.trafalgar</groupId>
+            <artifactId>mod-api</artifactId>
+        </dependency>
         
     </dependencies>
 </project>

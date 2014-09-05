@@ -46,6 +46,8 @@ public abstract class GenericModRegisterer implements ModRegisterer {
             XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getModPreGameSpringConfig()), beanFactory);
             ctx.registerSingleton("mod.common.ModConfig", modConfiguration);
             modConfiguration.setBeanFactory(ctx);
+        } else {
+            modConfiguration.setBeanFactory(beanFactory);
         }
     }
 

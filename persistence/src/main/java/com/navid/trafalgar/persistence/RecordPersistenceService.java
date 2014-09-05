@@ -1,5 +1,6 @@
 package com.navid.trafalgar.persistence;
 
+import com.navid.trafalgar.model.CandidateRecord;
 import java.util.List;
 
 /**

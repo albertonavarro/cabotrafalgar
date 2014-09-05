@@ -124,7 +124,7 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
     public void onLoadCam(float tpf) {
 
         this.camera = gameStatus.getCamera();
-        this.player = gameModel.getShip();
+        this.player = (AShipModel) gameModel.getShip();
         this.targets = gameModel.getMillestones();
 
         // Create a flying cam

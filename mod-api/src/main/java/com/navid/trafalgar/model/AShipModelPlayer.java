@@ -1,0 +1,17 @@
+
+package com.navid.trafalgar.model;
+
+import com.navid.trafalgar.manager.statistics.StatisticsManager;
+
+/**
+ *
+ * @author casa
+ */
+public interface AShipModelPlayer {
+    
+    CandidateRecord getCandidateRecordInstance();
+
+    StepRecord getSnapshot();
+    
+    void setStatisticsManager(StatisticsManager statisticsManager);
+}

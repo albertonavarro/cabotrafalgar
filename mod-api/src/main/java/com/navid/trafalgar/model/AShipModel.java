@@ -1,7 +1,6 @@
 package com.navid.trafalgar.model;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.input.InputManager;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -20,28 +19,12 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
 
     protected IContext context;
     
-    protected StatisticsManager statisticsManager;
-
     public AShipModel(String role, Vector3f lookAt, AssetManager assetManager, EventManager eventManager) {     
         super(lookAt, assetManager, eventManager);
         this.role = role;
     }
 
-    public final boolean isEnabled() {
-        return true;
-    }
-
-    public void setEnabled(boolean value) {
-        //todo
-    }
-
-    public void setStatisticsManager(StatisticsManager statisticsManager) {
-        this.statisticsManager = statisticsManager;
-
-        initStatisticsManager();
-    }
-
-    protected abstract void initStatisticsManager();
+    
 
     public abstract void setWindNode(IWind.WindGeometry windGeometry);
 
@@ -78,5 +61,7 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     }
 
     public abstract void setTransparent(boolean enabled);
+    
+    public abstract void updateFromRecord(StepRecord currentStepRecord);
 
 }

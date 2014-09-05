@@ -1,26 +1,84 @@
-package com.navid.trafalgar.model;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.navid.trafalgar.shipmodely;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.input.InputManager;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
-import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.Auditable;
+import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
-import static com.navid.trafalgar.model.AShipModelTwo.MAXIMUM_ROPE;
-import static com.navid.trafalgar.model.AShipModelTwo.MINIMUM_ROPE;
-import static com.navid.trafalgar.model.AShipModelTwo.TRIMMING_SPEED;
-import java.util.HashSet;
-import java.util.Set;
+import com.navid.trafalgar.model.AShipModelPlayer;
+import com.navid.trafalgar.model.CandidateRecord;
+import com.navid.trafalgar.model.StepRecord;
 
 /**
  *
- * @author alberto
+ * @author casa
  */
-public final class ShipModelTwo extends AShipModelTwo {
+public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlayer {
+
+    public static String STATS_NAME = "shipOneStats";
+
+    public static final float MINIMUM_ROPE = 1.5f;
+    public static final float MAXIMUM_ROPE = 3;
+    public static final float TRIMMING_SPEED = 1;
+
+    @Override
+    public void setStatisticsManager(StatisticsManager statisticsManager) {
+        shipDirection = statisticsManager.createStatistic(STATS_NAME, "Ship direction", this.getGlobalDirection());
+        realWind = statisticsManager.createStatistic(STATS_NAME, "Real wind", Vector3f.UNIT_X);
+        apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
+    }
+
+    public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
+    }
+
+    @Override
+    public final CandidateRecord getCandidateRecordInstance() {
+        ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
+        candidateRecord.getHeader().setShipModel("ShipModelOneY");
+        return candidateRecord;
+    }
+
+    /**
+     * Internal representation for AShipOneModel
+     */
+    public static class ShipSnapshot extends StepRecord {
+
+        private Vector3f position;
+        private Quaternion rotation;
+
+        private void setPosition(final Vector3f position) {
+            this.position = position;
+        }
+
+        private void setRotation(final Quaternion rotation) {
+            this.rotation = rotation;
+        }
+
+        public Vector3f getPosition() {
+            return position;
+        }
+
+        public Quaternion getRotation() {
+            return rotation;
+        }
+    }
+
+    @Override
+    public final StepRecord getSnapshot() {
+        ShipSnapshot snapshot = new ShipSnapshot();
+
+        snapshot.setPosition(this.getLocalTranslation().clone());
+        snapshot.setRotation(this.getLocalRotation().clone());
+
+        return snapshot;
+    }
 
     @Auditable
     private float windOverVela;
@@ -52,97 +110,13 @@ public final class ShipModelTwo extends AShipModelTwo {
     private Vector3fStatistic realWind;
     @Auditable
     private float speed;
+    @Auditable
+    protected float inclinacion = 0;
 
-
-    private final class Sail extends AShipModelTwo.Sail {
-
-        public Sail(AssetManager assetManager, EventManager eventManager) {
-            super(assetManager, eventManager);
-            Spatial s = ((Node) spatial).getChild("Cube.001");
-            this.attachChild(s);
-        }
-    }
-
-    private final class Rudder extends AShipModelTwo.Rudder {
-
-        public Rudder(AssetManager assetManager, EventManager eventManager) {
-            super(assetManager, eventManager);
-        }
-    }
-
-    public ShipModelTwo(AssetManager assetManager, EventManager eventManager) {
+    public ShipModelTwoPlayer(AssetManager assetManager, EventManager eventManager) {
         super("Player", assetManager, eventManager);
     }
 
-    @Override
-    protected void initGeometry(AssetManager assetManager, EventManager eventManager) {
-        spatial = assetManager.loadModel("Models/ship2g/ship2g.j3o");
-        spatial.rotate(0f, (float) -Math.PI / 2, 0f);
-        this.attachChild(spatial);
-
-        sail = new Sail(assetManager, eventManager);
-        rudder = new Rudder(assetManager, eventManager);
-    }
-
-    @Override
-    public Set<Command> getCommands() {
-        return new HashSet<Command>() {
-            {
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "rudderLeft";
-                    }
-
-                    @Override
-                    public void execute(float tpf) {
-                        rudderRight(tpf);
-                    }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "rudderRight";
-                    }
-
-                    @Override
-                    public void execute(float tpf) {
-                        rudderLeft(tpf);
-                    }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "sailTrim";
-                    }
-
-                    @Override
-                    public void execute(float tpf) {
-                        sailTrim(tpf);
-                    }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "sailLoose";
-                    }
-
-                    @Override
-                    public void execute(float tpf) {
-                        sailLoose(tpf);
-                    }
-                });
-            }
-        };
-    }
-
-    @Override
-    protected final void initStatisticsManager() {
-        shipDirection = statisticsManager.createStatistic(STATS_NAME, "Ship direction", this.getGlobalDirection());
-        realWind = statisticsManager.createStatistic(STATS_NAME, "Real wind", Vector3f.UNIT_X);
-        apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
-    }
-    
     private void updateSpeed(float tpf) {
         Vector3f realwindDirection3f = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
         realwindDirection3f.multLocal(100);
@@ -291,4 +265,5 @@ public final class ShipModelTwo extends AShipModelTwo {
             ropeLenght = ropeLenght + (1 * tpf * TRIMMING_SPEED);
         }
     }
+
 }
