@@ -6,8 +6,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
  
-    <!-- builders 
-    <bean id="mod.counterclock.ShipModelTwoBuilder" class="com.navid.trafalgar.model.builder.ShipModelTwoBuilder" autowire="byType" />-->
+    <!-- builders -->
     <bean id="mod.counterclock.RotateSimpleWindBuilder" class="com.navid.trafalgar.model.builder.RotateSimpleWindBuilder" autowire="byType" />
     <bean id="mod.counterclock.ContextBuilder" class="com.navid.trafalgar.model.builder.ContextBuilder" autowire="byType" />
     <bean id="mod.counterclock.WaterBuilder2" class="com.navid.trafalgar.model.builder.WaterBuilder2" autowire="byType" />

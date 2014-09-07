@@ -8,7 +8,7 @@ import java.util.List;
  * @author anf
  * @param <T>
  */
-public abstract class CandidateRecord<T extends StepRecord> {
+public class CandidateRecord<T extends StepRecord> {
     
     private final int version = 1;
     

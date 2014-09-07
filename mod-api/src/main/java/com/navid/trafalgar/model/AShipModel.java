@@ -64,4 +64,8 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     
     public abstract void updateFromRecord(StepRecord currentStepRecord);
 
+    public abstract CandidateRecord getCandidateRecordInstance();
+
+    public abstract StepRecord getSnapshot();
+    
 }

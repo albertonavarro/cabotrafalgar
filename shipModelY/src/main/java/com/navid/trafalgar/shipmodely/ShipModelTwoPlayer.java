@@ -35,50 +35,7 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
         apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
     }
 
-    public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
-    }
-
-    @Override
-    public final CandidateRecord getCandidateRecordInstance() {
-        ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
-        candidateRecord.getHeader().setShipModel("ShipModelOneY");
-        return candidateRecord;
-    }
-
-    /**
-     * Internal representation for AShipOneModel
-     */
-    public static class ShipSnapshot extends StepRecord {
-
-        private Vector3f position;
-        private Quaternion rotation;
-
-        private void setPosition(final Vector3f position) {
-            this.position = position;
-        }
-
-        private void setRotation(final Quaternion rotation) {
-            this.rotation = rotation;
-        }
-
-        public Vector3f getPosition() {
-            return position;
-        }
-
-        public Quaternion getRotation() {
-            return rotation;
-        }
-    }
-
-    @Override
-    public final StepRecord getSnapshot() {
-        ShipSnapshot snapshot = new ShipSnapshot();
-
-        snapshot.setPosition(this.getLocalTranslation().clone());
-        snapshot.setRotation(this.getLocalRotation().clone());
-
-        return snapshot;
-    }
+    
 
     @Auditable
     private float windOverVela;

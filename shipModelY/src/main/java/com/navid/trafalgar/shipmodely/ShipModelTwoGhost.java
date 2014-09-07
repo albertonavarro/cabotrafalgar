@@ -2,15 +2,15 @@ package com.navid.trafalgar.shipmodely;
 
 import com.jme3.asset.AssetManager;
 import com.navid.trafalgar.manager.EventManager;
+import com.navid.trafalgar.model.AShipModelGhost;
 import com.navid.trafalgar.model.CandidateRecord;
-import com.navid.trafalgar.shipmodely.ShipModelTwoPlayer.ShipSnapshot;
 import java.util.Iterator;
 
 /**
  *
  * @author casa
  */
-public class ShipModelTwoGhost extends AShipModelTwo {
+public class ShipModelTwoGhost extends AShipModelTwo implements AShipModelGhost{
 
     private final CandidateRecord<ShipSnapshot> candidateRecord;
 

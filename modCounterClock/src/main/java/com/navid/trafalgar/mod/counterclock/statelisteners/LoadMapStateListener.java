@@ -1,7 +1,6 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.input.InputManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.control.Control;

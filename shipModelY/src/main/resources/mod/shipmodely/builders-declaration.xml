@@ -8,6 +8,5 @@
  
     <context:annotation-config/>
     <!-- builders -->
-    <!-- builders -->
     <bean id="mod.counterclock.ShipModelTwoBuilder" class="com.navid.trafalgar.shipmodely.ShipModelTwoBuilder" autowire="byType" />
 </beans>

@@ -15,7 +15,7 @@
     <bean id="mod.counterclock.mapselectorgenerator" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMapGenerator" autowire="byType"/>
     
     <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService" />
-    <bean id="mod.counterclock.persistenceOnline" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService" >
+    <bean id="mod.counterclock.persistenceOnline" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService" autowire="byType">
         <property name="rankingClient" ref="mod.counterclock.clientRecordServer"></property>
         <property name="userCommandsClient" ref="mod.counterclock.clientUser"></property>
         <property name="container" ref="mod.counterclock.requestContextContainer" />

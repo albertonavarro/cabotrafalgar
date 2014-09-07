@@ -9,9 +9,5 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
  */
 public interface AShipModelPlayer {
     
-    CandidateRecord getCandidateRecordInstance();
-
-    StepRecord getSnapshot();
-    
     void setStatisticsManager(StatisticsManager statisticsManager);
 }

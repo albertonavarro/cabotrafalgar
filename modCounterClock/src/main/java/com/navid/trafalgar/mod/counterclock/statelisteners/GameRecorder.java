@@ -7,6 +7,7 @@ import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.manager.SuccessfulState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
+import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
@@ -54,13 +55,13 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
 
     @Override
     public void onPrestart(float tpf) {
-        candidateRecord = model.getShip().getCandidateRecordInstance();
+        candidateRecord = ((AShipModel)model.getShip()).getCandidateRecordInstance();
         candidateRecord.setMap(gameConfiguration.getMap());
     }
 
     @Override
     public void onStarted(float tpf) {
-        StepRecord newRecord = model.getShip().getSnapshot();
+        StepRecord newRecord = ((AShipModel)model.getShip()).getSnapshot();
         newRecord.setTimestamp(gameStatus.getTime().getValue());
         newRecord.setEventList(eventList);
         candidateRecord.addStepRecord(newRecord);

@@ -3,23 +3,67 @@ package com.navid.trafalgar.shipmodely;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.BlendMode;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.model.AShipModel;
+import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.TrafalgarNode;
 import com.navid.trafalgar.model.IWind;
 import com.navid.trafalgar.model.StepRecord;
-import com.navid.trafalgar.shipmodely.ShipModelTwoPlayer.ShipSnapshot;
 
 /**
  *
  * @author alberto
  */
 public abstract class AShipModelTwo extends AShipModel {
+    
+    public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
+    }
 
+    public final CandidateRecord getCandidateRecordInstance() {
+        ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
+        candidateRecord.getHeader().setShipModel("ShipModelOneY");
+        return candidateRecord;
+    }
+
+    /**
+     * Internal representation for AShipOneModel
+     */
+    public static class ShipSnapshot extends StepRecord {
+
+        private Vector3f position;
+        private Quaternion rotation;
+
+        private void setPosition(final Vector3f position) {
+            this.position = position;
+        }
+
+        private void setRotation(final Quaternion rotation) {
+            this.rotation = rotation;
+        }
+
+        public Vector3f getPosition() {
+            return position;
+        }
+
+        public Quaternion getRotation() {
+            return rotation;
+        }
+    }
+
+    public final StepRecord getSnapshot() {
+        ShipSnapshot snapshot = new ShipSnapshot();
+
+        snapshot.setPosition(this.getLocalTranslation().clone());
+        snapshot.setRotation(this.getLocalRotation().clone());
+
+        return snapshot;
+    }
+    
     protected Spatial spatial;
     protected Sail sail;
     protected Rudder rudder;
