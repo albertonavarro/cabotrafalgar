@@ -12,7 +12,6 @@
         <module>mod-api</module>
         <module>modWindTunnel</module>
         <module>modCounterClock</module>
-        <module>persistence</module>
         <module>JMonkeyClient</module>
         <module>shipModelY</module>
     </modules>
@@ -327,6 +326,21 @@
                 <groupId>com.navid.record-server</groupId>
                 <artifactId>contract</artifactId>
                 <version>${recordserver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>2.2.10-b140310.1920</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2.10-b140310.1920</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-xjc</artifactId>
+                <version>2.2.10-b140310.1920</version>
             </dependency>
         </dependencies>
         

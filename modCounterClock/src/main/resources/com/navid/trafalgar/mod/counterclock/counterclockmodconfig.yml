@@ -9,9 +9,13 @@ screenDeclarations:
   - screenName: counterclockScreen
     interfaceConstructor: mod.counterclock.mainscreengenerator
     controller: mod.counterclock.mainscreencontroller
+  - screenName: selectProfile
+    interfaceConstructor: mod.counterclock.profileselectorgenerator
+    controller: mod.counterclock.profileselector
 moduleScreenFlow:
+  - selectProfile  
+  - selectShip  
   - selectMap
-  - selectShip
   - selectControl
   - selectKeys
   - counterclockScreen

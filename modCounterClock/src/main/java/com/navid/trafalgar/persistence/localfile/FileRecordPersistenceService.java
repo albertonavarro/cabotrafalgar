@@ -3,6 +3,7 @@ package com.navid.trafalgar.persistence.localfile;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.navid.trafalgar.mod.counterclock.profile.ProfileManager;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CompetitorInfo;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -20,6 +22,9 @@ import java.util.logging.Logger;
 public class FileRecordPersistenceService implements RecordPersistenceService {
 
     Gson gson = new Gson();
+    
+    @Autowired
+    private ProfileManager profileManager;
 
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
 
@@ -85,17 +90,8 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
     }
 
     private File returnFolderForMap(String map) {
-        String userHome = System.getProperty("user.home");
-
-        File userHomeFile = new File(userHome);
-
-        File trafalgarFolder = new File(userHomeFile, ".cabotrafalgar");
-
-        if (!trafalgarFolder.exists()) {
-            trafalgarFolder.mkdir();
-        }
-
-        File mapsFolder = new File(trafalgarFolder, "maps");
+        
+        File mapsFolder = new File(profileManager.getHome(), "maps");
         if (!mapsFolder.exists()) {
             mapsFolder.mkdir();
         }
@@ -166,4 +162,13 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
 
         throw new UnsupportedOperationException("Getting any ghost position different than 1 is not supported yet.");
     }
+
+    /**
+     * @param profileManager the profileManager to set
+     */
+    public void setProfileManager(ProfileManager profileManager) {
+        this.profileManager = profileManager;
+    }
+    
+    
 }

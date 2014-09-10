@@ -118,6 +118,7 @@ public class SelectShipScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        gameConfiguration.reset();
         gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
         
         fillListWithShips();

@@ -74,8 +74,7 @@ public class ScreenSelectMap implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        gameConfiguration.reset();
-
+        
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.addAllItems(getMaps());
         setSelectedMap((String) dropDown1.getSelection().get(0));
