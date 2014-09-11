@@ -42,10 +42,12 @@ public class FileProfileManager implements ProfileManager {
 
     @Resource(name = "mod.counterclock.requestContextContainer")
     private RequestContextContainer container;
-    
+
     ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-    
+
     File trafalgarFolder;
+    
+    File configFile;
 
     @Override
     public Collection<ProfileStatus> listProfiles() {
@@ -64,15 +66,25 @@ public class FileProfileManager implements ProfileManager {
 
     @Override
     public String getSessionId() {
-        if(activeProfile.getSessionId() != null){
+        if (activeProfile.getSessionId() != null) {
             return activeProfile.getSessionId();
         } else if (activeProfile.getToken() != null) {
-            LoginWithTokenResponse response = 
-                    userCommandsClient.loginWithToken(new LoginWithTokenRequest(){{setToken(new Token(){{setToken(activeProfile.getToken());}});}});
+            LoginWithTokenResponse response
+                    = userCommandsClient.loginWithToken(new LoginWithTokenRequest() {
+                        {
+                            setToken(new Token() {
+                                {
+                                    setToken(activeProfile.getToken());
+                                }
+                            });
+                        }
+                    });
             activeProfile.setSessionId(response.getResponse().getSessionid());
             return activeProfile.getSessionId();
-        } else return null;
-        
+        } else {
+            return null;
+        }
+
     }
 
     @Override
@@ -88,7 +100,7 @@ public class FileProfileManager implements ProfileManager {
             selected.setSessionId(tokenSession.session());
             selected.setToken(tokenSession.token());
             File newFolder = new File(trafalgarFolder, email);
-            if(!newFolder.exists()){
+            if (!newFolder.exists()) {
                 newFolder.mkdir();
             }
             selected.setFolderHome(newFolder.getAbsolutePath());
@@ -96,12 +108,10 @@ public class FileProfileManager implements ProfileManager {
         }
 
         saveFile();
-        
+
         return INTERNAL_TO_STATUS.apply(selected);
     }
-    
 
-    
     private Pair.TokenSession createToken(String email) {
         CreateTokenRequest ctr = new CreateTokenRequest();
         ctr.setEmail(email);
@@ -109,45 +119,64 @@ public class FileProfileManager implements ProfileManager {
         return new AutoValue_Pair_TokenSession(response.getToken().getToken(), response.getSessionid().getSessionid());
     }
     
-    
-    private void loadFromFile(){     
-        FileContent fileContent = null;
+    private void initConfigFile() {
+        
         String userHome = System.getProperty("user.home");
         File userHomeFile = new File(userHome);
         trafalgarFolder = new File(userHomeFile, ".cabotrafalgar");
         if (!trafalgarFolder.exists()) {
             trafalgarFolder.mkdir();
         }
+
+        configFile = new File(trafalgarFolder, "profileconfig.yml");
+    }
+
+    private void loadFromFile() {
+        FileContent fileContent = null;
         
-        try {
-            fileContent = mapper.readValue(new File(trafalgarFolder, "profileconfig.yml"), FileContent.class);
-        } catch (IOException ex) {
-            Logger.getLogger(GenericModRegisterer.class.getName()).log(Level.SEVERE, null, ex);
+        initConfigFile();
+
+        if (configFile.exists()) {
+            try {
+                fileContent = mapper.readValue(new File(trafalgarFolder, "profileconfig.yml"), FileContent.class);
+            } catch (IOException ex) {
+                Logger.getLogger(GenericModRegisterer.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
-        if(fileContent != null){
+
+        if (fileContent != null) {
             for (ProfileEntry entry : fileContent.profiles) {
-                profiles.put(entry.getEmail(), FILE_TO_INTERNAL.apply(entry) );
+                profiles.put(entry.getEmail(), FILE_TO_INTERNAL.apply(entry));
             }
         } else {
-            profiles.put("DEFAULT", new ProfileInternal(){{
-                setEmail("DEFAULT");
-            }});
+            profiles.put("DEFAULT", new ProfileInternal() {
+                {
+                    setEmail("DEFAULT");
+                }
+            });
         }
     }
-    
+
     private void saveFile() {
         try {
             FileContent fileContent = new FileContent();
             fileContent.profiles = Collections2.transform(profiles.values(), INTERNAL_TO_FILE);
-            mapper.writeValue(new File("/home/casa/.cabotrafalgar/profileconfig.yml"), fileContent);
+            mapper.writeValue(configFile, fileContent);
         } catch (IOException ex) {
             Logger.getLogger(FileProfileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private String createSessionId(String token) {
-        LoginWithTokenResponse response = userCommandsClient.loginWithToken(new LoginWithTokenRequest(){{setToken(new Token(){{setToken(token);}});}});
+        LoginWithTokenResponse response = userCommandsClient.loginWithToken(new LoginWithTokenRequest() {
+            {
+                setToken(new Token() {
+                    {
+                        setToken(token);
+                    }
+                });
+            }
+        });
         return response.getResponse().getSessionid();
     }
 
@@ -171,9 +200,10 @@ public class FileProfileManager implements ProfileManager {
     }
 
     public static class FileContent {
+
         public Collection<ProfileEntry> profiles;
     }
-    
+
     private final Function<ProfileInternal, ProfileStatus> INTERNAL_TO_STATUS
             = new Function<ProfileInternal, ProfileStatus>() {
 
@@ -189,8 +219,8 @@ public class FileProfileManager implements ProfileManager {
 
                 }
             };
-    
-     private final Function<ProfileInternal, ProfileEntry> INTERNAL_TO_FILE
+
+    private final Function<ProfileInternal, ProfileEntry> INTERNAL_TO_FILE
             = new Function<ProfileInternal, ProfileEntry>() {
 
                 @Override
@@ -205,8 +235,8 @@ public class FileProfileManager implements ProfileManager {
 
                 }
             };
-     
-     private final Function<ProfileEntry, ProfileInternal> FILE_TO_INTERNAL
+
+    private final Function<ProfileEntry, ProfileInternal> FILE_TO_INTERNAL
             = new Function<ProfileEntry, ProfileInternal>() {
 
                 @Override
@@ -222,5 +252,4 @@ public class FileProfileManager implements ProfileManager {
                 }
             };
 
-    
 }
