@@ -49,10 +49,10 @@
     </bean>
     <bean id="mod.counterclock.requestContextContainer" class="com.navid.lazylogin.context.RequestContextContainer" />
 
-    <bean id="mod.counterclock.clientUser" class="com.navid.lazylogin.UserCommands" factory-bean="mod.counterclock.clientUserFactory" factory-method="create"/>
+    <bean id="mod.counterclock.clientUser" class="com.lazylogin.client.user.v0.UserCommands" factory-bean="mod.counterclock.clientUserFactory" factory-method="create"/>
     <bean id="mod.counterclock.clientUserFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
-        <property name="serviceClass" value="com.navid.lazylogin.UserCommands"/>
-        <property name="address" value="http://lazylogin.ws:8080/user"/>
+        <property name="serviceClass" value="com.lazylogin.client.user.v0.UserCommands"/>
+        <property name="address" value="http://lazylogin.ws:8080/services/user"/>
         <property name="handlers">
             <list>
                 <bean class="com.navid.lazylogin.context.interceptors.RequestIdHandler">

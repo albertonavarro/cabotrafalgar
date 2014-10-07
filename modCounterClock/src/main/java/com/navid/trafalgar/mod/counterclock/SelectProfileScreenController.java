@@ -1,6 +1,6 @@
-
 package com.navid.trafalgar.mod.counterclock;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.newArrayList;
 import com.navid.trafalgar.mod.counterclock.profile.ProfileManager;
 import com.navid.trafalgar.mod.counterclock.profile.ProfileStatus;
@@ -15,6 +15,8 @@ import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -22,6 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author casa
  */
 public class SelectProfileScreenController implements ScreenController {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(SelectProfileScreenController.class);
 
     /**
      * From bind
@@ -46,7 +50,7 @@ public class SelectProfileScreenController implements ScreenController {
     @Autowired
     private ProfileManager profileManager;
     /**
-     * 
+     *
      */
     @Autowired
     private ScreenFlowManager screenFlowManager;
@@ -64,8 +68,6 @@ public class SelectProfileScreenController implements ScreenController {
         this.gameConfiguration = gameConfiguration;
     }
 
-    
-
     /**
      * @param screenFlowManager the screenFlowManager to set
      */
@@ -73,12 +75,10 @@ public class SelectProfileScreenController implements ScreenController {
         this.screenFlowManager = screenFlowManager;
     }
 
-    
-
     @Override
     public void onStartScreen() {
         gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
-        
+
         fillListWithShips();
     }
 
@@ -92,8 +92,8 @@ public class SelectProfileScreenController implements ScreenController {
 
         shipList.clear();
         shipList.addAllItems(newArrayList(profileManager.listProfiles()));
-        
-        selectedItem =  shipList.getItems().isEmpty()? null : (ProfileStatus) shipList.getItems().get(0);
+
+        selectedItem = shipList.getItems().isEmpty() ? null : (ProfileStatus) shipList.getItems().get(0);
     }
 
     private void emptyList() {
@@ -128,11 +128,16 @@ public class SelectProfileScreenController implements ScreenController {
         screenFlowManager.changePreviousScreen();
         nifty.gotoScreen("redirector");
     }
-    
+
     public void add() {
-        TextField newProfile = screen.findNiftyControl("newprofile", TextField.class);
-        profileManager.createProfile(newProfile.getRealText());
-        fillListWithShips();
+        try {
+            TextField newProfile = screen.findNiftyControl("newprofile", TextField.class);
+            profileManager.createProfile(newProfile.getRealText());
+            fillListWithShips();
+        } catch (Exception e) {
+            LOGGER.error("Error creating profile: ",e);
+        }
+
     }
 
     /**
@@ -141,6 +146,5 @@ public class SelectProfileScreenController implements ScreenController {
     public void setProfileManager(ProfileManager profileManager) {
         this.profileManager = profileManager;
     }
-    
+
 }
-  
