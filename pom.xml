@@ -39,8 +39,8 @@
         <commons.io.version>2.4</commons.io.version>
         <opencsv.version>2.3</opencsv.version>
         <cxf.version>3.0.1</cxf.version>
-        <lazylogin.version>1.2.122</lazylogin.version>
-        <recordserver.version>1.2.66</recordserver.version>
+        <lazylogin.version>1.2.153</lazylogin.version>
+        <recordserver.version>1.2.79</recordserver.version>
     </properties>
     
     
