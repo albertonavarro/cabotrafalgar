@@ -13,6 +13,16 @@ public class ProfileEntry {
     private String token;
     
     private String email;
+    
+    public ProfileEntry() {
+        
+    }
+    
+    public ProfileEntry(String email, String folderName, String token) {
+        this.email = email;
+        this.folderHome = folderName;
+        this.token = token;
+    }
 
     /**
      * @return the name

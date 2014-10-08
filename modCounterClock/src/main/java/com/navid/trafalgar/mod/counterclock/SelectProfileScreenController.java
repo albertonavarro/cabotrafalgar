@@ -4,7 +4,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.newArrayList;
 import com.navid.trafalgar.mod.counterclock.profile.ProfileManager;
 import com.navid.trafalgar.mod.counterclock.profile.ProfileStatus;
-import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
@@ -77,9 +76,9 @@ public class SelectProfileScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
+        //gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
 
-        fillListWithShips();
+        fillListWithProfiles();
     }
 
     @Override
@@ -87,19 +86,19 @@ public class SelectProfileScreenController implements ScreenController {
         emptyList();
     }
 
-    private void fillListWithShips() {
-        ListBox shipList = screen.findNiftyControl("profileList", ListBox.class);
+    private void fillListWithProfiles() {
+        ListBox profileList = screen.findNiftyControl("profileList", ListBox.class);
 
-        shipList.clear();
-        shipList.addAllItems(newArrayList(profileManager.listProfiles()));
+        profileList.clear();
+        profileList.addAllItems(newArrayList(profileManager.listProfiles()));
 
-        selectedItem = shipList.getItems().isEmpty() ? null : (ProfileStatus) shipList.getItems().get(0);
+        selectedItem = profileList.getItems().isEmpty() ? null : (ProfileStatus) profileList.getItems().get(0);
     }
 
     private void emptyList() {
-        ListBox shipList = screen.findNiftyControl("profileList", ListBox.class);
+        ListBox profileList = screen.findNiftyControl("profileList", ListBox.class);
 
-        shipList.clear();
+        profileList.clear();
     }
 
     /**
@@ -108,9 +107,11 @@ public class SelectProfileScreenController implements ScreenController {
      * @param id
      * @param event
      */
-    @NiftyEventSubscriber(id = "shipList")
-    public void onShipChanged(final String id, final ListBoxSelectionChangedEvent<ProfileStatus> event) {
-        selectedItem = event.getSelection().get(0);
+    @NiftyEventSubscriber(id = "profileList")
+    public void onProfileChanged(final String id, final ListBoxSelectionChangedEvent<ProfileStatus> event) {
+        if(!event.getSelection().isEmpty()){
+            selectedItem = event.getSelection().get(0);
+        }
     }
 
     public void goTo(String nextScreen) {
@@ -133,7 +134,7 @@ public class SelectProfileScreenController implements ScreenController {
         try {
             TextField newProfile = screen.findNiftyControl("newprofile", TextField.class);
             profileManager.createProfile(newProfile.getRealText());
-            fillListWithShips();
+            fillListWithProfiles();
         } catch (Exception e) {
             LOGGER.error("Error creating profile: ",e);
         }

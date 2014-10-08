@@ -7,8 +7,11 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import com.lazylogin.client.user.v0.CreateTokenRequest;
 import com.lazylogin.client.user.v0.CreateTokenResponse;
+import com.lazylogin.client.user.v0.GetInfoRequest;
+import com.lazylogin.client.user.v0.GetInfoResponse;
 import com.lazylogin.client.user.v0.LoginWithTokenRequest;
 import com.lazylogin.client.user.v0.LoginWithTokenResponse;
+import com.lazylogin.client.user.v0.Status;
 import com.lazylogin.client.user.v0.Token;
 import com.lazylogin.client.user.v0.UserCommands;
 import com.navid.lazylogin.context.RequestContextContainer;
@@ -18,15 +21,17 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author casa
  */
 public class FileProfileManager implements ProfileManager {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileProfileManager.class);
 
     private ProfileInternal activeProfile;
 
@@ -61,21 +66,19 @@ public class FileProfileManager implements ProfileManager {
 
     @Override
     public String getSessionId() {
-        if (activeProfile.getSessionId() != null) {
-            return activeProfile.getSessionId();
-        } else if (activeProfile.getToken() != null) {
+        return getSessionId(activeProfile);
+    }
+    
+    private String getSessionId(ProfileInternal profile) {
+        if (profile.getSessionId() != null) {
+            return profile.getSessionId();
+        } else if (profile.getToken() != null) {
             LoginWithTokenResponse response
-                    = userCommandsClient.loginWithToken(new LoginWithTokenRequest() {
-                        {
-                            setToken(new Token() {
-                                {
-                                    setToken(activeProfile.getToken());
-                                }
-                            });
-                        }
-                    });
-            activeProfile.setSessionId(response.getResponse().getSessionid());
-            return activeProfile.getSessionId();
+                    = userCommandsClient.loginWithToken(
+                            new LoginWithTokenRequest().withToken(
+                                    new Token().withToken(profile.getToken())));
+            profile.setSessionId(response.getResponse().getSessionid());
+            return profile.getSessionId();
         } else {
             return null;
         }
@@ -135,7 +138,7 @@ public class FileProfileManager implements ProfileManager {
             try {
                 fileContent = mapper.readValue(new File(trafalgarFolder, "profileconfig.yml"), FileContent.class);
             } catch (IOException ex) {
-                Logger.getLogger(GenericModRegisterer.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.error("Error loading profileconfig.yml", ex);
             }
         }
 
@@ -158,21 +161,8 @@ public class FileProfileManager implements ProfileManager {
             fileContent.profiles = Collections2.transform(profiles.values(), INTERNAL_TO_FILE);
             mapper.writeValue(configFile, fileContent);
         } catch (IOException ex) {
-            Logger.getLogger(FileProfileManager.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error("Error saving {}", configFile, ex);
         }
-    }
-
-    private String createSessionId(String token) {
-        LoginWithTokenResponse response = userCommandsClient.loginWithToken(new LoginWithTokenRequest() {
-            {
-                setToken(new Token() {
-                    {
-                        setToken(token);
-                    }
-                });
-            }
-        });
-        return response.getResponse().getSessionid();
     }
 
     /**
@@ -204,14 +194,7 @@ public class FileProfileManager implements ProfileManager {
 
                 @Override
                 public ProfileStatus apply(final ProfileInternal f) {
-                    return new ProfileStatus() {
-                        {
-                            setEmail(f.getEmail());
-                            setVerified(false);
-                            setUsername(Optional.<String>absent());
-                        }
-                    };
-
+                    return new ProfileStatus(f.getEmail(), f.getName()!=null, Optional.fromNullable(f.getName()));
                 }
             };
 
@@ -220,14 +203,7 @@ public class FileProfileManager implements ProfileManager {
 
                 @Override
                 public ProfileEntry apply(final ProfileInternal f) {
-                    return new ProfileEntry() {
-                        {
-                            setEmail(f.getEmail());
-                            setFolderHome(f.getFolderHome());
-                            setToken(f.getToken());
-                        }
-                    };
-
+                    return new ProfileEntry(f.getEmail(), f.getFolderHome(), f.getToken());
                 }
             };
 
@@ -236,14 +212,18 @@ public class FileProfileManager implements ProfileManager {
 
                 @Override
                 public ProfileInternal apply(final ProfileEntry f) {
-                    return new ProfileInternal() {
-                        {
-                            setEmail(f.getEmail());
-                            setFolderHome(f.getFolderHome());
-                            setToken(f.getToken());
-                        }
-                    };
-
+                    
+                    ProfileInternal result = new ProfileInternal(f.getEmail(), f.getFolderHome(), f.getToken());
+                    
+                    try{
+                        String sessionId = getSessionId(result);
+                        GetInfoResponse response = userCommandsClient.getInfo(new GetInfoRequest().withSessionid(sessionId));
+                        result.setName(response.getName());
+                    } catch(Exception e) {
+                        LOGGER.error("Error loading info for {}", f.getEmail(), e);
+                    }
+                    
+                    return result;
                 }
             };
 

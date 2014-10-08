@@ -15,6 +15,16 @@ public class ProfileInternal {
     private String email;
     
     private String sessionId;
+    
+    public ProfileInternal() {
+        
+    }
+    
+    public ProfileInternal(String email, String folderName, String token) {
+        this.email = email;
+        this.folderHome = folderName;
+        this.token = token;
+    }
 
     /**
      * @return the name

@@ -15,6 +15,16 @@ public class ProfileStatus {
     private Optional<String> username;
     
     private String email;
+    
+    public ProfileStatus() {
+        
+    }
+    
+    public ProfileStatus(String email, boolean verified, Optional<String> username) {
+        this.email = email;
+        this.verified = verified;
+        this.username = username;
+    }
 
     /**
      * @return the verified
