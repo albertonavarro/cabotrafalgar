@@ -1,4 +1,4 @@
-package com.navid.trafalgar.mod.counterclock.profile;
+package com.navid.trafalgar.profiles;
 
 import java.io.File;
 import java.util.Collection;

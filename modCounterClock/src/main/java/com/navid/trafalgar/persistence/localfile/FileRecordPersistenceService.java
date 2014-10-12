@@ -3,7 +3,7 @@ package com.navid.trafalgar.persistence.localfile;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.navid.trafalgar.mod.counterclock.profile.ProfileManager;
+import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CompetitorInfo;

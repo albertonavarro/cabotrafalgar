@@ -17,4 +17,24 @@
     <bean id="common.RootScreenGenerator" class="com.navid.trafalgar.games.RootScreenGenerator" autowire="byType" />
     <bean id="common.RootScreenController" class="com.navid.trafalgar.games.StartScreenController" autowire="byType"/>
     <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
+    
+    <bean id="mod.counterclock.profilemanager" class="com.navid.trafalgar.profiles.FileProfileManager" autowire="byType" init-method="loadFromFile">
+        <property name="userCommandsClient" ref="mod.counterclock.clientUser"></property>
+    </bean>
+    
+    <bean id="mod.counterclock.clientUser" class="com.lazylogin.client.user.v0.UserCommands" factory-bean="mod.counterclock.clientUserFactory" factory-method="create"/>
+    <bean id="mod.counterclock.clientUserFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+        <property name="serviceClass" value="com.lazylogin.client.user.v0.UserCommands"/>
+        <property name="address" value="http://lazylogin.ws:8080/services/user"/>
+        <property name="handlers">
+            <list>
+                <bean class="com.navid.lazylogin.context.interceptors.RequestIdHandler">
+                    <property name="requestContextContainer" ref="mod.counterclock.requestContextContainer"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="mod.counterclock.requestContextContainer" class="com.navid.lazylogin.context.RequestContextContainer" />
+    
 </beans>

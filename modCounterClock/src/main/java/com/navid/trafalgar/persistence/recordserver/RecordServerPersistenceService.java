@@ -16,7 +16,7 @@ import com.navid.recordserver.v1.GetMapRecordsResponse.RankingEntry;
 import com.navid.recordserver.v1.GetRecordResponse;
 import com.navid.recordserver.v1.RankingResource;
 import com.navid.trafalgar.definition2.Entry;
-import com.navid.trafalgar.mod.counterclock.profile.ProfileManager;
+import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.persistence.CandidateInfo;

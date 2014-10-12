@@ -105,6 +105,9 @@ public class SelectControlsScreenController implements ScreenController {
                 }
             }
         }
+        
+        //skip this screen until you have more controllers
+        next();
     }
 
     @Override

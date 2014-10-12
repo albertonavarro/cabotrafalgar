@@ -1,4 +1,4 @@
-package com.navid.trafalgar.mod.counterclock.profile;
+package com.navid.trafalgar.profiles;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -11,11 +11,9 @@ import com.lazylogin.client.user.v0.GetInfoRequest;
 import com.lazylogin.client.user.v0.GetInfoResponse;
 import com.lazylogin.client.user.v0.LoginWithTokenRequest;
 import com.lazylogin.client.user.v0.LoginWithTokenResponse;
-import com.lazylogin.client.user.v0.Status;
 import com.lazylogin.client.user.v0.Token;
 import com.lazylogin.client.user.v0.UserCommands;
 import com.navid.lazylogin.context.RequestContextContainer;
-import com.navid.trafalgar.modapi.GenericModRegisterer;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -61,7 +59,12 @@ public class FileProfileManager implements ProfileManager {
 
     @Override
     public File getHome() {
-        return new File(activeProfile.getFolderHome());
+        File file = new File(activeProfile.getFolderHome());
+        if(!file.exists()){
+            file.mkdir();
+        }
+        
+        return file;
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.navid.trafalgar.mod.counterclock;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.newArrayList;
-import com.navid.trafalgar.mod.counterclock.profile.ProfileManager;
-import com.navid.trafalgar.mod.counterclock.profile.ProfileStatus;
+import com.navid.trafalgar.profiles.ProfileManager;
+import com.navid.trafalgar.profiles.ProfileStatus;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
@@ -76,8 +76,6 @@ public class SelectProfileScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        //gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
-
         fillListWithProfiles();
     }
 
