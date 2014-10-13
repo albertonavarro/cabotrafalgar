@@ -6,6 +6,7 @@ import com.jme3.input.InputManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.control.Control;
+import com.navid.trafalgar.definition2.Entry;
 import com.navid.trafalgar.definition2.GameDefinition2;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
@@ -13,6 +14,8 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.windtunnel.WindTunnelGameModel;
 import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 import com.navid.trafalgar.model.*;
+import java.util.Collection;
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -45,8 +48,8 @@ public class LoadMapStateListener implements LoadModelState {
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
-
-        windTunnelGameModel.init(gameModel);
+        
+        windTunnelGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = windTunnelGameModel.getIContext();
         gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());

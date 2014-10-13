@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * @author casa
  */
 public class FileProfileManager implements ProfileManager {
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FileProfileManager.class);
 
     private ProfileInternal activeProfile;
@@ -44,7 +44,7 @@ public class FileProfileManager implements ProfileManager {
     ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
     File trafalgarFolder;
-    
+
     File configFile;
 
     @Override
@@ -60,10 +60,10 @@ public class FileProfileManager implements ProfileManager {
     @Override
     public File getHome() {
         File file = new File(activeProfile.getFolderHome());
-        if(!file.exists()){
+        if (!file.exists()) {
             file.mkdir();
         }
-        
+
         return file;
     }
 
@@ -71,7 +71,7 @@ public class FileProfileManager implements ProfileManager {
     public String getSessionId() {
         return getSessionId(activeProfile);
     }
-    
+
     private String getSessionId(ProfileInternal profile) {
         if (profile.getSessionId() != null) {
             return profile.getSessionId();
@@ -119,9 +119,9 @@ public class FileProfileManager implements ProfileManager {
         CreateTokenResponse response = userCommandsClient.createToken(ctr);
         return new AutoValue_Pair_TokenSession(response.getToken().getToken(), response.getSessionid().getSessionid());
     }
-    
+
     private void initConfigFile() {
-        
+
         String userHome = System.getProperty("user.home");
         File userHomeFile = new File(userHome);
         trafalgarFolder = new File(userHomeFile, ".cabotrafalgar");
@@ -134,7 +134,7 @@ public class FileProfileManager implements ProfileManager {
 
     private void loadFromFile() {
         FileContent fileContent = null;
-        
+
         initConfigFile();
 
         if (configFile.exists()) {
@@ -153,9 +153,17 @@ public class FileProfileManager implements ProfileManager {
             profiles.put("DEFAULT", new ProfileInternal() {
                 {
                     setEmail("DEFAULT");
+                    File newFolder = new File(trafalgarFolder, getEmail());
+                    if (!newFolder.exists()) {
+                        newFolder.mkdir();
+                    }
+                    setFolderHome(newFolder.getAbsolutePath());
                 }
             });
+            saveFile();
         }
+
+        setActiveProfile("DEFAULT");
     }
 
     private void saveFile() {
@@ -197,7 +205,7 @@ public class FileProfileManager implements ProfileManager {
 
                 @Override
                 public ProfileStatus apply(final ProfileInternal f) {
-                    return new ProfileStatus(f.getEmail(), f.getName()!=null, Optional.fromNullable(f.getName()));
+                    return new ProfileStatus(f.getEmail(), f.getName() != null, Optional.fromNullable(f.getName()));
                 }
             };
 
@@ -215,17 +223,17 @@ public class FileProfileManager implements ProfileManager {
 
                 @Override
                 public ProfileInternal apply(final ProfileEntry f) {
-                    
+
                     ProfileInternal result = new ProfileInternal(f.getEmail(), f.getFolderHome(), f.getToken());
-                    
-                    try{
+
+                    try {
                         String sessionId = getSessionId(result);
                         GetInfoResponse response = userCommandsClient.getInfo(new GetInfoRequest().withSessionid(sessionId));
                         result.setName(response.getName());
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         LOGGER.error("Error loading info for {}", f.getEmail(), e);
                     }
-                    
+
                     return result;
                 }
             };

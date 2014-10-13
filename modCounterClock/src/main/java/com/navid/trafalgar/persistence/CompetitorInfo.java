@@ -84,7 +84,7 @@ public final class CompetitorInfo {
     
     @Override
     public String toString() {
-        return Float.toString(time);
+        return Float.toString(time) + " " + userName;
     }
     
 }

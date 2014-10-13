@@ -30,7 +30,7 @@ public class WindTunnelGameModel {
         return inited;
     }
     
-    public void init(GameModel gameModel) {
+    public void init(GameModel gameModel, GameModel preGameModel) {
         
         if(inited){
             throw new IllegalStateException("Instance CounterClockGameModel already inited");
@@ -39,6 +39,8 @@ public class WindTunnelGameModel {
         inited = true;
         
         ship = (AShipModelPlayer) gameModel.getSingleByType(AShipModelPlayer.class);
+        preGameModel.getSingleByType(AShipModelInteractive.class).setTarget(ship);
+
         context = (IContext) gameModel.getSingleByType(IContext.class);
         harness = (AHarnessModel) gameModel.getSingleByType(AHarnessModel.class);
         
