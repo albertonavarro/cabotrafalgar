@@ -44,6 +44,8 @@ public class ScreenFlowGraph {
         } else if ("back".equals(screenFlowState.getScreenCommand())) {
             if (screenFlowState.getCurrentScreen() == null) {
                 return modScreenConfigurations.get(0).getScreenName();
+            } else if (modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) == 0) {
+                return "start";
             } else {
                 return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) - 1).getScreenName();
             }
