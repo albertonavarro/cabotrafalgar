@@ -5,6 +5,7 @@ import com.jme3.app.state.AppStateManager;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.mod.windtunnel.statelisteners.LoadCameraStateListener;
+import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
@@ -40,6 +41,8 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
     private LoadCameraStateListener cameraManager;
     @Autowired
     private EventManager eventManager;
+    @Autowired
+    private ScreenFlowManager screenFlowManager;
     private WindTunnelMainGame game;
     private boolean showMenu;
     private XmlBeanFactory ctx;
@@ -138,13 +141,17 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
     synchronized public void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        nifty.gotoScreen("windTunnelScreen");
+        
+        screenFlowManager.changeNextScreen("windTunnelScreen");
+        nifty.gotoScreen("redirector");
     }
 
     synchronized public void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        nifty.gotoScreen("preWindTunnelScreen");
+        
+        screenFlowManager.changeNextScreen("selectShip");
+        nifty.gotoScreen("redirector");
     }
 
     /**
@@ -179,4 +186,13 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
     }
+
+    /**
+     * @param screenFlowManager the screenFlowManager to set
+     */
+    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
+        this.screenFlowManager = screenFlowManager;
+    }
+    
+    
 }

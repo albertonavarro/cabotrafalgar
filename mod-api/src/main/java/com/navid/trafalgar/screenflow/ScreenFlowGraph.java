@@ -16,6 +16,7 @@ import java.util.Map;
  */
 public class ScreenFlowGraph {
 
+    private ScreenFlowGraph parent = null;
     private List<ScreenFlowUnit> modScreenConfigurations = new ArrayList<ScreenFlowUnit>();
     private Map<String, ScreenFlowUnit> mapModScreenConfigurations = new HashMap<String, ScreenFlowUnit>();
 
@@ -45,7 +46,8 @@ public class ScreenFlowGraph {
             if (screenFlowState.getCurrentScreen() == null) {
                 return modScreenConfigurations.get(0).getScreenName();
             } else if (modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) == 0) {
-                return "start";
+                screenFlowState.setCurrentFlow("root");
+                return parent.getStartScreenName();
             } else {
                 return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) - 1).getScreenName();
             }
@@ -56,6 +58,10 @@ public class ScreenFlowGraph {
             return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getScreenCommand()))).getScreenName();
 
         }
+    }
+
+    void addParentFlow(ScreenFlowGraph parent) {
+        this.parent = parent;
     }
 
 }

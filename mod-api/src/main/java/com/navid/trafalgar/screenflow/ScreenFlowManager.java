@@ -1,37 +1,37 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.screenflow;
 
-import com.navid.trafalgar.modapi.ModScreenConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 /**
  *
  * @author alberto
  */
-public class ScreenFlowManager implements ApplicationContextAware {
+public class ScreenFlowManager {
     
-    private Map<String, ScreenFlowUnit> mapScreenDeclarations = new HashMap<String, ScreenFlowUnit>();
+    private final Map<String, ScreenFlowUnit> mapScreenDeclarations = new HashMap<String, ScreenFlowUnit>();
     
-    private ScreenFlowState screenFlowState = new ScreenFlowState();
+    private final ScreenFlowState screenFlowState = new ScreenFlowState();
+    
+    private ScreenFlowGraph root = null;
     
     @Autowired
-    private Map<String, ScreenFlowGraph> screenFlowGraph = new HashMap<String, ScreenFlowGraph>();
-
-    private ApplicationContext applicationContext;
+    private final Map<String, ScreenFlowGraph> screenFlowGraph = new HashMap<String, ScreenFlowGraph>();    
     
-    
+    public ScreenFlowGraph addRootFlowGraph( String name ){
+        root = new ScreenFlowGraph();
+        screenFlowGraph.put(name, root);
+        for(ScreenFlowGraph current: screenFlowGraph.values()) {
+            current.addParentFlow(root);
+        }
+        return root;
+    }
     
     public ScreenFlowGraph addFlowGraph( String name ){
         ScreenFlowGraph result = new ScreenFlowGraph();
+        result.addParentFlow(root);
         screenFlowGraph.put(name, result);
         return result;
     }
@@ -53,11 +53,6 @@ public class ScreenFlowManager implements ApplicationContextAware {
         nextScreenConfig.getInterfaceConstructor().buildScreen();
         
         return screenFlowState.getCurrentScreen();
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        this.applicationContext = ac;
     }
 
     public void changeFlow(String moduleName) {

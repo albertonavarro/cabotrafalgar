@@ -68,7 +68,7 @@
                     <panel childLayout="horizontal" align="center" height="30%">
                         <panel childLayout="center" width="33%">
                             <control id="resumeButton" name="button" label="Resume" width="100px" align="center">
-                                <interact onClick="resume()" />  
+                                <interact onClick="toggleMenu()" />  
                             </control>
                         </panel>
                         <panel childLayout="center" width="33%">

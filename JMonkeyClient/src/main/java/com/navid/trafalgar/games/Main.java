@@ -92,7 +92,7 @@ public class Main extends Application {
     private void initScreen(Nifty nifty, final BeanFactory beanFactory) {
 
         ScreenFlowManager screenFlowManager = beanFactory.getBean(ScreenFlowManager.class);
-        screenFlowManager.addFlowGraph("root").addScreen(new ScreenFlowUnit("start", beanFactory.getBean("common.RootScreenGenerator", ScreenGenerator.class), beanFactory.getBean("common.RootScreenController", ScreenController.class)));
+        screenFlowManager.addRootFlowGraph("root").addScreen(new ScreenFlowUnit("start", beanFactory.getBean("common.RootScreenGenerator", ScreenGenerator.class), beanFactory.getBean("common.RootScreenController", ScreenController.class)));
         screenFlowManager.changeFlow("root");
 
         nifty.addScreen("redirector", new ScreenBuilder("start", beanFactory.getBean(RedirectorScreenController.class)).build(nifty));
