@@ -45,7 +45,7 @@ public class ScreenSelectMap implements ScreenController {
     private Nifty nifty;
     private Screen screen;
     private String selectedMap;
-    private ShowGhost ghostOptions = ShowGhost.noGhost;
+    private ShowGhost ghostOptions = ShowGhost.bestLocal;
     private static final Logger logger = Logger.getLogger(ScreenSelectMap.class.getName());
 
     /**
@@ -78,6 +78,7 @@ public class ScreenSelectMap implements ScreenController {
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.addAllItems(getMaps());
         setSelectedMap((String) dropDown1.getSelection().get(0));
+        gameConfiguration.getPreGameModel().removeFromModel(CandidateRecord.class);
     }
 
     @Override

@@ -60,7 +60,9 @@ public class GameModel implements GameModelInterface {
         List list = getByType(className);
         
         for(Object o : list){
-            mapByClass.remove(o.getClass());
+            for (Class currentClass : ReflexionUtils.getSuperTypes(o)) {
+                mapByClass.remove(currentClass);
+            }
         }
     }
 

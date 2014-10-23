@@ -111,9 +111,10 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
             return null;
         }
 
-        GetRecordResponse response = rankingClient.getIdid(getTopCompetitors(number, map).get(0).getGameId());
         final CandidateRecord candidate;
+        GetRecordResponse response;
         try {
+            response = rankingClient.getIdid(getTopCompetitors(number, map).get(0).getGameId());
             candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
         } catch (Exception e) {
             e.printStackTrace();
