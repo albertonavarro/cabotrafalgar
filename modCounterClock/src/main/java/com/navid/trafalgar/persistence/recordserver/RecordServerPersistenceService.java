@@ -118,7 +118,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
             candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            return null;
         }
         Collection cr = builder2.build(new Entry() {
             {
