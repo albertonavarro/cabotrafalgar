@@ -132,9 +132,11 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
                 });
                 
                 listBoxController.selectItemByIndex(index);
+                currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
                 
             } else {
                 listBoxController.selectItemByIndex(0);
+                currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
             }
             
 
