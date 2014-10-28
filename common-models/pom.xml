@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.navid.trafalgar</groupId>
         <artifactId>parent-trafalgar</artifactId>
-        <version>0.8-SNAPSHOT</version>
+        <version>0.8</version>
     </parent>
     
     <artifactId>common-models</artifactId>
@@ -18,8 +18,8 @@
             <artifactId>mod-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.navid.trafalgar</groupId>
-            <artifactId>persistence</artifactId>
+            <groupId>com.navid.lazylogin</groupId>
+            <artifactId>common-context</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jme3</groupId>
