@@ -5,5 +5,8 @@
 /JMonkeyClient/target/
 /JMonkeyClient/dependency-reduced-pom.xml
 /modWindTunnel/target/
+modWindTunnel/target
 /JMonkeyClient/pom.xml.versionsBackup
 /shipModelY/target/
+*.versionsBackup
+
