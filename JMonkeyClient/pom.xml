@@ -194,7 +194,7 @@
                         <configuration>
                             <headerType>gui</headerType>
                             <jar>${project.build.directory}/${artifactId}-${version}.jar</jar>
-                            <outfile>${project.build.directory}/hasCode.exe</outfile>
+                            <outfile>${project.build.directory}/caboTrafalgar.exe</outfile>
                             <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>
                                 <mainClass>com.navid.trafalgar.games.Main</mainClass>
