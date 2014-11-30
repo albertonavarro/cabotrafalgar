@@ -47,6 +47,7 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
     public void init() {
         eventManager.registerListener(new EventListener() {
 
+            @Override
             public void onEvent(String event) {
                 eventList.add(event);
             }
