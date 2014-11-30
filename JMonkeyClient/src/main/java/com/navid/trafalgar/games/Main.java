@@ -19,9 +19,9 @@ import de.lessvoid.nifty.screen.ScreenController;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.reflections.Reflections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -29,6 +29,8 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
 public class Main extends Application {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     private static boolean record = false;
 
@@ -102,7 +104,6 @@ public class Main extends Application {
     private void loadModules(Nifty nifty, Screen screen, AppSettings settings, Application app) {
         Reflections reflections = new Reflections("com.navid.trafalgar");
 
-
         Set<Class<? extends ModRegisterer>> result = reflections.getSubTypesOf(ModRegisterer.class);
 
         Collection<ModRegisterer> resultInstances = new ArrayList();
@@ -111,8 +112,12 @@ public class Main extends Application {
             try {
                 ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
                 resultInstances.add(currentLoader);
-            } catch (Exception ex) {
-                Logger.getLogger(StartScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                LOG.error("Error loading module {}", currentClass, ex);
+            } catch (InstantiationException ex) {
+                LOG.error("Error loading module {}", currentClass, ex);
+            } catch (IllegalAccessException ex) {
+                LOG.error("Error loading module {}", currentClass, ex);
             }
         }
 
@@ -149,6 +154,7 @@ public class Main extends Application {
         // render the viewports
         renderManager.render(tpf, context.isRenderable());
     }
+    
     public static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
 
     public static void registerSingletonBeanDefinition(String name, String className) {

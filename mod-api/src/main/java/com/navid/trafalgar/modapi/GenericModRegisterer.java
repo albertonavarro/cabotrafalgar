@@ -17,8 +17,8 @@ import de.lessvoid.nifty.Nifty;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -28,15 +28,17 @@ import org.springframework.core.io.ClassPathResource;
  * @author alberto
  */
 public abstract class GenericModRegisterer implements ModRegisterer {
-    
+
+    private static final Logger LOG = LoggerFactory.getLogger(GenericModRegisterer.class);
+
     private ModConfiguration modConfiguration;
-    
-    public GenericModRegisterer(InputStream configFile){
-    ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
+    public GenericModRegisterer(InputStream configFile) {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
             modConfiguration = mapper.readValue(configFile, ModConfiguration.class);
         } catch (IOException ex) {
-            Logger.getLogger(GenericModRegisterer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error("Error reading module configuration: {}", configFile, ex);
         }
     }
 
@@ -71,10 +73,16 @@ public abstract class GenericModRegisterer implements ModRegisterer {
             XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
 
             Map<String, CommandGenerator> commandGenerators = ctx.getBeansOfType(CommandGenerator.class);
-            GeneratorBuilder generatorBuilder = ctx.getBean("common.InputBuilder", GeneratorBuilder.class);
-
-            for (CommandGenerator currentCommandGenerator : commandGenerators.values()) {
-                generatorBuilder.registerBuilder(currentCommandGenerator);
+            if (commandGenerators.size() > 0) {
+                try{
+                GeneratorBuilder generatorBuilder = ctx.getBean("common.InputBuilder", GeneratorBuilder.class);
+                for (CommandGenerator currentCommandGenerator : commandGenerators.values()) {
+                    generatorBuilder.registerBuilder(currentCommandGenerator);
+                }
+                }catch(Exception e){
+                    LOG.error("Error registering Inputs in module {}", modConfiguration, e);
+                }
+                
             }
         }
     }
@@ -90,7 +98,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
                 ScreenFlowUnit screenFlowUnit = new ScreenFlowUnit(currentScreenConfig, ctx);
                 nifty.registerScreenController(screenFlowUnit.getController());
                 screenFlowManager.addScreenDeclaration(screenFlowUnit);
-             }
+            }
         }
     }
 

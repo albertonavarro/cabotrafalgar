@@ -9,4 +9,4 @@ modWindTunnel/target
 /JMonkeyClient/pom.xml.versionsBackup
 /shipModelY/target/
 *.versionsBackup
-
+/shipModelZ/target/

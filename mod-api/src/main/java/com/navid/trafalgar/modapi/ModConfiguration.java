@@ -141,5 +141,10 @@ public class ModConfiguration {
     public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
+    
+    @Override
+    public String toString(){ 
+        return "Module:" + modName;
+    }
 
 }

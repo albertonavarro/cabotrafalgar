@@ -14,6 +14,7 @@
         <module>modCounterClock</module>
         <module>JMonkeyClient</module>
         <module>shipModelY</module>
+        <module>shipModelZ</module>
     </modules>
     
     <properties>
@@ -33,7 +34,7 @@
         <gson.version>2.2.4</gson.version>
         <cglib.version>2.2</cglib.version>
         <reflections.version>0.9.9-RC2</reflections.version>
-        <fasterxml.version>2.4.1</fasterxml.version>
+        <fasterxml.version>2.4.4</fasterxml.version>
         <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
         <guava.version>17.0</guava.version>
         <commons.io.version>2.4</commons.io.version>
@@ -116,6 +117,11 @@
             <dependency>
                 <groupId>com.navid.trafalgar</groupId>
                 <artifactId>shipModelY</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>shipModelZ</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
