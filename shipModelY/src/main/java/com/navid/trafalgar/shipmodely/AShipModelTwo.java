@@ -24,6 +24,7 @@ public abstract class AShipModelTwo extends AShipModel {
     public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
     }
 
+    @Override
     public final CandidateRecord getCandidateRecordInstance() {
         ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
         candidateRecord.getHeader().setShipModel("ShipModelOneY");
@@ -55,6 +56,7 @@ public abstract class AShipModelTwo extends AShipModel {
         }
     }
 
+    @Override
     public final StepRecord getSnapshot() {
         ShipSnapshot snapshot = new ShipSnapshot();
 
@@ -99,6 +101,7 @@ public abstract class AShipModelTwo extends AShipModel {
         spatial.setMaterial(mat);
     }
 
+    @Override
     public final void setTransparent(boolean b) {
         if (!previousTransparent && b) {
             matHull.getAdditionalRenderState().setBlendMode(BlendMode.Color);
@@ -132,7 +135,7 @@ public abstract class AShipModelTwo extends AShipModel {
      */
     protected final class Sail extends TrafalgarNode {
 
-        private Node helperDirection;
+        private final Node helperDirection;
 
         protected Sail(AssetManager assetManager, EventManager eventManager) {
             super(new Vector3f(0, 0, 1), assetManager, eventManager);

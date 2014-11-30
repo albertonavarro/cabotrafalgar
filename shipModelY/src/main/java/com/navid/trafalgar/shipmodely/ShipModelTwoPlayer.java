@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.shipmodely;
 
 import com.jme3.asset.AssetManager;
@@ -13,8 +8,6 @@ import com.navid.trafalgar.manager.statistics.Auditable;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
 import com.navid.trafalgar.model.AShipModelPlayer;
-import com.navid.trafalgar.model.CandidateRecord;
-import com.navid.trafalgar.model.StepRecord;
 
 /**
  *
@@ -35,8 +28,6 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
         apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
     }
 
-    
-
     @Auditable
     private float windOverVela;
     @Auditable
@@ -46,7 +37,6 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
     @Auditable
     private float acceleration;
     @Auditable
-
     private float friction;
     @Auditable
     private float rudderRotation;
@@ -58,17 +48,20 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
     private float lastSailRotation;
     @Auditable
     private float mass = 1f;
-    private float sailCorrection = 0.3f;
-    private float sailRotateSpeed = 2f;
-    private float sailSurface = 100;
-    private float lastPitch = 0f;
-    private Vector3fStatistic apparentWind;
-    private Vector3fStatistic shipDirection;
-    private Vector3fStatistic realWind;
     @Auditable
     private float speed;
     @Auditable
     protected float inclinacion = 0;
+    
+    private float sailCorrection = 0.3f;
+    private float sailRotateSpeed = 2f;
+    private float sailSurface = 100;
+    private float lastPitch = 0f;
+    
+    private Vector3fStatistic apparentWind;
+    private Vector3fStatistic shipDirection;
+    private Vector3fStatistic realWind;
+    
 
     public ShipModelTwoPlayer(AssetManager assetManager, EventManager eventManager) {
         super("Player", assetManager, eventManager);
