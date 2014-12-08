@@ -21,15 +21,17 @@ public interface RecordPersistenceService {
      * This method retrieves the top N competitors for a given map.
      * @param number Max results
      * @param map Map name
+     * @param ship
      * @return List of CompetitorInfo with the info of the N better for the map.
      */
-    List<CompetitorInfo> getTopCompetitors(int number, String map);
+    List<CompetitorInfo> getTopCompetitors(int number, String map, String ship);
 
     /**
      * This method retrieves the actual movements for a given position and map.
      * @param number position
      * @param map map
+     * @param ship
      * @return CandidateRecord with these movements.
      */
-    CandidateRecord getGhost(int number, String map);
+    CandidateRecord getGhost(int number, String map, String ship);
 }

@@ -92,9 +92,9 @@ public class ScreenSelectMap implements ScreenController {
 
         CandidateRecord cr = null;
         if (ghostOptions == ShowGhost.bestLocal) {
-            cr = localPersistence.getGhost(1, selectedMap);
+            cr = localPersistence.getGhost(1, selectedMap, gameConfiguration.getShipName());
         } else if (ghostOptions == ShowGhost.bestRemote) {
-            cr = remotePersistence.getGhost(1, selectedMap);
+            cr = remotePersistence.getGhost(1, selectedMap, gameConfiguration.getShipName());
         }
 
         if (cr != null) {
@@ -148,14 +148,14 @@ public class ScreenSelectMap implements ScreenController {
 
     private void setSelectedMap(String map) {
 
-        List<CompetitorInfo> listLocal = localPersistence.getTopCompetitors(4, map);
+        List<CompetitorInfo> listLocal = localPersistence.getTopCompetitors(4, map, gameConfiguration.getShipName());
         ListBox listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
         listLocalTimes.clear();
         for (CompetitorInfo currentTime : listLocal) {
             listLocalTimes.addItem(currentTime);
         }
 
-        List<CompetitorInfo> listRemote = remotePersistence.getTopCompetitors(4, map);
+        List<CompetitorInfo> listRemote = remotePersistence.getTopCompetitors(4, map, gameConfiguration.getShipName());
         ListBox listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
         listRemoteTimes.clear();
         for (CompetitorInfo currentTime : listRemote) {

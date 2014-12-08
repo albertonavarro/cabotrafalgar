@@ -11,8 +11,8 @@ import com.navid.trafalgar.persistence.RecordPersistenceService;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -20,12 +20,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author anf
  */
 public class FileRecordPersistenceService implements RecordPersistenceService {
+    
+    private final static Logger LOG = LoggerFactory.getLogger(FileRecordPersistenceService.class);
 
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
     
     @Autowired
     private ProfileManager profileManager;
 
+    @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
 
         Qualification currentQualification = returnCurrentQualificationForMap(candidateRecord.getHeader().getMap());
@@ -59,7 +62,7 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
             gson.toJson(qualification, Qualification.class, fw);
             fw.close();
         } catch (IOException ex) {
-            Logger.getLogger(FileRecordPersistenceService.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error("Error saving qualification record with qualification {}", qualification, ex);
             throw new IOError(ex);
         }
     }
@@ -70,7 +73,7 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
             gson.toJson(candidateRecord, CandidateRecord.class, fw);
             fw.close();
         } catch (IOException ex) {
-            Logger.getLogger(FileRecordPersistenceService.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error("Error saving candidate record with qualification {}", qualification, ex);
             throw new IOError(ex);
         }
     }
@@ -84,7 +87,7 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
         } catch (FileNotFoundException e) {
             return null;
         } catch (IOException ex) {
-            Logger.getLogger(FileRecordPersistenceService.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error("Error loading candidate record with qualification {}", qualification, ex);
             throw new IOError(ex);
         }
     }
@@ -105,15 +108,11 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
     }
 
     private CandidateRecord returnGhostForMap(String map) {
-
         Qualification q = returnCurrentQualificationForMap(map);
-
         return loadRecord(q);
-
     }
 
     private Qualification returnCurrentQualificationForMap(String map) {
-
         File currentMapFolder = returnFolderForMap(map);
 
         File qualificationFile = new File(currentMapFolder, "ranking.json");
@@ -134,11 +133,11 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
         } catch (IOException e2) {
             throw new IOError(e2);
         }
-
-
     }
 
-    public List<CompetitorInfo> getTopCompetitors(int number, String map) {
+    @Override
+    public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship) {
+        //TODO use ship
         Qualification q = returnCurrentQualificationForMap(map);
 
         List<CompetitorInfo> result = new ArrayList<CompetitorInfo>();
@@ -155,7 +154,9 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
 
     }
 
-    public CandidateRecord getGhost(int number, String map) {
+    @Override
+    public CandidateRecord getGhost(int number, String map, String ship) {
+        //TODO use ship
         if (number == 1) {
             return returnGhostForMap(map);
         }

@@ -6,12 +6,12 @@ import com.google.common.collect.Lists;
 import static com.google.common.collect.Lists.newArrayList;
 import com.google.gson.Gson;
 import com.navid.lazylogin.context.RequestContextContainer;
-import com.navid.recordserver.v1.AddRecordRequest;
-import com.navid.recordserver.v1.AddRecordResponse;
-import com.navid.recordserver.v1.GetMapRecordsResponse;
-import com.navid.recordserver.v1.GetMapRecordsResponse.RankingEntry;
-import com.navid.recordserver.v1.GetRecordResponse;
-import com.navid.recordserver.v1.RankingResource;
+import com.navid.recordserver.v2.AddRecordRequest;
+import com.navid.recordserver.v2.AddRecordResponse;
+import com.navid.recordserver.v2.GetMapRecordsResponse;
+import com.navid.recordserver.v2.GetMapRecordsResponse.RankingEntry;
+import com.navid.recordserver.v2.GetRecordResponse;
+import com.navid.recordserver.v2.V2Resource;
 import com.navid.trafalgar.definition2.Entry;
 import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.model.Builder2;
@@ -44,14 +44,14 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
     private Builder2 builder2;
 
     @Resource(name = "mod.counterclock.clientRecordServer")
-    private RankingResource rankingClient;
+    private V2Resource rankingClient;
 
     @Resource(name = "mod.counterclock.requestContextContainer")
     private RequestContextContainer container;
 
     @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
-        if(!setUpSession()){
+        if (!setUpSession()) {
             return null;
         }
 
@@ -61,7 +61,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
         AddRecordRequest addRecordRequest = new AddRecordRequest();
         addRecordRequest.setPayload(sampleReal);
         LOGGER.info("Trying with size " + sampleReal.length());
-        addRecordResponse = rankingClient.post(addRecordRequest);
+        addRecordResponse = rankingClient.postRanking(addRecordRequest);
 
         CandidateInfo returned = new CandidateInfo();
         returned.setAccepted(true);
@@ -70,13 +70,13 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
     }
 
     @Override
-    public List<CompetitorInfo> getTopCompetitors(int number, String map) {
-        if (!setUpSession()){
+    public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship) {
+        if (!setUpSession()) {
             return newArrayList();
         }
 
         String newMapName = map.replace("/", "_");
-        GetMapRecordsResponse response = rankingClient.getMapsmap(newMapName);
+        GetMapRecordsResponse response = rankingClient.getRankingshipshipmapsmap(newMapName, ship);
 
         return Lists.transform(response.getRankingEntry(), new Function<RankingEntry, CompetitorInfo>() {
             @Override
@@ -97,7 +97,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
             if (container.get().getSessionId() == null) {
 
                 container.get().setSessionId(profileManager.getSessionId());
-                
+
             }
             return true;
         }
@@ -106,18 +106,24 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
     }
 
     @Override
-    public CandidateRecord getGhost(int number, String map) {
-        if(! setUpSession()){
+    public CandidateRecord getGhost(int number, String map, String ship) {
+        if (!setUpSession()) {
             return null;
         }
 
         final CandidateRecord candidate;
         GetRecordResponse response;
         try {
-            response = rankingClient.getIdid(getTopCompetitors(number, map).get(0).getGameId());
-            candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
+            List<CompetitorInfo> competitorInfos = getTopCompetitors(number, map, ship);
+            if (competitorInfos.size() > 0) {
+                response = rankingClient.getRankingidid(competitorInfos.get(0).getGameId());
+                candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
+            } else {
+                return null;
+            }
+
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error loading ghost {} from map {}", ship, map);
             return null;
         }
         Collection cr = builder2.build(new Entry() {
@@ -140,7 +146,7 @@ public class RecordServerPersistenceService implements RecordPersistenceService 
     /**
      * @param rankingClient the rankingClient to set
      */
-    public void setRankingClient(RankingResource rankingClient) {
+    public void setRankingClient(V2Resource rankingClient) {
         this.rankingClient = rankingClient;
     }
 

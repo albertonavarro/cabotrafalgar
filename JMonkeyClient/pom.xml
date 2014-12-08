@@ -135,7 +135,7 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-    
+  
     <build>
         <plugins>
             <plugin>
@@ -164,24 +164,6 @@
                                 </transformer>
                             </transformers>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-           
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.9.1</version>
-                <configuration>
-                    <configLocation>build_config/sun_checks.xml</configLocation>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>checkstyle-organisation-standard</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>checkstyle</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
