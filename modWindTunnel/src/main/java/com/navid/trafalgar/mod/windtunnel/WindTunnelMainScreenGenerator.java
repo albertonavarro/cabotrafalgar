@@ -16,7 +16,7 @@ public class WindTunnelMainScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
-            
+
     @Override
     public void buildScreen() {
         nifty.addXml("mod/windtunnel/interface_windtunnel.xml");

@@ -37,8 +37,7 @@ public class CounterClockMainGame extends AbstractAppState {
      */
     @Autowired
     private List<StateListener> stateListeners;
-    
-    
+
     @Autowired
     private GameConfiguration gameConfiguration;
 
@@ -52,8 +51,8 @@ public class CounterClockMainGame extends AbstractAppState {
         for (StateListener currentStateListener : stateListeners) {
             stateManager.register(currentStateListener);
         }
-        
-        for(StateListener currentStateListener : gameConfiguration.getPreGameModel().getByType(StateListener.class)){
+
+        for (StateListener currentStateListener : gameConfiguration.getPreGameModel().getByType(StateListener.class)) {
             stateManager.register(currentStateListener);
         }
 
@@ -95,6 +94,5 @@ public class CounterClockMainGame extends AbstractAppState {
     public void setGameConfiguration(GameConfiguration gameConfiguration) {
         this.gameConfiguration = gameConfiguration;
     }
-    
-    
+
 }

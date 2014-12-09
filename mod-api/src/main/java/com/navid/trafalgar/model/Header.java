@@ -5,11 +5,11 @@ package com.navid.trafalgar.model;
  * @author anf
  */
 public class Header {
-    
+
     private static final int version = 1;
-    
+
     private String map;
-    
+
     private String shipModel;
 
     /**
@@ -18,9 +18,9 @@ public class Header {
     public int getVersion() {
         return version;
     }
-    
-    public void setVersion( int newVersion) {
-        if (newVersion != version){
+
+    public void setVersion(int newVersion) {
+        if (newVersion != version) {
             throw new RuntimeException("Different version!");
         }
     }
@@ -52,7 +52,5 @@ public class Header {
     public void setShipModel(String shipModel) {
         this.shipModel = shipModel;
     }
-    
-    
-    
+
 }

@@ -21,7 +21,6 @@ public class GUIUpdater implements StartedState, PrestartState {
     @Autowired
     private StatisticsManager statisticsManager;
 
-
     @Override
     public void onStarted(float tpf) {
         mainScreen.updateShipStats();
@@ -40,7 +39,6 @@ public class GUIUpdater implements StartedState, PrestartState {
         mainScreen.fillShipStats(statisticsManager.getAllStatistics().values());
     }
 
-    
     private final ActionListener actionListener = new ActionListener() {
 
         @Override
@@ -71,7 +69,6 @@ public class GUIUpdater implements StartedState, PrestartState {
     public void setMainScreen(CounterClockMainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
-
 
     /**
      * @param inputManager the inputManager to set

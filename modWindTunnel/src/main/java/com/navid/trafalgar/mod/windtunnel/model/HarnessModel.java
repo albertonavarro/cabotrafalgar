@@ -18,12 +18,12 @@ public class HarnessModel extends AHarnessModel {
     protected void initGeometry(AssetManager assetManager) {
 
     }
-    
-    public boolean isEnabled(){
+
+    public boolean isEnabled() {
         return true;
     }
-    
-    public void setEnabled(boolean value){
+
+    public void setEnabled(boolean value) {
         //todo
     }
 }

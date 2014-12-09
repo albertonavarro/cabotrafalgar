@@ -18,7 +18,7 @@ public class RotateSimpleWindBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
-    
+
     /**
      * @param assetManager the assetManager to set
      */
@@ -38,5 +38,5 @@ public class RotateSimpleWindBuilder implements BuilderInterface {
     public Iterable<Category> getCategories() {
         return Collections.singleton(Category.context);
     }
-    
+
 }

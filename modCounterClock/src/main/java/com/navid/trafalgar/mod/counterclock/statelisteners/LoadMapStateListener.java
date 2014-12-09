@@ -47,25 +47,25 @@ public class LoadMapStateListener implements LoadModelState {
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
-        
+
         if (gameConfiguration.getPreGameModel().contains(CandidateRecord.class)) {
-            final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class) ;
+            final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class);
             Collection c = builder2.buildWithDependencies(new Entry() {
-                    {
-                        setType(gameConfiguration.getShipName());
-                        setName("ghost1");
-                        setValues(new HashMap<String, Object>() {
-                            {
-                                put("role", "Ghost");
-                                put("record", cr);
-                            }
-                        });
-                    }
-                }, gameModel);
-            
+                {
+                    setType(gameConfiguration.getShipName());
+                    setName("ghost1");
+                    setValues(new HashMap<String, Object>() {
+                        {
+                            put("role", "Ghost");
+                            put("record", cr);
+                        }
+                    });
+                }
+            }, gameModel);
+
             gameModel.addToModel(c);
         }
-        
+
         counterClockGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = counterClockGameModel.getIContext();
@@ -74,18 +74,18 @@ public class LoadMapStateListener implements LoadModelState {
         AShipModelPlayer currentShip = counterClockGameModel.getShip();
         gameStatus.getGameNode().addControl((Control) currentShip);
         currentShip.setStatisticsManager(statisticsManager);
-        
-        if(counterClockGameModel.getGhost() != null){
+
+        if (counterClockGameModel.getGhost() != null) {
             gameStatus.getGameNode().addControl((Control) counterClockGameModel.getGhost());
         }
 
         List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
         for (AMillestoneModel currentMillestone : millestones) {
             currentMillestone.setEventManager(eventManager);
-            currentMillestone.setCollidable(Collections.singleton((AShipModel)currentShip));
+            currentMillestone.setCollidable(Collections.singleton((AShipModel) currentShip));
             gameStatus.getGameNode().addControl(currentMillestone);
         }
-        
+
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);
         for (Filter currentFilter : counterClockGameModel.getFpp()) {
             fpp.addFilter(currentFilter);
@@ -99,7 +99,7 @@ public class LoadMapStateListener implements LoadModelState {
     @Override
     public void onUnload() {
         gameStatus.getGameNode().removeControl((Control) counterClockGameModel.getShip());
-        if(gameStatus.getGameNode() != null){
+        if (gameStatus.getGameNode() != null) {
             gameStatus.getGameNode().removeControl((Control) counterClockGameModel.getGhost());
         }
 
@@ -107,7 +107,7 @@ public class LoadMapStateListener implements LoadModelState {
         for (AMillestoneModel currentMillestone : millestones) {
             gameStatus.getGameNode().removeControl(currentMillestone);
         }
-        
+
         gameStatus.getGameNode().detachAllChildren();
         gameStatus.setGameDefinition(null);
     }

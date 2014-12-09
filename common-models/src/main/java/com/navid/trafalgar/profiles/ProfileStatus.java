@@ -7,19 +7,19 @@ import com.google.common.base.Optional;
  * @author casa
  */
 public class ProfileStatus {
-     
+
     private Boolean verified;
-    
+
     private Boolean online;
-    
+
     private Optional<String> username;
-    
+
     private String email;
-    
+
     public ProfileStatus() {
-        
+
     }
-    
+
     public ProfileStatus(String email, boolean verified, Optional<String> username) {
         this.email = email;
         this.verified = verified;
@@ -67,7 +67,7 @@ public class ProfileStatus {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     /**
      * @return the online
      */
@@ -81,15 +81,10 @@ public class ProfileStatus {
     public void setOnline(Boolean online) {
         this.online = online;
     }
-    
-    
-    
+
     @Override
     public String toString() {
-        return getVerified()? (getUsername().get() + " (verified)") : (getEmail() + " (unverified)");
+        return getVerified() ? (getUsername().get() + " (verified)") : (getEmail() + " (unverified)");
     }
 
-    
-    
-    
 }

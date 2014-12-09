@@ -38,23 +38,23 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
      */
     @Autowired
     private GeneratorBuilder generatorBuilder;
-    
+
     @Autowired
     private SelectControlsScreenController screenControlScreenController;
-    
+
     @Autowired
     private Nifty nifty;
-    
+
     private Map<String, PanelBuilder> panels;
 
     @Override
     public void buildScreen() {
-        if (nifty.getScreen("selectControl") != null){
+        if (nifty.getScreen("selectControl") != null) {
             nifty.removeScreen("selectControl");
         }
         buildScreenNow();
     }
-    
+
     public void buildScreenNow() {
         panels = new HashMap<String, PanelBuilder>();
 
@@ -63,8 +63,6 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
         Set<Command> commands = ship.getCommands();
 
         HashMultimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
-
-
 
         final PanelBuilder outerPanelBuilder = new PanelBuilder("Panel_ID") {
             {
@@ -89,7 +87,6 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
         };
 
         outerPanelBuilder.panel(commandNamePanelBuilder);
-
 
         for (final Command currentCommand : gens.keySet()) {
 
@@ -117,10 +114,8 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
                     }
                 });
 
-
             }
         }
-
 
         Screen screen = new ScreenBuilder("selectControl") {
             {

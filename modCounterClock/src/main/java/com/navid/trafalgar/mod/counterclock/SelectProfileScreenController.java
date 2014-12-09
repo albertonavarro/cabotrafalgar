@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author casa
  */
 public class SelectProfileScreenController implements ScreenController {
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SelectProfileScreenController.class);
 
     /**
@@ -107,7 +107,7 @@ public class SelectProfileScreenController implements ScreenController {
      */
     @NiftyEventSubscriber(id = "profileList")
     public void onProfileChanged(final String id, final ListBoxSelectionChangedEvent<ProfileStatus> event) {
-        if(!event.getSelection().isEmpty()){
+        if (!event.getSelection().isEmpty()) {
             selectedItem = event.getSelection().get(0);
         }
     }
@@ -134,7 +134,7 @@ public class SelectProfileScreenController implements ScreenController {
             profileManager.createProfile(newProfile.getRealText());
             fillListWithProfiles();
         } catch (Exception e) {
-            LOGGER.error("Error creating profile: ",e);
+            LOGGER.error("Error creating profile: ", e);
         }
 
     }

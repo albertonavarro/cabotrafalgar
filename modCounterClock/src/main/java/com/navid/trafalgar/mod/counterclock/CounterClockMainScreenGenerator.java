@@ -16,7 +16,7 @@ public class CounterClockMainScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
-            
+
     @Override
     public void buildScreen() {
         nifty.addXml("mod/counterclock/interface_counterclock.xml");
@@ -28,5 +28,5 @@ public class CounterClockMainScreenGenerator implements ScreenGenerator {
     public void setNifty(Nifty nifty) {
         this.nifty = nifty;
     }
-    
+
 }

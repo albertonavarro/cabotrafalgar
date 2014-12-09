@@ -58,8 +58,8 @@ public class GameModel implements GameModelInterface {
     @Override
     public void removeFromModel(Class className) {
         List list = getByType(className);
-        
-        for(Object o : list){
+
+        for (Object o : list) {
             for (Class currentClass : ReflexionUtils.getSuperTypes(o)) {
                 mapByClass.remove(currentClass);
             }
@@ -67,6 +67,6 @@ public class GameModel implements GameModelInterface {
     }
 
     public boolean contains(Class className) {
-        return ! getByType(className).isEmpty();
+        return !getByType(className).isEmpty();
     }
 }

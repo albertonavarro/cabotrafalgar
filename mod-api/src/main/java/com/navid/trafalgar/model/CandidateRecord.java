@@ -9,34 +9,34 @@ import java.util.List;
  * @param <T>
  */
 public class CandidateRecord<T extends StepRecord> {
-    
+
     private final int version = 1;
-    
+
     private final Header header = new Header();
-    
+
     private final List<T> stepRecordList = new LinkedList<T>();
-   
+
     public CandidateRecord() {
-        
+
     }
-    
-    public void addStepRecord( T stepRecord ){
+
+    public void addStepRecord(T stepRecord) {
         this.stepRecordList.add(stepRecord);
     }
 
     public Header getHeader() {
         return this.header;
     }
-    
-    public float getTime(){
-        if (! stepRecordList.isEmpty()){
-            return stepRecordList.get(stepRecordList.size()-1).getTimestamp();
+
+    public float getTime() {
+        if (!stepRecordList.isEmpty()) {
+            return stepRecordList.get(stepRecordList.size() - 1).getTimestamp();
         }
-        
+
         return 0;
     }
-    
-    public List<? extends StepRecord> getStepRecord(){
+
+    public List<? extends StepRecord> getStepRecord() {
         return stepRecordList;
     }
 
@@ -44,6 +44,4 @@ public class CandidateRecord<T extends StepRecord> {
         this.header.setMap(map);
     }
 
-    
-    
 }

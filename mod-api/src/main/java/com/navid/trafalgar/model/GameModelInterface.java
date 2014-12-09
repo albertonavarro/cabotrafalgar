@@ -14,8 +14,8 @@ import java.util.List;
 public interface GameModelInterface {
 
     /**
-     * 
-     * @param collection 
+     *
+     * @param collection
      */
     void addToModel(Collection collection);
 
@@ -34,7 +34,7 @@ public interface GameModelInterface {
      * @return
      */
     <T> T getSingleByType(Class<T> className);
-    
+
     void removeFromModel(Class className);
-    
+
 }

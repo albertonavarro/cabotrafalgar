@@ -39,8 +39,8 @@ public class GeneratorBuilder {
             }
         }
     }
-    
-    public Map<String, CommandGenerator> getGenerators(){
+
+    public Map<String, CommandGenerator> getGenerators() {
         return generatorOnlyMap;
     }
 
@@ -49,7 +49,7 @@ public class GeneratorBuilder {
         HashMultimap<Command, CommandGenerator> result = HashMultimap.create();
 
         for (Command currentCommand : commands) {
-            for( Class commandClasses : ReflexionUtils.getSuperTypes(currentCommand)){
+            for (Class commandClasses : ReflexionUtils.getSuperTypes(currentCommand)) {
                 result.putAll(currentCommand, generatorMap.get(commandClasses));
             }
         }
@@ -68,5 +68,4 @@ public class GeneratorBuilder {
         return commandStateListeners;
     }
 
-    
 }

@@ -14,14 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author alberto
  */
 public class RedirectorScreenController implements ScreenController {
-    
+
     @Autowired
     private ScreenFlowManager screenFlowManager;
 
     private Nifty nifty;
-    
+
     private Screen screen;
-    
+
     @Override
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
@@ -43,7 +43,5 @@ public class RedirectorScreenController implements ScreenController {
     public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
     }
-    
-    
-    
+
 }

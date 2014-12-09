@@ -45,7 +45,7 @@ public class SelectShipScreenController implements ScreenController {
     @Autowired
     private Builder2 builder;
     /**
-     * 
+     *
      */
     @Autowired
     private ScreenFlowManager screenFlowManager;
@@ -120,7 +120,7 @@ public class SelectShipScreenController implements ScreenController {
     public void onStartScreen() {
         gameConfiguration.reset();
         gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
-        
+
         fillListWithShips();
     }
 
@@ -162,19 +162,20 @@ public class SelectShipScreenController implements ScreenController {
 
     public void goTo(String nextScreen) {
         gameConfiguration.setShipName(selectedItem.getName());
-        
+
         Collection c = builder.build(new Entry() {
             {
                 setType(selectedItem.getName());
                 setName("player1");
-                setValues(new HashMap<String, Object>(){{
-                    put("role", "ControlProxy");
-                }});
+                setValues(new HashMap<String, Object>() {
+                    {
+                        put("role", "ControlProxy");
+                    }
+                });
             }
         });
 
         gameConfiguration.getPreGameModel().addToModel(c);
-
 
         nifty.gotoScreen(nextScreen);
     }

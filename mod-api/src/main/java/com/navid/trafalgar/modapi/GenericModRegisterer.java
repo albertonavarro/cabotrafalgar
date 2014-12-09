@@ -74,15 +74,15 @@ public abstract class GenericModRegisterer implements ModRegisterer {
 
             Map<String, CommandGenerator> commandGenerators = ctx.getBeansOfType(CommandGenerator.class);
             if (commandGenerators.size() > 0) {
-                try{
-                GeneratorBuilder generatorBuilder = ctx.getBean("common.InputBuilder", GeneratorBuilder.class);
-                for (CommandGenerator currentCommandGenerator : commandGenerators.values()) {
-                    generatorBuilder.registerBuilder(currentCommandGenerator);
-                }
-                }catch(Exception e){
+                try {
+                    GeneratorBuilder generatorBuilder = ctx.getBean("common.InputBuilder", GeneratorBuilder.class);
+                    for (CommandGenerator currentCommandGenerator : commandGenerators.values()) {
+                        generatorBuilder.registerBuilder(currentCommandGenerator);
+                    }
+                } catch (Exception e) {
                     LOG.error("Error registering Inputs in module {}", modConfiguration, e);
                 }
-                
+
             }
         }
     }

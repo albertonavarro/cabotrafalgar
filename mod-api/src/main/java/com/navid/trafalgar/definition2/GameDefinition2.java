@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * Representation for a json2 file content
- * 
+ *
  */
 public class GameDefinition2 {
-    
+
     private List<Entry> entries;
 
     /**
@@ -23,5 +23,5 @@ public class GameDefinition2 {
     public void setEntries(List<Entry> entries) {
         this.entries = entries;
     }
-    
+
 }

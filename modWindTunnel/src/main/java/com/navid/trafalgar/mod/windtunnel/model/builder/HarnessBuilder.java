@@ -20,10 +20,10 @@ public class HarnessBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
-    
+
     @Autowired
     private InputManager inputManager;
-    
+
     @Override
     public Collection build(String instanceName, Map<String, Object> customValues) {
         HarnessModel harness = new HarnessModel(assetManager);

@@ -43,7 +43,7 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
     private EventManager eventManager;
     @Autowired
     private ScreenFlowManager screenFlowManager;
-    
+
     private CounterClockMainGame game;
     private boolean showMenu;
     private XmlBeanFactory ctx;
@@ -196,6 +196,5 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
     public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
     }
-    
-    
+
 }

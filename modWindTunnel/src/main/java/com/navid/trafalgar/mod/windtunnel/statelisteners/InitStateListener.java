@@ -35,7 +35,7 @@ public class InitStateListener implements InitState {
         viewPort.attachScene(gameStatus.getGameNode());
 
         Camera cameraGUI = new Camera(settings.getWidth(), settings.getHeight());
-        
+
         ViewPort viewPortGUI = renderManager.createPostView("CounterClockGUI", cameraGUI);
         viewPortGUI.setClearFlags(false, false, false);
         viewPortGUI.attachScene(gameStatus.getGameGUINode());
@@ -48,15 +48,15 @@ public class InitStateListener implements InitState {
 
     @Override
     public void onUnload() {
-        
+
         renderManager.removeMainView("CounterClock");
         renderManager.removePostView("CounterClockGUI");
-        
+
         gameStatus.setCamera(null);
         gameStatus.setViewPort(null);
         gameStatus.setCameraGUI(null);
         gameStatus.setViewPortGUI(null);
-        
+
         gameStatus.getGameNode().detachAllChildren();
         gameStatus.getGameGUINode().detachAllChildren();
 

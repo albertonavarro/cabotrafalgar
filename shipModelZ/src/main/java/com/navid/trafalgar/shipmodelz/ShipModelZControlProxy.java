@@ -1,4 +1,3 @@
-
 package com.navid.trafalgar.shipmodelz;
 
 import com.navid.trafalgar.input.Command;
@@ -12,11 +11,11 @@ import java.util.Set;
  * @author casa
  */
 public class ShipModelZControlProxy implements AShipModelInteractive {
-    
+
     private ShipModelZPlayer target;
 
     @Override
-    public void setTarget(AShipModelPlayer target){
+    public void setTarget(AShipModelPlayer target) {
         this.target = (ShipModelZPlayer) target;
     }
 
@@ -71,22 +70,21 @@ public class ShipModelZControlProxy implements AShipModelInteractive {
             }
         };
     }
-    
-    public void rudderLeft(float tpf){
+
+    public void rudderLeft(float tpf) {
         target.rudderLeft(tpf);
     }
-    
-    public void rudderRight(float tpf){
+
+    public void rudderRight(float tpf) {
         target.rudderRight(tpf);
     }
-    
-    public void sailLoose(float tpf){
+
+    public void sailLoose(float tpf) {
         target.sailLoose(tpf);
     }
-    
-    public void sailTrim(float tpf){
+
+    public void sailTrim(float tpf) {
         target.sailTrim(tpf);
     }
-   
-    
+
 }

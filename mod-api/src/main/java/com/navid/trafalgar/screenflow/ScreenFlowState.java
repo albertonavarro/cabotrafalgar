@@ -9,11 +9,11 @@ package com.navid.trafalgar.screenflow;
  * @author alberto
  */
 class ScreenFlowState {
-    
+
     private String currentFlow;
-    
+
     private String currentScreen;
-    
+
     private String screenCommand;
 
     /**
@@ -57,7 +57,5 @@ class ScreenFlowState {
     public void setCurrentFlow(String currentFlow) {
         this.currentFlow = currentFlow;
     }
-    
-    
-    
+
 }

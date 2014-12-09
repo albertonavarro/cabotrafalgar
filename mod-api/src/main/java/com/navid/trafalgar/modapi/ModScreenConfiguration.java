@@ -17,7 +17,6 @@ public class ModScreenConfiguration {
     private String interfaceConstructor;
     private String controller;
 
-    
     /**
      * @return the screenName
      */
@@ -60,6 +59,4 @@ public class ModScreenConfiguration {
         this.controller = controller;
     }
 
-    
-    
 }

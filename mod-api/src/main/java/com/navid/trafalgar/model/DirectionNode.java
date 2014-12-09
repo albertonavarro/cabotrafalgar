@@ -10,12 +10,11 @@ import com.jme3.scene.shape.Line;
 
 /**
  *
- *   
+ *
  */
 public class DirectionNode extends Node {
 
     private Line line;
-    
 
     /**
      *
@@ -40,7 +39,7 @@ public class DirectionNode extends Node {
         Vector3f a = this.getWorldRotation().getRotationColumn(0);
         return a;
     }
-    
+
     /**
      *
      * @return
@@ -49,12 +48,12 @@ public class DirectionNode extends Node {
         Vector3f a = this.getLocalRotation().getRotationColumn(0);
         return a;
     }
-    
+
     /**
      *
      * @param newdir
      */
-    public void setDirection(Vector3f newdir){
+    public void setDirection(Vector3f newdir) {
         this.lookAt(newdir, Vector3f.UNIT_Y);
     }
 }

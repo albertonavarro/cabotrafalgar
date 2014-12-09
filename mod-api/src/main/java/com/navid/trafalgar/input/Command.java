@@ -9,7 +9,7 @@ package com.navid.trafalgar.input;
  * @author alberto
  */
 public interface Command {
-    
+
     void execute(float tpf);
-    
+
 }

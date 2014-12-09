@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  *
- *   
+ *
  */
 public interface BuilderInterface {
 
@@ -16,14 +16,14 @@ public interface BuilderInterface {
      * @param customValues
      * @return
      */
-    Collection build( String instanceName, Map<String, Object> customValues);
-    
+    Collection build(String instanceName, Map<String, Object> customValues);
+
     /**
      *
      * @return
      */
     String getType();
-    
+
     /**
      *
      * @return

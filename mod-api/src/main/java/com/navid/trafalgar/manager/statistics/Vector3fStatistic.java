@@ -6,12 +6,12 @@ import com.navid.trafalgar.util.FormatUtils;
 /**
  * Vector3f implementation for AbstactStatistic
  */
-public class Vector3fStatistic extends AbstractStatistic<Vector3f>{
-    
+public class Vector3fStatistic extends AbstractStatistic<Vector3f> {
+
     /*
      * Initial value
      */
-    private Vector3f value = new Vector3f(1,0,0);
+    private Vector3f value = new Vector3f(1, 0, 0);
 
     /*
      * Constructor
@@ -19,7 +19,7 @@ public class Vector3fStatistic extends AbstractStatistic<Vector3f>{
     Vector3fStatistic(String parentId, String id) {
         super(parentId, id);
     }
-    
+
     /**
      *
      * @return
@@ -37,13 +37,13 @@ public class Vector3fStatistic extends AbstractStatistic<Vector3f>{
     public void setValue(Vector3f newValue) {
         this.value = newValue.clone();
     }
-    
+
     /**
      *
      * @return
      */
     @Override
-    public String toString(){
+    public String toString() {
         return new StringBuilder()
                 .append(getId())
                 .append(": ")
@@ -54,5 +54,5 @@ public class Vector3fStatistic extends AbstractStatistic<Vector3f>{
                 .append(FormatUtils.formatFloatX_XXX(value.z))
                 .toString();
     }
-    
+
 }

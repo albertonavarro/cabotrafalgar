@@ -15,16 +15,17 @@ import java.util.Set;
  * @author alberto
  */
 public class ReflexionUtils {
-    
-    private ReflexionUtils(){
+
+    private ReflexionUtils() {
     }
+
     //TODO: REWRITE THIS SHIT
-    public static Set<Class> getSuperTypes(Object o){
+    public static Set<Class> getSuperTypes(Object o) {
         Set<Class> collection = new HashSet<Class>();
         Queue<Class> queue = new ArrayDeque();
-        
+
         Class currentSuperClass = o.getClass();
-        while(currentSuperClass != null){
+        while (currentSuperClass != null) {
             Set<Class> innerCollection = new HashSet<Class>();
             innerCollection.add(currentSuperClass);
             innerCollection.addAll(Arrays.asList(currentSuperClass.getInterfaces()));
@@ -35,8 +36,8 @@ public class ReflexionUtils {
             collection.addAll(innerCollection);
             currentSuperClass = queue.poll();
         }
-        
+
         return collection;
     }
-    
+
 }

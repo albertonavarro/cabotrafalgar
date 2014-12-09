@@ -48,7 +48,7 @@ public class LoadMapStateListener implements LoadModelState {
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
-        
+
         windTunnelGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = windTunnelGameModel.getIContext();
@@ -58,7 +58,7 @@ public class LoadMapStateListener implements LoadModelState {
         gameStatus.getGameNode().addControl((Control) currentShip);
         AHarnessModel harness = windTunnelGameModel.getHarness();
         gameStatus.getGameNode().addControl(harness);
-        
+
         currentShip.setStatisticsManager(statisticsManager);
 
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);

@@ -5,19 +5,19 @@ package com.navid.trafalgar.profiles;
  * @author casa
  */
 public class ProfileEntry {
-    
+
     private String name;
-    
+
     private String folderHome;
-    
+
     private String token;
-    
+
     private String email;
-    
+
     public ProfileEntry() {
-        
+
     }
-    
+
     public ProfileEntry(String email, String folderName, String token) {
         this.email = email;
         this.folderHome = folderName;
@@ -79,7 +79,5 @@ public class ProfileEntry {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-    
+
 }

@@ -108,7 +108,7 @@ public class Builder2 {
                 gameModel.addToModel(build(entry));
             }
         }
-        
+
         for (Dependent currentDependant : (List<Dependent>) gameModel.getByType(Dependent.class)) {
             currentDependant.resolveDependencies(gameModel);
         }
@@ -156,7 +156,7 @@ public class Builder2 {
 
         return buildersByName.get(entry.getType()).build(entry.getName(), entry.getValues());
     }
-    
+
     /**
      *
      * @param entry
@@ -168,13 +168,13 @@ public class Builder2 {
         }
 
         Collection objects = buildersByName.get(entry.getType()).build(entry.getName(), entry.getValues());
-        
-        for(Object o : objects){
-            if (o instanceof Dependent){
-                ((Dependent) o ).resolveDependencies(gameModel);
+
+        for (Object o : objects) {
+            if (o instanceof Dependent) {
+                ((Dependent) o).resolveDependencies(gameModel);
             }
         }
-        
+
         return objects;
     }
 }

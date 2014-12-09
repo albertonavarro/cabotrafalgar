@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.navid.trafalgar.mod.counterclock;
 
 import com.navid.trafalgar.screenflow.ScreenGenerator;
@@ -15,12 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author casa
  */
 public class SelectProfileScreenGenerator implements ScreenGenerator {
+
     @Autowired
     private Nifty nifty;
-         
+
     @Override
     public void buildScreen() {
-        if(nifty.getScreen("selectProfile") == null){
+        if (nifty.getScreen("selectProfile") == null) {
             nifty.addXml("mod/counterclock/interface_profileselector.xml");
         }
     }

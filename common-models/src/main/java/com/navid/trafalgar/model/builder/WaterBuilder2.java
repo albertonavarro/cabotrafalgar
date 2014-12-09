@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @author alberto
  */
-public class WaterBuilder2 implements BuilderInterface{
+public class WaterBuilder2 implements BuilderInterface {
 
     @Override
     public Collection build(String instanceName, Map<String, Object> customValues) {

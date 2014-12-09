@@ -10,26 +10,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author alberto
  */
 public class ScreenFlowManager {
-    
+
     private final Map<String, ScreenFlowUnit> mapScreenDeclarations = new HashMap<String, ScreenFlowUnit>();
-    
+
     private final ScreenFlowState screenFlowState = new ScreenFlowState();
-    
+
     private ScreenFlowGraph root = null;
-    
+
     @Autowired
-    private final Map<String, ScreenFlowGraph> screenFlowGraph = new HashMap<String, ScreenFlowGraph>();    
-    
-    public ScreenFlowGraph addRootFlowGraph( String name ){
+    private final Map<String, ScreenFlowGraph> screenFlowGraph = new HashMap<String, ScreenFlowGraph>();
+
+    public ScreenFlowGraph addRootFlowGraph(String name) {
         root = new ScreenFlowGraph();
         screenFlowGraph.put(name, root);
-        for(ScreenFlowGraph current: screenFlowGraph.values()) {
+        for (ScreenFlowGraph current : screenFlowGraph.values()) {
             current.addParentFlow(root);
         }
         return root;
     }
-    
-    public ScreenFlowGraph addFlowGraph( String name ){
+
+    public ScreenFlowGraph addFlowGraph(String name) {
         ScreenFlowGraph result = new ScreenFlowGraph();
         result.addParentFlow(root);
         screenFlowGraph.put(name, result);
@@ -41,17 +41,17 @@ public class ScreenFlowManager {
     }
 
     public String nextScreen() {
-        if(screenFlowState.getCurrentFlow() == null){
+        if (screenFlowState.getCurrentFlow() == null) {
             screenFlowState.setCurrentFlow(screenFlowState.getScreenCommand());
             screenFlowState.setCurrentScreen(screenFlowGraph.get(screenFlowState.getCurrentFlow()).getStartScreenName());
-        }else{
+        } else {
             screenFlowState.setCurrentScreen(screenFlowGraph.get(screenFlowState.getCurrentFlow()).getNextScreenName(screenFlowState));
         }
-        
+
         ScreenFlowUnit nextScreenConfig = screenFlowGraph.get(screenFlowState.getCurrentFlow()).getScreenConfiguration(screenFlowState.getCurrentScreen());
-        
+
         nextScreenConfig.getInterfaceConstructor().buildScreen();
-        
+
         return screenFlowState.getCurrentScreen();
     }
 
@@ -64,11 +64,11 @@ public class ScreenFlowManager {
     public void changeNextScreen() {
         screenFlowState.setScreenCommand("next");
     }
-    
+
     public void changePreviousScreen() {
         screenFlowState.setScreenCommand("back");
     }
-    
+
     public void changeNextScreen(String nextScreen) {
         screenFlowState.setScreenCommand(nextScreen);
     }
@@ -80,6 +80,5 @@ public class ScreenFlowManager {
     public void addScreenDeclaration(ScreenFlowUnit screenFlowUnit) {
         mapScreenDeclarations.put(screenFlowUnit.getScreenName(), screenFlowUnit);
     }
-    
-    
+
 }

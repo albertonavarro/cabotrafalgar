@@ -74,7 +74,7 @@ public class ScreenSelectMap implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        
+
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.addAllItems(getMaps());
         setSelectedMap((String) dropDown1.getSelection().get(0));
@@ -135,7 +135,7 @@ public class ScreenSelectMap implements ScreenController {
         List<String> result = FileUtils.findFilesInFolder("Games/Millestone2/", false);
         return result;
     }
-    
+
     public void back() {
         screenFlowManager.changePreviousScreen();
         nifty.gotoScreen("redirector");

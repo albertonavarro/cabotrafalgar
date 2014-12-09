@@ -11,7 +11,7 @@
             <panel id="panel_center" width="94%" height="100%" childLayout="vertical"  >  
                 <panel id="panel_top" width="100%" height="5%" childLayout="horizontal"   backgroundColor="#ffffff30">  
                     <control name="button" label="X" id="StartButton2" align="center" valign="center" 
-                        visibleToMouse="true" > 
+                             visibleToMouse="true" > 
                         <interact onClick="showMenu()" />
                     </control>
                 </panel>

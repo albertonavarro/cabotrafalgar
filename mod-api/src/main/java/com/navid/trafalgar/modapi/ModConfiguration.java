@@ -13,21 +13,21 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
  * @author alberto
  */
 public class ModConfiguration {
-    
+
     private String modName;
-    
+
     private String modPreGameSpringConfig;
-    
+
     private String modGameSpringConfig;
-    
+
     private String buildersSpringConfig;
-    
+
     private List<ModScreenConfiguration> screenConfigurations;
-    
+
     private List<ModScreenConfiguration> screenDeclarations;
-    
+
     private List<String> moduleScreenFlow;
-    
+
     private BeanFactory beanFactory;
 
     /**
@@ -141,9 +141,9 @@ public class ModConfiguration {
     public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
-    
+
     @Override
-    public String toString(){ 
+    public String toString() {
         return "Module:" + modName;
     }
 

@@ -40,7 +40,7 @@ public class WindTunnelMainGame extends AbstractAppState {
 
     @Autowired
     private GameConfiguration gameConfiguration;
-    
+
     /**
      * jME3 AppState methods
      */
@@ -51,8 +51,8 @@ public class WindTunnelMainGame extends AbstractAppState {
         for (StateListener currentStateListener : stateListeners) {
             stateManager.register(currentStateListener);
         }
-        
-        for(StateListener currentStateListener : gameConfiguration.getPreGameModel().getByType(StateListener.class)){
+
+        for (StateListener currentStateListener : gameConfiguration.getPreGameModel().getByType(StateListener.class)) {
             stateManager.register(currentStateListener);
         }
 
@@ -109,6 +109,5 @@ public class WindTunnelMainGame extends AbstractAppState {
     public void setGameConfiguration(GameConfiguration gameConfiguration) {
         this.gameConfiguration = gameConfiguration;
     }
-    
-    
+
 }

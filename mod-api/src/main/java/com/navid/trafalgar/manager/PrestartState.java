@@ -2,9 +2,10 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- *  
+ *
  */
-public interface PrestartState extends StateListener{
+public interface PrestartState extends StateListener {
+
     /**
      *
      * @param tpf

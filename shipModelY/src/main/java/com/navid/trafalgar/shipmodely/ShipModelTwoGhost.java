@@ -10,7 +10,7 @@ import java.util.Iterator;
  *
  * @author casa
  */
-public class ShipModelTwoGhost extends AShipModelTwo implements AShipModelGhost{
+public class ShipModelTwoGhost extends AShipModelTwo implements AShipModelGhost {
 
     private final CandidateRecord<ShipSnapshot> candidateRecord;
 

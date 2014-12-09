@@ -81,10 +81,10 @@ public final class CompetitorInfo {
     public void setGameId(String gameId) {
         this.gameId = gameId;
     }
-    
+
     @Override
     public String toString() {
         return Float.toString(time) + " " + userName;
     }
-    
+
 }

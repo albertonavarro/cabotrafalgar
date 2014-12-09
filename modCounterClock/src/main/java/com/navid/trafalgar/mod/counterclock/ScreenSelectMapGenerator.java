@@ -16,7 +16,7 @@ public class ScreenSelectMapGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
-            
+
     @Override
     public void buildScreen() {
         nifty.addXml("mod/counterclock/interface_mapselector.xml");

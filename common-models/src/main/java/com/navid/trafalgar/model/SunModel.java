@@ -8,14 +8,12 @@ import com.jme3.math.Vector3f;
  *
  * @author alberto
  */
-public class SunModel extends DirectionalLight{
+public class SunModel extends DirectionalLight {
 
     public SunModel(Vector3f vector3f, ColorRGBA colorRGBA) {
         super();
         this.setDirection(vector3f);
         this.setColor(colorRGBA);
     }
-    
-    
-    
+
 }

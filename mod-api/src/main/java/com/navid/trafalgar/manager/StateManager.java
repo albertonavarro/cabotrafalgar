@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- *  
+ *
  */
 public class StateManager implements EventListener {
 
@@ -112,8 +112,8 @@ public class StateManager implements EventListener {
             } else if (event.equals(EventManager.FAILED)) {
                 currentState = STATES.FAILED;
             }
-        } 
-        
+        }
+
         if (event.equals(EventManager.UNLOAD)) {
             currentState = STATES.UNLOAD;
             update(0);

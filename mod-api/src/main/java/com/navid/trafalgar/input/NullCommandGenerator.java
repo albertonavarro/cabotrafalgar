@@ -20,19 +20,18 @@ public class NullCommandGenerator implements CommandGenerator {
 
     @Override
     public CommandStateListener generateCommandStateListener(final Command key) {
-        return new CommandStateListener (){ 
+        return new CommandStateListener() {
 
             @Override
             public void onUnload() {
             }
-        
+
         };
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Null Generator";
     }
-    
-    
+
 }

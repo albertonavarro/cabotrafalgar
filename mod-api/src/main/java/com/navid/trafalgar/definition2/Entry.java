@@ -4,20 +4,20 @@ import java.util.Map;
 
 /**
  * Representation for a json2 entry
- * 
+ *
  */
 public class Entry {
-    
+
     /*
      * Classname for the entry
      */
     private String type;
-    
+
     /*
      * Id for the object
      */
     private String name;
-    
+
     /*
      * Custom parameters
      */

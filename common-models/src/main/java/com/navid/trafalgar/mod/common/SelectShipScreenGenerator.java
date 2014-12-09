@@ -16,10 +16,10 @@ public class SelectShipScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
-         
+
     @Override
     public void buildScreen() {
-        if(nifty.getScreen("selectShip") == null){
+        if (nifty.getScreen("selectShip") == null) {
             nifty.addXml("mod/common/interface_shipselector.xml");
         }
     }

@@ -8,13 +8,12 @@ import java.util.List;
  * @author anf
  */
 public abstract class StepRecord {
-    
-    private static final int version = 1;
-    
-    private float timestamp;
-    
-    private List<String> eventList = new ArrayList();
 
+    private static final int version = 1;
+
+    private float timestamp;
+
+    private List<String> eventList = new ArrayList();
 
     /**
      * @return the version
@@ -50,8 +49,5 @@ public abstract class StepRecord {
     public void setEventList(List<String> eventList) {
         this.eventList = eventList;
     }
-    
-    
-    
-    
+
 }

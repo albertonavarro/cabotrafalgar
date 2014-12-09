@@ -66,7 +66,7 @@ public class ShipModelZBuilder implements BuilderInterface {
     public String getType() {
         return "ShipModelOneZ";
     }
-    
+
     /**
      * @param assetManager the assetManager to set
      */

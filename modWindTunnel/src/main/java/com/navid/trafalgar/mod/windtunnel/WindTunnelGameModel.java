@@ -20,46 +20,46 @@ public class WindTunnelGameModel {
     private AShipModelPlayer ship;
     private IContext context;
     private AHarnessModel harness;
-    
+
     private Node gameNode = new Node("model");
     private List<Filter> fpp = new ArrayList<Filter>();
-    
+
     private boolean inited = false;
-    
-    public boolean isInited(){
+
+    public boolean isInited() {
         return inited;
     }
-    
+
     public void init(GameModel gameModel, GameModel preGameModel) {
-        
-        if(inited){
+
+        if (inited) {
             throw new IllegalStateException("Instance CounterClockGameModel already inited");
         }
-        
+
         inited = true;
-        
+
         ship = (AShipModelPlayer) gameModel.getSingleByType(AShipModelPlayer.class);
         preGameModel.getSingleByType(AShipModelInteractive.class).setTarget(ship);
 
         context = (IContext) gameModel.getSingleByType(IContext.class);
         harness = (AHarnessModel) gameModel.getSingleByType(AHarnessModel.class);
-        
-        gameNode.addLight( (SunModel) gameModel.getSingleByType(SunModel.class));
-        
+
+        gameNode.addLight((SunModel) gameModel.getSingleByType(SunModel.class));
+
         fpp = gameModel.getByType(Filter.class);
-        
+
         gameNode.attachChild((Spatial) ship);
         gameNode.addLight(new AmbientLight());
     }
-    
+
     /**
      * @return the gameNode
      */
     public Node getGameNode() {
-        if(!inited){
+        if (!inited) {
             throw new IllegalStateException("Instance WindTunnelGameModel not yet inited");
         }
-        
+
         return gameNode;
     }
 
@@ -67,10 +67,10 @@ public class WindTunnelGameModel {
      * @return the fpp
      */
     public Collection<Filter> getFpp() {
-        if(!inited){
+        if (!inited) {
             throw new IllegalStateException("Instance WindTunnelGameModel not yet inited");
         }
-        
+
         return fpp;
     }
 
@@ -82,8 +82,8 @@ public class WindTunnelGameModel {
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public IContext getIContext() {
         return context;

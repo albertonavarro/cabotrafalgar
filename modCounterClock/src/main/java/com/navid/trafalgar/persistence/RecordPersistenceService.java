@@ -10,15 +10,18 @@ import java.util.List;
 public interface RecordPersistenceService {
 
     /**
-     * This method asks for recording the current result. 
-     * Recording is not guaranteed as system could opt to discard the result. 
+     * This method asks for recording the current result. Recording is not
+     * guaranteed as system could opt to discard the result.
+     *
      * @param candidateRecord current record
-     * @return CandidateInfo with the position of the record in the ranking and an indication of acceptance.
+     * @return CandidateInfo with the position of the record in the ranking and
+     * an indication of acceptance.
      */
     CandidateInfo addCandidate(CandidateRecord candidateRecord);
 
     /**
      * This method retrieves the top N competitors for a given map.
+     *
      * @param number Max results
      * @param map Map name
      * @param ship
@@ -28,6 +31,7 @@ public interface RecordPersistenceService {
 
     /**
      * This method retrieves the actual movements for a given position and map.
+     *
      * @param number position
      * @param map map
      * @param ship

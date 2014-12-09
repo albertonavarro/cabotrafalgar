@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 
 /**
  *
- *  
+ *
  */
 public final class FormatUtils {
 
@@ -25,13 +25,13 @@ public final class FormatUtils {
         DecimalFormat myFormatter = new DecimalFormat("###.###");
         return myFormatter.format(value);
     }
-    
+
     /**
      *
      * @param input
      * @return
      */
-    public static Vector3f getVector3fFromString(String input){
+    public static Vector3f getVector3fFromString(String input) {
         String[] values = input.split(",");
         return new Vector3f(Float.parseFloat(values[0]), Float.parseFloat(values[1]), Float.parseFloat(values[2]));
     }

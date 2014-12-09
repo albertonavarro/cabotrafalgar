@@ -68,9 +68,8 @@ public class SelectControlsScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        
-        gameConfiguration.getPreGameModel().removeFromModel(CommandStateListener.class);
 
+        gameConfiguration.getPreGameModel().removeFromModel(CommandStateListener.class);
 
         eventHandler = new EventTopicSubscriber<RadioButtonStateChangedEvent>() {
             @Override
@@ -105,7 +104,7 @@ public class SelectControlsScreenController implements ScreenController {
                 }
             }
         }
-        
+
     }
 
     @Override
@@ -133,7 +132,7 @@ public class SelectControlsScreenController implements ScreenController {
         screenFlowManager.changeNextScreen();
         goTo("redirector");
     }
-    
+
     public void back() {
         screenFlowManager.changePreviousScreen();
         nifty.gotoScreen("redirector");

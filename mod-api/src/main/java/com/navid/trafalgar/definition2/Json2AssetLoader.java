@@ -12,7 +12,7 @@ import java.io.Reader;
  *
  */
 public class Json2AssetLoader implements AssetLoader {
-    
+
     /**
      *
      * @param assetInfo
@@ -21,12 +21,12 @@ public class Json2AssetLoader implements AssetLoader {
      */
     @Override
     public Object load(AssetInfo assetInfo) throws IOException {
-        
-        Reader r =new InputStreamReader(assetInfo.openStream());
-        GameDefinition2 game = new Gson().fromJson(r, GameDefinition2.class);    
+
+        Reader r = new InputStreamReader(assetInfo.openStream());
+        GameDefinition2 game = new Gson().fromJson(r, GameDefinition2.class);
         r.close();
-        
+
         return game;
     }
-    
+
 }

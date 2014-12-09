@@ -26,31 +26,30 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author alberto
  */
 public class AnnotationToStatsManagerStartedListener implements PrestartState, StartedState {
-    
-    
+
     @Autowired
     private CounterClockGameModel gameModel;
-    
+
     @Autowired
     private StatisticsManager statsManager;
-    
+
     private AShipModelPlayer ship;
-    
-    private Map<Field, AbstractStatistic> fields = new HashMap<Field,AbstractStatistic>();
+
+    private Map<Field, AbstractStatistic> fields = new HashMap<Field, AbstractStatistic>();
 
     @Override
     public void onPrestart(float tpf) {
         ship = gameModel.getShip();
-        
+
         Iterable<Class> classes = ReflexionUtils.getSuperTypes(ship);
-        for(Class currentClass : classes){
-            for(Field currentField : currentClass.getDeclaredFields()){
-                for(Annotation currentAnnotation : currentField.getAnnotations()){
-                    if(currentAnnotation.annotationType().equals(Auditable.class)){
-                        if(!currentField.isAccessible()){
+        for (Class currentClass : classes) {
+            for (Field currentField : currentClass.getDeclaredFields()) {
+                for (Annotation currentAnnotation : currentField.getAnnotations()) {
+                    if (currentAnnotation.annotationType().equals(Auditable.class)) {
+                        if (!currentField.isAccessible()) {
                             currentField.setAccessible(true);
                         }
-                       
+
                         fields.put(currentField, statsManager.createStatistic("shipZeroStats", currentField.getName(), 0f));
                     }
                 }
@@ -66,7 +65,7 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
     @Override
     public void onStarted(float tpf) {
         long timeA = System.currentTimeMillis();
-        for (Map.Entry<Field, AbstractStatistic> field : fields.entrySet()){
+        for (Map.Entry<Field, AbstractStatistic> field : fields.entrySet()) {
             try {
                 Object value = field.getKey().get(ship);
                 field.getValue().setValue(value);
@@ -75,7 +74,7 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
             } catch (IllegalAccessException ex) {
                 Logger.getLogger(AnnotationToStatsManagerStartedListener.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }        
+        }
     }
 
     /**
@@ -98,7 +97,5 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
     public void setStatsManager(StatisticsManager statsManager) {
         this.statsManager = statsManager;
     }
-    
-    
-    
+
 }

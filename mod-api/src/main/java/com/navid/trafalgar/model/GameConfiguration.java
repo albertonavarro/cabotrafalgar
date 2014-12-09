@@ -4,27 +4,25 @@ import com.jme3.system.AppSettings;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 /**
  *
- *  
+ *
  */
 public class GameConfiguration {
 
-    
     private String map;
-    
+
     @Autowired
     private AppSettings appSettings;
-    
+
     private String shipName;
-    
+
     private GameModel preGameModel;
-    
-    public GameConfiguration(){
+
+    public GameConfiguration() {
         reset();
     }
-    
+
     public final void reset() {
         preGameModel = new GameModel();
         shipName = null;
@@ -49,16 +47,16 @@ public class GameConfiguration {
      * @param gc
      */
     public void fromGameConfiguration(GameConfiguration gc) {
-        if(gc.getMap()!=null){
+        if (gc.getMap() != null) {
             this.setMap(gc.getMap());
         }
-        
-        if(gc.getAppSettings()!= null){
+
+        if (gc.getAppSettings() != null) {
             this.setAppSettings(gc.getAppSettings());
         }
-        
-        if(gc.getShipName() != null){
-            this.setShipName( gc.getShipName());
+
+        if (gc.getShipName() != null) {
+            this.setShipName(gc.getShipName());
         }
     }
 
@@ -96,5 +94,5 @@ public class GameConfiguration {
     public GameModel getPreGameModel() {
         return preGameModel;
     }
-    
+
 }

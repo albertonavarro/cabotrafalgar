@@ -36,12 +36,12 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
 
     @Override
     public void buildScreen() {
-        if (nifty.getScreen("selectKeys") != null){
+        if (nifty.getScreen("selectKeys") != null) {
             nifty.removeScreen("selectKeys");
         }
         buildScreenNow();
     }
-    
+
     public void buildScreenNow() {
 
         Collection<KeyboardCommandStateListener> keyListeners = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
@@ -83,8 +83,6 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
                         }
                     });
 
-
-
                 }
             };
 
@@ -94,7 +92,6 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
         Screen screen = new ScreenBuilder("selectKeys") {
             {
                 controller(controller); // Screen properties   
-
 
                 // <layer>
                 layer(new LayerBuilder("Layer_ID") {
@@ -156,5 +153,4 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
         this.gameConfiguration = gameConfiguration;
     }
 
-    
 }

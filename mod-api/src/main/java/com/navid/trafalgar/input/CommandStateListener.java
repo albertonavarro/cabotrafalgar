@@ -11,5 +11,5 @@ import com.navid.trafalgar.manager.StateListener;
  * @author alberto
  */
 public interface CommandStateListener extends StateListener {
-    
+
 }

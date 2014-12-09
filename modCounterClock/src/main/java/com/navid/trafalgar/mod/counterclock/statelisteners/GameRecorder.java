@@ -37,7 +37,7 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
 
     @Autowired
     private FileRecordPersistenceService fileRecordPersistenceService;
-    
+
     @Autowired
     private RecordServerPersistenceService recordServerPersistenceService;
 
@@ -56,13 +56,13 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
 
     @Override
     public void onPrestart(float tpf) {
-        candidateRecord = ((AShipModel)model.getShip()).getCandidateRecordInstance();
+        candidateRecord = ((AShipModel) model.getShip()).getCandidateRecordInstance();
         candidateRecord.setMap(gameConfiguration.getMap());
     }
 
     @Override
     public void onStarted(float tpf) {
-        StepRecord newRecord = ((AShipModel)model.getShip()).getSnapshot();
+        StepRecord newRecord = ((AShipModel) model.getShip()).getSnapshot();
         newRecord.setTimestamp(gameStatus.getTime().getValue());
         newRecord.setEventList(eventList);
         candidateRecord.addStepRecord(newRecord);
@@ -113,20 +113,19 @@ public class GameRecorder implements StartedState, PrestartState, SuccessfulStat
     }
 
     /**
-     * @param fileRecordPersistenceService the fileRecordPersistenceService to set
+     * @param fileRecordPersistenceService the fileRecordPersistenceService to
+     * set
      */
     public void setFileRecordPersistenceService(FileRecordPersistenceService fileRecordPersistenceService) {
         this.fileRecordPersistenceService = fileRecordPersistenceService;
     }
 
     /**
-     * @param recordServerPersistenceService the recordServerPersistenceService to set
+     * @param recordServerPersistenceService the recordServerPersistenceService
+     * to set
      */
     public void setRecordServerPersistenceService(RecordServerPersistenceService recordServerPersistenceService) {
         this.recordServerPersistenceService = recordServerPersistenceService;
     }
 
-
-    
-    
 }

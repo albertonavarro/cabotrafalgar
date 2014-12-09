@@ -7,9 +7,9 @@ import com.jme3.water.WaterFilter;
  *
  * @author alberto
  */
-public class SimpleWater2 extends WaterFilter{
-    
-    public SimpleWater2(){
+public class SimpleWater2 extends WaterFilter {
+
+    public SimpleWater2() {
         setWaveScale(0.003f);
         setMaxAmplitude(2f);
         setFoamExistence(new Vector3f(1f, 4, 0.5f));

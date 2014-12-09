@@ -8,22 +8,22 @@ import com.navid.trafalgar.util.FormatUtils;
 public class FloatStatistic extends AbstractStatistic<Float> {
 
     private Float value = null;
-    
-    FloatStatistic(String parentId, String id, float initValue){
+
+    FloatStatistic(String parentId, String id, float initValue) {
         super(parentId, id);
         this.value = initValue;
     }
-    
+
     /**
      *
      * @return
      */
     @Override
     public Float getValue() {
-        if (value == null){
+        if (value == null) {
             return 0f;
         }
-        
+
         return value;
     }
 
@@ -35,14 +35,14 @@ public class FloatStatistic extends AbstractStatistic<Float> {
     public void setValue(Float newValue) {
         this.value = newValue;
     }
-    
+
     /**
      *
      * @return
      */
     @Override
-    public String toString(){
+    public String toString() {
         return getId() + " " + FormatUtils.formatFloatX_XXX(getValue());
     }
-    
+
 }

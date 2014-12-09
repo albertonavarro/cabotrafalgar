@@ -46,6 +46,5 @@ public class StartScreenController implements ScreenController {
     public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
     }
-    
-    
+
 }

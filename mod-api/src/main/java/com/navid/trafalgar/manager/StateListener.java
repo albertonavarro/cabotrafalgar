@@ -2,10 +2,10 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- *  
+ *
  */
 public interface StateListener {
-    
+
     /**
      *
      */

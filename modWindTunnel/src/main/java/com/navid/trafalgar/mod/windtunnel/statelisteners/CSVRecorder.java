@@ -54,7 +54,7 @@ public class CSVRecorder implements PrestartState, StartedState {
         mapstats = statsManager.getAllStatistics();
 
         try {
-            writer = new CSVWriter(new FileWriter("windtunnel"+System.currentTimeMillis()+".csv"));
+            writer = new CSVWriter(new FileWriter("windtunnel" + System.currentTimeMillis() + ".csv"));
 
             writer.writeNext(getHeaders());
         } catch (IOException ex) {

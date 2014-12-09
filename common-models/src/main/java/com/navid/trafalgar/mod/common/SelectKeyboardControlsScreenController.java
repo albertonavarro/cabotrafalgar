@@ -47,9 +47,10 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
 
     @Autowired
     private ProfileManager profileManager;
-    
+
     private static final Map<Integer, String> reverseMap = new HashMap<Integer, String>();
-    static{
+
+    static {
         reverseMap.put(KeyInput.KEY_A, "A");
         reverseMap.put(KeyInput.KEY_S, "S");
         reverseMap.put(KeyInput.KEY_D, "D");
@@ -85,8 +86,8 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
 
         File keyboardHistory = new File(profileManager.getHome(), "keyboardHistory.properties");
         final Properties properties = new Properties();
-        
-        if(keyboardHistory.exists()){
+
+        if (keyboardHistory.exists()) {
             try {
                 properties.load(new FileReader(keyboardHistory));
             } catch (FileNotFoundException ex) {
@@ -96,7 +97,6 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
             }
         }
 
-        
         EventTopicSubscriber<ListBoxSelectionChangedEvent> eventHandler;
 
         final Map<String, KeyboardCommandStateListener> keyListeners
@@ -116,13 +116,13 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
             }
         };
 
-        for (final Entry<String,KeyboardCommandStateListener> currentListener : keyListeners.entrySet()) {
+        for (final Entry<String, KeyboardCommandStateListener> currentListener : keyListeners.entrySet()) {
             ListBox listBoxController = screen.findNiftyControl(currentListener.getKey(), ListBox.class);
-            
+
             List<ListItem> itemList = generateKeys();
             listBoxController.addAllItems(itemList);
-            
-            if(properties.containsKey(currentListener.getKey())){
+
+            if (properties.containsKey(currentListener.getKey())) {
                 int index = Iterables.indexOf(itemList, new Predicate<ListItem>() {
 
                     @Override
@@ -130,15 +130,14 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
                         return t.value == Integer.parseInt((String) properties.get(currentListener.getKey()));
                     }
                 });
-                
+
                 listBoxController.selectItemByIndex(index);
                 currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
-                
+
             } else {
                 listBoxController.selectItemByIndex(0);
                 currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
             }
-            
 
             nifty.subscribe(screen, currentListener.getKey(), ListBoxSelectionChangedEvent.class, eventHandler);
         }
@@ -160,15 +159,15 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
 
         try {
             File keyboardHistory = new File(profileManager.getHome(), "keyboardHistory.properties");
-            
+
             Properties properties = new Properties();
-            
+
             List<KeyboardCommandStateListener> listeners = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
-            
+
             for (KeyboardCommandStateListener listener : listeners) {
                 properties.put(listener.toString(), Integer.toString(listener.getKeycode()));
             }
-            
+
             properties.store(new FileWriter(keyboardHistory), "User commands");
         } catch (IOException ex) {
             Logger.getLogger(SelectKeyboardControlsScreenController.class.getName()).log(Level.SEVERE, null, ex);

@@ -54,30 +54,29 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
 
         NONE, FLYCAM, TARGETCAM, CHASECAM
     };
-    
+
     @Autowired
-    public void setCounterClockMainScreen(WindTunnelMainScreen screen){
+    public void setCounterClockMainScreen(WindTunnelMainScreen screen) {
         screen.setCameraManager(this);
     }
-    
+
     @Autowired
     private GameStatus gameStatus;
     @Autowired
     private InputManager inputManager;
     @Autowired
     private EventManager eventManager;
-    
-    
+
     private FlyByCamera flyCamControl;
     private ChaseCamera chaseCamControl;
     private Camera camera;
     private AShipModelPlayer player;
     private final String[] mappings = {"Cam1", "Cam2", "Cam3"};
     private LoadCameraStateListener.Cameras selectedCam = LoadCameraStateListener.Cameras.NONE;
-    
+
     @Autowired
     private WindTunnelGameModel gameModel;
-    
+
     private final ActionListener actionListener = new ActionListener() {
 
         @Override
@@ -116,7 +115,6 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         flyCamControl.setMoveSpeed(200);
         flyCamControl.setDragToRotate(true);
 
-        
         // Enable a chasing cam
         chaseCamControl = new ChaseCamera(camera, (Node) player, inputManager);
         chaseCamControl.setSmoothMotion(true);

@@ -7,8 +7,8 @@ import com.navid.trafalgar.modapi.GenericModRegisterer;
  * @author alberto
  */
 public class InterfaceGeneratorGeneric extends GenericModRegisterer {
-    
-    public InterfaceGeneratorGeneric(){
+
+    public InterfaceGeneratorGeneric() {
         super(InterfaceGeneratorGeneric.class.getResourceAsStream("windtunnelmodconfig.yml"));
     }
 

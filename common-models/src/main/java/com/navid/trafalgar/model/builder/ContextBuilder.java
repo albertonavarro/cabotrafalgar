@@ -40,5 +40,5 @@ public class ContextBuilder implements BuilderInterface {
     public String getType() {
         return "Context";
     }
-    
+
 }

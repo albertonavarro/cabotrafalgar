@@ -141,7 +141,7 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
     synchronized public void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        
+
         screenFlowManager.changeNextScreen("windTunnelScreen");
         nifty.gotoScreen("redirector");
     }
@@ -149,7 +149,7 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
     synchronized public void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        
+
         screenFlowManager.changeNextScreen("selectShip");
         nifty.gotoScreen("redirector");
     }
@@ -193,6 +193,5 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
     public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
     }
-    
-    
+
 }

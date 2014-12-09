@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- *   
+ *
  */
 public class GameStatus {
 
@@ -36,20 +36,17 @@ public class GameStatus {
 
         gameGUINode.setQueueBucket(Bucket.Gui);
         gameGUINode.setCullHint(CullHint.Never);
-        
-        
+
     }
-    
+
     /**
      *
      * @param statisticsManager
      */
     @Autowired
-    public void setStatisticsManager(StatisticsManager statisticsManager){
-    time = statisticsManager.createStatistic("root", "time", 0f);
+    public void setStatisticsManager(StatisticsManager statisticsManager) {
+        time = statisticsManager.createStatistic("root", "time", 0f);
     }
-    
-
 
     /**
      *

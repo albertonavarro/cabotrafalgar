@@ -29,8 +29,8 @@ public class KeyboardCommandStateListener implements CommandStateListener, Prest
     public void setKeycode(int keycode) {
         this.keycode = keycode;
     }
-    
-    public int getKeycode(){
+
+    public int getKeycode() {
         return keycode;
     }
 

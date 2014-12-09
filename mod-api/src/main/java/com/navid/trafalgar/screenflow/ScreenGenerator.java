@@ -11,5 +11,5 @@ package com.navid.trafalgar.screenflow;
 public interface ScreenGenerator {
 
     public void buildScreen();
-    
+
 }

@@ -20,17 +20,17 @@ import org.springframework.context.ApplicationContextAware;
  * @author casa
  */
 public class ModRegistererClasspathDetector implements ApplicationContextAware {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(ModRegistererClasspathDetector.class);
-    
+
     private ApplicationContext ctx;
-    
+
     private Builder2 builder;
-    
+
     public void detectAndRegister() {
         loadModules(null, null, null, null);
     }
-    
+
     private void loadModules(Nifty nifty, Screen screen, AppSettings settings, Application app) {
         Reflections reflections = new Reflections("com.navid.trafalgar");
 
@@ -54,7 +54,7 @@ public class ModRegistererClasspathDetector implements ApplicationContextAware {
         for (ModRegisterer currentRegisterer : resultInstances) {
             currentRegisterer.registerSpringConfig(ctx);
         }
-        
+
         for (ModRegisterer currentRegisterer : resultInstances) {
             currentRegisterer.registerInputs();
         }
@@ -81,7 +81,5 @@ public class ModRegistererClasspathDetector implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.ctx = applicationContext;
     }
-    
-    
-    
+
 }

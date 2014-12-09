@@ -29,13 +29,13 @@
             <panel id="panel_bottom" height="15%" width="75%" align="center" childLayout="horizontal">  
                 <panel id="panel_bottom_right" height="50%" width="25%" valign="center" childLayout="center">  
                     <control name="button" label="Back" id="QuitButton" align="center" valign="center" 
-          visibleToMouse="true" > 
+                             visibleToMouse="true" > 
                         <interact onClick="back()"/>
                     </control>
                 </panel>
                 <panel id="panel_bottom_right3" height="50%" width="25%" valign="center" childLayout="center">  
                     <control name="button" label="Play!" id="MillestoneGame2" align="center" valign="center" 
-          visibleToMouse="true" > 
+                             visibleToMouse="true" > 
                         <interact onClick="next()"/>
                     </control>
                 </panel>

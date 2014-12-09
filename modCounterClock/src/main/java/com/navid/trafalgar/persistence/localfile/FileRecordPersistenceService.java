@@ -20,11 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author anf
  */
 public class FileRecordPersistenceService implements RecordPersistenceService {
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(FileRecordPersistenceService.class);
 
     private Gson gson = new Gson();
-    
+
     @Autowired
     private ProfileManager profileManager;
 
@@ -93,12 +93,12 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
     }
 
     private File returnFolderForMap(String map, String ship) {
-        
+
         File shipFolder = new File(profileManager.getHome(), ship);
         if (!shipFolder.exists()) {
             shipFolder.mkdir();
         }
-        
+
         File currentMapFolder = new File(shipFolder, map.replace("/", "_").replace("\\", "_"));
         if (!currentMapFolder.exists()) {
             currentMapFolder.mkdir();
@@ -170,6 +170,5 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
     public void setProfileManager(ProfileManager profileManager) {
         this.profileManager = profileManager;
     }
-    
-    
+
 }

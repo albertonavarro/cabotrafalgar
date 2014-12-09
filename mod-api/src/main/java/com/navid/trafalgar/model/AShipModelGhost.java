@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.navid.trafalgar.model;
 
 /**
@@ -11,5 +10,5 @@ package com.navid.trafalgar.model;
  * @author casa
  */
 public interface AShipModelGhost {
-    
+
 }

@@ -21,8 +21,8 @@ public class MillestoneModel extends AMillestoneModel {
         spatial.scale(3);
         this.attachChild(spatial);
 
-        CollisionShape sceneShape =
-                CollisionShapeFactory.createMeshShape(this);
+        CollisionShape sceneShape
+                = CollisionShapeFactory.createMeshShape(this);
         millestone = new RigidBodyControl(sceneShape, 0);
         this.addControl(millestone);
         millestone.setPhysicsLocation(new Vector3f(-200, 0, 100));

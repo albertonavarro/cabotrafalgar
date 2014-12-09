@@ -22,10 +22,9 @@ public class StartedListener implements PrestartState, StartedState {
     private Collection<AMillestoneModel> millestones;
     @Autowired
     private EventManager eventManager;
-    
+
     @Autowired
     private CounterClockGameModel model;
-
 
     public void onPrestart(float tpf) {
         gameStatus.getTime().setValue(0f);

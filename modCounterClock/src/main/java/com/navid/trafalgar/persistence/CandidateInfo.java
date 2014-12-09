@@ -5,9 +5,9 @@ package com.navid.trafalgar.persistence;
  * @author anf
  */
 public class CandidateInfo {
-    
+
     private boolean accepted;
-    
+
     private int position;
 
     /**
@@ -37,5 +37,5 @@ public class CandidateInfo {
     public void setPosition(int position) {
         this.position = position;
     }
-    
+
 }

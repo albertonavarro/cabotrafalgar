@@ -24,8 +24,6 @@ public class ShipModelTwoBuilder implements BuilderInterface {
     @Autowired
     private EventManager eventManager;
 
-    
-
     @Override
     public Collection build(String instanceName, Map<String, Object> customValues) {
         AShipModelTwo model = null;
@@ -68,7 +66,7 @@ public class ShipModelTwoBuilder implements BuilderInterface {
     public String getType() {
         return "ShipModelOneY";
     }
-    
+
     /**
      * @param assetManager the assetManager to set
      */

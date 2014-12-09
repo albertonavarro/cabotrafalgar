@@ -15,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class SunBuilder implements BuilderInterface{
-    
+public class SunBuilder implements BuilderInterface {
+
     @Autowired
     private AssetManager assetManager;
-    
+
     /**
      * @param assetManager the assetManager to set
      */
@@ -29,7 +29,7 @@ public class SunBuilder implements BuilderInterface{
 
     @Override
     public Collection build(String instanceName, Map<String, Object> customValues) {
-        return Collections.singleton(new SunModel(new Vector3f(-1,-1,-1), ColorRGBA.Yellow));
+        return Collections.singleton(new SunModel(new Vector3f(-1, -1, -1), ColorRGBA.Yellow));
     }
 
     @Override
@@ -41,5 +41,5 @@ public class SunBuilder implements BuilderInterface{
     public Iterable<Builder2.Category> getCategories() {
         return Collections.singleton(Builder2.Category.context);
     }
-    
+
 }

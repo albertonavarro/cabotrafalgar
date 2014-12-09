@@ -5,21 +5,21 @@ package com.navid.trafalgar.profiles;
  * @author casa
  */
 public class ProfileInternal {
-    
+
     private String name;
-    
+
     private String folderHome;
-    
+
     private String token;
-    
+
     private String email;
-    
+
     private String sessionId;
-    
+
     public ProfileInternal() {
-        
+
     }
-    
+
     public ProfileInternal(String email, String folderName, String token) {
         this.email = email;
         this.folderHome = folderName;
@@ -95,10 +95,9 @@ public class ProfileInternal {
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
-    
+
     public boolean isOnline() {
         return token != null;
     }
-    
-    
+
 }

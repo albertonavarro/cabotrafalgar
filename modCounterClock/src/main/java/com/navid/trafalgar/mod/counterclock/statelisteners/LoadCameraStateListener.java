@@ -58,20 +58,19 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
 
         NONE, FLYCAM, TARGETCAM, CHASECAM
     };
-    
+
     @Autowired
-    public void setCounterClockMainScreen(CounterClockMainScreen screen){
+    public void setCounterClockMainScreen(CounterClockMainScreen screen) {
         screen.setCameraManager(this);
     }
-    
+
     @Autowired
     private GameStatus gameStatus;
     @Autowired
     private InputManager inputManager;
     @Autowired
     private EventManager eventManager;
-    
-    
+
     private FlyByCamera flyCamControl;
     private TargetCamera targetCamControl;
     private ChaseCamera chaseCamControl;
@@ -80,10 +79,10 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
     private Collection<? extends Node> targets;
     private String[] mappings = {"Cam1", "Cam2", "Cam3"};
     private Cameras selectedCam = Cameras.NONE;
-    
+
     @Autowired
     private CounterClockGameModel gameModel;
-    
+
     private ActionListener actionListener = new ActionListener() {
 
         public void onAction(String name, boolean isPressed, float tpf) {

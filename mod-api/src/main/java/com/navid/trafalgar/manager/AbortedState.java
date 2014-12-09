@@ -2,9 +2,9 @@ package com.navid.trafalgar.manager;
 
 /**
  *
- *   
+ *
  */
-public interface AbortedState extends StateListener{
+public interface AbortedState extends StateListener {
 
     /**
      *

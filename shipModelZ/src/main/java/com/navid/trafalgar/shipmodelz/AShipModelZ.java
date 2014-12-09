@@ -20,7 +20,7 @@ import com.navid.trafalgar.model.StepRecord;
  * @author alberto
  */
 public abstract class AShipModelZ extends AShipModel {
-    
+
     public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
     }
 
@@ -65,14 +65,13 @@ public abstract class AShipModelZ extends AShipModel {
 
         return snapshot;
     }
-    
+
     protected Spatial spatial;
     protected Sail sail;
     protected Rudder rudder;
     private Material matHull;
     private Material matSail;
     private boolean previousTransparent = false;
-    
 
     protected AShipModelZ(String role, AssetManager assetManager, EventManager eventManager) {
         super(role, new Vector3f(1, 0, 0), assetManager, eventManager);
@@ -121,7 +120,7 @@ public abstract class AShipModelZ extends AShipModel {
         this.addControl(windGeometry);
         windGeometry.move(-10, 10, 0);
     }
-    
+
     @Override
     public final void updateFromRecord(StepRecord currentStepRecord) {
         ShipSnapshot snapshot = (ShipSnapshot) currentStepRecord;
@@ -129,7 +128,7 @@ public abstract class AShipModelZ extends AShipModel {
         this.setLocalTranslation(snapshot.getPosition());
         this.setLocalRotation(snapshot.getRotation());
     }
-    
+
     /**
      * Sail representation
      */
@@ -174,7 +173,7 @@ public abstract class AShipModelZ extends AShipModel {
 
         public final void rotateY(float radians) {
             float increment;
-            if(radians > 0) { 
+            if (radians > 0) {
                 if (value + radians > MAXIMUM) {
                     value = MAXIMUM;
                     increment = MAXIMUM - value;

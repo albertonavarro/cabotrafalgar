@@ -14,12 +14,12 @@ import org.springframework.beans.factory.BeanFactory;
  * @author alberto
  */
 public class ScreenFlowUnit {
-    
+
     private String screenName;
     private ScreenGenerator interfaceConstructor;
     private ScreenController controller;
-    
-    public ScreenFlowUnit(String screenName, ScreenGenerator interfaceConstructor, ScreenController controller){
+
+    public ScreenFlowUnit(String screenName, ScreenGenerator interfaceConstructor, ScreenController controller) {
         this.screenName = screenName;
         this.interfaceConstructor = interfaceConstructor;
         this.controller = controller;
@@ -30,7 +30,7 @@ public class ScreenFlowUnit {
         this.controller = beanFactory.getBean(modScreenConfiguration.getController(), ScreenController.class);
         this.screenName = modScreenConfiguration.getScreenName();
     }
-    
+
     /**
      * @return the screenName
      */
@@ -72,5 +72,5 @@ public class ScreenFlowUnit {
     public void setController(ScreenController controller) {
         this.controller = controller;
     }
-    
+
 }

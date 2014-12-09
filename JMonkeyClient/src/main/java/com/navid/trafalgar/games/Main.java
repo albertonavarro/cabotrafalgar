@@ -29,7 +29,7 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
 public class Main extends Application {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     private static boolean record = false;
@@ -154,7 +154,7 @@ public class Main extends Application {
         // render the viewports
         renderManager.render(tpf, context.isRenderable());
     }
-    
+
     public static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
 
     public static void registerSingletonBeanDefinition(String name, String className) {

@@ -9,23 +9,22 @@ import java.util.List;
  * @author anf
  */
 public class Qualification {
-    
-    private File fileName;
-    
-    private List<Float> times = new ArrayList<Float>();
-    
-    private String shipClassName;
-    
 
-    public Qualification(){
-    
+    private File fileName;
+
+    private List<Float> times = new ArrayList<Float>();
+
+    private String shipClassName;
+
+    public Qualification() {
+
     }
-    
-    public Qualification(File fileName){
+
+    public Qualification(File fileName) {
         this.fileName = fileName;
         calculateMapName(fileName);
     }
-    
+
     /**
      * @return the times
      */
@@ -46,8 +45,8 @@ public class Qualification {
     public File getFileName() {
         return fileName;
     }
-    
-    public File getMapName(){
+
+    public File getMapName() {
         return calculateMapName(fileName);
     }
 
@@ -59,7 +58,7 @@ public class Qualification {
     }
 
     private File calculateMapName(File fileName) {
-        return new File(fileName.getParent(), fileName.getName()+"_map");
+        return new File(fileName.getParent(), fileName.getName() + "_map");
     }
 
     /**
@@ -68,8 +67,8 @@ public class Qualification {
     public String getShipClassName() {
         return shipClassName;
     }
-    
-    public Class getShipClass(){
+
+    public Class getShipClass() {
         try {
             return Class.forName(shipClassName);
         } catch (ClassNotFoundException ex) {
@@ -87,5 +86,5 @@ public class Qualification {
     void setShipClass(Class stepRecordClass) {
         this.shipClassName = stepRecordClass.getName();
     }
-    
+
 }

@@ -20,7 +20,6 @@ public class StartedListener implements PrestartState, StartedState {
     @Autowired
     private GameStatus gameStatus;
 
-
     @Override
     public void onPrestart(float tpf) {
         gameStatus.getTime().setValue(0f);
@@ -44,5 +43,5 @@ public class StartedListener implements PrestartState, StartedState {
      */
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
-    }    
+    }
 }

@@ -22,7 +22,7 @@ public class LoadEventsListener implements InitState {
         inputManager.addMapping("Cam3", new KeyTrigger(KeyInput.KEY_3));
 
         inputManager.addMapping("Menu", new KeyTrigger(KeyInput.KEY_ESCAPE));
-        
+
         inputManager.addMapping("WindTunnel_RotateRight", new KeyTrigger(KeyInput.KEY_J));
         inputManager.addMapping("WindTunnel_RotateLeft", new KeyTrigger(KeyInput.KEY_K));
     }

@@ -2,7 +2,8 @@ package com.navid.trafalgar.manager.statistics;
 
 /**
  * This class represents a Statistic to be evaluated.
- * @param <T> 
+ *
+ * @param <T>
  */
 public abstract class AbstractStatistic<T> {
 
@@ -14,7 +15,7 @@ public abstract class AbstractStatistic<T> {
      * Logical parent id
      */
     private final String parentId;
-    
+
     /*
      * Constructor
      */
@@ -23,11 +24,11 @@ public abstract class AbstractStatistic<T> {
      * @param parentId
      * @param id
      */
-    protected AbstractStatistic(String parentId, String id){
+    protected AbstractStatistic(String parentId, String id) {
         this.id = id;
         this.parentId = parentId;
     }
-    
+
     /*
      * Get parentid
      */
@@ -49,7 +50,7 @@ public abstract class AbstractStatistic<T> {
     public String getId() {
         return id;
     }
-    
+
     /*
      * Get typed value
      */
@@ -67,5 +68,5 @@ public abstract class AbstractStatistic<T> {
      * @param newValue
      */
     public abstract void setValue(T newValue);
-    
+
 }

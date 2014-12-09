@@ -64,7 +64,6 @@ public class TargetCamera implements Control, EventListener {
 
             cam.lookAt(currentTarget.getWorldTranslation(), Vector3f.ZERO);
 
-
         }
 
     }

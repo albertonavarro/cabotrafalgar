@@ -52,16 +52,15 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
     private float speed;
     @Auditable
     protected float inclinacion = 0;
-    
+
     private float sailCorrection = 0.3f;
     private float sailRotateSpeed = 2f;
     private float sailSurface = 100;
     private float lastPitch = 0f;
-    
+
     private Vector3fStatistic apparentWind;
     private Vector3fStatistic shipDirection;
     private Vector3fStatistic realWind;
-    
 
     public ShipModelTwoPlayer(AssetManager assetManager, EventManager eventManager) {
         super("Player", assetManager, eventManager);

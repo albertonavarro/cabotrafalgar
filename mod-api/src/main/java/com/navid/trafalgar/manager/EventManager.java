@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- *  
+ *
  */
 public class EventManager {
 
@@ -40,15 +40,13 @@ public class EventManager {
     /**
      *
      */
-    public static final String MILLESTONE_REACHED ="MILLESTONE_REACHED";
+    public static final String MILLESTONE_REACHED = "MILLESTONE_REACHED";
     /**
      *
      */
     public static final String UNLOAD = "UNLOAD";
-    
+
     private Map<String, Set<EventListener>> eventListeners = new HashMap<String, Set<EventListener>>();
-    
-   
 
     /**
      *
@@ -76,16 +74,16 @@ public class EventManager {
         Set<EventListener> listeners = eventListeners.get(event);
         if (listeners != null) {
             for (EventListener currentListener : listeners) {
-                Logger.getLogger(EventManager.class.getName()).log(Level.FINE, "Firing event {0} to listener: {1}", new Object[] {event, currentListener.toString()});
+                Logger.getLogger(EventManager.class.getName()).log(Level.FINE, "Firing event {0} to listener: {1}", new Object[]{event, currentListener.toString()});
 
                 currentListener.onEvent(event);
             }
         }
-        
-        if(event.equals(UNLOAD)){
+
+        if (event.equals(UNLOAD)) {
             eventListeners = new HashMap<String, Set<EventListener>>();
         }
-        
+
         Logger.getLogger(EventManager.class.getName()).log(Level.FINE, "Finished firing event: {0}", event);
 
     }

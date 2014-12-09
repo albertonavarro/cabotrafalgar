@@ -4,9 +4,10 @@ package com.navid.trafalgar.model;
  *
  * @author alberto
  */
-public class SimpleContext implements IContext, Dependent{
+public class SimpleContext implements IContext, Dependent {
+
     private IWind iWind;
-    
+
     private IWater iWater;
 
     /**
@@ -39,7 +40,7 @@ public class SimpleContext implements IContext, Dependent{
 
     @Override
     public void resolveDependencies(GameModel gameModel) {
-        setWind((IWind)gameModel.getSingleByType(IWind.class));
+        setWind((IWind) gameModel.getSingleByType(IWind.class));
     }
-    
+
 }
