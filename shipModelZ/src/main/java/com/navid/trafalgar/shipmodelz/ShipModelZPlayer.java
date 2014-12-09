@@ -20,14 +20,8 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     public static final float MINIMUM_ROPE = 1.5f;
     public static final float MAXIMUM_ROPE = 3;
     public static final float TRIMMING_SPEED = 1;
-
-    @Override
-    public void setStatisticsManager(StatisticsManager statisticsManager) {
-        shipDirection = statisticsManager.createStatistic(STATS_NAME, "Ship direction", this.getGlobalDirection());
-        realWind = statisticsManager.createStatistic(STATS_NAME, "Real wind", Vector3f.UNIT_X);
-        apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
-    }
-
+    public static final float MAXIMUM_RUDDER = 0.3f;
+    
     @Auditable
     private float windOverVela;
     @Auditable
@@ -61,10 +55,16 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     private Vector3fStatistic apparentWind;
     private Vector3fStatistic shipDirection;
     private Vector3fStatistic realWind;
-
-
+    
     public ShipModelZPlayer(AssetManager assetManager, EventManager eventManager) {
         super("Player", assetManager, eventManager);
+    }
+    
+    @Override
+    public void setStatisticsManager(StatisticsManager statisticsManager) {
+        shipDirection = statisticsManager.createStatistic(STATS_NAME, "Ship direction", this.getGlobalDirection());
+        realWind = statisticsManager.createStatistic(STATS_NAME, "Real wind", Vector3f.UNIT_X);
+        apparentWind = statisticsManager.createStatistic(STATS_NAME, "Apparent wind", Vector3f.UNIT_X);
     }
 
     private void updateSpeed(float tpf) {
@@ -194,10 +194,12 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
     public void rudderRight(float tpf) {
         rudderRotation = -1 * tpf;
+        
     }
 
     public void rudderLeft(float tpf) {
         rudderRotation = 1 * tpf;
+
     }
 
     public void sailLoose(float tpf) {

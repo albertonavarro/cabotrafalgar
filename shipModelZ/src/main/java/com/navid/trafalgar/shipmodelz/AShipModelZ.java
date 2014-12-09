@@ -24,6 +24,7 @@ public abstract class AShipModelZ extends AShipModel {
     public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
     }
 
+    @Override
     public final CandidateRecord getCandidateRecordInstance() {
         ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
         candidateRecord.getHeader().setShipModel("ShipModelOneZ");
@@ -55,6 +56,7 @@ public abstract class AShipModelZ extends AShipModel {
         }
     }
 
+    @Override
     public final StepRecord getSnapshot() {
         ShipSnapshot snapshot = new ShipSnapshot();
 
@@ -99,6 +101,7 @@ public abstract class AShipModelZ extends AShipModel {
         spatial.setMaterial(mat);
     }
 
+    @Override
     public final void setTransparent(boolean b) {
         if (!previousTransparent && b) {
             matHull.getAdditionalRenderState().setBlendMode(BlendMode.Color);
@@ -132,7 +135,7 @@ public abstract class AShipModelZ extends AShipModel {
      */
     protected final class Sail extends TrafalgarNode {
 
-        private Node helperDirection;
+        private final Node helperDirection;
 
         protected Sail(AssetManager assetManager, EventManager eventManager) {
             super(new Vector3f(0, 0, 1), assetManager, eventManager);
@@ -158,6 +161,7 @@ public abstract class AShipModelZ extends AShipModel {
 
     protected final class Rudder extends TrafalgarNode {
 
+        private final float MAXIMUM = 1;
         private float value = 0;
 
         protected Rudder(AssetManager assetManager, EventManager eventManager) {
@@ -169,13 +173,30 @@ public abstract class AShipModelZ extends AShipModel {
         }
 
         public final void rotateY(float radians) {
-            this.rotate(0, radians, 0);
-            value += radians;
+            float increment;
+            if(radians > 0) { 
+                if (value + radians > MAXIMUM) {
+                    value = MAXIMUM;
+                    increment = MAXIMUM - value;
+                } else {
+                    value += radians;
+                    increment = radians;
+                }
+            } else {
+                if (value + radians < -MAXIMUM) {
+                    value = -MAXIMUM;
+                    increment = -MAXIMUM + value;
+                } else {
+                    value += radians;
+                    increment = radians;
+                }
+            }
+            this.rotate(0, increment, 0);
         }
 
         protected void resetRotation() {
-            this.rotateY(-getRudderValue());
             value = 0;
+            this.rotateY(-value);
         }
     }
 

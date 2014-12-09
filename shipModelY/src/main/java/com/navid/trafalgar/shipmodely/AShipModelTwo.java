@@ -161,6 +161,7 @@ public abstract class AShipModelTwo extends AShipModel {
 
     protected final class Rudder extends TrafalgarNode {
 
+        private final float MAXIMUM = 1;
         private float value = 0;
 
         protected Rudder(AssetManager assetManager, EventManager eventManager) {
@@ -172,8 +173,25 @@ public abstract class AShipModelTwo extends AShipModel {
         }
 
         public final void rotateY(float radians) {
-            this.rotate(0, radians, 0);
-            value += radians;
+            float increment;
+            if(radians > 0) { 
+                if (value + radians > MAXIMUM) {
+                    value = MAXIMUM;
+                    increment = MAXIMUM - value;
+                } else {
+                    value += radians;
+                    increment = radians;
+                }
+            } else {
+                if (value + radians < -MAXIMUM) {
+                    value = -MAXIMUM;
+                    increment = -MAXIMUM + value;
+                } else {
+                    value += radians;
+                    increment = radians;
+                }
+            }
+            this.rotate(0, increment, 0);
         }
 
         protected void resetRotation() {
