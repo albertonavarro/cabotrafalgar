@@ -31,7 +31,7 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
     @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
 
-        Qualification currentQualification = returnCurrentQualificationForMap(candidateRecord.getHeader().getMap());
+        Qualification currentQualification = returnCurrentQualificationForMap(candidateRecord.getHeader().getMap(), candidateRecord.getHeader().getShipModel());
 
         int index;
         for (index = 0; index < currentQualification.getTimes().size(); index++) {
@@ -92,14 +92,14 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
         }
     }
 
-    private File returnFolderForMap(String map) {
+    private File returnFolderForMap(String map, String ship) {
         
-        File mapsFolder = new File(profileManager.getHome(), "maps");
-        if (!mapsFolder.exists()) {
-            mapsFolder.mkdir();
+        File shipFolder = new File(profileManager.getHome(), ship);
+        if (!shipFolder.exists()) {
+            shipFolder.mkdir();
         }
-
-        File currentMapFolder = new File(mapsFolder, map.replace("/", "_").replace("\\", "_"));
+        
+        File currentMapFolder = new File(shipFolder, map.replace("/", "_").replace("\\", "_"));
         if (!currentMapFolder.exists()) {
             currentMapFolder.mkdir();
         }
@@ -107,13 +107,13 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
         return currentMapFolder;
     }
 
-    private CandidateRecord returnGhostForMap(String map) {
-        Qualification q = returnCurrentQualificationForMap(map);
+    private CandidateRecord returnGhostForMap(String map, String ship) {
+        Qualification q = returnCurrentQualificationForMap(map, ship);
         return loadRecord(q);
     }
 
-    private Qualification returnCurrentQualificationForMap(String map) {
-        File currentMapFolder = returnFolderForMap(map);
+    private Qualification returnCurrentQualificationForMap(String map, String ship) {
+        File currentMapFolder = returnFolderForMap(map, ship);
 
         File qualificationFile = new File(currentMapFolder, "ranking.json");
         if (!qualificationFile.exists()) {
@@ -138,7 +138,7 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
     @Override
     public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship) {
         //TODO use ship
-        Qualification q = returnCurrentQualificationForMap(map);
+        Qualification q = returnCurrentQualificationForMap(map, ship);
 
         List<CompetitorInfo> result = new ArrayList<CompetitorInfo>();
         for (int index = 0; index < q.getTimes().size() && index < number; index++) {
@@ -158,7 +158,7 @@ public class FileRecordPersistenceService implements RecordPersistenceService {
     public CandidateRecord getGhost(int number, String map, String ship) {
         //TODO use ship
         if (number == 1) {
-            return returnGhostForMap(map);
+            return returnGhostForMap(map, ship);
         }
 
         throw new UnsupportedOperationException("Getting any ghost position different than 1 is not supported yet.");
