@@ -1,6 +1,7 @@
 package com.navid.trafalgar.shipmodelz;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.material.Material;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.model.AShipModelGhost;
 import com.navid.trafalgar.model.CandidateRecord;
@@ -17,7 +18,7 @@ public class ShipModelZGhost extends AShipModelZ implements AShipModelGhost {
     private final Iterator<ShipSnapshot> iterator;
     private ShipSnapshot currentStep;
 
-    public ShipModelZGhost(AssetManager assetManager,
+    public ShipModelZGhost(final AssetManager assetManager,
             EventManager eventManager,
             CandidateRecord<ShipSnapshot> candidateRecord) {
         super("Ghost", assetManager, eventManager);
@@ -27,6 +28,20 @@ public class ShipModelZGhost extends AShipModelZ implements AShipModelGhost {
         if (iterator.hasNext()) {
             currentStep = iterator.next();
         }
+        
+        this.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
+            {
+                setTexture("DiffuseMap", assetManager.loadTexture("Textures/wood.jpeg"));
+            }
+        });
+
+        this.setSailMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
+            {
+                setTexture("DiffuseMap", assetManager.loadTexture("Textures/sail.jpg"));
+            }
+        });
+        
+        this.setTransparent(true);
     }
 
     float time = 0;

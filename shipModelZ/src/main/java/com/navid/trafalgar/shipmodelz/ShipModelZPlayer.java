@@ -1,6 +1,7 @@
 package com.navid.trafalgar.shipmodelz;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.material.Material;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.navid.trafalgar.manager.EventManager;
@@ -56,8 +57,21 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     private Vector3fStatistic shipDirection;
     private Vector3fStatistic realWind;
 
-    public ShipModelZPlayer(AssetManager assetManager, EventManager eventManager) {
+    public ShipModelZPlayer(final AssetManager assetManager, EventManager eventManager) {
         super("Player", assetManager, eventManager);
+        
+        
+        this.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
+            {
+                setTexture("DiffuseMap", assetManager.loadTexture("Textures/wood.jpeg"));
+            }
+        });
+
+        this.setSailMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
+            {
+                setTexture("DiffuseMap", assetManager.loadTexture("Textures/sail.jpg"));
+            }
+        });
     }
 
     @Override

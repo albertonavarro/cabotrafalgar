@@ -43,17 +43,6 @@ public class ShipModelZBuilder implements BuilderInterface {
 
         model.setName(instanceName);
 
-        model.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
-            {
-                setTexture("DiffuseMap", assetManager.loadTexture("Textures/wood.jpeg"));
-            }
-        });
-
-        model.setSailMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
-            {
-                setTexture("DiffuseMap", assetManager.loadTexture("Textures/sail.jpg"));
-            }
-        });
 
         if (customValues.containsKey("position")) {
             model.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
