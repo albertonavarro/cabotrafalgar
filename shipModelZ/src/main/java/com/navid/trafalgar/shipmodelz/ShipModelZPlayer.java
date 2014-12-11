@@ -47,9 +47,9 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     @Auditable
     protected float inclinacion = 0;
 
-    private float sailCorrection = 0.3f;
-    private float sailRotateSpeed = 2f;
-    private float sailSurface = 100;
+    private final float sailCorrection = 0.3f;
+    private final float sailRotateSpeed = 2f;
+    private final float sailSurface = 100;
     private float lastPitch = 0f;
 
     private Vector3fStatistic apparentWind;

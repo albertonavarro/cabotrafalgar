@@ -21,51 +21,6 @@ import com.navid.trafalgar.model.StepRecord;
  */
 public abstract class AShipModelZ extends AShipModel {
 
-    public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
-    }
-
-    @Override
-    public final CandidateRecord getCandidateRecordInstance() {
-        ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
-        candidateRecord.getHeader().setShipModel("ShipModelOneZ");
-        return candidateRecord;
-    }
-
-    /**
-     * Internal representation for AShipOneModel
-     */
-    public static class ShipSnapshot extends StepRecord {
-
-        private Vector3f position;
-        private Quaternion rotation;
-
-        private void setPosition(final Vector3f position) {
-            this.position = position;
-        }
-
-        private void setRotation(final Quaternion rotation) {
-            this.rotation = rotation;
-        }
-
-        public Vector3f getPosition() {
-            return position;
-        }
-
-        public Quaternion getRotation() {
-            return rotation;
-        }
-    }
-
-    @Override
-    public final StepRecord getSnapshot() {
-        ShipSnapshot snapshot = new ShipSnapshot();
-
-        snapshot.setPosition(this.getLocalTranslation().clone());
-        snapshot.setRotation(this.getLocalRotation().clone());
-
-        return snapshot;
-    }
-
     protected Spatial spatial;
     protected Sail sail;
     protected Rudder rudder;
@@ -88,6 +43,24 @@ public abstract class AShipModelZ extends AShipModel {
 
         sail.setQueueBucket(Bucket.Transparent);
         spatial.setQueueBucket(Bucket.Transparent);
+    }
+    
+    @Override
+    public final CandidateRecord getCandidateRecordInstance() {
+        ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
+        candidateRecord.getHeader().setShipModel("ShipModelOneZ");
+        return candidateRecord;
+    }
+
+    @Override
+    public final StepRecord getSnapshot() {
+        ShipSnapshot snapshot = new ShipSnapshot();
+
+        snapshot.setPosition(this.getLocalTranslation().clone());
+        snapshot.setRotation(this.getLocalRotation().clone());
+        snapshot.setLastRotation(sail.getLastRotation());
+
+        return snapshot;
     }
 
     public final void setSailMaterial(Material mat) {
@@ -127,6 +100,7 @@ public abstract class AShipModelZ extends AShipModel {
 
         this.setLocalTranslation(snapshot.getPosition());
         this.setLocalRotation(snapshot.getRotation());
+        sail.rotateY(snapshot.getLastRotation());
     }
 
     /**
@@ -135,6 +109,8 @@ public abstract class AShipModelZ extends AShipModel {
     protected final class Sail extends TrafalgarNode {
 
         private final Node helperDirection;
+        
+        private float lastRotation = 0;
 
         protected Sail(AssetManager assetManager, EventManager eventManager) {
             super(new Vector3f(0, 0, 1), assetManager, eventManager);
@@ -154,7 +130,14 @@ public abstract class AShipModelZ extends AShipModel {
         }
 
         public final void rotateY(float radians) {
+            lastRotation += radians;
             this.rotate(0, radians, 0);
+        }
+
+        public float getLastRotation() {
+            float t = lastRotation;
+            lastRotation = 0;
+            return t;
         }
     }
 
@@ -199,4 +182,40 @@ public abstract class AShipModelZ extends AShipModel {
         }
     }
 
+    public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
+    }
+    
+    /**
+     * Internal representation for AShipOneModel
+     */
+    public static class ShipSnapshot extends StepRecord {
+
+        private Vector3f position;
+        private Quaternion rotation;
+        private float lastRotation;
+
+        private void setPosition(final Vector3f position) {
+            this.position = position;
+        }
+
+        private void setRotation(final Quaternion rotation) {
+            this.rotation = rotation;
+        }
+
+        public Vector3f getPosition() {
+            return position;
+        }
+
+        public Quaternion getRotation() {
+            return rotation;
+        }
+        
+        public float getLastRotation() {
+            return lastRotation;
+        }
+
+        public void setLastRotation(float lastRotation) {
+            this.lastRotation = lastRotation;
+        }
+    }
 }
