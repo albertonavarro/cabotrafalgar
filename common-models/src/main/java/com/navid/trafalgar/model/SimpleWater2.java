@@ -3,11 +3,7 @@ package com.navid.trafalgar.model;
 import com.jme3.math.Vector3f;
 import com.jme3.water.WaterFilter;
 
-/**
- *
- * @author alberto
- */
-public class SimpleWater2 extends WaterFilter {
+public final class SimpleWater2 extends WaterFilter {
 
     public SimpleWater2() {
         setWaveScale(0.003f);

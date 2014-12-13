@@ -11,11 +11,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class SunBuilder implements BuilderInterface {
+public final class SunBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;

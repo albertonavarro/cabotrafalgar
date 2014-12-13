@@ -1,7 +1,6 @@
 package com.navid.trafalgar.model.builder;
 
 import com.jme3.asset.AssetManager;
-import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.SimpleContext;
@@ -14,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class ContextBuilder implements BuilderInterface {
+public final class ContextBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;

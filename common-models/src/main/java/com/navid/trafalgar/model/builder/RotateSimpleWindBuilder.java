@@ -1,7 +1,6 @@
 package com.navid.trafalgar.model.builder;
 
 import com.jme3.asset.AssetManager;
-import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.RotateSimpleWind;
@@ -10,11 +9,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class RotateSimpleWindBuilder implements BuilderInterface {
+public final class RotateSimpleWindBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
@@ -31,10 +26,12 @@ public class RotateSimpleWindBuilder implements BuilderInterface {
         return Collections.singleton(new RotateSimpleWind(assetManager));
     }
 
+    @Override
     public String getType() {
         return "RotateSimpleWind";
     }
 
+    @Override
     public Iterable<Category> getCategories() {
         return Collections.singleton(Category.context);
     }

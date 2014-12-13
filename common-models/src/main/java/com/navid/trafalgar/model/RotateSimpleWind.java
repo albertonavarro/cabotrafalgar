@@ -9,15 +9,11 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 
-/**
- *
- * @author alberto
- */
 public final class RotateSimpleWind implements IWind {
 
-    private ArrowModel arrowModel;
+    private final ArrowModel arrowModel;
     private Vector2f vector = new Vector2f(1, 0);
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
 
     public RotateSimpleWind(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -25,6 +21,7 @@ public final class RotateSimpleWind implements IWind {
         setWind(new Vector2f(1, 0));
     }
 
+    @Override
     public Geometry getGeometry() {
         return arrowModel;
     }
@@ -34,6 +31,7 @@ public final class RotateSimpleWind implements IWind {
         arrowModel.rotate(0, -angle, 0);
     }
 
+    @Override
     public Vector2f getWind() {
         return vector;
     }
@@ -51,6 +49,7 @@ public final class RotateSimpleWind implements IWind {
         arrowModel.scale(newVector.length() / oldVector.length());
     }
 
+    @Override
     public WindGeometry createWindGeometryNode() {
         return new WindGeometryImpl(assetManager);
     }
@@ -67,6 +66,7 @@ public final class RotateSimpleWind implements IWind {
             this.attachChild(arrowModel);
         }
 
+        @Override
         public void update(float f) {
             Vector3f currentWind = arrowModel.getWorldRotation().getRotationColumn(2);
             Vector2f currentWind2f = new Vector2f(currentWind.x, currentWind.z);
@@ -75,13 +75,16 @@ public final class RotateSimpleWind implements IWind {
             arrowModel.rotate(0, -angle, 0);
         }
 
+        @Override
         public void render(RenderManager rm, ViewPort vp) {
         }
 
+        @Override
         public Control cloneForSpatial(Spatial sptl) {
             return null;
         }
 
+        @Override
         public void setSpatial(Spatial sptl) {
         }
 

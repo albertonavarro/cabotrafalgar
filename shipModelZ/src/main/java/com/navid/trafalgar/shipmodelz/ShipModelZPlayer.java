@@ -44,7 +44,9 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     @Auditable
     private float mass = 1f;
     @Auditable
-    private float speed;
+    private float localSpeed;
+    @Auditable
+    private float globalSpeed;
     @Auditable
     protected float inclinacion = 0;
 
@@ -86,7 +88,7 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         realwindDirection3f.multLocal(100);
         realWind.setValue(realwindDirection3f);
 
-        Vector3f apparentWind3f = realwindDirection3f.subtract(this.getGlobalDirection().mult(speed));
+        Vector3f apparentWind3f = realwindDirection3f.subtract(this.getGlobalDirection().mult(localSpeed));
         apparentWind.setValue(apparentWind3f);
 
         Vector3f shipOrientation3f = this.getGlobalDirection();
@@ -100,11 +102,11 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing);
 
         acceleration = force / mass;
-        friction = speed * speed / 80 * Math.signum(speed);
+        friction = localSpeed * localSpeed / 80 * Math.signum(localSpeed);
 
-        float newspeed = speed + (acceleration - friction) * tpf;
+        float newspeed = localSpeed + (acceleration - friction) * tpf;
 
-        speed = newspeed;
+        localSpeed = newspeed;
     }
 
     private void updateRudder(float tpf) {
@@ -181,17 +183,17 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
      * @param tpf
      */
     private void updateShipYaw(float tpf) {
-        this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * speed * tpf / 100, 0).mult(this.getLocalRotation()));
+        this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * localSpeed * tpf / 100, 0).mult(this.getLocalRotation()));
     }
 
     /**
-     * Update position
+     * Update local position
      *
      * @param tpf
      */
-    private void updatePosition(float tpf) {
+    private void updateLocalPosition(float tpf) {
         Vector3f shipOrientation3f = this.getGlobalDirection();
-        this.move(shipOrientation3f.x * speed * tpf, 0, shipOrientation3f.z * speed * tpf);
+        this.move(shipOrientation3f.x * localSpeed * tpf, 0, shipOrientation3f.z * localSpeed * tpf);
         shipDirection.setValue(shipOrientation3f);
     }
 
@@ -201,7 +203,7 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         updateSpeed(tpf);
         updateRudder(tpf);
         updateSailAutomaticRotation(tpf);
-        updatePosition(tpf);
+        updateLocalPosition(tpf);
         updateShipRoll(tpf);
         updateShipYaw(tpf);
     }

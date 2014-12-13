@@ -10,11 +10,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class SkyBuilder implements BuilderInterface {
+public final class SkyBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
