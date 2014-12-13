@@ -2,7 +2,7 @@
 {"type" : "Context"},
 {"type" : "RotateSimpleWind"},
 {"type" : "Sun"},
-{"type" : "TidalWater"},
+{"type" : "TidalWater", "values" : { "speed" : "2,-2" } },
 {"name" : "player", "values" : { "position" : "0,0,0", "role" : "Player" } },
 {"type" : "Millestone", "name" : "mil1", "values" : { "position" : "2500,0,0" } },
 {"type" : "Sky"}

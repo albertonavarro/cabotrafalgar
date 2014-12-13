@@ -4,11 +4,12 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.water.WaterFilter;
 
-public final class TidalWater extends WaterFilter implements Dependent, IWater {
+public final class TidalWater extends WaterFilter implements IWater {
     
-    private IWind wind;
+    Vector2f speed;
 
-    public TidalWater() {
+    public TidalWater(Vector2f speed) {
+        this.speed = speed;
         setWaveScale(0.003f);
         setMaxAmplitude(2f);
         setFoamExistence(new Vector3f(1f, 4, 0.5f));
@@ -16,12 +17,7 @@ public final class TidalWater extends WaterFilter implements Dependent, IWater {
         setRefractionConstant(0.25f);
         setRefractionStrength(0.2f);
         setFoamHardness(0.6f);
-    }
-
-    @Override
-    public void resolveDependencies(GameModel gameModel) {
-        this.wind = gameModel.getSingleByType(IWind.class);
-        setWindDirection(wind.getWind().mult(-1));
+        setWindDirection(speed);
     }
 
     @Override
@@ -31,7 +27,7 @@ public final class TidalWater extends WaterFilter implements Dependent, IWater {
 
     @Override
     public Vector2f getMovement(Vector2f position) {
-        return new Vector2f(1,0);
+        return speed;
     }
 
 }
