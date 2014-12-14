@@ -6,10 +6,10 @@ import com.jme3.water.WaterFilter;
 
 public final class TidalWater extends WaterFilter implements IWater {
     
-    Vector2f speed;
+    Vector3f speed;
 
     public TidalWater(Vector2f speed) {
-        this.speed = speed;
+        this.speed = new Vector3f(speed.x, 0, speed.y);
         setWaveScale(0.003f);
         setMaxAmplitude(2f);
         setFoamExistence(new Vector3f(1f, 4, 0.5f));
@@ -26,7 +26,7 @@ public final class TidalWater extends WaterFilter implements IWater {
     }
 
     @Override
-    public Vector2f getMovement(Vector2f position) {
+    public Vector3f getMovement(Vector3f position) {
         return speed;
     }
 

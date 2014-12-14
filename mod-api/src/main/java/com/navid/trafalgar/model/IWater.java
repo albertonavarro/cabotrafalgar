@@ -15,5 +15,5 @@ public interface IWater {
      */
     float getHeight();
 
-    Vector2f getMovement(Vector2f position);
+    Vector3f getMovement(Vector3f position);
 }

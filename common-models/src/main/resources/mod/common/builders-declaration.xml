@@ -11,6 +11,7 @@
     <bean id="mod.counterclock.ContextBuilder" class="com.navid.trafalgar.model.builder.ContextBuilder" autowire="byType" />
     <bean id="mod.counterclock.WaterBuilder2" class="com.navid.trafalgar.model.builder.WaterBuilder2" autowire="byType" />
     <bean id="mod.counterclock.TidalWater" class="com.navid.trafalgar.model.builder.TidalWaterBuilder" autowire="byType" />
+    <bean id="mod.counterclock.NoWater" class="com.navid.trafalgar.model.builder.NoWaterBuilder" autowire="byType" />
     <bean id="mod.counterclock.SunBuilder" class="com.navid.trafalgar.model.builder.SunBuilder" autowire="byType" />
     <bean id="mod.counterclock.SkyBuilder" class="com.navid.trafalgar.model.builder.SkyBuilder" autowire="byType" />
     

@@ -194,6 +194,7 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     private void updateLocalPosition(float tpf) {
         Vector3f shipOrientation3f = this.getGlobalDirection();
         this.move(shipOrientation3f.x * localSpeed * tpf, 0, shipOrientation3f.z * localSpeed * tpf);
+        this.move(context.getWater().getMovement(this.getGlobalDirection()).mult(-30*tpf));
         shipDirection.setValue(shipOrientation3f);
     }
 
