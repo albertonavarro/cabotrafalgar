@@ -18,9 +18,9 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
     public static String STATS_NAME = "shipOneStats";
 
-    public static final float MINIMUM_ROPE = 1.5f;
-    public static final float MAXIMUM_ROPE = 3;
-    public static final float TRIMMING_SPEED = 1;
+    public static final float MINIMUM_ROPE = 9;
+    public static final float MAXIMUM_ROPE = 20;
+    public static final float TRIMMING_SPEED = 10; 
     public static final float MAXIMUM_RUDDER = 0.3f;
 
     @Auditable
@@ -49,6 +49,8 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     private float globalSpeed;
     @Auditable
     protected float inclinacion = 0;
+    @Auditable
+    protected float mainSheetDistance = 0;
 
     private final float sailCorrection = 0.3f;
     private final float sailRotateSpeed = 2f;
@@ -126,6 +128,12 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
      * @param tpf
      */
     private void updateSailAutomaticRotation(float tpf) {
+        Vector3f a = mainsheetBoatHandler.getWorldTranslation();
+        Vector3f b = mainsheetSailHandler.getWorldTranslation();
+        Vector3f difference = a.subtract(b);
+        mainSheetDistance = difference.length();
+        System.out.println("mainsheetdistance : " + mainSheetDistance);
+        
         Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
         Vector3f helperDirection = sail.getHelperDirection();
         Vector3f vectorshipDirection = this.getGlobalDirection();
@@ -134,20 +142,37 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         Vector3f resMultVectSailShip = helperDirection.cross(vectorshipDirection);
 
         if (resMultVectWindSail.y * resMultVectSailShip.y > 0) {
+            System.out.println("resMultVectWindSail.y * resMultVectSailShip.y > 0");
             //Sail is moving towards the front
-            if (helperDirection.angleBetween(vectorshipDirection) > ropeLenght) {
+            if (mainSheetDistance < ropeLenght - 0.5) {
+                System.out.println("mainSheetDistance < ropeLenght - 0.5");
                 //Sail hasn't yet arrived to the limit
                 sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
                 sailForcing = 0f;
+            } else if (mainSheetDistance < ropeLenght) {
+                System.out.println("mainSheetDistance < ropeLenght");
+                //Sail hasn't yet arrived to the limit
+                //sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+                sailForcing = 1f;
             } else {
+                System.out.println("mainSheetDistance >= ropeLenght - 0.5");
                 //Sail adjusts to the limit
                 sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght) * tpf * sailRotateSpeed);
-                sailForcing = 1f;
+                sailForcing = 0f;
             }
         } else {
-            //Sail is moving towards the back
-            sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
-            sailForcing = 0f;
+            if (mainSheetDistance > ropeLenght) {
+                System.out.println("mainSheetDistance > ropeLenght");
+                //Sail adjusts to the limit
+                sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght) * tpf * sailRotateSpeed);
+                sailForcing = 0f;
+            } else {
+                System.out.println("resMultVectWindSail.y * resMultVectSailShip.y <= 0");
+                //Sail is moving backwards
+                sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+                sailForcing = 0f;
+            }
+            
         }
     }
 
@@ -220,18 +245,18 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     }
 
     public void sailLoose(float tpf) {
-        if (ropeLenght <= MINIMUM_ROPE + (1 * tpf)) {
-            ropeLenght = MINIMUM_ROPE;
-        } else {
-            ropeLenght = ropeLenght - (1 * tpf * TRIMMING_SPEED);
-        }
-    }
-
-    public void sailTrim(float tpf) {
         if (ropeLenght >= MAXIMUM_ROPE - (1 * tpf)) {
             ropeLenght = MAXIMUM_ROPE;
         } else {
             ropeLenght = ropeLenght + (1 * tpf * TRIMMING_SPEED);
+        }
+    }
+
+    public void sailTrim(float tpf) {
+        if (ropeLenght <= MINIMUM_ROPE + (1 * tpf)) {
+            ropeLenght = MINIMUM_ROPE;
+        } else {
+            ropeLenght = ropeLenght - (1 * tpf * TRIMMING_SPEED);
         }
     }
 

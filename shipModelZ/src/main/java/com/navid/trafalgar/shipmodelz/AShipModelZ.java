@@ -6,8 +6,10 @@ import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue.Bucket;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Sphere;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.CandidateRecord;
@@ -27,6 +29,8 @@ public abstract class AShipModelZ extends AShipModel {
     private Material matHull;
     private Material matSail;
     private boolean previousTransparent = false;
+    protected Geometry mainsheetBoatHandler;
+    protected Geometry mainsheetSailHandler;
 
     protected AShipModelZ(String role, AssetManager assetManager, EventManager eventManager) {
         super(role, new Vector3f(1, 0, 0), assetManager, eventManager);
@@ -34,6 +38,13 @@ public abstract class AShipModelZ extends AShipModel {
         spatial = assetManager.loadModel("Models/ship2g/ship2g.j3o");
         spatial.rotate(0f, (float) -Math.PI / 2, 0f);
         this.attachChild(spatial);
+
+        Sphere sphereMesh = new Sphere(8, 8, 1f);
+        mainsheetBoatHandler = new Geometry("Mainsheet boat handler", sphereMesh);
+        mainsheetBoatHandler.move(-20, 2, 0);
+        Material sphereMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
+        mainsheetBoatHandler.setMaterial(sphereMat);
+        this.attachChild(mainsheetBoatHandler);
 
         sail = new Sail(assetManager, eventManager);
         rudder = new Rudder(assetManager, eventManager);
@@ -44,7 +55,7 @@ public abstract class AShipModelZ extends AShipModel {
         sail.setQueueBucket(Bucket.Transparent);
         spatial.setQueueBucket(Bucket.Transparent);
     }
-    
+
     @Override
     public final CandidateRecord getCandidateRecordInstance() {
         ShipCandidateRecord candidateRecord = new ShipCandidateRecord();
@@ -109,7 +120,7 @@ public abstract class AShipModelZ extends AShipModel {
     protected final class Sail extends TrafalgarNode {
 
         private final Node helperDirection;
-        
+
         private float lastRotation = 0;
 
         protected Sail(AssetManager assetManager, EventManager eventManager) {
@@ -119,6 +130,13 @@ public abstract class AShipModelZ extends AShipModel {
             this.attachChild(helperDirection);
             Spatial s = ((Node) spatial).getChild("Cube.001");
             this.attachChild(s);
+
+            Sphere sphereMesh = new Sphere(8, 8, 1f);
+            mainsheetSailHandler = new Geometry("Mainsheet sail handler", sphereMesh);
+            mainsheetSailHandler.move(0, 9, 15);
+            Material sphereMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
+            mainsheetSailHandler.setMaterial(sphereMat);
+            this.attachChild(mainsheetSailHandler);
         }
 
         public Vector3f getHelperDirection() {
@@ -184,7 +202,7 @@ public abstract class AShipModelZ extends AShipModel {
 
     public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
     }
-    
+
     /**
      * Internal representation for AShipOneModel
      */
@@ -209,7 +227,7 @@ public abstract class AShipModelZ extends AShipModel {
         public Quaternion getRotation() {
             return rotation;
         }
-        
+
         public float getLastRotation() {
             return lastRotation;
         }
