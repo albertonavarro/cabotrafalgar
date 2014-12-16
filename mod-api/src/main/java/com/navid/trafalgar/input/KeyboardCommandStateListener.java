@@ -16,10 +16,11 @@ import com.navid.trafalgar.manager.PrestartState;
  */
 public class KeyboardCommandStateListener implements CommandStateListener, PrestartState {
 
-    private InputManager inputManager;
+    private final InputManager inputManager;
+    private final Command key;
+    
     private AnalogListener listener;
     private int keycode;
-    private Command key;
 
     public KeyboardCommandStateListener(InputManager inputManager, Command key) {
         this.inputManager = inputManager;

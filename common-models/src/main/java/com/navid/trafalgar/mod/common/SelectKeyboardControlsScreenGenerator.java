@@ -4,6 +4,8 @@
  */
 package com.navid.trafalgar.mod.common;
 
+import static com.google.common.collect.Lists.newArrayList;
+import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenGenerator;
@@ -16,6 +18,9 @@ import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.listbox.builder.ListBoxBuilder;
 import de.lessvoid.nifty.screen.Screen;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -52,8 +57,17 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
                 childLayoutVertical();
             }
         };
+        
+        //sorting commands in alphabetical order of command name
+        List<KeyboardCommandStateListener> sortedCommands = newArrayList(keyListeners);
+        Collections.sort(sortedCommands, new Comparator<KeyboardCommandStateListener>() {
+            @Override
+            public int compare(KeyboardCommandStateListener o1, KeyboardCommandStateListener o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
 
-        for (final KeyboardCommandStateListener currentCommandListener : keyListeners) {
+        for (final KeyboardCommandStateListener currentCommandListener : sortedCommands) {
             final PanelBuilder commandNamePanelBuilder = new PanelBuilder(currentCommandListener.toString() + "Panel") {
                 {
                     childLayoutHorizontal();

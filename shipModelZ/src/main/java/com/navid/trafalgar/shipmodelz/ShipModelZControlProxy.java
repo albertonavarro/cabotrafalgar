@@ -26,65 +26,71 @@ public class ShipModelZControlProxy implements AShipModelInteractive {
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "rudderLeft";
+                        return "tiller - to port";
                     }
 
                     @Override
                     public void execute(float tpf) {
-                        rudderRight(tpf);
+                        target.rudderRight(tpf);
                     }
                 });
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "rudderRight";
+                        return "tiller - to starboard";
                     }
 
                     @Override
                     public void execute(float tpf) {
-                        rudderLeft(tpf);
+                        target.rudderLeft(tpf);
                     }
                 });
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "sailTrim";
+                        return "mainsail - bring in";
                     }
 
                     @Override
                     public void execute(float tpf) {
-                        sailTrim(tpf);
+                        target.sailTrim(tpf);
                     }
                 });
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "sailLoose";
+                        return "mainsail - let go";
                     }
 
                     @Override
                     public void execute(float tpf) {
-                        sailLoose(tpf);
+                        target.sailLoose(tpf);
+                    }
+                });
+                add(new Command() {
+                    @Override
+                    public String toString() {
+                        return "weight- move to port";
+                    }
+
+                    @Override
+                    public void execute(float tpf) {
+                        target.weightPort(tpf);
+                    }
+                });
+                add(new Command() {
+                    @Override
+                    public String toString() {
+                        return "weight - move to starboard";
+                    }
+
+                    @Override
+                    public void execute(float tpf) {
+                        target.weightStarboard(tpf);
                     }
                 });
             }
         };
-    }
-
-    public void rudderLeft(float tpf) {
-        target.rudderLeft(tpf);
-    }
-
-    public void rudderRight(float tpf) {
-        target.rudderRight(tpf);
-    }
-
-    public void sailLoose(float tpf) {
-        target.sailLoose(tpf);
-    }
-
-    public void sailTrim(float tpf) {
-        target.sailTrim(tpf);
     }
 
 }

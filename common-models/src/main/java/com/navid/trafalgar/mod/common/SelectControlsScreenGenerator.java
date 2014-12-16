@@ -1,6 +1,7 @@
 package com.navid.trafalgar.mod.common;
 
 import com.google.common.collect.HashMultimap;
+import static com.google.common.collect.Lists.newArrayList;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
@@ -16,7 +17,10 @@ import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.radiobutton.builder.RadioButtonBuilder;
 import de.lessvoid.nifty.controls.radiobutton.builder.RadioGroupBuilder;
 import de.lessvoid.nifty.screen.Screen;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +91,17 @@ public class SelectControlsScreenGenerator implements ScreenGenerator {
         };
 
         outerPanelBuilder.panel(commandNamePanelBuilder);
+        
+        //sorting commands in alphabetical order of command name
+        List<Command> sortedCommands = newArrayList(gens.keySet());
+        Collections.sort(sortedCommands, new Comparator<Command>() {
+            @Override
+            public int compare(Command o1, Command o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
 
-        for (final Command currentCommand : gens.keySet()) {
+        for (final Command currentCommand : sortedCommands) {
 
             commandNamePanelBuilder.text(new TextBuilder("text") {
                 {
