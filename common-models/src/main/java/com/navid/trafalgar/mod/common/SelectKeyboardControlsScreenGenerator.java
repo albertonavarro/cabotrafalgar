@@ -4,6 +4,7 @@
  */
 package com.navid.trafalgar.mod.common;
 
+import com.google.common.collect.Lists;
 import static com.google.common.collect.Lists.newArrayList;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
@@ -51,13 +52,6 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
 
         Collection<KeyboardCommandStateListener> keyListeners = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
 
-        final PanelBuilder outerPanelBuilder = new PanelBuilder("Panel_ID") {
-            {
-                height("80%");
-                childLayoutVertical();
-            }
-        };
-        
         //sorting commands in alphabetical order of command name
         List<KeyboardCommandStateListener> sortedCommands = newArrayList(keyListeners);
         Collections.sort(sortedCommands, new Comparator<KeyboardCommandStateListener>() {
@@ -66,41 +60,63 @@ public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
                 return o1.toString().compareTo(o2.toString());
             }
         });
-
-        for (final KeyboardCommandStateListener currentCommandListener : sortedCommands) {
-            final PanelBuilder commandNamePanelBuilder = new PanelBuilder(currentCommandListener.toString() + "Panel") {
+        
+        final PanelBuilder outerPanelBuilder = new PanelBuilder("PartitionPanel") {
                 {
+                    height("80%");
                     childLayoutHorizontal();
-
-                    text(new TextBuilder("text") {
-                        {
-                            text(currentCommandListener.toString());
-                            style("nifty-label");
-                            alignCenter();
-                            valignCenter();
-                            height("10%");
-                            margin("1%");
-                        }
-                    });
-
-                    control(new ListBoxBuilder(currentCommandListener.toString()) {
-                        {
-                            displayItems(4);
-                            selectionModeSingle();
-                            optionalHorizontalScrollbar();
-                            optionalVerticalScrollbar();
-                            alignCenter();
-                            valignCenter();
-                            height("10%");
-                            width("10%");
-                            margin("1%");
-                        }
-                    });
-
                 }
             };
 
-            outerPanelBuilder.panel(commandNamePanelBuilder);
+        List<List<KeyboardCommandStateListener>> partitionedSorted = Lists.partition(sortedCommands, 4);
+
+        int partitionIndex = 0;
+        for (List<KeyboardCommandStateListener> currentPartition : partitionedSorted) {
+
+            final PanelBuilder partitionPanelBuilder = new PanelBuilder("Partition" + partitionIndex++ + "Panel") {
+                {
+                    height("80%");
+                    childLayoutVertical();
+                }
+            };
+
+            for (final KeyboardCommandStateListener currentCommandListener : currentPartition) {
+                final PanelBuilder commandNamePanelBuilder = new PanelBuilder(currentCommandListener.toString() + "Panel") {
+                    {
+                        childLayoutHorizontal();
+
+                        text(new TextBuilder("text") {
+                            {
+                                text(currentCommandListener.toString());
+                                style("nifty-label");
+                                alignCenter();
+                                valignCenter();
+                                height("10%");
+                                margin("1%");
+                            }
+                        });
+
+                        control(new ListBoxBuilder(currentCommandListener.toString()) {
+                            {
+                                displayItems(4);
+                                selectionModeSingle();
+                                optionalHorizontalScrollbar();
+                                optionalVerticalScrollbar();
+                                alignCenter();
+                                valignCenter();
+                                height("10%");
+                                width("10%");
+                                margin("1%");
+                            }
+                        });
+
+                    }
+                };
+
+                partitionPanelBuilder.panel(commandNamePanelBuilder);
+            }
+            
+            outerPanelBuilder.panel(partitionPanelBuilder);
         }
 
         Screen screen = new ScreenBuilder("selectKeys") {
