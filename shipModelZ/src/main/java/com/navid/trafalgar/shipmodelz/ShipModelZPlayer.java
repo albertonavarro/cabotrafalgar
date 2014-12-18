@@ -21,7 +21,6 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     public static final float MINIMUM_ROPE = 9;
     public static final float MAXIMUM_ROPE = 20;
     public static final float TRIMMING_SPEED = 5; 
-    public static final float MAXIMUM_RUDDER = 0.3f;
 
     @Auditable
     private float windOverVela;
