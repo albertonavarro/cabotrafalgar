@@ -7,10 +7,6 @@ import com.navid.trafalgar.model.AShipModelGhost;
 import com.navid.trafalgar.model.CandidateRecord;
 import java.util.Iterator;
 
-/**
- *
- * @author casa
- */
 public class ShipModelZGhost extends AShipModelZ implements AShipModelGhost {
 
     private final CandidateRecord<ShipSnapshot> candidateRecord;

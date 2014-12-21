@@ -10,10 +10,6 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
 import com.navid.trafalgar.model.AShipModelPlayer;
 
-/**
- *
- * @author casa
- */
 public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
     public static String STATS_NAME = "shipOneStats";

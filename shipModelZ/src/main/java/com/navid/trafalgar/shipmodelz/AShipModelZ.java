@@ -17,10 +17,6 @@ import com.navid.trafalgar.model.TrafalgarNode;
 import com.navid.trafalgar.model.IWind;
 import com.navid.trafalgar.model.StepRecord;
 
-/**
- *
- * @author alberto
- */
 public abstract class AShipModelZ extends AShipModel {
 
     protected Spatial spatial;
