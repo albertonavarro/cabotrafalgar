@@ -21,6 +21,8 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     public static final float MINIMUM_ROPE = 9;
     public static final float MAXIMUM_ROPE = 20;
     public static final float TRIMMING_SPEED = 5; 
+    public static final float MAX_HORIZONTAL_POS = 5;
+    public static final float HORIZONTAL_WEIGHT_SPEED = 10;
 
     @Auditable
     private float windOverVela;
@@ -35,7 +37,7 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     @Auditable
     private float rudderRotation;
     @Auditable
-    private float ropeLenght = MINIMUM_ROPE;
+    private float ropeLenght = MAXIMUM_ROPE;
     @Auditable
     private float lastRudderRotation;
     @Auditable
@@ -47,9 +49,12 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     @Auditable
     private float globalSpeed;
     @Auditable
-    protected float inclinacion = 0;
+    protected float inclination = 0;
     @Auditable
     protected float mainSheetDistance = 0;
+    @Auditable
+    protected float horizontalPosition = 0;
+    protected float horizontalPositionIncrement = 0;
 
     private final float sailCorrection = 0.3f;
     private final float sailRotateSpeed = 2f;
@@ -100,14 +105,12 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         float sailRegulation = (float) ((angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection);
         velaOverShip = (float) Math.cos(angleBetween + sailRegulation);
 
-        float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing);
+        float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing / ((1+Math.abs(inclination)) / 2));
 
         acceleration = force / mass;
         friction = localSpeed * localSpeed / 80 * Math.signum(localSpeed);
 
-        float newspeed = localSpeed + (acceleration - friction) * tpf;
-
-        localSpeed = newspeed;
+        localSpeed += (acceleration - friction) * tpf;
     }
 
     private void updateRudder(float tpf) {
@@ -182,11 +185,12 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
         double velaOverShipPitch = Math.sin(angleBetween);
 
-        float targetPitch = (float) windOverVelaPitch * (float) velaOverShipPitch * sailForcing;
-        float resistance = ((float) Math.sin(inclinacion));
-        float totalForce = targetPitch - resistance;
+        float windForce = (float) windOverVelaPitch * (float) velaOverShipPitch * sailForcing;
+        float weightForce = horizontalPosition/10;
+        float keelForce = (float) Math.sin(inclination);
+        float totalForce = (windForce + weightForce) - keelForce;
 
-        inclinacion += totalForce * tpf;
+        inclination += totalForce * tpf;
         this.rotate(totalForce * tpf, 0, 0);
 
         lastPitch = totalForce;
@@ -207,20 +211,26 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
      *
      * @param tpf
      */
-    private void updateLocalPosition(float tpf) {
+    private void updatePosition(float tpf) {
         Vector3f shipOrientation3f = this.getGlobalDirection();
         this.move(shipOrientation3f.x * localSpeed * tpf, 0, shipOrientation3f.z * localSpeed * tpf);
         this.move(context.getWater().getMovement(this.getGlobalDirection()).mult(-30*tpf));
         shipDirection.setValue(shipOrientation3f);
     }
+    
+    private void updateWeightPosition(float tpf) {
+        this.weight.move(0, 0, horizontalPositionIncrement);
+        horizontalPositionIncrement = 0;
+    }
 
     @Override
     public final void update(float tpf) {
         super.update(tpf);
+        updateWeightPosition(tpf);
         updateSpeed(tpf);
         updateRudder(tpf);
         updateSailAutomaticRotation(tpf);
-        updateLocalPosition(tpf);
+        updatePosition(tpf);
         updateShipRoll(tpf);
         updateShipYaw(tpf);
     }
@@ -236,27 +246,36 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     }
 
     public void sailLoose(float tpf) {
-        if (ropeLenght >= MAXIMUM_ROPE - (1 * tpf)) {
-            ropeLenght = MAXIMUM_ROPE;
-        } else {
-            ropeLenght = ropeLenght + (1 * tpf * TRIMMING_SPEED);
-        }
+        ropeLenght = getRangedValue(ropeLenght, tpf * TRIMMING_SPEED, MAXIMUM_ROPE, MINIMUM_ROPE);
     }
 
     public void sailTrim(float tpf) {
-        if (ropeLenght <= MINIMUM_ROPE + (1 * tpf)) {
-            ropeLenght = MINIMUM_ROPE;
-        } else {
-            ropeLenght = ropeLenght - (1 * tpf * TRIMMING_SPEED);
-        }
+        ropeLenght = getRangedValue(ropeLenght, -tpf * TRIMMING_SPEED, MAXIMUM_ROPE, MINIMUM_ROPE);
     }
 
     void weightPort(float tpf) {
-
+        float previousPosition = horizontalPosition;
+        horizontalPosition = getRangedValue(horizontalPosition, -tpf * HORIZONTAL_WEIGHT_SPEED, MAX_HORIZONTAL_POS, -MAX_HORIZONTAL_POS);
+        horizontalPositionIncrement = horizontalPosition - previousPosition;
     }
 
     void weightStarboard(float tpf) {
-
+        float previousPosition = horizontalPosition;
+        horizontalPosition = getRangedValue(horizontalPosition, tpf * HORIZONTAL_WEIGHT_SPEED, MAX_HORIZONTAL_POS, -MAX_HORIZONTAL_POS);
+        horizontalPositionIncrement = horizontalPosition - previousPosition;
     }
+    
+    private float getRangedValue(float current, float increment, float max, float min) {
+        current += increment;
+        if (current > max) {
+            return max;
+        } else if (current < min) {
+            return min;
+        }
+        
+        return current;
+    }
+
+    
 
 }

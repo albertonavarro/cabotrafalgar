@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.mod.common;
 
 import com.google.common.base.Function;
@@ -11,7 +7,6 @@ import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.CommandStateListener;
 import com.navid.trafalgar.input.GeneratorBuilder;
-import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
@@ -30,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class SelectControlsScreenController implements ScreenController {
+public final class SelectControlsScreenController implements ScreenController {
 
     /**
      * From bind

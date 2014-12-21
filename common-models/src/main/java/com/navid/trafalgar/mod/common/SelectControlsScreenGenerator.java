@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class SelectControlsScreenGenerator implements ScreenGenerator {
+public final class SelectControlsScreenGenerator implements ScreenGenerator {
 
     /**
      * Singleton

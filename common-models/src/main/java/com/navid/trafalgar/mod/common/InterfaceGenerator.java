@@ -6,7 +6,7 @@ import com.navid.trafalgar.modapi.GenericModRegisterer;
  *
  * @author alberto
  */
-public class InterfaceGenerator extends GenericModRegisterer {
+public final class InterfaceGenerator extends GenericModRegisterer {
 
     public InterfaceGenerator() {
         super(InterfaceGenerator.class.getResourceAsStream("commonmodconfig.yml"));

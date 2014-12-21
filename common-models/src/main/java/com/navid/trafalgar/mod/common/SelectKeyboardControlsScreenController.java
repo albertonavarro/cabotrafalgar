@@ -26,17 +26,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bushe.swing.event.EventTopicSubscriber;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class SelectKeyboardControlsScreenController implements ScreenController {
+public final class SelectKeyboardControlsScreenController implements ScreenController {
+    
+    private final Logger LOG = LoggerFactory.getLogger(SelectKeyboardControlsScreenController.class);
 
     @Autowired
     private ScreenFlowManager screenFlowManager;
@@ -119,9 +116,9 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
             try {
                 properties.load(new FileReader(keyboardHistory));
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(SelectKeyboardControlsScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.info("History file not found, file {}", keyboardHistory);
             } catch (IOException ex) {
-                Logger.getLogger(SelectKeyboardControlsScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.error("IOException loading history file: {}", keyboardHistory, ex);
             }
         }
 
@@ -215,21 +212,17 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
 
     @Override
     public void onEndScreen() {
+        File keyboardHistory = new File(profileManager.getHome(), "keyboardHistory.properties");
 
         try {
-            File keyboardHistory = new File(profileManager.getHome(), "keyboardHistory.properties");
-
             Properties properties = new Properties();
-
             List<KeyboardCommandStateListener> listeners = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
-
             for (KeyboardCommandStateListener listener : listeners) {
                 properties.put(listener.toString(), Integer.toString(listener.getKeycode()));
             }
-
             properties.store(new FileWriter(keyboardHistory), "User commands");
         } catch (IOException ex) {
-            Logger.getLogger(SelectKeyboardControlsScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error("Error saving history file: {}", keyboardHistory, ex);
         }
     }
 
@@ -280,7 +273,6 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
     }
 
     private static class ListItem {
-
         private String keyName;
         private int value;
 
@@ -289,37 +281,25 @@ public class SelectKeyboardControlsScreenController implements ScreenController 
             this.value = value;
         }
 
-        @Override
-        public String toString() {
-            return keyName;
-        }
-
-        /**
-         * @return the keyName
-         */
         public String getKeyName() {
             return keyName;
         }
 
-        /**
-         * @param keyName the keyName to set
-         */
         public void setKeyName(String keyName) {
             this.keyName = keyName;
         }
 
-        /**
-         * @return the value
-         */
         public int getValue() {
             return value;
         }
 
-        /**
-         * @param value the value to set
-         */
         public void setValue(int value) {
             this.value = value;
+        }
+        
+        @Override
+        public String toString() {
+            return keyName;
         }
     }
 

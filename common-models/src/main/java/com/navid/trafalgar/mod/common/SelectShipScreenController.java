@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class SelectShipScreenController implements ScreenController {
+public final class SelectShipScreenController implements ScreenController {
 
     /**
      * From bind

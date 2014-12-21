@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.mod.common;
 
 import com.navid.trafalgar.screenflow.ScreenGenerator;
@@ -12,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class SelectShipScreenGenerator implements ScreenGenerator {
+public final class SelectShipScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;

@@ -1,7 +1,6 @@
 package com.navid.trafalgar.shipmodelz;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.material.Material;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.BuilderInterface;

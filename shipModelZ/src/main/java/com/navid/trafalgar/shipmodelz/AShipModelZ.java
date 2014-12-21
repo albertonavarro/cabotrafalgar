@@ -31,6 +31,7 @@ public abstract class AShipModelZ extends AShipModel {
     private boolean previousTransparent = false;
     protected Geometry mainsheetBoatHandler;
     protected Geometry mainsheetSailHandler;
+    protected Geometry weight;
 
     protected AShipModelZ(String role, AssetManager assetManager, EventManager eventManager) {
         super(role, new Vector3f(1, 0, 0), assetManager, eventManager);
@@ -45,6 +46,13 @@ public abstract class AShipModelZ extends AShipModel {
         Material sphereMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
         mainsheetBoatHandler.setMaterial(sphereMat);
         this.attachChild(mainsheetBoatHandler);
+        
+        Sphere sphereWeight = new Sphere(8, 8, 5f);
+        weight = new Geometry("Mainsheet boat handler", sphereWeight);
+        weight.move(-20, 3, 0);
+        Material sphereWeightMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
+        weight.setMaterial(sphereWeightMat);
+        this.attachChild(weight);
 
         sail = new Sail(assetManager, eventManager);
         rudder = new Rudder(assetManager, eventManager);

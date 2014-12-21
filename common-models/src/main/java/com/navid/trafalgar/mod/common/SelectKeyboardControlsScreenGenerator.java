@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.mod.common;
 
 import com.google.common.collect.Lists;
 import static com.google.common.collect.Lists.newArrayList;
-import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenGenerator;
@@ -24,11 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
+public final class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;
