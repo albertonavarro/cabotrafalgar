@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- *
- * @author alberto
- */
-public class CounterClockGameModel {
+public final class CounterClockGameModel {
 
     private final Node gameNode = new Node("reflexion");
 

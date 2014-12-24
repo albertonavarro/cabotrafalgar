@@ -1,10 +1,6 @@
 package com.navid.trafalgar.persistence;
 
-/**
- *
- * @author anf
- */
-public class CandidateInfo {
+public final class CandidateInfo {
 
     private boolean accepted;
 

@@ -1,6 +1,5 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
-import com.jme3.app.Application;
 import com.jme3.input.FlyByCamera;
 import com.jme3.input.InputManager;
 import com.jme3.input.controls.ActionListener;
@@ -20,11 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class LoadCameraStateListener implements LoadCamState, StartedState, EventListener {
+public final class LoadCameraStateListener implements LoadCamState, StartedState, EventListener {
 
     /**
      * @param gameModel the gameModel to set
@@ -77,14 +72,15 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
     private Camera camera;
     private AShipModel player;
     private Collection<? extends Node> targets;
-    private String[] mappings = {"Cam1", "Cam2", "Cam3"};
+    private final String[] mappings = {"Cam1", "Cam2", "Cam3"};
     private Cameras selectedCam = Cameras.NONE;
 
     @Autowired
     private CounterClockGameModel gameModel;
 
-    private ActionListener actionListener = new ActionListener() {
+    private final ActionListener actionListener = new ActionListener() {
 
+        @Override
         public void onAction(String name, boolean isPressed, float tpf) {
             if (isPressed) {
 
@@ -120,6 +116,7 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         }
     }
 
+    @Override
     public void onLoadCam(float tpf) {
 
         this.camera = gameStatus.getCamera();
@@ -148,9 +145,11 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         eventManager.fireEvent("ACTIVATE_CAM3");
     }
 
+    @Override
     public void onStarted(float tpf) {
     }
 
+    @Override
     public void onUnload() {
         //flyCamControl.unregisterInput();
 
@@ -161,6 +160,7 @@ public class LoadCameraStateListener implements LoadCamState, StartedState, Even
         eventManager.fireEvent("DEACTIVATE_CAM");
     }
 
+    @Override
     public void onEvent(String event) {
         if ("DEACTIVATE_CAM".equals(event)) {
             flyCamControl.setEnabled(false);

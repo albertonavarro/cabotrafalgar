@@ -8,10 +8,6 @@ import com.navid.trafalgar.manager.EventManager;
 import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
 import java.util.Collection;
 
-/**
- *
- * @author alberto
- */
 public abstract class AMillestoneModel extends Node implements Control {
 
     private EventManager eventManager;

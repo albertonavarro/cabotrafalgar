@@ -8,11 +8,7 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.counterclock.CounterClockMainScreen;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class GUIUpdater implements StartedState, PrestartState {
+public final class GUIUpdater implements StartedState, PrestartState {
 
     @Autowired
     private CounterClockMainScreen mainScreen;

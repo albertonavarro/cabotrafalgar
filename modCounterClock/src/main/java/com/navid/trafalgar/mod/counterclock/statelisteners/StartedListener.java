@@ -11,11 +11,7 @@ import com.navid.trafalgar.model.GameStatus;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class StartedListener implements PrestartState, StartedState {
+public final class StartedListener implements PrestartState, StartedState {
 
     @Autowired
     private GameStatus gameStatus;
@@ -26,12 +22,14 @@ public class StartedListener implements PrestartState, StartedState {
     @Autowired
     private CounterClockGameModel model;
 
+    @Override
     public void onPrestart(float tpf) {
         gameStatus.getTime().setValue(0f);
         millestones = model.getMillestones();
 
     }
 
+    @Override
     public void onStarted(float tpf) {
         gameStatus.getTime().setValue(gameStatus.getTime().getValue() + tpf);
 
@@ -40,6 +38,7 @@ public class StartedListener implements PrestartState, StartedState {
         gameStatus.getGameGUINode().updateLogicalState(tpf);
     }
 
+    @Override
     public void onUnload() {
     }
 
@@ -69,6 +68,7 @@ public class StartedListener implements PrestartState, StartedState {
 
         private int counter = 0;
 
+        @Override
         public void onEvent(final String event) {
             if (MILLESTONE_REACHED.equals(event)) {
                 counter++;

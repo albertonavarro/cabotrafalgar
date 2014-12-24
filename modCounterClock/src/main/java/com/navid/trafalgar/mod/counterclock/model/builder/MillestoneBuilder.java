@@ -12,11 +12,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class MillestoneBuilder implements BuilderInterface {
+public final class MillestoneBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;

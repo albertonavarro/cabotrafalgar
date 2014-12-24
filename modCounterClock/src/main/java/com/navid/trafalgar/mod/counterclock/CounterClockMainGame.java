@@ -11,11 +11,7 @@ import com.navid.trafalgar.model.GameStatus;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class CounterClockMainGame extends AbstractAppState {
+public final class CounterClockMainGame extends AbstractAppState {
 
     /*
      * EventManager (Broadcasting of events)

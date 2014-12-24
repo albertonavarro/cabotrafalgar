@@ -19,7 +19,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class GameRecorder implements StartedState, PrestartState, SuccessfulState, AbortedState {
+public final class GameRecorder implements StartedState, PrestartState, SuccessfulState, AbortedState {
 
     @Autowired
     private GameStatus gameStatus;

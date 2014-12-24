@@ -1,9 +1,5 @@
 package com.navid.trafalgar.persistence;
 
-/**
- *
- * @author anf
- */
 public final class CompetitorInfo {
 
     private int position;

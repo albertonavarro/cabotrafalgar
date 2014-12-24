@@ -10,10 +10,10 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 
-public class MillestoneModel extends AMillestoneModel {
+public final class MillestoneModel extends AMillestoneModel {
 
-    private RigidBodyControl millestone;
-    private Spatial spatial;
+    private final RigidBodyControl millestone;
+    private final Spatial spatial;
 
     public MillestoneModel(AssetManager assetManager) {
         super();
@@ -21,8 +21,7 @@ public class MillestoneModel extends AMillestoneModel {
         spatial.scale(3);
         this.attachChild(spatial);
 
-        CollisionShape sceneShape
-                = CollisionShapeFactory.createMeshShape(this);
+        CollisionShape sceneShape = CollisionShapeFactory.createMeshShape(this);
         millestone = new RigidBodyControl(sceneShape, 0);
         this.addControl(millestone);
         millestone.setPhysicsLocation(new Vector3f(-200, 0, 100));
@@ -35,13 +34,16 @@ public class MillestoneModel extends AMillestoneModel {
         millestone.setPhysicsLocation(pos);
     }
 
+    @Override
     public Control cloneForSpatial(Spatial spatial) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void setSpatial(Spatial spatial) {
     }
 
+    @Override
     public void render(RenderManager rm, ViewPort vp) {
     }
 

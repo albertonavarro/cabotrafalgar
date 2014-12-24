@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.mod.counterclock;
 
 import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author casa
- */
-public class SelectProfileScreenGenerator implements ScreenGenerator {
+public final class SelectProfileScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;

@@ -1,11 +1,9 @@
 package com.navid.trafalgar.mod.counterclock;
 
-import com.navid.trafalgar.definition2.Entry;
 import com.navid.trafalgar.model.Builder2;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.persistence.CompetitorInfo;
-import com.navid.trafalgar.persistence.RecordPersistenceService;
 import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
@@ -18,17 +16,12 @@ import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import static java.util.Collections.singleton;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class ScreenSelectMap implements ScreenController {
+public final class ScreenSelectMap implements ScreenController {
 
     /**
      * @param builder the builder to set

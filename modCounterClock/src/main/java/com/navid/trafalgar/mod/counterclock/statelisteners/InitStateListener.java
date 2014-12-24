@@ -9,11 +9,7 @@ import com.navid.trafalgar.manager.InitState;
 import com.navid.trafalgar.model.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class InitStateListener implements InitState {
+public final class InitStateListener implements InitState {
 
     @Autowired
     private RenderManager renderManager;
@@ -22,6 +18,7 @@ public class InitStateListener implements InitState {
     @Autowired
     private AppSettings settings;
 
+    @Override
     public void onInit(float tpf) {
 
         Camera camera = new Camera(settings.getWidth(), settings.getHeight());
@@ -45,6 +42,7 @@ public class InitStateListener implements InitState {
         gameStatus.setViewPortGUI(viewPortGUI);
     }
 
+    @Override
     public void onUnload() {
 
         renderManager.removeMainView("CounterClock");

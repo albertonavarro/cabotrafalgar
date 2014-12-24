@@ -27,15 +27,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class RecordServerPersistenceService implements RecordPersistenceService {
+public final class RecordServerPersistenceService implements RecordPersistenceService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RecordServerPersistenceService.class);
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Autowired
     private ProfileManager profileManager;

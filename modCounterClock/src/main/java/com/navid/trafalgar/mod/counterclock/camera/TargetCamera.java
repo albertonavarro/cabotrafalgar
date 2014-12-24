@@ -19,23 +19,17 @@ import com.navid.trafalgar.model.AShipModel;
 import java.io.IOException;
 import java.util.List;
 
-/**
- *
- * @author alberto
- */
-public class TargetCamera implements Control, EventListener {
+public final class TargetCamera implements Control, EventListener {
 
     private Camera cam;
     private AShipModel reference;
     private List<Node> targets;
     private Node currentTarget;
     private boolean enabled;
-    private EventManager eventManager;
 
     public TargetCamera(Camera cam, AShipModel reference, EventManager eventManager) {
         this.cam = cam;
         this.reference = reference;
-        this.eventManager = eventManager;
         eventManager.registerListener(this, new String[]{VIEW_NEXTTARGET, MILLESTONE_REACHED});
     }
 

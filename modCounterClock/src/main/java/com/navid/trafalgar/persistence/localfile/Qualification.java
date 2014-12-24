@@ -4,23 +4,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author anf
- */
-public class Qualification {
+public final class Qualification {
 
     private File fileName;
 
-    private List<Float> times = new ArrayList<Float>();
+    private final List<Float> times;
 
     private String shipClassName;
 
     public Qualification() {
+        this.times = new ArrayList<Float>();
 
     }
 
     public Qualification(File fileName) {
+        this.times = new ArrayList<Float>();
         this.fileName = fileName;
         calculateMapName(fileName);
     }

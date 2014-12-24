@@ -19,10 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-/**
- *
- * @author anf
- */
 public final class CounterClockMainScreen implements ScreenController, BeanFactoryAware {
 
     /*

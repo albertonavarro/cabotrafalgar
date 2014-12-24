@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
 import com.navid.trafalgar.manager.PrestartState;
@@ -10,7 +6,6 @@ import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.manager.statistics.Auditable;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
-import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.AShipModelPlayer;
 import com.navid.trafalgar.util.ReflexionUtils;
 import java.lang.annotation.Annotation;
@@ -21,11 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class AnnotationToStatsManagerStartedListener implements PrestartState, StartedState {
+public final class AnnotationToStatsManagerStartedListener implements PrestartState, StartedState {
 
     @Autowired
     private CounterClockGameModel gameModel;
@@ -35,7 +26,7 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
 
     private AShipModelPlayer ship;
 
-    private Map<Field, AbstractStatistic> fields = new HashMap<Field, AbstractStatistic>();
+    private final Map<Field, AbstractStatistic> fields = new HashMap<Field, AbstractStatistic>();
 
     @Override
     public void onPrestart(float tpf) {
@@ -49,7 +40,6 @@ public class AnnotationToStatsManagerStartedListener implements PrestartState, S
                         if (!currentField.isAccessible()) {
                             currentField.setAccessible(true);
                         }
-
                         fields.put(currentField, statsManager.createStatistic("shipZeroStats", currentField.getName(), 0f));
                     }
                 }
