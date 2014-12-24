@@ -1,6 +1,5 @@
 package com.navid.trafalgar.mod.windtunnel;
 
-import com.navid.trafalgar.model.AShipModel;
 import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
@@ -11,17 +10,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- *
- * @author alberto
- */
-public class WindTunnelGameModel {
+public final class WindTunnelGameModel {
 
     private AShipModelPlayer ship;
     private IContext context;
     private AHarnessModel harness;
 
-    private Node gameNode = new Node("model");
+    private final Node gameNode = new Node("model");
     private List<Filter> fpp = new ArrayList<Filter>();
 
     private boolean inited = false;

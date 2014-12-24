@@ -5,8 +5,6 @@ import com.jme3.input.InputManager;
 import com.navid.trafalgar.mod.windtunnel.model.HarnessModel;
 import com.navid.trafalgar.model.Builder2.Category;
 import com.navid.trafalgar.model.BuilderInterface;
-import com.navid.trafalgar.model.Dependent;
-import com.navid.trafalgar.model.GameModel;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -16,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class HarnessBuilder implements BuilderInterface {
+public final class HarnessBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;

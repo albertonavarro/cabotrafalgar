@@ -9,11 +9,7 @@ import com.navid.trafalgar.manager.InitState;
 import com.navid.trafalgar.model.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class InitStateListener implements InitState {
+public final class InitStateListener implements InitState {
 
     @Autowired
     private RenderManager renderManager;

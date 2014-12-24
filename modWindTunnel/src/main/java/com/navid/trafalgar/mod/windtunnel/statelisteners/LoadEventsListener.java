@@ -6,11 +6,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.navid.trafalgar.manager.InitState;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class LoadEventsListener implements InitState {
+public final class LoadEventsListener implements InitState {
 
     @Autowired
     private InputManager inputManager;

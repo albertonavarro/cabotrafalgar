@@ -19,11 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-/**
- *
- * @author alberto
- */
-public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware {
+public final class WindTunnelMainScreen implements ScreenController, BeanFactoryAware {
     /*
      * Comes from bind
      */
@@ -53,6 +49,8 @@ public class WindTunnelMainScreen implements ScreenController, BeanFactoryAware 
 
     /**
      * Nifty GUI ScreenControl methods
+     * @param nifty
+     * @param screen
      */
     @Override
     public void bind(Nifty nifty, Screen screen) {

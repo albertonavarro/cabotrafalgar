@@ -16,11 +16,7 @@ import com.navid.trafalgar.model.AShipModelPlayer;
 import com.navid.trafalgar.model.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class LoadCameraStateListener implements LoadCamState, StartedState, EventListener {
+public final class LoadCameraStateListener implements LoadCamState, StartedState, EventListener {
 
     /**
      * @param gameModel the gameModel to set

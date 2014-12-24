@@ -1,14 +1,12 @@
 package com.navid.trafalgar.mod.windtunnel.model;
 
 import com.jme3.asset.AssetManager;
-import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
-import com.navid.trafalgar.model.GameModel;
 
 /**
  *
  * @author alberto
  */
-public class HarnessModel extends AHarnessModel {
+public final class HarnessModel extends AHarnessModel {
 
     public HarnessModel(AssetManager assetManager) {
         super(assetManager);

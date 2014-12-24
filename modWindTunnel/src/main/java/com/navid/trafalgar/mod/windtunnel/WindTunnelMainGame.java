@@ -11,11 +11,7 @@ import com.navid.trafalgar.model.GameStatus;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class WindTunnelMainGame extends AbstractAppState {
+public final class WindTunnelMainGame extends AbstractAppState {
 
     /*
      * EventManager (Broadcasting of events)
@@ -43,6 +39,8 @@ public class WindTunnelMainGame extends AbstractAppState {
 
     /**
      * jME3 AppState methods
+     * @param appStateManager
+     * @param app
      */
     @Override
     public final void initialize(final AppStateManager appStateManager, final Application app) {
@@ -76,28 +74,28 @@ public class WindTunnelMainGame extends AbstractAppState {
     }
 
     /**
-     * @param eventManager the eventManager to set
+     * @param inEventManager
      */
     public final void setEventManager(final EventManager inEventManager) {
         this.eventManager = inEventManager;
     }
 
     /**
-     * @param stateManager the stateManager to set
+     * @param inStateManager the stateManager to set
      */
     public final void setStateManager(final StateManager inStateManager) {
         this.stateManager = inStateManager;
     }
 
     /**
-     * @param gameStatus the gameStatus to set
+     * @param inGameStatus the gameStatus to set
      */
     public final void setGameStatus(final GameStatus inGameStatus) {
         this.gameStatus = inGameStatus;
     }
 
     /**
-     * @param stateListeners the stateListeners to set
+     * @param inStateListeners the stateListeners to set
      */
     public final void setStateListeners(final List<StateListener> inStateListeners) {
         this.stateListeners = inStateListeners;

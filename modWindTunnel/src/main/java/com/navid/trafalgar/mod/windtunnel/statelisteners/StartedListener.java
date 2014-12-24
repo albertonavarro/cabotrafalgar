@@ -1,21 +1,11 @@
 package com.navid.trafalgar.mod.windtunnel.statelisteners;
 
-import com.navid.trafalgar.manager.EventListener;
-import com.navid.trafalgar.manager.EventManager;
-import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
 import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
-import com.navid.trafalgar.mod.windtunnel.WindTunnelGameModel;
-import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.GameStatus;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author anf
- */
-public class StartedListener implements PrestartState, StartedState {
+public final class StartedListener implements PrestartState, StartedState {
 
     @Autowired
     private GameStatus gameStatus;

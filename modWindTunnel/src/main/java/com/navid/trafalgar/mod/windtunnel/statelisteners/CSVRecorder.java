@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.mod.windtunnel.statelisteners;
 
 import au.com.bytecode.opencsv.CSVWriter;
@@ -18,10 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
 public class CSVRecorder implements PrestartState, StartedState {
 
     @Autowired
