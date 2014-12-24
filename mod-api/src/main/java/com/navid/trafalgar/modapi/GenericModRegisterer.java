@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.modapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,10 +19,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-/**
- *
- * @author alberto
- */
 public abstract class GenericModRegisterer implements ModRegisterer {
 
     private static final Logger LOG = LoggerFactory.getLogger(GenericModRegisterer.class);
@@ -43,7 +35,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
     }
 
     @Override
-    public void registerSpringConfig(BeanFactory beanFactory) {
+    public final void registerSpringConfig(BeanFactory beanFactory) {
         if (modConfiguration.getModPreGameSpringConfig() != null) {
             XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getModPreGameSpringConfig()), beanFactory);
             ctx.registerSingleton("mod.common.ModConfig", modConfiguration);
@@ -54,7 +46,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
     }
 
     @Override
-    public void registerModels() {
+    public final void registerModels() {
         if (modConfiguration.getBuildersSpringConfig() != null) {
             XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
 
@@ -68,7 +60,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
     }
 
     @Override
-    public void registerInputs() {
+    public final void registerInputs() {
         if (modConfiguration.getBuildersSpringConfig() != null) {
             XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
 
@@ -88,7 +80,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
     }
 
     @Override
-    public void registerScreens(Nifty nifty) {
+    public final void registerScreens(Nifty nifty) {
         if (modConfiguration.getScreenDeclarations() != null) {
             BeanFactory ctx = modConfiguration.getBeanFactory();
 
@@ -103,7 +95,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
     }
 
     @Override
-    public void registerFlow(Nifty nifty) {
+    public final void registerFlow(Nifty nifty) {
         if (modConfiguration.getModuleScreenFlow() != null) {
 
             BeanFactory ctx = modConfiguration.getBeanFactory();

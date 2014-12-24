@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.input;
 
 import com.google.common.collect.HashMultimap;
@@ -13,18 +9,11 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author alberto
- */
-public class GeneratorBuilder {
+public final class GeneratorBuilder {
 
-    /**
-     * Logger
-     */
     private static final Logger LOG = LoggerFactory.getLogger(GeneratorBuilder.class);
-    private HashMultimap<Class<Command>, CommandGenerator> generatorMap = HashMultimap.create();
-    private Map<String, CommandGenerator> generatorOnlyMap = new HashMap<String, CommandGenerator>();
+    private final HashMultimap<Class<Command>, CommandGenerator> generatorMap = HashMultimap.create();
+    private final Map<String, CommandGenerator> generatorOnlyMap = new HashMap<String, CommandGenerator>();
 
     public void registerBuilder(CommandGenerator commandGenerator) {
         LOG.info("Registring builder " + commandGenerator);

@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.screenflow;
 
-import com.navid.trafalgar.modapi.ModConfiguration;
 import com.navid.trafalgar.modapi.ModScreenConfiguration;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.BeanFactory;
 
-/**
- *
- * @author alberto
- */
 public class ScreenFlowUnit {
 
     private String screenName;

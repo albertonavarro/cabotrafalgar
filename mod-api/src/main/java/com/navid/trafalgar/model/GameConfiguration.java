@@ -1,14 +1,13 @@
 package com.navid.trafalgar.model;
 
 import com.jme3.system.AppSettings;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  *
  */
-public class GameConfiguration {
+public final class GameConfiguration {
 
     private String map;
 

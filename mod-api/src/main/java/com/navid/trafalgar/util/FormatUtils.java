@@ -4,10 +4,6 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import java.text.DecimalFormat;
 
-/**
- *
- *
- */
 public final class FormatUtils {
 
     /**

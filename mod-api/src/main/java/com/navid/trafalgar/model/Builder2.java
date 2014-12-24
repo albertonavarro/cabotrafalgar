@@ -1,17 +1,12 @@
 package com.navid.trafalgar.model;
 
-import com.jme3.scene.Node;
 import com.navid.trafalgar.definition2.Entry;
 import com.navid.trafalgar.definition2.GameDefinition2;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *
- *
- */
-public class Builder2 {
+public final class Builder2 {
 
     /**
      * Logger

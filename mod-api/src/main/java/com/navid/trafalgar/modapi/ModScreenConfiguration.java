@@ -1,17 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.modapi;
 
-import com.navid.trafalgar.screenflow.ScreenGenerator;
-import de.lessvoid.nifty.screen.ScreenController;
-
-/**
- *
- * @author alberto
- */
-public class ModScreenConfiguration {
+public final class ModScreenConfiguration {
 
     private String screenName;
     private String interfaceConstructor;

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.input;
 
 import com.jme3.input.InputManager;
@@ -9,11 +5,7 @@ import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.navid.trafalgar.manager.PrestartState;
 
-/**
- *
- * @author alberto
- */
-public class KeyboardCommandStateListener implements CommandStateListener, PrestartState {
+public final class KeyboardCommandStateListener implements CommandStateListener, PrestartState {
 
     private final InputManager inputManager;
     private final Command key;

@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.modapi;
 
 import java.util.List;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 
-/**
- *
- * @author alberto
- */
-public class ModConfiguration {
+public final class ModConfiguration {
 
     private String modName;
 

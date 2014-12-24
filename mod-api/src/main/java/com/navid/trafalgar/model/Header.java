@@ -1,10 +1,6 @@
 package com.navid.trafalgar.model;
 
-/**
- *
- * @author anf
- */
-public class Header {
+public final class Header {
 
     private static final int version = 1;
 

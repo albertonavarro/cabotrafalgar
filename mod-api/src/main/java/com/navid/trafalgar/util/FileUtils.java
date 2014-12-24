@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.util;
 
 import java.io.File;
@@ -21,11 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 
-/**
- *
- * @author alberto
- */
-public class FileUtils {
+public final class FileUtils {
 
     private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
 

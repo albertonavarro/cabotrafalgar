@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.util;
 
 import java.util.ArrayDeque;
@@ -10,10 +6,6 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
-/**
- *
- * @author alberto
- */
 public class ReflexionUtils {
 
     private ReflexionUtils() {

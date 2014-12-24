@@ -14,7 +14,7 @@ import com.jme3.scene.shape.Line;
  */
 public class DirectionNode extends Node {
 
-    private Line line;
+    private final Line line;
 
     /**
      *

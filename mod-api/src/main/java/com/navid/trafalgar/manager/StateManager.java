@@ -6,11 +6,7 @@ import java.util.EnumMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- *
- */
-public class StateManager implements EventListener {
+public final class StateManager implements EventListener {
 
     @Autowired
     private EventManager eventManager;

@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class GameModel implements GameModelInterface {
 
-    private Map<Class, List<Object>> mapByClass = new HashMap();
+    private final Map<Class, List<Object>> mapByClass = new HashMap();
 
     @Override
     public void addToModel(Collection collection) {

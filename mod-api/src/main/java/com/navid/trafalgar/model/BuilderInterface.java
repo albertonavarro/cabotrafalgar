@@ -4,10 +4,6 @@ import com.navid.trafalgar.model.Builder2.Category;
 import java.util.Collection;
 import java.util.Map;
 
-/**
- *
- *
- */
 public interface BuilderInterface {
 
     /**

@@ -7,12 +7,7 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 import com.navid.trafalgar.manager.EventManager;
-import com.navid.trafalgar.manager.statistics.StatisticsManager;
 
-/**
- *
- * @author alberto
- */
 public abstract class AShipModel extends TrafalgarNode implements Control, Dependent {
 
     private final String role;

@@ -15,11 +15,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-/**
- *
- * @author casa
- */
-public class ModRegistererClasspathDetector implements ApplicationContextAware {
+public final class ModRegistererClasspathDetector implements ApplicationContextAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(ModRegistererClasspathDetector.class);
 

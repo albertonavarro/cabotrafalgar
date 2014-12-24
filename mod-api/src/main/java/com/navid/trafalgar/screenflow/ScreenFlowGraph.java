@@ -1,24 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.navid.trafalgar.screenflow;
 
-import com.navid.trafalgar.modapi.ModScreenConfiguration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author alberto
- */
-public class ScreenFlowGraph {
+public final class ScreenFlowGraph {
 
     private ScreenFlowGraph parent = null;
-    private List<ScreenFlowUnit> modScreenConfigurations = new ArrayList<ScreenFlowUnit>();
-    private Map<String, ScreenFlowUnit> mapModScreenConfigurations = new HashMap<String, ScreenFlowUnit>();
+    private final List<ScreenFlowUnit> modScreenConfigurations = new ArrayList<ScreenFlowUnit>();
+    private final Map<String, ScreenFlowUnit> mapModScreenConfigurations = new HashMap<String, ScreenFlowUnit>();
 
     public void addScreen(ScreenFlowUnit currentScreenConfig) {
         modScreenConfigurations.add(currentScreenConfig);
