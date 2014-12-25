@@ -25,10 +25,6 @@ import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
 public final class SelectControlsScreenGenerator implements ScreenGenerator {
 
     /**

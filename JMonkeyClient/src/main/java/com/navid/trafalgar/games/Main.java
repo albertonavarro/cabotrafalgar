@@ -28,7 +28,7 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-public class Main extends Application {
+public final class Main extends Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 

@@ -5,7 +5,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class RedirectorScreenController implements ScreenController {
+public final class RedirectorScreenController implements ScreenController {
 
     @Autowired
     private ScreenFlowManager screenFlowManager;

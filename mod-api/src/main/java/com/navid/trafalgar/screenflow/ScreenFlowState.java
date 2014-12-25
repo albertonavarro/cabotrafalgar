@@ -1,6 +1,6 @@
 package com.navid.trafalgar.screenflow;
 
-class ScreenFlowState {
+final class ScreenFlowState {
 
     private String currentFlow;
 

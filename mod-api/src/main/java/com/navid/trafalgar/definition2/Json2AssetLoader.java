@@ -11,7 +11,7 @@ import java.io.Reader;
  * Json2 jme3 custom loader
  *
  */
-public class Json2AssetLoader implements AssetLoader {
+public final class Json2AssetLoader implements AssetLoader {
 
     /**
      *

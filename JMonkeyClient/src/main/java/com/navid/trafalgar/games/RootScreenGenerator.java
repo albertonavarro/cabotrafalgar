@@ -10,11 +10,7 @@ import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.tools.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class RootScreenGenerator implements ScreenGenerator {
+public final class RootScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;

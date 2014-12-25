@@ -35,7 +35,7 @@ public class DirectionNode extends Node {
      *
      * @return
      */
-    public Vector3f getGlobalDirection() {
+    public final Vector3f getGlobalDirection() {
         Vector3f a = this.getWorldRotation().getRotationColumn(0);
         return a;
     }
@@ -44,7 +44,7 @@ public class DirectionNode extends Node {
      *
      * @return
      */
-    public Vector3f getLocalDirection() {
+    public final Vector3f getLocalDirection() {
         Vector3f a = this.getLocalRotation().getRotationColumn(0);
         return a;
     }
@@ -53,7 +53,7 @@ public class DirectionNode extends Node {
      *
      * @param newdir
      */
-    public void setDirection(Vector3f newdir) {
+    public final void setDirection(Vector3f newdir) {
         this.lookAt(newdir, Vector3f.UNIT_Y);
     }
 }

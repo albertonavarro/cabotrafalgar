@@ -6,7 +6,7 @@ import java.util.Map;
  * Representation for a json2 entry
  *
  */
-public class Entry {
+public final class Entry {
 
     /*
      * Classname for the entry

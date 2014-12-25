@@ -87,17 +87,15 @@ public final class Builder2 {
             if (entry.getName() != null && entry.getName().equals("player")) {
                 //entry.setType(gameConfiguration.getShipName());
                 //gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModel.class));
-                Collection c = build(new Entry() {
+                Entry entryInput = new Entry();
+                entry.setType(gameConfiguration.getShipName());
+                entry.setName("player1");
+                entry.setValues(new HashMap<String, Object>() {
                     {
-                        setType(gameConfiguration.getShipName());
-                        setName("player1");
-                        setValues(new HashMap<String, Object>() {
-                            {
-                                put("role", "Player");
-                            }
-                        });
+                        put("role", "Player");
                     }
                 });
+                Collection c = build(entryInput);
                 gameModel.addToModel(c);
             } else {
                 gameModel.addToModel(build(entry));

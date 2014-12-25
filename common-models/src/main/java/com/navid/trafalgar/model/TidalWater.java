@@ -6,7 +6,7 @@ import com.jme3.water.WaterFilter;
 
 public final class TidalWater extends WaterFilter implements IWater {
     
-    Vector3f speed;
+    private Vector3f speed;
 
     public TidalWater(Vector2f speed) {
         this.speed = new Vector3f(speed.x, 0, speed.y);

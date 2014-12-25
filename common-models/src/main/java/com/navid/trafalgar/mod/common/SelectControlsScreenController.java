@@ -21,10 +21,6 @@ import java.util.Set;
 import org.bushe.swing.event.EventTopicSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
 public final class SelectControlsScreenController implements ScreenController {
 
     /**

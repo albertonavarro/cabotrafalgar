@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
-public class ReflexionUtils {
+public final class ReflexionUtils {
 
     private ReflexionUtils() {
     }

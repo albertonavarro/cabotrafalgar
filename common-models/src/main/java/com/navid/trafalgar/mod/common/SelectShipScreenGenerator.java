@@ -4,10 +4,6 @@ import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
 public final class SelectShipScreenGenerator implements ScreenGenerator {
 
     @Autowired

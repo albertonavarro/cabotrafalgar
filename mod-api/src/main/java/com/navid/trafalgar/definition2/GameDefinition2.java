@@ -6,7 +6,7 @@ import java.util.List;
  * Representation for a json2 file content
  *
  */
-public class GameDefinition2 {
+public final class GameDefinition2 {
 
     private List<Entry> entries;
 

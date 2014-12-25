@@ -7,7 +7,7 @@ import java.util.*;
  *
  *
  */
-public class GameModel implements GameModelInterface {
+public final class GameModel implements GameModelInterface {
 
     private final Map<Class, List<Object>> mapByClass = new HashMap();
 

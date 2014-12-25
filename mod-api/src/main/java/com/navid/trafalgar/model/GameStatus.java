@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  *
  */
-public class GameStatus {
+public final class GameStatus {
 
     private FloatStatistic time;
     private GameDefinition2 gameDefinition;

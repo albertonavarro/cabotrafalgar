@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Map;
 
 
-public class NoWaterBuilder implements BuilderInterface {
+public final class NoWaterBuilder implements BuilderInterface {
 
     @Override
     public Collection build(String instanceName, Map<String, Object> customValues) {

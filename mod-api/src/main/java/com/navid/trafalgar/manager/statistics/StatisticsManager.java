@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @see AbstractStatistic
  */
-public class StatisticsManager {
+public final class StatisticsManager {
 
     /**
      *

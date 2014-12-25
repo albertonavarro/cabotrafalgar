@@ -5,7 +5,7 @@ import com.navid.trafalgar.util.FormatUtils;
 /**
  * Float implementation for AbstractStatistic
  */
-public class FloatStatistic extends AbstractStatistic<Float> {
+public final class FloatStatistic extends AbstractStatistic<Float> {
 
     private Float value = null;
 

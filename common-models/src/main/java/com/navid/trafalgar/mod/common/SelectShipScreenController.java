@@ -16,10 +16,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
 public final class SelectShipScreenController implements ScreenController {
 
     /**

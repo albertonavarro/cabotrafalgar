@@ -6,7 +6,7 @@ import com.navid.trafalgar.util.FormatUtils;
 /**
  * Vector3f implementation for AbstactStatistic
  */
-public class Vector3fStatistic extends AbstractStatistic<Vector3f> {
+public final class Vector3fStatistic extends AbstractStatistic<Vector3f> {
 
     /*
      * Initial value

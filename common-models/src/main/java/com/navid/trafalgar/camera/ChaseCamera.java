@@ -4,11 +4,7 @@ import com.jme3.input.InputManager;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 
-/**
- *
- * @author anavarro
- */
-public class ChaseCamera extends com.jme3.input.ChaseCamera {
+public final class ChaseCamera extends com.jme3.input.ChaseCamera {
 
     public ChaseCamera(Camera camera, Node target) {
         super(camera, target);
