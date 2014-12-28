@@ -46,18 +46,16 @@ public class LoadMapStateListener implements LoadModelState {
 
         if (gameConfiguration.getPreGameModel().contains(CandidateRecord.class)) {
             final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class);
-            Collection c = builder2.buildWithDependencies(new Entry() {
-                {
-                    setType(gameConfiguration.getShipName());
-                    setName("ghost1");
-                    setValues(new HashMap<String, Object>() {
+            Entry entry = new Entry();
+            entry.setType(gameConfiguration.getShipName());
+            entry.setName("ghost1");
+            entry.setValues(new HashMap<String, Object>() {
                         {
                             put("role", "Ghost");
                             put("record", cr);
                         }
                     });
-                }
-            }, gameModel);
+            Collection c = builder2.buildWithDependencies(entry, gameModel);
 
             gameModel.addToModel(c);
         }

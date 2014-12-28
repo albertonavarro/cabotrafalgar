@@ -122,16 +122,15 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
             LOGGER.error("Error loading ghost {} from map {}", ship, map);
             return null;
         }
-        Collection cr = builder2.build(new Entry() {
-            {
-                setType(candidate.getHeader().getShipModel());
-                setValues(new HashMap<String, Object>() {
+        
+        Entry entry = new Entry();
+        entry.setType(candidate.getHeader().getShipModel());
+        entry.setValues(new HashMap<String, Object>() {
                     {
                         put("role", "CandidateRecord");
                     }
                 });
-            }
-        });
+        Collection cr = builder2.build(entry);
 
         CandidateRecord finalcandidate = (CandidateRecord) gson.fromJson(response.getPayload(), Iterators.getOnlyElement(cr.iterator()).getClass());
 
