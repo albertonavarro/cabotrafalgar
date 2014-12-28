@@ -8,7 +8,7 @@ public final class Qualification {
 
     private File fileName;
 
-    private final List<Float> times;
+    private List<Float> times;
 
     private String shipClassName;
 
@@ -34,7 +34,7 @@ public final class Qualification {
      * @param times the times to set
      */
     public void setTimes(List<Float> times) {
-        this.setTimes(times);
+        this.times = times;
     }
 
     /**

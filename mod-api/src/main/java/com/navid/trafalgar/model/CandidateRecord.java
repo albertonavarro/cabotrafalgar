@@ -20,15 +20,15 @@ public class CandidateRecord<T extends StepRecord> {
 
     }
 
-    public void addStepRecord(T stepRecord) {
+    public final void addStepRecord(T stepRecord) {
         this.stepRecordList.add(stepRecord);
     }
 
-    public Header getHeader() {
+    public final Header getHeader() {
         return this.header;
     }
 
-    public float getTime() {
+    public final float getTime() {
         if (!stepRecordList.isEmpty()) {
             return stepRecordList.get(stepRecordList.size() - 1).getTimestamp();
         }
@@ -36,11 +36,11 @@ public class CandidateRecord<T extends StepRecord> {
         return 0;
     }
 
-    public List<? extends StepRecord> getStepRecord() {
+    public final List<? extends StepRecord> getStepRecord() {
         return stepRecordList;
     }
 
-    public void setMap(String map) {
+    public final void setMap(String map) {
         this.header.setMap(map);
     }
 

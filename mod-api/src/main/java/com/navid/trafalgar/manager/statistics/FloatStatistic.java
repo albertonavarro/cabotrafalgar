@@ -42,7 +42,7 @@ public final class FloatStatistic extends AbstractStatistic<Float> {
      */
     @Override
     public String toString() {
-        return getId() + " " + FormatUtils.formatFloatX_XXX(getValue());
+        return getId() + " " + FormatUtils.formatFloat(getValue());
     }
 
 }

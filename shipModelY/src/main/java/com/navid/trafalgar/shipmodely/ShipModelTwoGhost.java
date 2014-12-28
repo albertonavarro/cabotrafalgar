@@ -6,16 +6,13 @@ import com.navid.trafalgar.model.AShipModelGhost;
 import com.navid.trafalgar.model.CandidateRecord;
 import java.util.Iterator;
 
-/**
- *
- * @author casa
- */
-public class ShipModelTwoGhost extends AShipModelTwo implements AShipModelGhost {
+public final class ShipModelTwoGhost extends AShipModelTwo implements AShipModelGhost {
 
     private final CandidateRecord<ShipSnapshot> candidateRecord;
 
     private final Iterator<ShipSnapshot> iterator;
     private ShipSnapshot currentStep;
+    private float time = 0;
 
     public ShipModelTwoGhost(AssetManager assetManager,
             EventManager eventManager,
@@ -28,8 +25,6 @@ public class ShipModelTwoGhost extends AShipModelTwo implements AShipModelGhost 
             currentStep = iterator.next();
         }
     }
-
-    float time = 0;
 
     @Override
     public void update(float tpf) {

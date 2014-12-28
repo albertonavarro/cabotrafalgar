@@ -131,12 +131,12 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         }
     }
 
-    synchronized public void toggleMenu() {
+    public synchronized void toggleMenu() {
         showMenu = !showMenu;
         showMenuFunction(showMenu);
     }
 
-    synchronized public void restart() {
+    public synchronized void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
@@ -144,7 +144,7 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         nifty.gotoScreen("redirector");
     }
 
-    synchronized public void quit() {
+    public synchronized void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
@@ -160,7 +160,7 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
     }
 
     @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+    public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 

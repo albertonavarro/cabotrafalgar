@@ -2,7 +2,7 @@ package com.navid.trafalgar.model;
 
 public final class Header {
 
-    private static final int version = 1;
+    private static final int VERSION = 1;
 
     private String map;
 
@@ -12,11 +12,11 @@ public final class Header {
      * @return the version
      */
     public int getVersion() {
-        return version;
+        return VERSION;
     }
 
     public void setVersion(int newVersion) {
-        if (newVersion != version) {
+        if (newVersion != VERSION) {
             throw new RuntimeException("Different version!");
         }
     }

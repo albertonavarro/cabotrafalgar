@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class FileUtils {
 
-    private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(FileUtils.class);
 
     private FileUtils() {
     }
@@ -63,12 +63,8 @@ public final class FileUtils {
                         }
                     }
                 }
-            } catch (IOException e) {
-                logger.logp(Level.SEVERE, FileUtils.class.toString(),
-                        "find(pckgname, recursive, classes)", "Exception", e);
             } catch (Exception e) {
-                logger.logp(Level.SEVERE, FileUtils.class.toString(),
-                        "find(pckgname, recursive, classes)", "Exception", e);
+                LOG.error("Error in findFilesInFolder", e);
             }
         }
 
@@ -84,7 +80,7 @@ public final class FileUtils {
             }
         });
         if (files != null) {
-            for (int i = 0; i < files.length; i++) {
+            for(int i = 0; i < files.length; i++) {
                 // we are only interested in .class files
                 if (files[i].isDirectory()) {
                     if (recursive) {

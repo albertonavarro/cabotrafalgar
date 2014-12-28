@@ -8,7 +8,7 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class GUIUpdater implements StartedState, PrestartState {
+public final class GUIUpdater implements StartedState, PrestartState {
 
     @Autowired
     private WindTunnelMainScreen mainScreen;
@@ -35,7 +35,7 @@ public class GUIUpdater implements StartedState, PrestartState {
         mainScreen.fillShipStats(statisticsManager.getAllStatistics().values());
     }
 
-    private ActionListener actionListener = new ActionListener() {
+    private final ActionListener actionListener = new ActionListener() {
 
         @Override
         public void onAction(String name, boolean isPressed, float tpf) {

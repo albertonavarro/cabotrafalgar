@@ -167,7 +167,7 @@ public final class SelectShipScreenController implements ScreenController {
                         put("role", "ControlProxy");
                     }
                 });
-        
+
         Collection c = builder.build(entry);
 
         gameConfiguration.getPreGameModel().addToModel(c);

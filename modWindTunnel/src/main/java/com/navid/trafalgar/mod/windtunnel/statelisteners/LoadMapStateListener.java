@@ -14,7 +14,7 @@ import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 import com.navid.trafalgar.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class LoadMapStateListener implements LoadModelState {
+public final class LoadMapStateListener implements LoadModelState {
 
     @Autowired
     private AssetManager assetManager;

@@ -23,11 +23,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author casa
- */
-public class FileProfileManager implements ProfileManager {
+public final class FileProfileManager implements ProfileManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileProfileManager.class);
 
@@ -35,17 +31,17 @@ public class FileProfileManager implements ProfileManager {
 
     private Map<String, ProfileInternal> profiles = new HashMap<String, ProfileInternal>();
 
+    private ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
+    private File trafalgarFolder;
+
+    private File configFile;
+
     @Resource(name = "mod.counterclock.clientUser")
     private UserCommands userCommandsClient;
 
     @Resource(name = "mod.counterclock.requestContextContainer")
     private RequestContextContainer container;
-
-    ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-
-    File trafalgarFolder;
-
-    File configFile;
 
     @Override
     public Collection<ProfileStatus> listProfiles() {
@@ -146,20 +142,18 @@ public class FileProfileManager implements ProfileManager {
         }
 
         if (fileContent != null) {
-            for (ProfileEntry entry : fileContent.profiles) {
-                profiles.put(entry.getEmail(), FILE_TO_INTERNAL.apply(entry));
+            for (ProfileEntry entry : fileContent.getProfiles()) {
+                profiles.put(entry.getEmail(), fileToInternal.apply(entry));
             }
         } else {
-            profiles.put("DEFAULT", new ProfileInternal() {
-                {
-                    setEmail("DEFAULT");
-                    File newFolder = new File(trafalgarFolder, getEmail());
-                    if (!newFolder.exists()) {
-                        newFolder.mkdir();
-                    }
-                    setFolderHome(newFolder.getAbsolutePath());
-                }
-            });
+            ProfileInternal profileInternal = new ProfileInternal();
+            profileInternal.setEmail("DEFAULT");
+            File newFolder = new File(trafalgarFolder, profileInternal.getEmail());
+            if (!newFolder.exists()) {
+                newFolder.mkdir();
+            }
+            profileInternal.setFolderHome(newFolder.getAbsolutePath());
+            profiles.put("DEFAULT", profileInternal);
             saveFile();
         }
 
@@ -169,7 +163,7 @@ public class FileProfileManager implements ProfileManager {
     private void saveFile() {
         try {
             FileContent fileContent = new FileContent();
-            fileContent.profiles = Collections2.transform(profiles.values(), INTERNAL_TO_FILE);
+            fileContent.setProfiles(Collections2.transform(profiles.values(), INTERNAL_TO_FILE));
             mapper.writeValue(configFile, fileContent);
         } catch (IOException ex) {
             LOGGER.error("Error saving {}", configFile, ex);
@@ -195,12 +189,26 @@ public class FileProfileManager implements ProfileManager {
         return this.activeProfile.isOnline();
     }
 
-    public static class FileContent {
+    public static final class FileContent {
 
-        public Collection<ProfileEntry> profiles;
+        private Collection<ProfileEntry> profiles;
+
+        /**
+         * @return the profiles
+         */
+        public Collection<ProfileEntry> getProfiles() {
+            return profiles;
+        }
+
+        /**
+         * @param profiles the profiles to set
+         */
+        public void setProfiles(Collection<ProfileEntry> profiles) {
+            this.profiles = profiles;
+        }
     }
 
-    private final Function<ProfileInternal, ProfileStatus> INTERNAL_TO_STATUS
+    private static final Function<ProfileInternal, ProfileStatus> INTERNAL_TO_STATUS
             = new Function<ProfileInternal, ProfileStatus>() {
 
                 @Override
@@ -209,7 +217,7 @@ public class FileProfileManager implements ProfileManager {
                 }
             };
 
-    private final Function<ProfileInternal, ProfileEntry> INTERNAL_TO_FILE
+    private static final Function<ProfileInternal, ProfileEntry> INTERNAL_TO_FILE
             = new Function<ProfileInternal, ProfileEntry>() {
 
                 @Override
@@ -218,7 +226,7 @@ public class FileProfileManager implements ProfileManager {
                 }
             };
 
-    private final Function<ProfileEntry, ProfileInternal> FILE_TO_INTERNAL
+    private final Function<ProfileEntry, ProfileInternal> fileToInternal
             = new Function<ProfileEntry, ProfileInternal>() {
 
                 @Override

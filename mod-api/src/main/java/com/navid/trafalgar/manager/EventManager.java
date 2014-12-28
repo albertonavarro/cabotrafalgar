@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class EventManager {
+
+    private static final Logger LOG = LoggerFactory.getLogger(EventManager.class);
 
     /**
      *
@@ -70,7 +72,7 @@ public final class EventManager {
         Set<EventListener> listeners = eventListeners.get(event);
         if (listeners != null) {
             for (EventListener currentListener : listeners) {
-                Logger.getLogger(EventManager.class.getName()).log(Level.FINE, "Firing event {0} to listener: {1}", new Object[]{event, currentListener.toString()});
+                LOG.debug("Firing event {} to listener: {}", event, currentListener);
 
                 currentListener.onEvent(event);
             }
@@ -80,7 +82,7 @@ public final class EventManager {
             eventListeners = new HashMap<String, Set<EventListener>>();
         }
 
-        Logger.getLogger(EventManager.class.getName()).log(Level.FINE, "Finished firing event: {0}", event);
+        LOG.debug("Finished firing event: {}", event);
 
     }
 }

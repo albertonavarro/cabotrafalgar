@@ -2,10 +2,6 @@ package com.navid.trafalgar.profiles;
 
 import com.google.auto.value.AutoValue;
 
-/**
- *
- * @author casa
- */
 public class Pair {
 
     @AutoValue

@@ -41,7 +41,7 @@ public final class CounterClockMainGame extends AbstractAppState {
      * jME3 AppState methods
      */
     @Override
-    public final void initialize(final AppStateManager appStateManager, final Application app) {
+    public void initialize(final AppStateManager appStateManager, final Application app) {
         stateManager.reset();
 
         for (StateListener currentStateListener : stateListeners) {
@@ -56,13 +56,13 @@ public final class CounterClockMainGame extends AbstractAppState {
     }
 
     @Override
-    public final void stateDetached(final AppStateManager unused) {
+    public void stateDetached(final AppStateManager unused) {
         eventManager.fireEvent(EventManager.UNLOAD);
         setEnabled(false);
     }
 
     @Override
-    public final void update(final float tpf) {
+    public void update(final float tpf) {
         if (isEnabled()) {
             stateManager.update(tpf);
         }
@@ -71,19 +71,19 @@ public final class CounterClockMainGame extends AbstractAppState {
         gameStatus.getGameGUINode().updateGeometricState();
     }
 
-    public final void setEventManager(final EventManager inEventManager) {
+    public void setEventManager(final EventManager inEventManager) {
         this.eventManager = inEventManager;
     }
 
-    public final void setStateManager(final StateManager inStateManager) {
+    public void setStateManager(final StateManager inStateManager) {
         this.stateManager = inStateManager;
     }
 
-    public final void setGameStatus(final GameStatus inGameStatus) {
+    public void setGameStatus(final GameStatus inGameStatus) {
         this.gameStatus = inGameStatus;
     }
 
-    public final void setStateListeners(final List<StateListener> inStateListeners) {
+    public void setStateListeners(final List<StateListener> inStateListeners) {
         this.stateListeners = inStateListeners;
     }
 

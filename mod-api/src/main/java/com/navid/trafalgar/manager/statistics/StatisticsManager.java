@@ -35,7 +35,7 @@ public final class StatisticsManager {
         VECTOR3F
     };
 
-    private Map<String, Map<String, AbstractStatistic>> statsMap = new HashMap<String, Map<String, AbstractStatistic>>();
+    private final Map<String, Map<String, AbstractStatistic>> statsMap = new HashMap<String, Map<String, AbstractStatistic>>();
 
     /**
      * Creates float statistic

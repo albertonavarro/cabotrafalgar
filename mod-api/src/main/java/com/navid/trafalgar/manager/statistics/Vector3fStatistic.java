@@ -47,11 +47,11 @@ public final class Vector3fStatistic extends AbstractStatistic<Vector3f> {
         return new StringBuilder()
                 .append(getId())
                 .append(": ")
-                .append(FormatUtils.formatFloatX_XXX(value.x))
+                .append(FormatUtils.formatFloat(value.x))
                 .append(" ")
-                .append(FormatUtils.formatFloatX_XXX(value.y))
+                .append(FormatUtils.formatFloat(value.y))
                 .append(" ")
-                .append(FormatUtils.formatFloatX_XXX(value.z))
+                .append(FormatUtils.formatFloat(value.z))
                 .toString();
     }
 

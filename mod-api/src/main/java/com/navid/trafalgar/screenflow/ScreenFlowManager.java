@@ -44,7 +44,8 @@ public final class ScreenFlowManager {
             screenFlowState.setCurrentScreen(screenFlowGraph.get(screenFlowState.getCurrentFlow()).getNextScreenName(screenFlowState));
         }
 
-        ScreenFlowUnit nextScreenConfig = screenFlowGraph.get(screenFlowState.getCurrentFlow()).getScreenConfiguration(screenFlowState.getCurrentScreen());
+        ScreenFlowUnit nextScreenConfig
+                = screenFlowGraph.get(screenFlowState.getCurrentFlow()).getScreenConfiguration(screenFlowState.getCurrentScreen());
 
         nextScreenConfig.getInterfaceConstructor().buildScreen();
 

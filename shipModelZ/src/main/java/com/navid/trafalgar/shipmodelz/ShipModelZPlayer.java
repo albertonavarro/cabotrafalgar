@@ -10,13 +10,13 @@ import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.manager.statistics.Vector3fStatistic;
 import com.navid.trafalgar.model.AShipModelPlayer;
 
-public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
+public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
-    public static String STATS_NAME = "shipOneStats";
+    public static final String STATS_NAME = "shipOneStats";
 
     public static final float MINIMUM_ROPE = 9;
     public static final float MAXIMUM_ROPE = 20;
-    public static final float TRIMMING_SPEED = 5; 
+    public static final float TRIMMING_SPEED = 5;
     public static final float MAX_HORIZONTAL_POS = 5;
     public static final float HORIZONTAL_WEIGHT_SPEED = 10;
 
@@ -45,12 +45,12 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
     @Auditable
     private float globalSpeed;
     @Auditable
-    protected float inclination = 0;
+    private float inclination = 0;
     @Auditable
-    protected float mainSheetDistance = 0;
+    private float mainSheetDistance = 0;
     @Auditable
-    protected float horizontalPosition = 0;
-    protected float horizontalPositionIncrement = 0;
+    private float horizontalPosition = 0;
+    private float horizontalPositionIncrement = 0;
 
     private final float sailCorrection = 0.3f;
     private final float sailRotateSpeed = 2f;
@@ -63,8 +63,7 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
     public ShipModelZPlayer(final AssetManager assetManager, EventManager eventManager) {
         super("Player", assetManager, eventManager);
-        
-        
+
         this.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
             {
                 setTexture("DiffuseMap", assetManager.loadTexture("Textures/wood.jpeg"));
@@ -95,9 +94,9 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
-        windOverVela = (float) Math.cos(sail.getGlobalDirection().angleBetween(apparentWind3f.normalize()));
+        windOverVela = (float) Math.cos(getSail().getGlobalDirection().angleBetween(apparentWind3f.normalize()));
 
-        float angleBetween = shipOrientation3f.angleBetween(sail.getGlobalDirection());
+        float angleBetween = shipOrientation3f.angleBetween(getSail().getGlobalDirection());
         float sailRegulation = (float) ((angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection);
         velaOverShip = (float) Math.cos(angleBetween + sailRegulation);
 
@@ -111,9 +110,9 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
     private void updateRudder(float tpf) {
         if (rudderRotation == 0) {
-            rudder.resetRotation();
+            getRudder().resetRotation();
         } else {
-            rudder.rotateY(rudderRotation);
+            getRudder().rotateY(rudderRotation);
         }
 
         lastRudderRotation = rudderRotation;
@@ -126,13 +125,13 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
      * @param tpf
      */
     private void updateSailAutomaticRotation(float tpf) {
-        Vector3f a = mainsheetBoatHandler.getWorldTranslation();
-        Vector3f b = mainsheetSailHandler.getWorldTranslation();
+        Vector3f a = getMainsheetBoatHandler().getWorldTranslation();
+        Vector3f b = getMainsheetSailHandler().getWorldTranslation();
         Vector3f difference = a.subtract(b);
         mainSheetDistance = difference.length();
-        
+
         Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
-        Vector3f helperDirection = sail.getHelperDirection();
+        Vector3f helperDirection = getSail().getHelperDirection();
         Vector3f vectorshipDirection = this.getGlobalDirection();
 
         Vector3f resMultVectWindSail = helperDirection.cross(windDirection);
@@ -142,27 +141,35 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
             //Sail is moving towards the front
             if (mainSheetDistance < ropeLenght - 0.5) {
                 //Sail hasn't yet arrived to the limit
-                sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+                getSail().rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
                 sailForcing = 0f;
             } else if (mainSheetDistance < ropeLenght) {
                 //Sail hasn't yet arrived to the limit
                 sailForcing = 1f;
             } else {
                 //Sail adjusts to the limit
-                sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght) * tpf * sailRotateSpeed);
+                getSail().rotateY(
+                        -Math.signum(resMultVectSailShip.y)
+                                * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght)
+                                * tpf
+                                * sailRotateSpeed);
                 sailForcing = 0f;
             }
         } else {
             if (mainSheetDistance > ropeLenght) {
                 //Sail adjusts to the limit
-                sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght) * tpf * sailRotateSpeed);
+                getSail().rotateY(
+                        -Math.signum(resMultVectSailShip.y)
+                                * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght)
+                                * tpf
+                                * sailRotateSpeed);
                 sailForcing = 0f;
             } else {
                 //Sail is moving backwards
-                sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+                getSail().rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
                 sailForcing = 0f;
             }
-            
+
         }
     }
 
@@ -176,8 +183,8 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
-        double windOverVelaPitch = Math.cos(sail.getGlobalDirection().angleBetween(windDirection));
-        float angleBetween = shipOrientation3f.angleBetween(sail.getGlobalDirection());
+        double windOverVelaPitch = Math.cos(getSail().getGlobalDirection().angleBetween(windDirection));
+        float angleBetween = shipOrientation3f.angleBetween(getSail().getGlobalDirection());
 
         double velaOverShipPitch = Math.sin(angleBetween);
 
@@ -199,7 +206,8 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
      * @param tpf
      */
     private void updateShipYaw(float tpf) {
-        this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * localSpeed * tpf / 100, 0).mult(this.getLocalRotation()));
+        this.setLocalRotation(
+                new Quaternion().fromAngles(0, getRudder().getRudderValue() * localSpeed * tpf / 100, 0).mult(this.getLocalRotation()));
     }
 
     /**
@@ -213,14 +221,14 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         this.move(context.getWater().getMovement(this.getGlobalDirection()).mult(-30*tpf));
         shipDirection.setValue(shipOrientation3f);
     }
-    
+
     private void updateWeightPosition(float tpf) {
-        this.weight.move(0, 0, horizontalPositionIncrement);
+        getWeight().move(0, 0, horizontalPositionIncrement);
         horizontalPositionIncrement = 0;
     }
 
     @Override
-    public final void update(float tpf) {
+    public void update(float tpf) {
         super.update(tpf);
         updateWeightPosition(tpf);
         updateSpeed(tpf);
@@ -233,12 +241,10 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
 
     public void rudderRight(float tpf) {
         rudderRotation = -1 * tpf;
-
     }
 
     public void rudderLeft(float tpf) {
         rudderRotation = 1 * tpf;
-
     }
 
     public void sailLoose(float tpf) {
@@ -249,18 +255,18 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         ropeLenght = getRangedValue(ropeLenght, -tpf * TRIMMING_SPEED, MAXIMUM_ROPE, MINIMUM_ROPE);
     }
 
-    void weightPort(float tpf) {
+    public void weightPort(float tpf) {
         float previousPosition = horizontalPosition;
         horizontalPosition = getRangedValue(horizontalPosition, -tpf * HORIZONTAL_WEIGHT_SPEED, MAX_HORIZONTAL_POS, -MAX_HORIZONTAL_POS);
         horizontalPositionIncrement = horizontalPosition - previousPosition;
     }
 
-    void weightStarboard(float tpf) {
+    public void weightStarboard(float tpf) {
         float previousPosition = horizontalPosition;
         horizontalPosition = getRangedValue(horizontalPosition, tpf * HORIZONTAL_WEIGHT_SPEED, MAX_HORIZONTAL_POS, -MAX_HORIZONTAL_POS);
         horizontalPositionIncrement = horizontalPosition - previousPosition;
     }
-    
+
     private float getRangedValue(float current, float increment, float max, float min) {
         current += increment;
         if (current > max) {
@@ -268,10 +274,8 @@ public class ShipModelZPlayer extends AShipModelZ implements AShipModelPlayer {
         } else if (current < min) {
             return min;
         }
-        
+
         return current;
     }
-
-    
 
 }

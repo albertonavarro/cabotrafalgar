@@ -15,12 +15,12 @@ public final class Builder2 {
     /**
      * Maps builder categories and builders
      */
-    private Map<Category, Collection<BuilderInterface>> buildersByCategory
+    private final Map<Category, Collection<BuilderInterface>> buildersByCategory
             = new EnumMap<Category, Collection<BuilderInterface>>(Category.class);
     /**
      * Maps builder names and builders
      */
-    private Map<String, BuilderInterface> buildersByName = new HashMap<String, BuilderInterface>();
+    private final Map<String, BuilderInterface> buildersByName = new HashMap<String, BuilderInterface>();
 
     /**
      * Categories (future use)
@@ -88,9 +88,9 @@ public final class Builder2 {
                 //entry.setType(gameConfiguration.getShipName());
                 //gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModel.class));
                 Entry entryInput = new Entry();
-                entry.setType(gameConfiguration.getShipName());
-                entry.setName("player1");
-                entry.setValues(new HashMap<String, Object>() {
+                entryInput.setType(gameConfiguration.getShipName());
+                entryInput.setName("player1");
+                entryInput.setValues(new HashMap<String, Object>() {
                     {
                         put("role", "Player");
                     }
@@ -153,6 +153,7 @@ public final class Builder2 {
     /**
      *
      * @param entry
+     * @param gameModel
      * @return
      */
     public Collection buildWithDependencies(Entry entry, GameModel gameModel) {

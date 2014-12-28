@@ -7,12 +7,14 @@ import com.navid.trafalgar.model.AShipModelGhost;
 import com.navid.trafalgar.model.CandidateRecord;
 import java.util.Iterator;
 
-public class ShipModelZGhost extends AShipModelZ implements AShipModelGhost {
+public final class ShipModelZGhost extends AShipModelZ implements AShipModelGhost {
 
     private final CandidateRecord<ShipSnapshot> candidateRecord;
 
     private final Iterator<ShipSnapshot> iterator;
     private ShipSnapshot currentStep;
+
+    private float time = 0;
 
     public ShipModelZGhost(final AssetManager assetManager,
             EventManager eventManager,
@@ -24,7 +26,7 @@ public class ShipModelZGhost extends AShipModelZ implements AShipModelGhost {
         if (iterator.hasNext()) {
             currentStep = iterator.next();
         }
-        
+
         this.setHullMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md") {
             {
                 setTexture("DiffuseMap", assetManager.loadTexture("Textures/wood.jpeg"));
@@ -36,11 +38,9 @@ public class ShipModelZGhost extends AShipModelZ implements AShipModelGhost {
                 setTexture("DiffuseMap", assetManager.loadTexture("Textures/sail.jpg"));
             }
         });
-        
+
         this.setTransparent(true);
     }
-
-    float time = 0;
 
     @Override
     public void update(float tpf) {

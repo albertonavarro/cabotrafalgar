@@ -2,11 +2,7 @@ package com.navid.trafalgar.profiles;
 
 import com.google.common.base.Optional;
 
-/**
- *
- * @author casa
- */
-public class ProfileStatus {
+public final class ProfileStatus {
 
     private Boolean verified;
 

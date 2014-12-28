@@ -26,7 +26,7 @@ public abstract class AHarnessModel extends Node implements Control, Dependent {
         initGeometry(assetManager);
     }
 
-    public void registerInputManager(InputManager inputManager) {
+    public final void registerInputManager(InputManager inputManager) {
         inputManager.addListener(new AnalogListener() {
 
             @Override
@@ -51,25 +51,25 @@ public abstract class AHarnessModel extends Node implements Control, Dependent {
         target.setLocalTranslation(this.getWorldTranslation());
     }
 
-    public void setTarget(Node target) {
+    public final void setTarget(Node target) {
         this.target = target;
     }
 
     @Override
-    public Control cloneForSpatial(Spatial spatial) {
+    public final Control cloneForSpatial(Spatial spatial) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void setSpatial(Spatial spatial) {
+    public final void setSpatial(Spatial spatial) {
     }
 
     @Override
-    public void render(RenderManager rm, ViewPort vp) {
+    public final void render(RenderManager rm, ViewPort vp) {
     }
 
     @Override
-    public void resolveDependencies(GameModel gameModel) {
+    public final void resolveDependencies(GameModel gameModel) {
         this.target = (Node) gameModel.getSingleByType(AShipModel.class);
     }
 }

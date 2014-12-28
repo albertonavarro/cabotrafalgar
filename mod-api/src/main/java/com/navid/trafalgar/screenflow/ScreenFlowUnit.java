@@ -4,7 +4,7 @@ import com.navid.trafalgar.modapi.ModScreenConfiguration;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.BeanFactory;
 
-public class ScreenFlowUnit {
+public final class ScreenFlowUnit {
 
     private String screenName;
     private ScreenGenerator interfaceConstructor;

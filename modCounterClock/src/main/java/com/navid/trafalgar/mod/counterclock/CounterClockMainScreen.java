@@ -134,19 +134,19 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
         }
     }
 
-    synchronized public void toggleMenu() {
+    public synchronized void toggleMenu() {
         showMenu = !showMenu;
         showMenuFunction(showMenu);
     }
 
-    synchronized public void restart() {
+    public synchronized void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
         screenFlowManager.changeNextScreen("counterclockScreen");
         nifty.gotoScreen("redirector");
     }
 
-    synchronized public void quit() {
+    public synchronized void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
         screenFlowManager.changeNextScreen("selectMap");
@@ -161,7 +161,7 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
     }
 
     @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+    public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 

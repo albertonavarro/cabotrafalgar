@@ -13,9 +13,9 @@ import com.navid.trafalgar.model.AShipModelPlayer;
  *
  * @author casa
  */
-public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlayer {
+public final class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlayer {
 
-    public static String STATS_NAME = "shipOneStats";
+    public static final String STATS_NAME = "shipOneStats";
 
     public static final float MINIMUM_ROPE = 1.5f;
     public static final float MAXIMUM_ROPE = 3;
@@ -51,11 +51,11 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
     @Auditable
     private float speed;
     @Auditable
-    protected float inclinacion = 0;
+    private float inclinacion = 0;
 
-    private float sailCorrection = 0.3f;
-    private float sailRotateSpeed = 2f;
-    private float sailSurface = 100;
+    private final float sailCorrection = 0.3f;
+    private final float sailRotateSpeed = 2f;
+    private final float sailSurface = 100;
     private float lastPitch = 0f;
 
     private Vector3fStatistic apparentWind;
@@ -76,9 +76,9 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
 
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
-        windOverVela = (float) Math.cos(sail.getGlobalDirection().angleBetween(apparentWind3f.normalize()));
+        windOverVela = (float) Math.cos(getSail().getGlobalDirection().angleBetween(apparentWind3f.normalize()));
 
-        float angleBetween = shipOrientation3f.angleBetween(sail.getGlobalDirection());
+        float angleBetween = shipOrientation3f.angleBetween(getSail().getGlobalDirection());
         float sailRegulation = (float) ((angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection);
         velaOverShip = (float) Math.cos(angleBetween + sailRegulation);
 
@@ -94,9 +94,9 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
 
     private void updateRudder(float tpf) {
         if (rudderRotation == 0) {
-            rudder.resetRotation();
+            getRudder().resetRotation();
         } else {
-            rudder.rotateY(rudderRotation);
+            getRudder().rotateY(rudderRotation);
         }
 
         lastRudderRotation = rudderRotation;
@@ -110,7 +110,7 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
      */
     private void updateSailAutomaticRotation(float tpf) {
         Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
-        Vector3f helperDirection = sail.getHelperDirection();
+        Vector3f helperDirection = getSail().getHelperDirection();
         Vector3f vectorshipDirection = this.getGlobalDirection();
 
         Vector3f resMultVectWindSail = helperDirection.cross(windDirection);
@@ -120,16 +120,19 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
             //Sail is moving towards the front
             if (helperDirection.angleBetween(vectorshipDirection) > ropeLenght) {
                 //Sail hasn't yet arrived to the limit
-                sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+                getSail().rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
                 sailForcing = 0f;
             } else {
                 //Sail adjusts to the limit
-                sail.rotateY(-Math.signum(resMultVectSailShip.y) * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght) * tpf * sailRotateSpeed);
+                getSail().rotateY(-Math.signum(resMultVectSailShip.y)
+                        * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght)
+                        * tpf
+                        * sailRotateSpeed);
                 sailForcing = 1f;
             }
         } else {
             //Sail is moving towards the back
-            sail.rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
+            getSail().rotateY(resMultVectWindSail.y * tpf * sailRotateSpeed);
             sailForcing = 0f;
         }
     }
@@ -144,8 +147,8 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
         Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
-        double windOverVelaPitch = Math.cos(sail.getGlobalDirection().angleBetween(windDirection));
-        float angleBetween = shipOrientation3f.angleBetween(sail.getGlobalDirection());
+        double windOverVelaPitch = Math.cos(getSail().getGlobalDirection().angleBetween(windDirection));
+        float angleBetween = shipOrientation3f.angleBetween(getSail().getGlobalDirection());
 
         double velaOverShipPitch = Math.sin(angleBetween);
 
@@ -166,7 +169,11 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
      * @param tpf
      */
     private void updateShipYaw(float tpf) {
-        this.setLocalRotation(new Quaternion().fromAngles(0, rudder.getRudderValue() * speed * tpf / 100, 0).mult(this.getLocalRotation()));
+        this.setLocalRotation(
+                new Quaternion().fromAngles(0, getRudder().getRudderValue()
+                        * speed
+                        * tpf / 100, 0)
+                        .mult(this.getLocalRotation()));
     }
 
     /**
@@ -181,7 +188,7 @@ public class ShipModelTwoPlayer extends AShipModelTwo implements AShipModelPlaye
     }
 
     @Override
-    public final void update(float tpf) {
+    public void update(float tpf) {
         super.update(tpf);
         updateSpeed(tpf);
         updateRudder(tpf);

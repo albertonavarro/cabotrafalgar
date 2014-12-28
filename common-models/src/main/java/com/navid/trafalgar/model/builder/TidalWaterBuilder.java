@@ -31,5 +31,5 @@ public final class TidalWaterBuilder implements BuilderInterface {
     public Iterable<Builder2.Category> getCategories() {
         return Collections.singleton(Builder2.Category.context);
     }
-    
+
 }

@@ -41,7 +41,8 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
 
     public void buildScreenNow() {
 
-        Collection<KeyboardCommandStateListener> keyListeners = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
+        Collection<KeyboardCommandStateListener> keyListeners
+                = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
 
         //sorting commands in alphabetical order of command name
         List<KeyboardCommandStateListener> sortedCommands = newArrayList(keyListeners);
@@ -51,7 +52,7 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
                 return o1.toString().compareTo(o2.toString());
             }
         });
-        
+
         final PanelBuilder outerPanelBuilder = new PanelBuilder("PartitionPanel") {
                 {
                     height("80%");
@@ -112,7 +113,7 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
 
         Screen screen = new ScreenBuilder("selectKeys") {
             {
-                controller(controller); // Screen properties   
+                controller(controller); // Screen properties
 
                 // <layer>
                 layer(new LayerBuilder("Layer_ID") {

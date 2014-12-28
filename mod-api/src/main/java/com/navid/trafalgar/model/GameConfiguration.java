@@ -22,7 +22,7 @@ public final class GameConfiguration {
         reset();
     }
 
-    public final void reset() {
+    public void reset() {
         preGameModel = new GameModel();
         shipName = null;
     }

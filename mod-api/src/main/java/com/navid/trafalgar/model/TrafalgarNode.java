@@ -18,7 +18,7 @@ public abstract class TrafalgarNode extends Node {
 
     private boolean debug = false;
     private final Geometry lineGeometry;
-    protected EventManager eventManager;
+    private final EventManager eventManager;
 
     public TrafalgarNode(Vector3f lookAt, AssetManager assetManager, EventManager eventManager) {
 
@@ -36,21 +36,22 @@ public abstract class TrafalgarNode extends Node {
         onDebugDisabled();
 
         eventManager.registerListener(new EventListener() {
+            @Override
             public void onEvent(String event) {
                 setDebug(!debug);
             }
         }, new String[]{"DEBUG"});
     }
 
-    public void setDirection(Vector3f newDirection) {
+    public final void setDirection(Vector3f newDirection) {
         this.lookAt(newDirection, Vector3f.UNIT_Y);
     }
 
-    public Vector3f getLocalDirection() {
+    public final Vector3f getLocalDirection() {
         return this.getLocalRotation().getRotationColumn(0);
     }
 
-    public Vector3f getGlobalDirection() {
+    public final Vector3f getGlobalDirection() {
         return this.getWorldRotation().getRotationColumn(0);
     }
 
@@ -63,11 +64,11 @@ public abstract class TrafalgarNode extends Node {
         this.debug = value;
     }
 
-    protected void onDebugEnabled() {
+    protected final void onDebugEnabled() {
         lineGeometry.setCullHint(CullHint.Never);
     }
 
-    protected void onDebugDisabled() {
+    protected final void onDebugDisabled() {
         lineGeometry.setCullHint(CullHint.Always);
     }
 }

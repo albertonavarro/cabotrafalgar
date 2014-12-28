@@ -6,11 +6,7 @@ import com.navid.trafalgar.model.AShipModelPlayer;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- * @author casa
- */
-public class ShipModelTwoControlProxy implements AShipModelInteractive {
+public final class ShipModelTwoControlProxy implements AShipModelInteractive {
 
     private ShipModelTwoPlayer target;
 

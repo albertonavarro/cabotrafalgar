@@ -12,11 +12,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alberto
- */
-public class ShipModelTwoBuilder implements BuilderInterface {
+public final class ShipModelTwoBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
@@ -32,7 +28,8 @@ public class ShipModelTwoBuilder implements BuilderInterface {
         if (role.equals("Player")) {
             model = new ShipModelTwoPlayer(assetManager, eventManager);
         } else if (role.equals("Ghost")) {
-            model = new ShipModelTwoGhost(assetManager, eventManager, (CandidateRecord<ShipModelTwoPlayer.ShipSnapshot>) customValues.get("record"));
+            model = new ShipModelTwoGhost(assetManager, eventManager,
+                    (CandidateRecord<ShipModelTwoPlayer.ShipSnapshot>) customValues.get("record"));
         } else if (role.equals("ControlProxy")) {
             return Collections.singleton(new ShipModelTwoControlProxy());
         } else if (role.equals("CandidateRecord")) {

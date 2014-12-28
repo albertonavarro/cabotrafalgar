@@ -52,12 +52,11 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
         }
 
         candidateRecord.setMap(candidateRecord.getHeader().getMap().replace("/", "_"));
-        AddRecordResponse addRecordResponse = null;
         String sampleReal = gson.toJson(candidateRecord);
         AddRecordRequest addRecordRequest = new AddRecordRequest();
         addRecordRequest.setPayload(sampleReal);
         LOGGER.info("Trying with size " + sampleReal.length());
-        addRecordResponse = rankingClient.postRanking(addRecordRequest);
+        AddRecordResponse addRecordResponse = rankingClient.postRanking(addRecordRequest);
 
         CandidateInfo returned = new CandidateInfo();
         returned.setAccepted(true);
@@ -122,7 +121,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
             LOGGER.error("Error loading ghost {} from map {}", ship, map);
             return null;
         }
-        
+
         Entry entry = new Entry();
         entry.setType(candidate.getHeader().getShipModel());
         entry.setValues(new HashMap<String, Object>() {
@@ -132,7 +131,8 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
                 });
         Collection cr = builder2.build(entry);
 
-        CandidateRecord finalcandidate = (CandidateRecord) gson.fromJson(response.getPayload(), Iterators.getOnlyElement(cr.iterator()).getClass());
+        CandidateRecord finalcandidate =
+                (CandidateRecord) gson.fromJson(response.getPayload(), Iterators.getOnlyElement(cr.iterator()).getClass());
 
         return finalcandidate;
 

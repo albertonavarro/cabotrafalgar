@@ -4,7 +4,7 @@ import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class WindTunnelMainScreenGenerator implements ScreenGenerator {
+public final class WindTunnelMainScreenGenerator implements ScreenGenerator {
 
     @Autowired
     private Nifty nifty;

@@ -53,7 +53,7 @@ public final class SelectControlsScreenController implements ScreenController {
         this.screen = screen;
     }
     private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler;
-    private Map<String, String> generated = new HashMap<String, String>();
+    private final Map<String, String> generated = new HashMap<String, String>();
     private Map<String, Command> commandsMap;
     private Map<String, CommandGenerator> generatorMap;
 

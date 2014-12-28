@@ -61,7 +61,8 @@ public final class StateManager implements EventListener {
          */
         PAUSED
     };
-    private EnumMap<STATES, List<StateListener>> stateListener = new EnumMap<STATES, List<StateListener>>(STATES.class);
+    
+    private final EnumMap<STATES, List<StateListener>> stateListener = new EnumMap<STATES, List<StateListener>>(STATES.class);
     private STATES currentState = STATES.INIT;
 
     /**
@@ -77,7 +78,14 @@ public final class StateManager implements EventListener {
     public void reset() {
         stateListener.clear();
         this.setCurrentState(STATES.INIT);
-        getEventManager().registerListener(this, new String[]{EventManager.ABORTED, EventManager.FAILED, EventManager.SUCCESSFUL, EventManager.PAUSED, EventManager.RESUME, EventManager.UNLOAD});
+        getEventManager().registerListener(this,
+                new String[]{
+                    EventManager.ABORTED,
+                    EventManager.FAILED,
+                    EventManager.SUCCESSFUL,
+                    EventManager.PAUSED,
+                    EventManager.RESUME,
+                    EventManager.UNLOAD});
     }
 
     /**
@@ -91,6 +99,7 @@ public final class StateManager implements EventListener {
      *
      * @param event
      */
+    @Override
     public void onEvent(String event) {
         if (currentState == STATES.STARTED) {
             if (event.equals(EventManager.ABORTED)) {

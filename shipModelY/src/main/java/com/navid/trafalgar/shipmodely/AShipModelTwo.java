@@ -15,10 +15,6 @@ import com.navid.trafalgar.model.TrafalgarNode;
 import com.navid.trafalgar.model.IWind;
 import com.navid.trafalgar.model.StepRecord;
 
-/**
- *
- * @author alberto
- */
 public abstract class AShipModelTwo extends AShipModel {
 
     public static class ShipCandidateRecord extends CandidateRecord<ShipSnapshot> {
@@ -34,7 +30,7 @@ public abstract class AShipModelTwo extends AShipModel {
     /**
      * Internal representation for AShipOneModel
      */
-    public static class ShipSnapshot extends StepRecord {
+    public static final class ShipSnapshot extends StepRecord {
 
         private Vector3f position;
         private Quaternion rotation;
@@ -66,9 +62,9 @@ public abstract class AShipModelTwo extends AShipModel {
         return snapshot;
     }
 
-    protected Spatial spatial;
-    protected Sail sail;
-    protected Rudder rudder;
+    private final Spatial spatial;
+    private final Sail sail;
+    private final Rudder rudder;
     private Material matHull;
     private Material matSail;
     private boolean previousTransparent = false;
@@ -115,7 +111,7 @@ public abstract class AShipModelTwo extends AShipModel {
     }
 
     @Override
-    public void setWindNode(IWind.WindGeometry windGeometry) {
+    public final void setWindNode(IWind.WindGeometry windGeometry) {
         this.attachChild(windGeometry);
         this.addControl(windGeometry);
         windGeometry.move(-10, 10, 0);
@@ -153,25 +149,25 @@ public abstract class AShipModelTwo extends AShipModel {
             return helperDirection;
         }
 
-        public final void rotateY(float radians) {
+        public void rotateY(float radians) {
             this.rotate(0, radians, 0);
         }
     }
 
     protected final class Rudder extends TrafalgarNode {
 
-        private final float MAXIMUM = 1;
+        private static final float MAXIMUM = 1;
         private float value = 0;
 
         protected Rudder(AssetManager assetManager, EventManager eventManager) {
             super(new Vector3f(1, 0, 0), assetManager, eventManager);
         }
 
-        public final float getRudderValue() {
+        public float getRudderValue() {
             return value;
         }
 
-        public final void rotateY(float radians) {
+        public void rotateY(float radians) {
             float increment;
             if (radians > 0) {
                 if (value + radians > MAXIMUM) {
@@ -197,6 +193,20 @@ public abstract class AShipModelTwo extends AShipModel {
             this.rotateY(-getRudderValue());
             value = 0;
         }
+    }
+
+    /**
+     * @return the sail
+     */
+    public final Sail getSail() {
+        return sail;
+    }
+
+    /**
+     * @return the rudder
+     */
+    public final Rudder getRudder() {
+        return rudder;
     }
 
 }

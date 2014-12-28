@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ShipModelZBuilder implements BuilderInterface {
+public final class ShipModelZBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
@@ -27,7 +27,8 @@ public class ShipModelZBuilder implements BuilderInterface {
         if (role.equals("Player")) {
             model = new ShipModelZPlayer(assetManager, eventManager);
         } else if (role.equals("Ghost")) {
-            model = new ShipModelZGhost(assetManager, eventManager, (CandidateRecord<ShipModelZPlayer.ShipSnapshot>) customValues.get("record"));
+            model = new ShipModelZGhost(assetManager, eventManager,
+                    (CandidateRecord<ShipModelZPlayer.ShipSnapshot>) customValues.get("record"));
         } else if (role.equals("ControlProxy")) {
             return Collections.singleton(new ShipModelZControlProxy());
         } else if (role.equals("CandidateRecord")) {

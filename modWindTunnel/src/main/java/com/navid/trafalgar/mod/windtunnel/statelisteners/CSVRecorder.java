@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CSVRecorder implements PrestartState, StartedState {
+public final class CSVRecorder implements PrestartState, StartedState {
 
     @Autowired
     private StatisticsManager statsManager;

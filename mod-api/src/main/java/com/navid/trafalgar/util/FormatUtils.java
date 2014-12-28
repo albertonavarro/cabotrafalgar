@@ -18,7 +18,7 @@ public final class FormatUtils {
      * @param value
      * @return "###.###" formatted string
      */
-    public static String formatFloatX_XXX(float value) {
+    public static String formatFloat(float value) {
         DecimalFormat myFormatter = new DecimalFormat("###.###");
         return myFormatter.format(value);
     }
@@ -32,7 +32,7 @@ public final class FormatUtils {
         String[] values = input.split(",");
         return new Vector3f(Float.parseFloat(values[0]), Float.parseFloat(values[1]), Float.parseFloat(values[2]));
     }
-    
+
     /**
      *
      * @param input

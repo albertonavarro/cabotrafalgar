@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alberto
  */
-public class AnnotationToStatsManagerStartedListener implements PrestartState, StartedState {
+public final class AnnotationToStatsManagerStartedListener implements PrestartState, StartedState {
 
     @Autowired
     private WindTunnelGameModel gameModel;

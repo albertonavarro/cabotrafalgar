@@ -19,15 +19,15 @@ import com.navid.trafalgar.model.StepRecord;
 
 public abstract class AShipModelZ extends AShipModel {
 
-    protected Spatial spatial;
-    protected Sail sail;
-    protected Rudder rudder;
+    private final Spatial spatial;
+    private final Sail sail;
+    private final Rudder rudder;
     private Material matHull;
     private Material matSail;
     private boolean previousTransparent = false;
-    protected Geometry mainsheetBoatHandler;
-    protected Geometry mainsheetSailHandler;
-    protected Geometry weight;
+    private final Geometry mainsheetBoatHandler;
+    private Geometry mainsheetSailHandler;
+    private final Geometry weight;
 
     protected AShipModelZ(String role, AssetManager assetManager, EventManager eventManager) {
         super(role, new Vector3f(1, 0, 0), assetManager, eventManager);
@@ -42,7 +42,7 @@ public abstract class AShipModelZ extends AShipModel {
         Material sphereMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
         mainsheetBoatHandler.setMaterial(sphereMat);
         this.attachChild(mainsheetBoatHandler);
-        
+
         Sphere sphereWeight = new Sphere(8, 8, 5f);
         weight = new Geometry("Mainsheet boat handler", sphereWeight);
         weight.move(-20, 3, 0);
@@ -73,14 +73,14 @@ public abstract class AShipModelZ extends AShipModel {
 
         snapshot.setPosition(this.getLocalTranslation().clone());
         snapshot.setRotation(this.getLocalRotation().clone());
-        snapshot.setLastRotation(sail.getLastRotation());
+        snapshot.setLastRotation(getSail().getLastRotation());
 
         return snapshot;
     }
 
     public final void setSailMaterial(Material mat) {
         matSail = mat;
-        sail.setMaterial(mat);
+        getSail().setMaterial(mat);
     }
 
     public final void setHullMaterial(Material mat) {
@@ -103,7 +103,7 @@ public abstract class AShipModelZ extends AShipModel {
     }
 
     @Override
-    public void setWindNode(IWind.WindGeometry windGeometry) {
+    public final void setWindNode(IWind.WindGeometry windGeometry) {
         this.attachChild(windGeometry);
         this.addControl(windGeometry);
         windGeometry.move(-10, 10, 0);
@@ -115,9 +115,46 @@ public abstract class AShipModelZ extends AShipModel {
 
         this.setLocalTranslation(snapshot.getPosition());
         this.setLocalRotation(snapshot.getRotation());
-        sail.rotateY(snapshot.getLastRotation());
+        getSail().rotateY(snapshot.getLastRotation());
     }
 
+    /**
+     * @return the sail
+     */
+    public final Sail getSail() {
+        return sail;
+    }
+
+    /**
+     * @return the rudder
+     */
+    public final Rudder getRudder() {
+        return rudder;
+    }
+
+    /**
+     * @return the weight
+     */
+    public final Geometry getWeight() {
+        return weight;
+    }
+
+    /**
+     * @return the mainsheetBoatHandler
+     */
+    public final Geometry getMainsheetBoatHandler() {
+        return mainsheetBoatHandler;
+    }
+
+    /**
+     * @return the mainsheetSailHandler
+     */
+    public final Geometry getMainsheetSailHandler() {
+        return mainsheetSailHandler;
+    }
+
+    
+    
     /**
      * Sail representation
      */
@@ -137,10 +174,10 @@ public abstract class AShipModelZ extends AShipModel {
 
             Sphere sphereMesh = new Sphere(8, 8, 1f);
             mainsheetSailHandler = new Geometry("Mainsheet sail handler", sphereMesh);
-            mainsheetSailHandler.move(0, 9, 15);
+            getMainsheetSailHandler().move(0, 9, 15);
             Material sphereMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
-            mainsheetSailHandler.setMaterial(sphereMat);
-            this.attachChild(mainsheetSailHandler);
+            getMainsheetSailHandler().setMaterial(sphereMat);
+            this.attachChild(getMainsheetSailHandler());
         }
 
         public Vector3f getHelperDirection() {
@@ -151,7 +188,7 @@ public abstract class AShipModelZ extends AShipModel {
             return helperDirection;
         }
 
-        public final void rotateY(float radians) {
+        public void rotateY(float radians) {
             lastRotation += radians;
             this.rotate(0, radians, 0);
         }
@@ -165,18 +202,18 @@ public abstract class AShipModelZ extends AShipModel {
 
     protected final class Rudder extends TrafalgarNode {
 
-        private final float MAXIMUM_RUDDER = 2;
+        private static final float MAXIMUM_RUDDER = 2;
         private float value = 0;
 
         protected Rudder(AssetManager assetManager, EventManager eventManager) {
             super(new Vector3f(1, 0, 0), assetManager, eventManager);
         }
 
-        public final float getRudderValue() {
+        public float getRudderValue() {
             return value;
         }
 
-        public final void rotateY(float radians) {
+        public void rotateY(float radians) {
             float increment;
             if (radians > 0) {
                 if (value + radians > MAXIMUM_RUDDER) {
@@ -210,7 +247,7 @@ public abstract class AShipModelZ extends AShipModel {
     /**
      * Internal representation for AShipOneModel
      */
-    public static class ShipSnapshot extends StepRecord {
+    public static final class ShipSnapshot extends StepRecord {
 
         private Vector3f position;
         private Quaternion rotation;
@@ -240,4 +277,6 @@ public abstract class AShipModelZ extends AShipModel {
             this.lastRotation = lastRotation;
         }
     }
+    
+    
 }

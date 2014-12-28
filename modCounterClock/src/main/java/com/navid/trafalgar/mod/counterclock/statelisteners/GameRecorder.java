@@ -80,6 +80,7 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
         candidateRecord = null;
     }
 
+    @Override
     public void onUnload() {
 
     }

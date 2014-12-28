@@ -9,7 +9,6 @@ public final class KeyboardCommandStateListener implements CommandStateListener,
 
     private final InputManager inputManager;
     private final Command key;
-    
     private AnalogListener listener;
     private int keycode;
 

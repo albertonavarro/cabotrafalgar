@@ -12,7 +12,9 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
 
     private final String role;
 
-    protected IContext context;
+    private IContext context;
+
+    private IWind.WindGeometry windGeometry;
 
     public AShipModel(String role, Vector3f lookAt, AssetManager assetManager, EventManager eventManager) {
         super(lookAt, assetManager, eventManager);
@@ -34,10 +36,8 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     public final void render(RenderManager rm, ViewPort vp) {
     }
 
-    IWind.WindGeometry windGeometry;
-
     @Override
-    public void resolveDependencies(GameModel gameModel) {
+    public final void resolveDependencies(GameModel gameModel) {
         this.context = (IContext) gameModel.getSingleByType(IContext.class);
         windGeometry = this.context.getWind().createWindGeometryNode();
         windGeometry.setLocalTranslation(-20, 20, 0);
@@ -49,7 +49,7 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
         windGeometry.update(tpf);
     }
 
-    public Object getRole() {
+    public final Object getRole() {
         return role;
     }
 

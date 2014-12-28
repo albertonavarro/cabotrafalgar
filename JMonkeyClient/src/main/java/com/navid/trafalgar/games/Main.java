@@ -94,7 +94,10 @@ public final class Main extends Application {
     private void initScreen(Nifty nifty, final BeanFactory beanFactory) {
 
         ScreenFlowManager screenFlowManager = beanFactory.getBean(ScreenFlowManager.class);
-        screenFlowManager.addRootFlowGraph("root").addScreen(new ScreenFlowUnit("start", beanFactory.getBean("common.RootScreenGenerator", ScreenGenerator.class), beanFactory.getBean("common.RootScreenController", ScreenController.class)));
+        screenFlowManager.addRootFlowGraph("root").addScreen(
+                new ScreenFlowUnit("start",
+                        beanFactory.getBean("common.RootScreenGenerator", ScreenGenerator.class),
+                        beanFactory.getBean("common.RootScreenController", ScreenController.class)));
         screenFlowManager.changeFlow("root");
 
         nifty.addScreen("redirector", new ScreenBuilder("start", beanFactory.getBean(RedirectorScreenController.class)).build(nifty));
@@ -112,11 +115,7 @@ public final class Main extends Application {
             try {
                 ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
                 resultInstances.add(currentLoader);
-            } catch (ClassNotFoundException ex) {
-                LOG.error("Error loading module {}", currentClass, ex);
-            } catch (InstantiationException ex) {
-                LOG.error("Error loading module {}", currentClass, ex);
-            } catch (IllegalAccessException ex) {
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                 LOG.error("Error loading module {}", currentClass, ex);
             }
         }
@@ -155,7 +154,7 @@ public final class Main extends Application {
         renderManager.render(tpf, context.isRenderable());
     }
 
-    public static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
+    private static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
 
     public static void registerSingletonBeanDefinition(String name, String className) {
         GenericBeanDefinition beanDefinition = new GenericBeanDefinition();

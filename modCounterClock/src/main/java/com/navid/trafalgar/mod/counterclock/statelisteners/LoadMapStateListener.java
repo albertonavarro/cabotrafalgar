@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class LoadMapStateListener implements LoadModelState {
+public final class LoadMapStateListener implements LoadModelState {
 
     @Autowired
     private AssetManager assetManager;

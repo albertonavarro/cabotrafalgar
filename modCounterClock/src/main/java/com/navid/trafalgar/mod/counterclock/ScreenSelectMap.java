@@ -17,8 +17,9 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import static java.util.Collections.singleton;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public final class ScreenSelectMap implements ScreenController {
@@ -39,7 +40,7 @@ public final class ScreenSelectMap implements ScreenController {
     private Screen screen;
     private String selectedMap;
     private ShowGhost ghostOptions = ShowGhost.bestLocal;
-    private static final Logger logger = Logger.getLogger(ScreenSelectMap.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(ScreenSelectMap.class);
 
     /**
      *

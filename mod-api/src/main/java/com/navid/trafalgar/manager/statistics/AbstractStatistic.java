@@ -36,7 +36,7 @@ public abstract class AbstractStatistic<T> {
      *
      * @return
      */
-    public String getParentId() {
+    public final String getParentId() {
         return parentId;
     }
 
@@ -47,7 +47,7 @@ public abstract class AbstractStatistic<T> {
      *
      * @return
      */
-    public String getId() {
+    public final String getId() {
         return id;
     }
 

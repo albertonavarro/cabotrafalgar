@@ -48,7 +48,8 @@ public abstract class GenericModRegisterer implements ModRegisterer {
     @Override
     public final void registerModels() {
         if (modConfiguration.getBuildersSpringConfig() != null) {
-            XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
+            XmlBeanFactory ctx = new XmlBeanFactory(
+                    new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
 
             Map<String, BuilderInterface> builders = ctx.getBeansOfType(BuilderInterface.class);
             Builder2 builder2 = ctx.getBean("common.Builder", Builder2.class);
@@ -62,7 +63,8 @@ public abstract class GenericModRegisterer implements ModRegisterer {
     @Override
     public final void registerInputs() {
         if (modConfiguration.getBuildersSpringConfig() != null) {
-            XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
+            XmlBeanFactory ctx = new XmlBeanFactory(
+                    new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
 
             Map<String, CommandGenerator> commandGenerators = ctx.getBeansOfType(CommandGenerator.class);
             if (commandGenerators.size() > 0) {

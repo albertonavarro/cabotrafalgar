@@ -54,9 +54,9 @@ public final class RotateSimpleWind implements IWind {
         return new WindGeometryImpl(assetManager);
     }
 
-    public class WindGeometryImpl extends WindGeometry {
+    public final class WindGeometryImpl extends WindGeometry {
 
-        ArrowModel arrowModel;
+        private ArrowModel arrowModel;
 
         public WindGeometryImpl(AssetManager assetManager) {
             Vector2f windVector = getWind();

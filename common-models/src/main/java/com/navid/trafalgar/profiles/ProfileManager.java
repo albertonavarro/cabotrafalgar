@@ -2,12 +2,7 @@ package com.navid.trafalgar.profiles;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.List;
 
-/**
- *
- * @author casa
- */
 public interface ProfileManager {
 
     Collection<ProfileStatus> listProfiles();
@@ -20,5 +15,5 @@ public interface ProfileManager {
 
     ProfileStatus createProfile(String email);
 
-    public boolean isOnline();
+    boolean isOnline();
 }

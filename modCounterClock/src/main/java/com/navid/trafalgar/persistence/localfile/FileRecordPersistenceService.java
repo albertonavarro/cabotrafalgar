@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public final class FileRecordPersistenceService implements RecordPersistenceService {
 
-    private final static Logger LOG = LoggerFactory.getLogger(FileRecordPersistenceService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileRecordPersistenceService.class);
 
     private final Gson gson = new Gson();
 
@@ -27,7 +27,8 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
     @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
 
-        Qualification currentQualification = returnCurrentQualificationForMap(candidateRecord.getHeader().getMap(), candidateRecord.getHeader().getShipModel());
+        Qualification currentQualification
+                = returnCurrentQualificationForMap(candidateRecord.getHeader().getMap(), candidateRecord.getHeader().getShipModel());
 
         int index;
         for (index = 0; index < currentQualification.getTimes().size(); index++) {

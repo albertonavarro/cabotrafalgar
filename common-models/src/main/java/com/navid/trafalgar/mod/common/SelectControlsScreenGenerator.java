@@ -87,7 +87,7 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
         };
 
         outerPanelBuilder.panel(commandNamePanelBuilder);
-        
+
         //sorting commands in alphabetical order of command name
         List<Command> sortedCommands = newArrayList(gens.keySet());
         Collections.sort(sortedCommands, new Comparator<Command>() {
@@ -110,7 +110,8 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
                 }
             });
 
-            commandNamePanelBuilder.control(new RadioGroupBuilder(currentCommand.toString())); // the RadioGroup id is used to link radiobuttons logical together so that only one of them can be active at a certain time
+            // the RadioGroup id is used to link radiobuttons logical together so that only one of them can be active at a certain time
+            commandNamePanelBuilder.control(new RadioGroupBuilder(currentCommand.toString()));
 
             for (final CommandGenerator commandGenerator : gens.get(currentCommand)) {
 
@@ -128,7 +129,7 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
 
         Screen screen = new ScreenBuilder("selectControl") {
             {
-                controller(screenControlScreenController); // Screen properties       
+                controller(screenControlScreenController); // Screen properties
 
                 // <layer>
                 layer(new LayerBuilder("Layer_ID") {

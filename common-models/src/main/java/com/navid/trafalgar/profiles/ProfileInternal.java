@@ -1,10 +1,6 @@
 package com.navid.trafalgar.profiles;
 
-/**
- *
- * @author casa
- */
-public class ProfileInternal {
+public final class ProfileInternal {
 
     private String name;
 

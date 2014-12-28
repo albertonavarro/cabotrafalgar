@@ -31,22 +31,31 @@ public final class ScreenFlowGraph {
             if (screenFlowState.getCurrentScreen() == null) {
                 return modScreenConfigurations.get(0).getScreenName();
             } else {
-                return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) + 1).getScreenName();
+                return modScreenConfigurations.get(
+                        modScreenConfigurations.indexOf(
+                                mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) + 1).getScreenName();
             }
         } else if ("back".equals(screenFlowState.getScreenCommand())) {
             if (screenFlowState.getCurrentScreen() == null) {
                 return modScreenConfigurations.get(0).getScreenName();
-            } else if (modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) == 0) {
+            } else if (modScreenConfigurations.indexOf(
+                    mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) == 0) {
                 screenFlowState.setCurrentFlow("root");
                 return parent.getStartScreenName();
             } else {
-                return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) - 1).getScreenName();
+                return modScreenConfigurations.get(
+                        modScreenConfigurations.indexOf(
+                                mapModScreenConfigurations.get(screenFlowState.getCurrentScreen())) - 1).getScreenName();
             }
         } else if (screenFlowState.getScreenCommand() == null) {
-            return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getScreenCommand())) + 1).getScreenName();
+            return modScreenConfigurations.get(
+                    modScreenConfigurations.indexOf(
+                            mapModScreenConfigurations.get(screenFlowState.getScreenCommand())) + 1).getScreenName();
 
         } else {
-            return modScreenConfigurations.get(modScreenConfigurations.indexOf(mapModScreenConfigurations.get(screenFlowState.getScreenCommand()))).getScreenName();
+            return modScreenConfigurations.get(
+                    modScreenConfigurations.indexOf(
+                            mapModScreenConfigurations.get(screenFlowState.getScreenCommand()))).getScreenName();
 
         }
     }

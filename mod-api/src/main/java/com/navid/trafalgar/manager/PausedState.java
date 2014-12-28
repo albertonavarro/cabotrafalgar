@@ -1,9 +1,5 @@
 package com.navid.trafalgar.manager;
 
-/**
- *
- *
- */
 public interface PausedState extends StateListener {
 
     /**

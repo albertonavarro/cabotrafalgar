@@ -38,13 +38,14 @@ public final class TargetCamera implements Control, EventListener {
         setTarget(target);
     }
 
-    public final void setTarget(List<Node> target) {
+    public void setTarget(List<Node> target) {
         this.targets = target;
         if (target != null && !targets.isEmpty()) {
             currentTarget = targets.get(0);
         }
     }
 
+    @Override
     public void update(float tpf) {
 
         if (enabled && currentTarget != null) {
@@ -62,20 +63,25 @@ public final class TargetCamera implements Control, EventListener {
 
     }
 
+    @Override
     public void render(RenderManager rm, ViewPort vp) {
     }
 
+    @Override
     public void setSpatial(Spatial spatial) {
     }
 
+    @Override
     public void write(JmeExporter ex) throws IOException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void read(JmeImporter im) throws IOException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public Control cloneForSpatial(Spatial spatial) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -100,6 +106,7 @@ public final class TargetCamera implements Control, EventListener {
     public void registerWithInput(InputManager inputManager) {
     }
 
+    @Override
     public void onEvent(String event) {
         if (targets != null && !targets.isEmpty()) {
 
@@ -118,7 +125,7 @@ public final class TargetCamera implements Control, EventListener {
     }
 
     private void selectNextUnreachedMillestone() {
-        for (int counter = 0; counter < targets.size(); counter++) {
+        for(int counter = 0; counter < targets.size(); counter++) {
             AMillestoneModel candidate = (AMillestoneModel) targets.get(counter);
             if (!candidate.getState()) {
                 currentTarget = candidate;
