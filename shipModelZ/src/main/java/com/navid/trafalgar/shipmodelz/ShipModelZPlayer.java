@@ -85,7 +85,7 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
     }
 
     private void updateSpeed(float tpf) {
-        Vector3f realwindDirection3f = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
+        Vector3f realwindDirection3f = new Vector3f(getContext().getWind().getWind().x, 0, getContext().getWind().getWind().y);
         realwindDirection3f.multLocal(100);
         realWind.setValue(realwindDirection3f);
 
@@ -130,7 +130,7 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
         Vector3f difference = a.subtract(b);
         mainSheetDistance = difference.length();
 
-        Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
+        Vector3f windDirection = new Vector3f(getContext().getWind().getWind().x, 0, getContext().getWind().getWind().y);
         Vector3f helperDirection = getSail().getHelperDirection();
         Vector3f vectorshipDirection = this.getGlobalDirection();
 
@@ -180,7 +180,7 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
      */
     private void updateShipRoll(float tpf) {
 
-        Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
+        Vector3f windDirection = new Vector3f(getContext().getWind().getWind().x, 0, getContext().getWind().getWind().y);
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
         double windOverVelaPitch = Math.cos(getSail().getGlobalDirection().angleBetween(windDirection));
@@ -218,7 +218,7 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
     private void updatePosition(float tpf) {
         Vector3f shipOrientation3f = this.getGlobalDirection();
         this.move(shipOrientation3f.x * localSpeed * tpf, 0, shipOrientation3f.z * localSpeed * tpf);
-        this.move(context.getWater().getMovement(this.getGlobalDirection()).mult(-30*tpf));
+        this.move(getContext().getWater().getMovement(this.getGlobalDirection()).mult(-30*tpf));
         shipDirection.setValue(shipOrientation3f);
     }
 
