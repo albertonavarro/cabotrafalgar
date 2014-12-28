@@ -39,7 +39,7 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     @Override
     public final void resolveDependencies(GameModel gameModel) {
         this.context = (IContext) gameModel.getSingleByType(IContext.class);
-        windGeometry = this.context.getWind().createWindGeometryNode();
+        windGeometry = this.getContext().getWind().createWindGeometryNode();
         windGeometry.setLocalTranslation(-20, 20, 0);
         this.attachChild(windGeometry);
     }
@@ -60,5 +60,12 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     public abstract CandidateRecord getCandidateRecordInstance();
 
     public abstract StepRecord getSnapshot();
+
+    /**
+     * @return the context
+     */
+    public final IContext getContext() {
+        return context;
+    }
 
 }

@@ -67,7 +67,7 @@ public final class ShipModelTwoPlayer extends AShipModelTwo implements AShipMode
     }
 
     private void updateSpeed(float tpf) {
-        Vector3f realwindDirection3f = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
+        Vector3f realwindDirection3f = new Vector3f(getContext().getWind().getWind().x, 0, getContext().getWind().getWind().y);
         realwindDirection3f.multLocal(100);
         realWind.setValue(realwindDirection3f);
 
@@ -109,7 +109,7 @@ public final class ShipModelTwoPlayer extends AShipModelTwo implements AShipMode
      * @param tpf
      */
     private void updateSailAutomaticRotation(float tpf) {
-        Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
+        Vector3f windDirection = new Vector3f(getContext().getWind().getWind().x, 0, getContext().getWind().getWind().y);
         Vector3f helperDirection = getSail().getHelperDirection();
         Vector3f vectorshipDirection = this.getGlobalDirection();
 
@@ -144,7 +144,7 @@ public final class ShipModelTwoPlayer extends AShipModelTwo implements AShipMode
      */
     private void updateShipRoll(float tpf) {
 
-        Vector3f windDirection = new Vector3f(context.getWind().getWind().x, 0, context.getWind().getWind().y);
+        Vector3f windDirection = new Vector3f(getContext().getWind().getWind().x, 0, getContext().getWind().getWind().y);
         Vector3f shipOrientation3f = this.getGlobalDirection();
 
         double windOverVelaPitch = Math.cos(getSail().getGlobalDirection().angleBetween(windDirection));
