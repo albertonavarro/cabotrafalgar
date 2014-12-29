@@ -34,40 +34,41 @@ public final class FileUtils {
      */
     public static List<String> findFilesInFolder(String folder, boolean recursive) {
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         URL url = FileUtils.class.getResource("/" + folder);
 
-        File directory;
-        try {
-            directory = new File(URLDecoder.decode(url.getFile(), "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            throw new InvalidParameterException(folder);
-        }
-
-        if (directory.exists()) {
-            addAllFilesInDirectory(directory, folder, recursive, result);
-        } else {
+        if (url != null) {
+            File directory;
             try {
-                URLConnection urlConnection = url.openConnection();
+                directory = new File(URLDecoder.decode(url.getFile(), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                throw new InvalidParameterException(folder);
+            }
 
-                if (urlConnection instanceof JarURLConnection) {
-                    JarURLConnection conn = (JarURLConnection) urlConnection;
+            if (directory.exists()) {
+                addAllFilesInDirectory(directory, folder, recursive, result);
+            } else {
+                try {
+                    URLConnection urlConnection = url.openConnection();
 
-                    JarFile jfile = conn.getJarFile();
-                    Enumeration e = jfile.entries();
-                    while (e.hasMoreElements()) {
-                        ZipEntry entry = (ZipEntry) e.nextElement();
-                        if (!entry.isDirectory() && entry.getName().contains(folder)) {
-                            result.add(entry.getName());
+                    if (urlConnection instanceof JarURLConnection) {
+                        JarURLConnection conn = (JarURLConnection) urlConnection;
+
+                        JarFile jfile = conn.getJarFile();
+                        Enumeration e = jfile.entries();
+                        while (e.hasMoreElements()) {
+                            ZipEntry entry = (ZipEntry) e.nextElement();
+                            if (!entry.isDirectory() && entry.getName().contains(folder)) {
+                                result.add(entry.getName());
+                            }
                         }
                     }
+                } catch (Exception e) {
+                    LOG.error("Error in findFilesInFolder", e);
                 }
-            } catch (Exception e) {
-                LOG.error("Error in findFilesInFolder", e);
             }
         }
-
         return result;
     }
 
@@ -80,7 +81,7 @@ public final class FileUtils {
             }
         });
         if (files != null) {
-            for(int i = 0; i < files.length; i++) {
+            for (int i = 0; i < files.length; i++) {
                 // we are only interested in .class files
                 if (files[i].isDirectory()) {
                     if (recursive) {

@@ -71,7 +71,9 @@ public final class ScreenSelectMap implements ScreenController {
 
         ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
         dropDown1.addAllItems(getMaps());
-        setSelectedMap((String) dropDown1.getSelection().get(0));
+        if(dropDown1.itemCount()>0){
+            setSelectedMap((String) dropDown1.getSelection().get(0));
+        }
         gameConfiguration.getPreGameModel().removeFromModel(CandidateRecord.class);
     }
 

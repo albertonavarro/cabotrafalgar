@@ -23,6 +23,10 @@
             <artifactId>common-models</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.navid.trafalgar</groupId>
+            <artifactId>modCounterClock-maps</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.jme3</groupId>
             <artifactId>jme3-core</artifactId>
         </dependency>

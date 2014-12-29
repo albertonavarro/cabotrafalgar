@@ -15,6 +15,7 @@
         <module>JMonkeyClient</module>
         <module>shipModelY</module>
         <module>shipModelZ</module>
+        <module>modCounterClock-maps</module>
     </modules>
     
     <properties>
@@ -145,6 +146,11 @@
             <dependency>
                 <groupId>com.navid.trafalgar</groupId>
                 <artifactId>modCounterClock</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>modCounterClock-maps</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
