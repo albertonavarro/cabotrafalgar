@@ -20,6 +20,7 @@
                 <panel id="panel_mid_center"  width="33%" align="center" childLayout="vertical">      
                     <panel id="panel_mid_center_description"  height="50%" childLayout="vertical">    
                         <text text="Description:" font="Interface/Fonts/Default.fnt"  />
+                        <control id="mapDescription" name="label" font="Interface/Fonts/Default.fnt" wrap="true" width="100%" height="100%" text="" />
                     </panel>
                     <panel id="panel_mid_center_ranking" childLayout="horizontal">    
                         <panel id="panel_mid_center_left_local_ranking"  height="50%" childLayout="vertical">    
@@ -80,6 +81,8 @@
                 <panel id="panel_bottom_right3" height="50%" width="25%" valign="center" childLayout="center">  
                 </panel>
             </panel>
+        </layer>
+        <layer id="help" childLayout="center">
         </layer>
     </screen>
 </nifty>

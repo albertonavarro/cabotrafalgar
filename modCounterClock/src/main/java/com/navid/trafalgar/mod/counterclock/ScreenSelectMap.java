@@ -10,9 +10,11 @@ import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.util.FileUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import static java.util.Collections.singleton;
@@ -24,6 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public final class ScreenSelectMap implements ScreenController {
 
+    private static final int MAX_COMPETITORS = 5;
+    
     /**
      * @param builder the builder to set
      */
@@ -59,6 +63,11 @@ public final class ScreenSelectMap implements ScreenController {
 
     @Autowired
     private ModelBuilder builder;
+    
+    private ListBox mapDropDown;
+    private ListBox listLocalTimes;
+    private ListBox listRemoteTimes;
+    private Label mapDescription;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
@@ -68,19 +77,20 @@ public final class ScreenSelectMap implements ScreenController {
 
     @Override
     public void onStartScreen() {
-
-        ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
-        dropDown1.addAllItems(getMaps());
-        if(dropDown1.itemCount()>0){
-            setSelectedMap((String) dropDown1.getSelection().get(0));
+        listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
+        listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
+        mapDropDown = screen.findNiftyControl("dropDown1", ListBox.class);
+        mapDescription = screen.findNiftyControl("mapDescription", Label.class);
+        mapDropDown.addAllItems(getMaps());
+        if(mapDropDown.itemCount()>0){
+            setSelectedMap((String) mapDropDown.getSelection().get(0));
         }
         gameConfiguration.getPreGameModel().removeFromModel(CandidateRecord.class);
     }
 
     @Override
     public void onEndScreen() {
-        ListBox dropDown1 = screen.findNiftyControl("dropDown1", ListBox.class);
-        dropDown1.clear();
+        mapDropDown.clear();
     }
 
     public void goTo(String nextScreen) {
@@ -144,20 +154,21 @@ public final class ScreenSelectMap implements ScreenController {
 
     private void setSelectedMap(String map) {
 
-        List<CompetitorInfo> listLocal = localPersistence.getTopCompetitors(4, map, gameConfiguration.getShipName());
-        ListBox listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
+        List<CompetitorInfo> listLocal 
+                = localPersistence.getTopCompetitors(MAX_COMPETITORS, map, gameConfiguration.getShipName());
         listLocalTimes.clear();
         for (CompetitorInfo currentTime : listLocal) {
             listLocalTimes.addItem(currentTime);
         }
 
-        List<CompetitorInfo> listRemote = remotePersistence.getTopCompetitors(4, map, gameConfiguration.getShipName());
-        ListBox listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
+        List<CompetitorInfo> listRemote 
+                = remotePersistence.getTopCompetitors(MAX_COMPETITORS, map, gameConfiguration.getShipName());
         listRemoteTimes.clear();
         for (CompetitorInfo currentTime : listRemote) {
             listRemoteTimes.addItem(currentTime);
         }
-
+        
+        mapDescription.setText(map + "dksjfsd skjdfdkjsfhjsk df jsd fhsdkj fsd hfjsdfh jksdhfksdfhk sjdfh ksjdhfkjsdf hsdkj");
         selectedMap = map;
     }
 
