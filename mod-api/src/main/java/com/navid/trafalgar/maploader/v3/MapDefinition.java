@@ -8,6 +8,7 @@ import java.util.List;
  */
 public final class MapDefinition {
 
+    private String picture;
     private String description;
     private List<EntryDefinition> entries;
 
@@ -39,4 +40,19 @@ public final class MapDefinition {
         this.description = description;
     }
 
+    /**
+     * @return the picture
+     */
+    public String getPicture() {
+        return picture;
+    }
+
+    /**
+     * @param picture the picture to set
+     */
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    
 }

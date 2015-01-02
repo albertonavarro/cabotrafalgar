@@ -1,4 +1,5 @@
 { "description" : "Practice gybing, the straight line is not the faster way to reach the only milestone",
+  "picture" : "Gybing.jpg",
   "entries" : [ { "type" : "Context" },
       { "type" : "RotateSimpleWind" },
       { "type" : "Sun" },

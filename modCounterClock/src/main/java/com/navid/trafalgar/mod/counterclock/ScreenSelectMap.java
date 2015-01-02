@@ -1,5 +1,9 @@
 package com.navid.trafalgar.mod.counterclock;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.jme3.asset.AssetManager;
+import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
@@ -10,15 +14,20 @@ import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.util.FileUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.batch.spi.BatchRenderBackend.Image;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.ImageRenderer;
+import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import static java.util.Collections.singleton;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public final class ScreenSelectMap implements ScreenController {
 
     private static final int MAX_COMPETITORS = 5;
-    
+
     /**
      * @param builder the builder to set
      */
@@ -35,15 +44,22 @@ public final class ScreenSelectMap implements ScreenController {
         this.builder = builder;
     }
 
-    private enum ShowGhost {
+    /**
+     * @param assetManager the assetManager to set
+     */
+    public void setAssetManager(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
 
+    private enum ShowGhost {
         noGhost, bestLocal, bestRemote
     };
 
     private Nifty nifty;
     private Screen screen;
-    private String selectedMap;
+    private ListItem selectedMap;
     private ShowGhost ghostOptions = ShowGhost.bestLocal;
+    private Map<String, NiftyImage> loadedImages = new HashMap<>();
     private static final Logger LOG = LoggerFactory.getLogger(ScreenSelectMap.class);
 
     /**
@@ -60,14 +76,18 @@ public final class ScreenSelectMap implements ScreenController {
 
     @Autowired
     private GameConfiguration gameConfiguration;
+    
+    @Resource
+    private AssetManager assetManager;
 
     @Autowired
     private ModelBuilder builder;
-    
+
     private ListBox mapDropDown;
     private ListBox listLocalTimes;
     private ListBox listRemoteTimes;
     private Label mapDescription;
+    private Element imageMap;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
@@ -77,13 +97,15 @@ public final class ScreenSelectMap implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        imageMap = screen.findElementByName("mapImage");
         listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
         listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
         mapDropDown = screen.findNiftyControl("dropDown1", ListBox.class);
         mapDescription = screen.findNiftyControl("mapDescription", Label.class);
         mapDropDown.addAllItems(getMaps());
         if(mapDropDown.itemCount()>0){
-            setSelectedMap((String) mapDropDown.getSelection().get(0));
+            mapDropDown.selectItemByIndex(0);
+            setSelectedMap((ListItem) mapDropDown.getSelection().get(0));
         }
         gameConfiguration.getPreGameModel().removeFromModel(CandidateRecord.class);
     }
@@ -94,13 +116,13 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     public void goTo(String nextScreen) {
-        gameConfiguration.setMap(selectedMap);
+        gameConfiguration.setMap(selectedMap.getName());
 
         CandidateRecord cr = null;
         if (ghostOptions == ShowGhost.bestLocal) {
-            cr = localPersistence.getGhost(1, selectedMap, gameConfiguration.getShipName());
+            cr = localPersistence.getGhost(1, selectedMap.getName(), gameConfiguration.getShipName());
         } else if (ghostOptions == ShowGhost.bestRemote) {
-            cr = remotePersistence.getGhost(1, selectedMap, gameConfiguration.getShipName());
+            cr = remotePersistence.getGhost(1, selectedMap.getName(), gameConfiguration.getShipName());
         }
 
         if (cr != null) {
@@ -111,8 +133,8 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     @NiftyEventSubscriber(id = "dropDown1")
-    public void onMapSelectionChanged(final String id, final ListBoxSelectionChangedEvent<String> event) {
-        List<String> selection = event.getSelection();
+    public void onMapSelectionChanged(final String id, final ListBoxSelectionChangedEvent<ListItem> event) {
+        List<ListItem> selection = event.getSelection();
         setSelectedMap(selection.get(0));
     }
 
@@ -137,9 +159,14 @@ public final class ScreenSelectMap implements ScreenController {
         }
     }
 
-    private List<String> getMaps() {
+    private List<ListItem> getMaps() {
         List<String> result = FileUtils.findFilesInFolder("Maps/CounterClock/", false);
-        return result;
+        return Lists.transform(result, new Function<String, ListItem>() {
+            @Override
+            public ListItem apply(String f) {
+                return new ListItem(f, f, (MapDefinition) assetManager.loadAsset(f));
+            }
+        });
     }
 
     public void back() {
@@ -152,24 +179,46 @@ public final class ScreenSelectMap implements ScreenController {
         goTo("redirector");
     }
 
-    private void setSelectedMap(String map) {
+    private void setSelectedMap(ListItem map) {
 
-        List<CompetitorInfo> listLocal 
-                = localPersistence.getTopCompetitors(MAX_COMPETITORS, map, gameConfiguration.getShipName());
+        List<CompetitorInfo> listLocal
+                = localPersistence.getTopCompetitors(MAX_COMPETITORS, map.getName(), gameConfiguration.getShipName());
         listLocalTimes.clear();
         for (CompetitorInfo currentTime : listLocal) {
             listLocalTimes.addItem(currentTime);
         }
 
-        List<CompetitorInfo> listRemote 
-                = remotePersistence.getTopCompetitors(MAX_COMPETITORS, map, gameConfiguration.getShipName());
+        List<CompetitorInfo> listRemote
+                = remotePersistence.getTopCompetitors(MAX_COMPETITORS, map.getName(), gameConfiguration.getShipName());
         listRemoteTimes.clear();
         for (CompetitorInfo currentTime : listRemote) {
             listRemoteTimes.addItem(currentTime);
         }
+
+        if(map.getMapDefinition().getDescription()==null){
+            mapDescription.setText("Description not available.");
+        } else {
+            mapDescription.setText(map.getMapDefinition().getDescription());
+        }
         
-        mapDescription.setText(map + "dksjfsd skjdfdkjsfhjsk df jsd fhsdkj fsd hfjsdfh jksdhfksdfhk sjdfh ksjdhfkjsdf hsdkj");
+        imageMap.getRenderer(ImageRenderer.class).setImage(getImageForMap(map.getMapDefinition()));
         selectedMap = map;
+    }
+    
+    NiftyImage getImageForMap(MapDefinition mapDefinition) {
+        if(mapDefinition.getPicture() == null) {
+            return null;
+        }
+        
+        String picturePath = mapDefinition.getPicture();
+        
+        if(loadedImages.containsKey(picturePath)){
+            return loadedImages.get(picturePath);
+        } else {
+            NiftyImage newImage = nifty.getRenderEngine().createImage(screen, "Maps/CounterClock/Gybing.png", false);
+            loadedImages.put(picturePath, newImage);
+            return newImage;
+        }
     }
 
     /**
@@ -199,5 +248,44 @@ public final class ScreenSelectMap implements ScreenController {
     public void setRemotePersistence(RecordServerPersistenceService remotePersistence) {
         this.remotePersistence = remotePersistence;
     }
+    
+    private static class ListItem {
+        private String name;
+        private String path;
+        private MapDefinition mapDefinition;
+        
+        public ListItem(String name, String path, MapDefinition mapDefinition) {
+            this.name = name;
+            this.path = path;
+            this.mapDefinition = mapDefinition;
+        }
 
+        /**
+         * @return the name
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * @return the path
+         */
+        public String getPath() {
+            return path;
+        }
+
+        /**
+         * @return the mapDefinition
+         */
+        public MapDefinition getMapDefinition() {
+            return mapDefinition;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    
 }
