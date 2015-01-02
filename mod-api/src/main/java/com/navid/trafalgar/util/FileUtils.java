@@ -77,7 +77,7 @@ public final class FileUtils {
         File[] files = directory.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                return file.getName().contains(".json2");
+                return file.getName().contains(".map");
             }
         });
         if (files != null) {

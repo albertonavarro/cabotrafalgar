@@ -1,8 +1,8 @@
 package com.navid.trafalgar.mod.common;
 
-import com.navid.trafalgar.definition2.Entry;
+import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.model.AShipModel;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
@@ -39,7 +39,7 @@ public final class SelectShipScreenController implements ScreenController {
      * Singleton
      */
     @Autowired
-    private Builder2 builder;
+    private ModelBuilder builder;
     /**
      *
      */
@@ -62,7 +62,7 @@ public final class SelectShipScreenController implements ScreenController {
     /**
      * @param builder the builder to set
      */
-    public void setBuilder(Builder2 builder) {
+    public void setBuilder(ModelBuilder builder) {
         this.builder = builder;
     }
 
@@ -128,7 +128,7 @@ public final class SelectShipScreenController implements ScreenController {
     private void fillListWithShips() {
         ListBox shipList = screen.findNiftyControl("shipList", ListBox.class);
 
-        Collection<BuilderInterface> builders = builder.getBuilder(Builder2.Category.ship);
+        Collection<BuilderInterface> builders = builder.getBuilder(ModelBuilder.Category.ship);
 
         for (BuilderInterface currentBuilder : builders) {
             ListItem item1 = new ListItem();
@@ -159,7 +159,7 @@ public final class SelectShipScreenController implements ScreenController {
     public void goTo(String nextScreen) {
         gameConfiguration.setShipName(selectedItem.getName());
 
-        Entry entry = new Entry();
+        EntryDefinition entry = new EntryDefinition();
         entry.setType(selectedItem.getName());
         entry.setName("player1");
         entry.setValues(new HashMap<String, Object>() {

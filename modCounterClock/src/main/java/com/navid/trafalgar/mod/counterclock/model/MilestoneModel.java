@@ -10,28 +10,28 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 
-public final class MillestoneModel extends AMillestoneModel {
+public final class MilestoneModel extends AMilestoneModel {
 
-    private final RigidBodyControl millestone;
+    private final RigidBodyControl milestone;
     private final Spatial spatial;
 
-    public MillestoneModel(AssetManager assetManager) {
+    public MilestoneModel(AssetManager assetManager) {
         super();
         spatial = assetManager.loadModel("Models/m1/m1.j3o");
         spatial.scale(3);
         this.attachChild(spatial);
 
         CollisionShape sceneShape = CollisionShapeFactory.createMeshShape(this);
-        millestone = new RigidBodyControl(sceneShape, 0);
-        this.addControl(millestone);
-        millestone.setPhysicsLocation(new Vector3f(-200, 0, 100));
+        milestone = new RigidBodyControl(sceneShape, 0);
+        this.addControl(milestone);
+        milestone.setPhysicsLocation(new Vector3f(-200, 0, 100));
 
     }
 
     @Override
     public void setLocalTranslation(Vector3f pos) {
         super.setLocalTranslation(pos);
-        millestone.setPhysicsLocation(pos);
+        milestone.setPhysicsLocation(pos);
     }
 
     @Override

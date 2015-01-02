@@ -1,17 +1,17 @@
 package com.navid.trafalgar.model;
 
-import com.navid.trafalgar.definition2.Entry;
-import com.navid.trafalgar.definition2.GameDefinition2;
+import com.navid.trafalgar.maploader.v3.EntryDefinition;
+import com.navid.trafalgar.maploader.v3.MapDefinition;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class Builder2 {
+public final class ModelBuilder {
 
     /**
      * Logger
      */
-    private static final Logger LOG = LoggerFactory.getLogger(Builder2.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ModelBuilder.class);
     /**
      * Maps builder categories and builders
      */
@@ -67,7 +67,7 @@ public final class Builder2 {
     /**
      *
      */
-    public Builder2() {
+    public ModelBuilder() {
         buildersByCategory.put(Category.ship, new LinkedList<BuilderInterface>());
         buildersByCategory.put(Category.context, new LinkedList<BuilderInterface>());
         buildersByCategory.put(Category.item, new LinkedList<BuilderInterface>());
@@ -80,14 +80,14 @@ public final class Builder2 {
      * @param gameDef
      * @return
      */
-    public GameModel build(final GameConfiguration gameConfiguration, GameDefinition2 gameDef) {
+    public GameModel build(final GameConfiguration gameConfiguration, MapDefinition gameDef) {
         GameModel gameModel = new GameModel();
 
-        for (Entry entry : gameDef.getEntries()) {
+        for (EntryDefinition entry : gameDef.getEntries()) {
             if (entry.getName() != null && entry.getName().equals("player")) {
                 //entry.setType(gameConfiguration.getShipName());
                 //gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModel.class));
-                Entry entryInput = new Entry();
+                EntryDefinition entryInput = new EntryDefinition();
                 entryInput.setType(gameConfiguration.getShipName());
                 entryInput.setName("player1");
                 entryInput.setValues(new HashMap<String, Object>() {
@@ -142,7 +142,7 @@ public final class Builder2 {
      * @param entry
      * @return
      */
-    public Collection build(Entry entry) {
+    public Collection build(EntryDefinition entry) {
         if (buildersByName.get(entry.getType()) == null) {
             throw new IllegalArgumentException("Builder " + entry.getType() + " doesn't exist");
         }
@@ -156,7 +156,7 @@ public final class Builder2 {
      * @param gameModel
      * @return
      */
-    public Collection buildWithDependencies(Entry entry, GameModel gameModel) {
+    public Collection buildWithDependencies(EntryDefinition entry, GameModel gameModel) {
         if (buildersByName.get(entry.getType()) == null) {
             throw new IllegalArgumentException("Builder " + entry.getType() + " doesn't exist");
         }

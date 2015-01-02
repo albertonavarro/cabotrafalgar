@@ -3,7 +3,7 @@ package com.navid.trafalgar.mod.windtunnel.model.builder;
 import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
 import com.navid.trafalgar.mod.windtunnel.model.HarnessModel;
-import com.navid.trafalgar.model.Builder2.Category;
+import com.navid.trafalgar.model.ModelBuilder.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import java.util.Collection;
 import java.util.Collections;

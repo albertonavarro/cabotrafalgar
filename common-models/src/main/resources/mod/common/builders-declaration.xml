@@ -9,7 +9,7 @@
     <!-- builders -->
     <bean id="mod.counterclock.RotateSimpleWindBuilder" class="com.navid.trafalgar.model.builder.RotateSimpleWindBuilder" autowire="byType" />
     <bean id="mod.counterclock.ContextBuilder" class="com.navid.trafalgar.model.builder.ContextBuilder" autowire="byType" />
-    <bean id="mod.counterclock.WaterBuilder2" class="com.navid.trafalgar.model.builder.WaterBuilder2" autowire="byType" />
+    <bean id="mod.counterclock.WaterBuilder" class="com.navid.trafalgar.model.builder.WaterBuilder" autowire="byType" />
     <bean id="mod.counterclock.TidalWater" class="com.navid.trafalgar.model.builder.TidalWaterBuilder" autowire="byType" />
     <bean id="mod.counterclock.NoWater" class="com.navid.trafalgar.model.builder.NoWaterBuilder" autowire="byType" />
     <bean id="mod.counterclock.SunBuilder" class="com.navid.trafalgar.model.builder.SunBuilder" autowire="byType" />

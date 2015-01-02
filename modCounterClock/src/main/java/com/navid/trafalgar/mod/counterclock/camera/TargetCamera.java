@@ -14,7 +14,7 @@ import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
 import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
 import static com.navid.trafalgar.manager.EventManager.VIEW_NEXTTARGET;
-import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
+import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.AShipModel;
 import java.io.IOException;
 import java.util.List;
@@ -111,22 +111,22 @@ public final class TargetCamera implements Control, EventListener {
         if (targets != null && !targets.isEmpty()) {
 
             if (event.equals(MILLESTONE_REACHED)) {
-                selectNextUnreachedMillestone();
+                selectNextUnreachedMilestone();
             } else if (event.equals(VIEW_NEXTTARGET)) {
-                selectNextMillestone();
+                selectNextMilestone();
             }
 
         }
     }
 
-    private void selectNextMillestone() {
+    private void selectNextMilestone() {
         int currentIndex = targets.indexOf(currentTarget);
         currentTarget = targets.get((currentIndex + 1) % targets.size());
     }
 
-    private void selectNextUnreachedMillestone() {
+    private void selectNextUnreachedMilestone() {
         for(int counter = 0; counter < targets.size(); counter++) {
-            AMillestoneModel candidate = (AMillestoneModel) targets.get(counter);
+            AMilestoneModel candidate = (AMilestoneModel) targets.get(counter);
             if (!candidate.getState()) {
                 currentTarget = candidate;
                 break;

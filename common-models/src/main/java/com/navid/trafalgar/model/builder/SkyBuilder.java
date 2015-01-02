@@ -3,7 +3,7 @@ package com.navid.trafalgar.model.builder;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Spatial;
 import com.jme3.util.SkyFactory;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public final class SkyBuilder implements BuilderInterface {
     }
 
     @Override
-    public Iterable<Builder2.Category> getCategories() {
-        return Collections.singleton(Builder2.Category.context);
+    public Iterable<ModelBuilder.Category> getCategories() {
+        return Collections.singleton(ModelBuilder.Category.context);
     }
 }

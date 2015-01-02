@@ -1,0 +1,19 @@
+{ "entries" : [ { "type" : "Context" },
+      { "type" : "RotateSimpleWind" },
+      { "type" : "Sun" },
+      { "type" : "SimpleWater" },
+      { "name" : "player",
+        "values" : { "position" : "-205,0,-200",
+            "role" : "Player"
+          }
+      },
+      { "name" : "mil1",
+        "type" : "Milestone",
+        "values" : { "position" : "500,0,500" }
+      },
+      { "name" : "mil2",
+        "type" : "Milestone",
+        "values" : { "position" : "400,0,-400" }
+      },
+      { "type" : "Sky" }
+    ] }

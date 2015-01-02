@@ -2,7 +2,7 @@ package com.navid.trafalgar.modapi;
 
 import com.jme3.app.Application;
 import com.jme3.system.AppSettings;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public final class ModRegistererClasspathDetector implements ApplicationContextA
 
     private ApplicationContext ctx;
 
-    private Builder2 builder;
+    private ModelBuilder builder;
 
     public void detectAndRegister() {
         loadModules(null, null, null, null);
@@ -69,7 +69,7 @@ public final class ModRegistererClasspathDetector implements ApplicationContextA
     /**
      * @param builder the builder to set
      */
-    public void setBuilder(Builder2 builder) {
+    public void setBuilder(ModelBuilder builder) {
         this.builder = builder;
     }
 

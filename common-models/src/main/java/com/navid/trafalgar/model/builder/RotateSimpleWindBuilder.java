@@ -1,7 +1,7 @@
 package com.navid.trafalgar.model.builder;
 
 import com.jme3.asset.AssetManager;
-import com.navid.trafalgar.model.Builder2.Category;
+import com.navid.trafalgar.model.ModelBuilder.Category;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.RotateSimpleWind;
 import java.util.Collection;

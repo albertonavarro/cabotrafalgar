@@ -8,7 +8,7 @@ import com.navid.trafalgar.manager.EventManager;
 import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
 import java.util.Collection;
 
-public abstract class AMillestoneModel extends Node implements Control {
+public abstract class AMilestoneModel extends Node implements Control {
 
     private EventManager eventManager;
     private boolean state = false;

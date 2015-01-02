@@ -1,0 +1,17 @@
+{ "description" : "Practice gybing, the straight line is not the faster way to reach the only milestone",
+  "entries" : [ { "type" : "Context" },
+      { "type" : "RotateSimpleWind" },
+      { "type" : "Sun" },
+      { "type" : "SimpleWater" },
+      { "name" : "player",
+        "values" : { "position" : "0,0,0",
+            "role" : "Player"
+          }
+      },
+      { "name" : "mil1",
+        "type" : "Milestone",
+        "values" : { "position" : "2500,0,0" }
+      },
+      { "type" : "Sky" }
+    ]
+}

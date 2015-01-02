@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.screenflow.ScreenFlowGraph;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
@@ -52,7 +52,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
                     new ClassPathResource(modConfiguration.getBuildersSpringConfig()), modConfiguration.getBeanFactory());
 
             Map<String, BuilderInterface> builders = ctx.getBeansOfType(BuilderInterface.class);
-            Builder2 builder2 = ctx.getBean("common.Builder", Builder2.class);
+            ModelBuilder builder2 = ctx.getBean("common.Builder", ModelBuilder.class);
 
             for (BuilderInterface currentBuilder : builders.values()) {
                 builder2.registerBuilder(currentBuilder);

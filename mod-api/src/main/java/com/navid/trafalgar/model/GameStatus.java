@@ -5,7 +5,7 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial.CullHint;
-import com.navid.trafalgar.definition2.GameDefinition2;
+import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.manager.statistics.FloatStatistic;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public final class GameStatus {
 
     private FloatStatistic time;
-    private GameDefinition2 gameDefinition;
+    private MapDefinition gameDefinition;
     //Nodes
     private final Node gameNode = new Node("Model Node");
     private final Node gameGUINode = new Node("GUI Node");
@@ -52,7 +52,7 @@ public final class GameStatus {
      *
      * @return
      */
-    public GameDefinition2 getGameDefinition() {
+    public MapDefinition getGameDefinition() {
         return gameDefinition;
     }
 
@@ -60,7 +60,7 @@ public final class GameStatus {
      *
      * @param gameDefinition
      */
-    public void setGameDefinition(GameDefinition2 gameDefinition) {
+    public void setGameDefinition(MapDefinition gameDefinition) {
         this.gameDefinition = gameDefinition;
     }
 

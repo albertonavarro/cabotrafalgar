@@ -5,7 +5,7 @@ import com.jme3.input.InputManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.control.Control;
-import com.navid.trafalgar.definition2.GameDefinition2;
+import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
@@ -29,14 +29,14 @@ public final class LoadMapStateListener implements LoadModelState {
     @Autowired
     private StatisticsManager statisticsManager;
     @Autowired
-    private Builder2 builder2;
+    private ModelBuilder builder2;
     @Autowired
     private WindTunnelGameModel windTunnelGameModel;
 
     @Override
     public void onLoadModel(float tpf) {
 
-        GameDefinition2 gameDefinition = (GameDefinition2) assetManager.loadAsset("mod/windtunnel/WindTunnel.json2");
+        MapDefinition gameDefinition = (MapDefinition) assetManager.loadAsset("Maps/WindTunnel/WindTunnel.map");
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
@@ -115,7 +115,7 @@ public final class LoadMapStateListener implements LoadModelState {
     /**
      * @param builder2 the builder2 to set
      */
-    public void setBuilder2(Builder2 builder2) {
+    public void setModelBuilder(ModelBuilder builder2) {
         this.builder2 = builder2;
     }
 

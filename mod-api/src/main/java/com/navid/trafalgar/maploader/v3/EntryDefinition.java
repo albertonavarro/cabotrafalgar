@@ -1,12 +1,12 @@
-package com.navid.trafalgar.definition2;
+package com.navid.trafalgar.maploader.v3;
 
 import java.util.Map;
 
 /**
- * Representation for a json2 entry
+ * Representation for a map entry
  *
  */
-public final class Entry {
+public final class EntryDefinition {
 
     /*
      * Classname for the entry

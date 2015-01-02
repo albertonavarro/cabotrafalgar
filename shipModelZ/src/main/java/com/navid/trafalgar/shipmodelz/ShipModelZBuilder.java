@@ -2,7 +2,7 @@ package com.navid.trafalgar.shipmodelz;
 
 import com.jme3.asset.AssetManager;
 import com.navid.trafalgar.manager.EventManager;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.util.FormatUtils;
@@ -67,8 +67,8 @@ public final class ShipModelZBuilder implements BuilderInterface {
     }
 
     @Override
-    public Iterable<Builder2.Category> getCategories() {
-        return Collections.singleton(Builder2.Category.ship);
+    public Iterable<ModelBuilder.Category> getCategories() {
+        return Collections.singleton(ModelBuilder.Category.ship);
     }
 
 }

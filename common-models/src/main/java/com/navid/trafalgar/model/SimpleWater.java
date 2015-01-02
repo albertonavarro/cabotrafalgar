@@ -3,11 +3,11 @@ package com.navid.trafalgar.model;
 import com.jme3.math.Vector3f;
 import com.jme3.water.WaterFilter;
 
-public final class SimpleWater2 extends WaterFilter implements IWater {
+public final class SimpleWater extends WaterFilter implements IWater {
 
     private final Vector3f movement = new Vector3f();
 
-    public SimpleWater2() {
+    public SimpleWater() {
         setWaveScale(0.003f);
         setMaxAmplitude(2f);
         setFoamExistence(new Vector3f(1f, 4, 0.5f));

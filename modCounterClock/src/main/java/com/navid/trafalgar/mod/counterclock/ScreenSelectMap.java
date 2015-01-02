@@ -1,6 +1,6 @@
 package com.navid.trafalgar.mod.counterclock;
 
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.persistence.CompetitorInfo;
@@ -27,7 +27,7 @@ public final class ScreenSelectMap implements ScreenController {
     /**
      * @param builder the builder to set
      */
-    public void setBuilder(Builder2 builder) {
+    public void setBuilder(ModelBuilder builder) {
         this.builder = builder;
     }
 
@@ -58,7 +58,7 @@ public final class ScreenSelectMap implements ScreenController {
     private GameConfiguration gameConfiguration;
 
     @Autowired
-    private Builder2 builder;
+    private ModelBuilder builder;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
@@ -128,7 +128,7 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     private List<String> getMaps() {
-        List<String> result = FileUtils.findFilesInFolder("Games/Millestone2/", false);
+        List<String> result = FileUtils.findFilesInFolder("Maps/CounterClock/", false);
         return result;
     }
 

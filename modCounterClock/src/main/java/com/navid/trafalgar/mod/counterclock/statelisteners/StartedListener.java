@@ -6,7 +6,7 @@ import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
 import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
-import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
+import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.GameStatus;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public final class StartedListener implements PrestartState, StartedState {
 
     @Autowired
     private GameStatus gameStatus;
-    private Collection<AMillestoneModel> millestones;
+    private Collection<AMilestoneModel> milestones;
     @Autowired
     private EventManager eventManager;
 
@@ -25,7 +25,7 @@ public final class StartedListener implements PrestartState, StartedState {
     @Override
     public void onPrestart(float tpf) {
         gameStatus.getTime().setValue(0f);
-        millestones = model.getMillestones();
+        milestones = model.getMilestones();
 
     }
 
@@ -54,7 +54,7 @@ public final class StartedListener implements PrestartState, StartedState {
      */
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
-        eventManager.registerListener(new MillestoneEventHandler(), new String[]{MILLESTONE_REACHED});
+        eventManager.registerListener(new MilestoneEventHandler(), new String[]{MILLESTONE_REACHED});
     }
 
     /**
@@ -64,7 +64,7 @@ public final class StartedListener implements PrestartState, StartedState {
         this.model = model;
     }
 
-    private class MillestoneEventHandler implements EventListener {
+    private class MilestoneEventHandler implements EventListener {
 
         private int counter = 0;
 
@@ -74,7 +74,7 @@ public final class StartedListener implements PrestartState, StartedState {
                 counter++;
             }
 
-            if (counter == millestones.size()) {
+            if (counter == milestones.size()) {
                 eventManager.fireEvent(EventManager.SUCCESSFUL);
             }
         }

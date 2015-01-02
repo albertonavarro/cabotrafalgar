@@ -6,7 +6,7 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import com.jme3.system.JmeSystem;
-import com.navid.trafalgar.definition2.Json2AssetLoader;
+import com.navid.trafalgar.maploader.v3.MapAssetLoader;
 import com.navid.trafalgar.modapi.ModRegisterer;
 import com.navid.trafalgar.screenflow.RedirectorScreenController;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
@@ -61,7 +61,7 @@ public final class Main extends Application {
 
         super.initialize();
         super.setPauseOnLostFocus(false);
-        assetManager.registerLoader(Json2AssetLoader.class, "json2");
+        assetManager.registerLoader(MapAssetLoader.class, "map");
 
         registerBean("common.assetManager", assetManager);
         registerBean("common.inputManager", inputManager);

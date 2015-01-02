@@ -4,7 +4,7 @@ import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
+import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,7 +14,7 @@ public final class CounterClockGameModel {
 
     private final Node gameNode = new Node("reflexion");
 
-    private List<AMillestoneModel> millestones;
+    private List<AMilestoneModel> milestones;
     private IContext context;
     private List<Filter> fpp = new ArrayList<Filter>();
     private boolean inited = false;
@@ -44,7 +44,7 @@ public final class CounterClockGameModel {
             }
         }
 
-        millestones = gameModel.getByType(AMillestoneModel.class);
+        milestones = gameModel.getByType(AMilestoneModel.class);
         context = (IContext) gameModel.getSingleByType(IContext.class);
         fpp = gameModel.getByType(Filter.class);
 
@@ -95,10 +95,10 @@ public final class CounterClockGameModel {
     }
 
     /**
-     * @return the millestones
+     * @return the milestones
      */
-    public List<AMillestoneModel> getMillestones() {
-        return millestones;
+    public List<AMilestoneModel> getMilestones() {
+        return milestones;
     }
 
     /**

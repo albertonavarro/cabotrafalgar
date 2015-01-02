@@ -1,7 +1,7 @@
 package com.navid.trafalgar.model.builder;
 
 import com.jme3.math.Vector2f;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.TidalWater;
 import com.navid.trafalgar.util.FormatUtils;
@@ -28,8 +28,8 @@ public final class TidalWaterBuilder implements BuilderInterface {
     }
 
     @Override
-    public Iterable<Builder2.Category> getCategories() {
-        return Collections.singleton(Builder2.Category.context);
+    public Iterable<ModelBuilder.Category> getCategories() {
+        return Collections.singleton(ModelBuilder.Category.context);
     }
 
 }

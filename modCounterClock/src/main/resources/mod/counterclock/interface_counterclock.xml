@@ -54,7 +54,7 @@
             <panel style="nifty-panel" childLayout="center" padding="18px,28px,40px,16px" width="40%" height="20%" align="center" valign="center">
                 <panel childLayout="vertical" align="center" valign="center">
                     <panel childLayout="center" height="70%" width="100%" >
-                        <text text="Millestones menu" style="base-font" align="center" valign="center" color="#ffff"/>
+                        <text text="Milestones menu" style="base-font" align="center" valign="center" color="#ffff"/>
                     </panel>
                     <panel childLayout="horizontal" align="center" height="30%">
                         <panel childLayout="center" width="33%">

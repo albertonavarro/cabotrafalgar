@@ -4,13 +4,13 @@ import com.jme3.asset.AssetManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.control.Control;
-import com.navid.trafalgar.definition2.Entry;
-import com.navid.trafalgar.definition2.GameDefinition2;
+import com.navid.trafalgar.maploader.v3.EntryDefinition;
+import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
-import com.navid.trafalgar.mod.counterclock.model.AMillestoneModel;
+import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.*;
 import com.navid.trafalgar.model.AShipModel;
 import java.util.Collection;
@@ -32,21 +32,21 @@ public final class LoadMapStateListener implements LoadModelState {
     @Autowired
     private StatisticsManager statisticsManager;
     @Autowired
-    private Builder2 builder2;
+    private ModelBuilder builder2;
     @Autowired
     private CounterClockGameModel counterClockGameModel;
 
     @Override
     public void onLoadModel(float tpf) {
 
-        GameDefinition2 gameDefinition = (GameDefinition2) assetManager.loadAsset(gameConfiguration.getMap());
+        MapDefinition gameDefinition = (MapDefinition) assetManager.loadAsset(gameConfiguration.getMap());
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
 
         if (gameConfiguration.getPreGameModel().contains(CandidateRecord.class)) {
             final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class);
-            Entry entry = new Entry();
+            EntryDefinition entry = new EntryDefinition();
             entry.setType(gameConfiguration.getShipName());
             entry.setName("ghost1");
             entry.setValues(new HashMap<String, Object>() {
@@ -73,11 +73,11 @@ public final class LoadMapStateListener implements LoadModelState {
             gameStatus.getGameNode().addControl((Control) counterClockGameModel.getGhost());
         }
 
-        List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
-        for (AMillestoneModel currentMillestone : millestones) {
-            currentMillestone.setEventManager(eventManager);
-            currentMillestone.setCollidable(Collections.singleton((AShipModel) currentShip));
-            gameStatus.getGameNode().addControl(currentMillestone);
+        List<AMilestoneModel> milestones = counterClockGameModel.getMilestones();
+        for (AMilestoneModel currentMilestone : milestones) {
+            currentMilestone.setEventManager(eventManager);
+            currentMilestone.setCollidable(Collections.singleton((AShipModel) currentShip));
+            gameStatus.getGameNode().addControl(currentMilestone);
         }
 
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);
@@ -97,9 +97,9 @@ public final class LoadMapStateListener implements LoadModelState {
             gameStatus.getGameNode().removeControl((Control) counterClockGameModel.getGhost());
         }
 
-        List<AMillestoneModel> millestones = counterClockGameModel.getMillestones();
-        for (AMillestoneModel currentMillestone : millestones) {
-            gameStatus.getGameNode().removeControl(currentMillestone);
+        List<AMilestoneModel> milestones = counterClockGameModel.getMilestones();
+        for (AMilestoneModel currentMilestone : milestones) {
+            gameStatus.getGameNode().removeControl(currentMilestone);
         }
 
         gameStatus.getGameNode().detachAllChildren();
@@ -144,7 +144,7 @@ public final class LoadMapStateListener implements LoadModelState {
     /**
      * @param builder2 the builder2 to set
      */
-    public void setBuilder2(Builder2 builder2) {
+    public void setModelBuilder(ModelBuilder builder2) {
         this.builder2 = builder2;
     }
 

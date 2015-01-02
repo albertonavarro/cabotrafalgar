@@ -1,6 +1,6 @@
 package com.navid.trafalgar.model;
 
-import com.navid.trafalgar.model.Builder2.Category;
+import com.navid.trafalgar.model.ModelBuilder.Category;
 import java.util.Collection;
 import java.util.Map;
 

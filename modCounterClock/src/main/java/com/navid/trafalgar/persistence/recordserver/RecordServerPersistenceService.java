@@ -12,9 +12,9 @@ import com.navid.recordserver.v2.GetMapRecordsResponse;
 import com.navid.recordserver.v2.GetMapRecordsResponse.RankingEntry;
 import com.navid.recordserver.v2.GetRecordResponse;
 import com.navid.recordserver.v2.V2Resource;
-import com.navid.trafalgar.definition2.Entry;
+import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.profiles.ProfileManager;
-import com.navid.trafalgar.model.Builder2;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CompetitorInfo;
@@ -37,7 +37,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     private ProfileManager profileManager;
 
     @Autowired
-    private Builder2 builder2;
+    private ModelBuilder builder2;
 
     @Resource(name = "mod.counterclock.clientRecordServer")
     private V2Resource rankingClient;
@@ -122,7 +122,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
             return null;
         }
 
-        Entry entry = new Entry();
+        EntryDefinition entry = new EntryDefinition();
         entry.setType(candidate.getHeader().getShipModel());
         entry.setValues(new HashMap<String, Object>() {
                     {
@@ -155,7 +155,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     /**
      * @param builder2 the builder2 to set
      */
-    public void setBuilder2(Builder2 builder2) {
+    public void setModelBuilder(ModelBuilder builder2) {
         this.builder2 = builder2;
     }
 

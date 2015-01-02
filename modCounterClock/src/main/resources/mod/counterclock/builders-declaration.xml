@@ -9,6 +9,6 @@
 
     <context:annotation-config/>
     <!-- builders -->
-    <bean id="mod.counterclock.MillestoneBuilder" class="com.navid.trafalgar.mod.counterclock.model.builder.MillestoneBuilder" autowire="byType" />
+    <bean id="mod.counterclock.MilestoneBuilder" class="com.navid.trafalgar.mod.counterclock.model.builder.MilestoneBuilder" autowire="byType" />
     
 </beans>
