@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 public final class FileProfileManager implements ProfileManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileProfileManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileProfileManager.class);
 
     private ProfileInternal activeProfile;
 
@@ -72,12 +72,17 @@ public final class FileProfileManager implements ProfileManager {
         if (profile.getSessionId() != null) {
             return profile.getSessionId();
         } else if (profile.getToken() != null) {
-            LoginWithTokenResponse response
-                    = userCommandsClient.loginWithToken(
-                            new LoginWithTokenRequest().withToken(
-                                    new Token().withToken(profile.getToken())));
-            profile.setSessionId(response.getResponse().getSessionid());
-            return profile.getSessionId();
+            try {
+                LoginWithTokenResponse response
+                        = userCommandsClient.loginWithToken(
+                                new LoginWithTokenRequest().withToken(
+                                        new Token().withToken(profile.getToken())));
+                profile.setSessionId(response.getResponse().getSessionid());
+                return profile.getSessionId();
+            } catch (Exception e) {
+                LOG.info("Connectivity problem validating session, returning null", e);
+                return null;
+            }
         } else {
             return null;
         }
@@ -137,7 +142,7 @@ public final class FileProfileManager implements ProfileManager {
             try {
                 fileContent = mapper.readValue(new File(trafalgarFolder, "profileconfig.yml"), FileContent.class);
             } catch (IOException ex) {
-                LOGGER.error("Error loading profileconfig.yml", ex);
+                LOG.error("Error loading profileconfig.yml", ex);
             }
         }
 
@@ -166,7 +171,7 @@ public final class FileProfileManager implements ProfileManager {
             fileContent.setProfiles(Collections2.transform(profiles.values(), INTERNAL_TO_FILE));
             mapper.writeValue(configFile, fileContent);
         } catch (IOException ex) {
-            LOGGER.error("Error saving {}", configFile, ex);
+            LOG.error("Error saving {}", configFile, ex);
         }
     }
 
@@ -239,7 +244,7 @@ public final class FileProfileManager implements ProfileManager {
                         GetInfoResponse response = userCommandsClient.getInfo(new GetInfoRequest().withSessionid(sessionId));
                         result.setName(response.getName());
                     } catch (Exception e) {
-                        LOGGER.error("Error loading info for {}", f.getEmail(), e);
+                        LOG.error("Error loading info for {}", f.getEmail(), e);
                     }
 
                     return result;

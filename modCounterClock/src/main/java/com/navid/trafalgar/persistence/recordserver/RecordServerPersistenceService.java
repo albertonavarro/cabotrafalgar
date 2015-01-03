@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public final class RecordServerPersistenceService implements RecordPersistenceService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RecordServerPersistenceService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RecordServerPersistenceService.class);
 
     private final Gson gson = new Gson();
 
@@ -48,20 +48,28 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     @Override
     public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
         if (!setUpSession()) {
-            return null;
+            CandidateInfo returned = new CandidateInfo();
+            returned.setAccepted(false);
+            return returned;
         }
 
         candidateRecord.setMap(candidateRecord.getHeader().getMap().replace("/", "_"));
         String sampleReal = gson.toJson(candidateRecord);
         AddRecordRequest addRecordRequest = new AddRecordRequest();
         addRecordRequest.setPayload(sampleReal);
-        LOGGER.info("Trying with size " + sampleReal.length());
-        AddRecordResponse addRecordResponse = rankingClient.postRanking(addRecordRequest);
-
-        CandidateInfo returned = new CandidateInfo();
-        returned.setAccepted(true);
-        returned.setPosition(addRecordResponse.getPosition());
-        return returned;
+        
+        LOG.info("Trying with size " + sampleReal.length());
+        try {
+            AddRecordResponse addRecordResponse = rankingClient.postRanking(addRecordRequest);
+            CandidateInfo returned = new CandidateInfo();
+            returned.setAccepted(true);
+            returned.setPosition(addRecordResponse.getPosition());
+            return returned;
+        } catch (Exception e) {
+            CandidateInfo returned = new CandidateInfo();
+            returned.setAccepted(false);
+            return returned;
+        }
     }
 
     @Override
@@ -71,8 +79,14 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
         }
 
         String newMapName = map.replace("/", "_");
-        GetMapRecordsResponse response = rankingClient.getRankingshipshipmapsmap(newMapName, ship);
+        GetMapRecordsResponse response;
 
+        try {
+            response = rankingClient.getRankingshipshipmapsmap(newMapName, ship);
+        } catch (Exception e) {
+            LOG.info("Connectivity problem retrieving top competitors, returning empty", e);
+            return newArrayList();
+        }
         return Lists.transform(response.getRankingEntry(), new Function<RankingEntry, CompetitorInfo>() {
             @Override
             public CompetitorInfo apply(RankingEntry f) {
@@ -118,21 +132,21 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
             }
 
         } catch (Exception e) {
-            LOGGER.error("Error loading ghost {} from map {}", ship, map);
+            LOG.error("Error loading ghost {} from map {}", ship, map);
             return null;
         }
 
         EntryDefinition entry = new EntryDefinition();
         entry.setType(candidate.getHeader().getShipModel());
         entry.setValues(new HashMap<String, Object>() {
-                    {
-                        put("role", "CandidateRecord");
-                    }
-                });
+            {
+                put("role", "CandidateRecord");
+            }
+        });
         Collection cr = builder2.build(entry);
 
-        CandidateRecord finalcandidate =
-                (CandidateRecord) gson.fromJson(response.getPayload(), Iterators.getOnlyElement(cr.iterator()).getClass());
+        CandidateRecord finalcandidate
+                = (CandidateRecord) gson.fromJson(response.getPayload(), Iterators.getOnlyElement(cr.iterator()).getClass());
 
         return finalcandidate;
 
