@@ -1,4 +1,6 @@
-{ "entries" : [ { "type" : "Context" },
+{ "description" : "Hit both milestones, in any order. Use key 3 to change camera target",
+  "picture" : "Maps/CounterClock/Milestones-2.png",
+  "entries" : [ { "type" : "Context" },
       { "type" : "RotateSimpleWind" },
       { "type" : "Sun" },
       { "type" : "SimpleWater" },

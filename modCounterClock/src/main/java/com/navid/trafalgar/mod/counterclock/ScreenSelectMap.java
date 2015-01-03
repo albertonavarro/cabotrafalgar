@@ -215,7 +215,7 @@ public final class ScreenSelectMap implements ScreenController {
         if(loadedImages.containsKey(picturePath)){
             return loadedImages.get(picturePath);
         } else {
-            NiftyImage newImage = nifty.getRenderEngine().createImage(screen, "Maps/CounterClock/Gybing.png", false);
+            NiftyImage newImage = nifty.getRenderEngine().createImage(screen, picturePath, false);
             loadedImages.put(picturePath, newImage);
             return newImage;
         }

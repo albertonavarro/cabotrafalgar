@@ -1,9 +1,11 @@
-{ "description" : "Practice gybing, the straight line is not the faster way to reach the only milestone",
-  "picture" : "Gybing.jpg",
+{ "description" : "Hit the milestone, mind the currents",
+  "picture" : "Maps/CounterClock/Tidal-1.png",
   "entries" : [ { "type" : "Context" },
       { "type" : "RotateSimpleWind" },
       { "type" : "Sun" },
-      { "type" : "SimpleWater" },
+      { "type" : "TidalWater",
+        "values" : { "speed" : "0,-0.4" }
+      },
       { "name" : "player",
         "values" : { "position" : "0,0,0",
             "role" : "Player"
@@ -14,5 +16,4 @@
         "values" : { "position" : "2500,0,0" }
       },
       { "type" : "Sky" }
-    ]
-}
+    ] }
