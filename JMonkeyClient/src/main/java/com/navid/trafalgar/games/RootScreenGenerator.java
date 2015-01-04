@@ -25,6 +25,8 @@ public final class RootScreenGenerator implements ScreenGenerator {
         final PanelBuilder panelBuilder = new PanelBuilder("Panel_ID") {
             {
                 childLayoutVertical();
+                alignCenter();
+                height("90%");
             }
         };
 
@@ -33,26 +35,41 @@ public final class RootScreenGenerator implements ScreenGenerator {
                 {
                     alignCenter();
                     valignCenter();
-                    height("5%");
-                    width("15%");
+                    height("30px");
+                    width("200px");
                     interactOnClick("executeModule(" + moduleName + ")");
                 }
             });
         }
 
+        final PanelBuilder panelQuit = new PanelBuilder("Panel_Quit") {
+            {
+                childLayoutVertical();
+                height("5%");
+            }
+        };
+
+        panelQuit.control(new ButtonBuilder("QuitButton", "Quit") {
+            {
+                alignCenter();
+                valignCenter();
+                height("30px");
+                width("200px");
+                interactOnClick("quit()");
+            }
+        });
+
         new ScreenBuilder("start") {
             {
                 controller(startScreenController);
-
                 layer(new LayerBuilder("Panel_ID") {
                     {
                         backgroundColor(Color.randomColor());
                         childLayoutVertical();
-
                         panel(panelBuilder);
+                        panel(panelQuit);
                     }
                 });
-
             }
         }.build(nifty);
 
