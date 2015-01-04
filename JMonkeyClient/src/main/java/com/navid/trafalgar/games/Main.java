@@ -61,6 +61,7 @@ public final class Main extends Application {
 
         super.initialize();
         super.setPauseOnLostFocus(false);
+        LOG.debug("Loading MapAssetLoader");
         assetManager.registerLoader(MapAssetLoader.class, "map");
 
         registerBean("common.assetManager", assetManager);

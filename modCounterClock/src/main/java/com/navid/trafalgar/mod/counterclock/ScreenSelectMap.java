@@ -164,6 +164,7 @@ public final class ScreenSelectMap implements ScreenController {
         return Lists.transform(result, new Function<String, ListItem>() {
             @Override
             public ListItem apply(String f) {
+                LOG.debug("Loading map {}", f);
                 return new ListItem(f, f, (MapDefinition) assetManager.loadAsset(f));
             }
         });

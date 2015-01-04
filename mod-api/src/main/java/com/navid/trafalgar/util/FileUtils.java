@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 public final class FileUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileUtils.class);
+    
+    private static final String MAP_EXTENSION = ".map";
 
     private FileUtils() {
     }
@@ -50,6 +52,7 @@ public final class FileUtils {
                 addAllFilesInDirectory(directory, folder, recursive, result);
             } else {
                 try {
+                    LOG.debug("Extracting files from JAR/ZIP file.");
                     URLConnection urlConnection = url.openConnection();
 
                     if (urlConnection instanceof JarURLConnection) {
@@ -59,7 +62,8 @@ public final class FileUtils {
                         Enumeration e = jfile.entries();
                         while (e.hasMoreElements()) {
                             ZipEntry entry = (ZipEntry) e.nextElement();
-                            if (!entry.isDirectory() && entry.getName().contains(folder)) {
+                            if (!entry.isDirectory() && entry.getName().contains(folder) && entry.getName().endsWith(MAP_EXTENSION)) {
+                                LOG.debug("Adding entry {} to map finding.", entry.getName());
                                 result.add(entry.getName());
                             }
                         }
@@ -73,11 +77,12 @@ public final class FileUtils {
     }
 
     private static void addAllFilesInDirectory(File directory, String folder, boolean recursive, List<String> result) {
+        LOG.debug("Extracting files from real directory.");
         // Get the list of the files contained in the package
         File[] files = directory.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                return file.getName().contains(".map");
+                return file.getName().endsWith(MAP_EXTENSION);
             }
         });
         if (files != null) {
