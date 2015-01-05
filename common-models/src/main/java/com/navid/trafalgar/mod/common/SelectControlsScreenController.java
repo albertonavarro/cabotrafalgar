@@ -53,12 +53,14 @@ public final class SelectControlsScreenController implements ScreenController {
         this.screen = screen;
     }
     private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler;
-    private final Map<String, String> generated = new HashMap<String, String>();
+    private final Map<String, String> generated = new HashMap<>();
     private Map<String, Command> commandsMap;
     private Map<String, CommandGenerator> generatorMap;
 
     @Override
     public void onStartScreen() {
+        
+        generated.clear();
 
         gameConfiguration.getPreGameModel().removeFromModel(CommandStateListener.class);
 
@@ -106,7 +108,7 @@ public final class SelectControlsScreenController implements ScreenController {
     }
 
     public void goTo(String nextScreen) {
-        Map<Command, CommandGenerator> assignments = new HashMap<Command, CommandGenerator>();
+        Map<Command, CommandGenerator> assignments = new HashMap<>();
 
         for (Map.Entry<String, String> entry : generated.entrySet()) {
             assignments.put(commandsMap.get(entry.getKey()), generatorMap.get(entry.getValue()));

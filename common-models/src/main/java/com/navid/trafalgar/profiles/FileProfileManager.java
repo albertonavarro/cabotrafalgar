@@ -14,11 +14,17 @@ import com.lazylogin.client.user.v0.LoginWithTokenResponse;
 import com.lazylogin.client.user.v0.Token;
 import com.lazylogin.client.user.v0.UserCommands;
 import com.navid.lazylogin.context.RequestContextContainer;
+import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -192,6 +198,38 @@ public final class FileProfileManager implements ProfileManager {
     @Override
     public boolean isOnline() {
         return this.activeProfile.isOnline();
+    }
+
+    @Override
+    public Properties getProperties() {
+        File keyboardHistory = new File(getHome(), "keyboardHistory.properties");
+        final Properties properties = new Properties();
+
+        if (keyboardHistory.exists()) {
+            try {
+                properties.load(new FileReader(keyboardHistory));
+            } catch (FileNotFoundException ex) {
+                LOG.info("History file not found, file {}", keyboardHistory);
+            } catch (IOException ex) {
+                LOG.error("IOException loading history file: {}", keyboardHistory, ex);
+            }
+        }
+        
+        return properties;
+    }
+
+    @Override
+    public void updateProperties(Map<String,String> userProperties) {
+        File keyboardHistory = new File(getHome(), "keyboardHistory.properties");
+
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileReader(keyboardHistory));
+            properties.putAll(userProperties);
+            properties.store(new FileWriter(keyboardHistory), "User commands");
+        } catch (IOException ex) {
+            LOG.error("Error saving history file: {}", keyboardHistory, ex);
+        }
     }
 
     public static final class FileContent {

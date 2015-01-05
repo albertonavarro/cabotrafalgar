@@ -2,6 +2,8 @@ package com.navid.trafalgar.profiles;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Properties;
 
 public interface ProfileManager {
 
@@ -15,5 +17,9 @@ public interface ProfileManager {
 
     ProfileStatus createProfile(String email);
 
+    Properties getProperties();
+    
+    void updateProperties(Map<String,String> p);
+    
     boolean isOnline();
 }

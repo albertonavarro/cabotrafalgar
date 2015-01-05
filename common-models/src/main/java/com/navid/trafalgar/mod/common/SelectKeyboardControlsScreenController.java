@@ -109,18 +109,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     @Override
     public void onStartScreen() {
 
-        File keyboardHistory = new File(profileManager.getHome(), "keyboardHistory.properties");
-        final Properties properties = new Properties();
-
-        if (keyboardHistory.exists()) {
-            try {
-                properties.load(new FileReader(keyboardHistory));
-            } catch (FileNotFoundException ex) {
-                LOG.info("History file not found, file {}", keyboardHistory);
-            } catch (IOException ex) {
-                LOG.error("IOException loading history file: {}", keyboardHistory, ex);
-            }
-        }
+        final Properties userProperties = profileManager.getProperties();
 
         EventTopicSubscriber<ListBoxSelectionChangedEvent> eventHandler;
 
@@ -147,12 +136,12 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
             List<ListItem> itemList = generateKeys();
             listBoxController.addAllItems(itemList);
 
-            if (properties.containsKey(currentListener.getKey())) {
+            if (userProperties.containsKey(currentListener.getKey())) {
                 int index = Iterables.indexOf(itemList, new Predicate<ListItem>() {
 
                     @Override
                     public boolean apply(ListItem t) {
-                        return t.value == Integer.parseInt((String) properties.get(currentListener.getKey()));
+                        return t.value == Integer.parseInt((String) userProperties.get(currentListener.getKey()));
                     }
                 });
 
@@ -212,19 +201,13 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
 
     @Override
     public void onEndScreen() {
-        File keyboardHistory = new File(profileManager.getHome(), "keyboardHistory.properties");
+        Map<String,String> userProperties = new HashMap<>();
 
-        try {
-            Properties properties = new Properties();
-            List<KeyboardCommandStateListener> listeners
-                    = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
-            for (KeyboardCommandStateListener listener : listeners) {
-                properties.put(listener.toString(), Integer.toString(listener.getKeycode()));
-            }
-            properties.store(new FileWriter(keyboardHistory), "User commands");
-        } catch (IOException ex) {
-            LOG.error("Error saving history file: {}", keyboardHistory, ex);
+        for (KeyboardCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class)) {
+            userProperties.put(listener.toString(), Integer.toString(listener.getKeycode()));
         }
+        
+        profileManager.updateProperties(userProperties);
     }
 
     public void goTo(String nextScreen) {
@@ -274,6 +257,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     }
 
     private static class ListItem {
+
         private String keyName;
         private int value;
 
