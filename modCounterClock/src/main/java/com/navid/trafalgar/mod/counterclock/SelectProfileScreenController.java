@@ -1,6 +1,7 @@
 package com.navid.trafalgar.mod.counterclock;
 
 import static com.google.common.collect.Lists.newArrayList;
+import com.navid.lazylogin.context.RequestContextContainer;
 import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.profiles.ProfileStatus;
 import com.navid.trafalgar.model.GameConfiguration;
@@ -12,6 +13,7 @@ import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ public final class SelectProfileScreenController implements ScreenController {
      */
     @Autowired
     private ProfileManager profileManager;
+    
+    @Resource(name = "mod.counterclock.requestContextContainer")
+    private RequestContextContainer container;
     /**
      *
      */
@@ -70,6 +75,7 @@ public final class SelectProfileScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        container.delete();
         fillListWithProfiles();
     }
 
@@ -139,5 +145,14 @@ public final class SelectProfileScreenController implements ScreenController {
     public void setProfileManager(ProfileManager profileManager) {
         this.profileManager = profileManager;
     }
+
+    /**
+     * @param container the container to set
+     */
+    public void setContainer(RequestContextContainer container) {
+        this.container = container;
+    }
+    
+    
 
 }
