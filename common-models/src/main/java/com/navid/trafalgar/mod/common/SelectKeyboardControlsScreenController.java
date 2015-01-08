@@ -16,11 +16,6 @@ import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public final class SelectKeyboardControlsScreenController implements ScreenController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SelectKeyboardControlsScreenController.class);
+    private static final Logger LOG
+            = LoggerFactory.getLogger(SelectKeyboardControlsScreenController.class);
 
     @Autowired
     private ScreenFlowManager screenFlowManager;
@@ -41,23 +37,23 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     @Autowired
     private ProfileManager profileManager;
 
-    private static final Map<Integer, String> REVERSE_MAP = new HashMap<Integer, String>();
+    private static final Map<Integer, String> REVERSE_MAP = new HashMap<>();
 
     static {
         REVERSE_MAP.put(KeyInput.KEY_0, "0");
-        REVERSE_MAP.put(KeyInput.KEY_1, "1");
-        REVERSE_MAP.put(KeyInput.KEY_2, "2");
-        REVERSE_MAP.put(KeyInput.KEY_3, "3");
+        //REVERSE_MAP.put(KeyInput.KEY_1, "1");
+        //REVERSE_MAP.put(KeyInput.KEY_2, "2");
+        //REVERSE_MAP.put(KeyInput.KEY_3, "3");
         REVERSE_MAP.put(KeyInput.KEY_4, "4");
         REVERSE_MAP.put(KeyInput.KEY_5, "5");
         REVERSE_MAP.put(KeyInput.KEY_6, "6");
         REVERSE_MAP.put(KeyInput.KEY_7, "7");
         REVERSE_MAP.put(KeyInput.KEY_8, "8");
         REVERSE_MAP.put(KeyInput.KEY_9, "9");
-        REVERSE_MAP.put(KeyInput.KEY_A, "A");
+        //REVERSE_MAP.put(KeyInput.KEY_A, "A");
         REVERSE_MAP.put(KeyInput.KEY_B, "B");
         REVERSE_MAP.put(KeyInput.KEY_C, "C");
-        REVERSE_MAP.put(KeyInput.KEY_D, "D");
+        //REVERSE_MAP.put(KeyInput.KEY_D, "D");
         REVERSE_MAP.put(KeyInput.KEY_E, "E");
         REVERSE_MAP.put(KeyInput.KEY_F, "F");
         REVERSE_MAP.put(KeyInput.KEY_G, "G");
@@ -72,11 +68,11 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
         REVERSE_MAP.put(KeyInput.KEY_P, "P");
         REVERSE_MAP.put(KeyInput.KEY_Q, "Q");
         REVERSE_MAP.put(KeyInput.KEY_R, "R");
-        REVERSE_MAP.put(KeyInput.KEY_S, "S");
+        //REVERSE_MAP.put(KeyInput.KEY_S, "S");
         REVERSE_MAP.put(KeyInput.KEY_T, "T");
         REVERSE_MAP.put(KeyInput.KEY_U, "U");
         REVERSE_MAP.put(KeyInput.KEY_V, "V");
-        REVERSE_MAP.put(KeyInput.KEY_W, "W");
+        //REVERSE_MAP.put(KeyInput.KEY_W, "W");
         REVERSE_MAP.put(KeyInput.KEY_X, "X");
         REVERSE_MAP.put(KeyInput.KEY_Y, "Y");
         REVERSE_MAP.put(KeyInput.KEY_Z, "Z");
@@ -145,6 +141,11 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
                     }
                 });
 
+                //possible if there's an invalid key from history file
+                if(index == -1) {
+                    index = 0;
+                }
+                
                 listBoxController.selectItemByIndex(index);
                 currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
 
@@ -161,19 +162,19 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     private List<ListItem> generateKeys() {
         List<ListItem> listResult = Lists.newArrayList();
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_0), KeyInput.KEY_0));
-        listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_1), KeyInput.KEY_1));
-        listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_2), KeyInput.KEY_2));
-        listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_3), KeyInput.KEY_3));
+        //listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_1), KeyInput.KEY_1));
+        //listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_2), KeyInput.KEY_2));
+        //listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_3), KeyInput.KEY_3));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_4), KeyInput.KEY_4));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_5), KeyInput.KEY_5));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_6), KeyInput.KEY_6));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_7), KeyInput.KEY_7));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_8), KeyInput.KEY_8));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_9), KeyInput.KEY_9));
-        listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_A), KeyInput.KEY_A));
+        //listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_A), KeyInput.KEY_A));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_B), KeyInput.KEY_B));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_C), KeyInput.KEY_C));
-        listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_D), KeyInput.KEY_D));
+        //listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_D), KeyInput.KEY_D));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_E), KeyInput.KEY_E));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_F), KeyInput.KEY_F));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_G), KeyInput.KEY_G));
@@ -188,11 +189,11 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_P), KeyInput.KEY_P));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_Q), KeyInput.KEY_Q));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_R), KeyInput.KEY_R));
-        listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_S), KeyInput.KEY_S));
+        //listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_S), KeyInput.KEY_S));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_T), KeyInput.KEY_T));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_U), KeyInput.KEY_U));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_V), KeyInput.KEY_V));
-        listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_W), KeyInput.KEY_W));
+        //listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_W), KeyInput.KEY_W));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_X), KeyInput.KEY_X));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_Y), KeyInput.KEY_Y));
         listResult.add(new ListItem(REVERSE_MAP.get(KeyInput.KEY_Z), KeyInput.KEY_Z));
@@ -206,7 +207,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
         for (KeyboardCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class)) {
             userProperties.put(listener.toString(), Integer.toString(listener.getKeycode()));
         }
-        
+
         profileManager.updateProperties(userProperties);
     }
 
