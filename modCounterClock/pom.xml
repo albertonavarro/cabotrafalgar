@@ -15,6 +15,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.navid.trafalgar</groupId>
             <artifactId>mod-api</artifactId>
         </dependency>

@@ -23,5 +23,6 @@
     <bean id="mod.counterclock.LoadEventListener" class="com.navid.trafalgar.mod.counterclock.statelisteners.LoadEventsListener" autowire="byType"/>
     <bean id="mod.counterclock.GUIUpdater" class="com.navid.trafalgar.mod.counterclock.statelisteners.GUIUpdater" autowire="byType"/>
     <bean id="mod.counterclock.GameRecorder" class="com.navid.trafalgar.mod.counterclock.statelisteners.GameRecorder" autowire="byType"/>
+    <!--<bean id="mod.counterclock.CSVRecorder" class="com.navid.trafalgar.mod.counterclock.statelisteners.CSVRecorder" autowire="byType"/>-->
 
 </beans>

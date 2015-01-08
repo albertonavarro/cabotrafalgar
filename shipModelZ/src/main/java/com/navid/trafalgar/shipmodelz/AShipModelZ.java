@@ -178,6 +178,7 @@ public abstract class AShipModelZ extends AShipModel {
             Material sphereMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
             getMainsheetSailHandler().setMaterial(sphereMat);
             this.attachChild(getMainsheetSailHandler());
+            this.rotateY(-0.5f);
         }
 
         public Vector3f getHelperDirection() {
