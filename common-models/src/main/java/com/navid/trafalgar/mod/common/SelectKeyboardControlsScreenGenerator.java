@@ -8,15 +8,21 @@ import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
+import de.lessvoid.nifty.builder.PopupBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.builder.TextBuilder;
+import de.lessvoid.nifty.controls.Menu;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
+import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.controls.listbox.builder.ListBoxBuilder;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.tools.Color;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.swing.colorchooser.ColorChooserComponentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public final class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
@@ -54,11 +60,17 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
         });
 
         final PanelBuilder outerPanelBuilder = new PanelBuilder("PartitionPanel") {
-                {
-                    height("80%");
-                    childLayoutHorizontal();
-                }
-            };
+            {
+                height("80%");
+                childLayoutHorizontal();
+            }
+        };
+        
+        final PopupBuilder popupBuilder = new PopupBuilder("popup") {
+            {
+                text("some text");
+            }
+        };
 
         List<List<KeyboardCommandStateListener>> partitionedSorted = Lists.partition(sortedCommands, 4);
 
@@ -107,10 +119,11 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
 
                 partitionPanelBuilder.panel(commandNamePanelBuilder);
             }
-            
+
             outerPanelBuilder.panel(partitionPanelBuilder);
         }
 
+        
         Screen screen = new ScreenBuilder("selectKeys") {
             {
                 controller(controller); // Screen properties
@@ -142,6 +155,15 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
                                         interactOnClick("next()");
                                     }
                                 });
+                                
+                                control(new LabelBuilder("RepeatError"){{
+                                    alignRight();
+                                    valignCenter();
+                                    text("");
+                                    width("50%");
+                                    color(new Color("#ff0"));
+                                }});
+                                
                             }
                         });
 
@@ -150,9 +172,8 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
                 // </layer>
             }
         }.build(nifty);
-        // <screen>
-
     }
+
 
     /**
      * @param nifty the nifty to set

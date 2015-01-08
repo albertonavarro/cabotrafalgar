@@ -12,15 +12,19 @@ import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
+import de.lessvoid.nifty.controls.label.LabelControl;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
 import org.bushe.swing.event.EventTopicSubscriber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,7 +108,6 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
 
     @Override
     public void onStartScreen() {
-
         final Properties userProperties = profileManager.getProperties();
 
         EventTopicSubscriber<ListBoxSelectionChangedEvent> eventHandler;
@@ -142,10 +145,10 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
                 });
 
                 //possible if there's an invalid key from history file
-                if(index == -1) {
+                if (index == -1) {
                     index = 0;
                 }
-                
+
                 listBoxController.selectItemByIndex(index);
                 currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
 
@@ -202,7 +205,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
 
     @Override
     public void onEndScreen() {
-        Map<String,String> userProperties = new HashMap<>();
+        Map<String, String> userProperties = new HashMap<>();
 
         for (KeyboardCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class)) {
             userProperties.put(listener.toString(), Integer.toString(listener.getKeycode()));
@@ -216,8 +219,29 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     }
 
     public void next() {
-        screenFlowManager.changeNextScreen();
-        goTo("redirector");
+        if (validateKeys()) {
+            screenFlowManager.changeNextScreen();
+            goTo("redirector");
+        } else {
+            showMenu();
+        }
+    }
+    
+    public void showMenu() {
+        Label label = screen.findNiftyControl("RepeatError", Label.class);
+        label.setText("You cannot use the same key for more than one command");
+    }
+
+    private boolean validateKeys() {
+        List<KeyboardCommandStateListener> commands
+                = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
+        Set<Integer> commandsByKey = new HashSet<>();
+        for (KeyboardCommandStateListener command : commands) {
+            if (!commandsByKey.add(command.getKeycode())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void back() {
@@ -244,10 +268,6 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
      */
     public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
         this.generatorBuilder = generatorBuilder;
-    }
-
-    private void setDefaults() {
-
     }
 
     /**
