@@ -14,7 +14,6 @@ import com.lazylogin.client.user.v0.LoginWithTokenResponse;
 import com.lazylogin.client.user.v0.Token;
 import com.lazylogin.client.user.v0.UserCommands;
 import com.navid.lazylogin.context.RequestContextContainer;
-import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,7 +21,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Resource;
@@ -214,15 +212,19 @@ public final class FileProfileManager implements ProfileManager {
                 LOG.error("IOException loading history file: {}", keyboardHistory, ex);
             }
         }
-        
+
         return properties;
     }
 
     @Override
-    public void updateProperties(Map<String,String> userProperties) {
+    public void updateProperties(Map<String, String> userProperties) {
         File keyboardHistory = new File(getHome(), "keyboardHistory.properties");
 
         try {
+            if (!keyboardHistory.exists()) {
+                keyboardHistory.createNewFile();
+            }
+
             Properties properties = new Properties();
             properties.load(new FileReader(keyboardHistory));
             properties.putAll(userProperties);
