@@ -23,6 +23,7 @@ import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import java.util.Collections;
 import static java.util.Collections.singleton;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,7 @@ public final class ScreenSelectMap implements ScreenController {
     private Screen screen;
     private ListItem selectedMap;
     private ShowGhost ghostOptions = ShowGhost.bestLocal;
-    private Map<String, NiftyImage> loadedImages = new HashMap<>();
+    private final Map<String, NiftyImage> loadedImages = new HashMap<>();
     private static final Logger LOG = LoggerFactory.getLogger(ScreenSelectMap.class);
 
     /**
@@ -75,7 +76,7 @@ public final class ScreenSelectMap implements ScreenController {
 
     @Autowired
     private GameConfiguration gameConfiguration;
-    
+
     @Resource
     private AssetManager assetManager;
 
@@ -160,6 +161,7 @@ public final class ScreenSelectMap implements ScreenController {
 
     private List<ListItem> getMaps() {
         List<String> result = FileUtils.findFilesInFolder("Maps/CounterClock/", false);
+        Collections.sort(result);
         return Lists.transform(result, new Function<String, ListItem>() {
             @Override
             public ListItem apply(String f) {
@@ -200,18 +202,18 @@ public final class ScreenSelectMap implements ScreenController {
         } else {
             mapDescription.setText(map.getMapDefinition().getDescription());
         }
-        
+
         imageMap.getRenderer(ImageRenderer.class).setImage(getImageForMap(map.getMapDefinition()));
         selectedMap = map;
     }
-    
+
     NiftyImage getImageForMap(MapDefinition mapDefinition) {
         if(mapDefinition.getPicture() == null) {
             return null;
         }
-        
+
         String picturePath = mapDefinition.getPicture();
-        
+
         if(loadedImages.containsKey(picturePath)){
             return loadedImages.get(picturePath);
         } else {
@@ -248,12 +250,12 @@ public final class ScreenSelectMap implements ScreenController {
     public void setRemotePersistence(RecordServerPersistenceService remotePersistence) {
         this.remotePersistence = remotePersistence;
     }
-    
+
     private static class ListItem {
-        private String name;
-        private String path;
-        private MapDefinition mapDefinition;
-        
+        private final String name;
+        private final String path;
+        private final MapDefinition mapDefinition;
+
         public ListItem(String name, String path, MapDefinition mapDefinition) {
             this.name = name;
             this.path = path;
@@ -287,5 +289,4 @@ public final class ScreenSelectMap implements ScreenController {
         }
     }
 
-    
 }

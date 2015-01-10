@@ -13,6 +13,9 @@ import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +47,7 @@ public final class SelectProfileScreenController implements ScreenController {
      */
     @Autowired
     private ProfileManager profileManager;
-    
+
     @Resource(name = "mod.counterclock.requestContextContainer")
     private RequestContextContainer container;
     /**
@@ -52,6 +55,8 @@ public final class SelectProfileScreenController implements ScreenController {
      */
     @Autowired
     private ScreenFlowManager screenFlowManager;
+
+    private ListBox profileListBoxContent;
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
@@ -75,6 +80,9 @@ public final class SelectProfileScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        profileListBoxContent = screen.findNiftyControl("profileList", ListBox.class);
+        profileListBoxContent.clear();
+
         container.delete();
         fillListWithProfiles();
     }
@@ -85,18 +93,20 @@ public final class SelectProfileScreenController implements ScreenController {
     }
 
     private void fillListWithProfiles() {
-        ListBox profileList = screen.findNiftyControl("profileList", ListBox.class);
+        List<ProfileStatus> profiles = newArrayList(profileManager.listProfiles());
+        Collections.sort(profiles, new Comparator<ProfileStatus>(){
+            @Override
+            public int compare(ProfileStatus o1, ProfileStatus o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
 
-        profileList.clear();
-        profileList.addAllItems(newArrayList(profileManager.listProfiles()));
-
-        selectedItem = profileList.getItems().isEmpty() ? null : (ProfileStatus) profileList.getItems().get(0);
+        profileListBoxContent.addAllItems(profiles);
+        selectedItem = profileListBoxContent.getItems().isEmpty() ? null : (ProfileStatus) profileListBoxContent.getItems().get(0);
     }
 
     private void emptyList() {
-        ListBox profileList = screen.findNiftyControl("profileList", ListBox.class);
-
-        profileList.clear();
+        profileListBoxContent.clear();
     }
 
     /**
