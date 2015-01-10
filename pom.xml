@@ -46,20 +46,13 @@
         <recordserver.version>1.2.105</recordserver.version>
     </properties>
     
-    
     <repositories>
         <repository>
             <id>repo.cabotrafalgar</id>
             <name>snapshots</name>
             <url>http://repo.cabotrafalgar.mooo.com/repo</url>
         </repository>
-        <repository>
-            <id>repo.nifty</id>
-            <name>nifty</name>
-            <url>http://nifty-gui.sourceforge.net/nifty-maven-repo</url>
-        </repository>
     </repositories>
-    
     
     <build>
         <plugins>

@@ -12,7 +12,6 @@
     <artifactId>modCounterClock</artifactId>
     <name>Trafalgar - CounterClock</name>
     
-
     <dependencies>
         <dependency>
             <groupId>net.sf.opencsv</groupId>
