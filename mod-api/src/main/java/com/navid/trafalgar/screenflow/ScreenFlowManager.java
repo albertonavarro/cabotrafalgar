@@ -1,6 +1,12 @@
 package com.navid.trafalgar.screenflow;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import static com.google.common.collect.Lists.newArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +38,17 @@ public final class ScreenFlowManager {
         return result;
     }
 
-    public Set<String> getModuleNames() {
-        return screenFlowGraph.keySet();
+    public List<String> getModuleNames() {
+        List<String> modules = newArrayList(Iterables.filter(screenFlowGraph.keySet(), new Predicate<String>() {
+
+            @Override
+            public boolean apply(String t) {
+                return !t.equals("root");
+            }
+        }));
+
+        Collections.sort(modules);
+        return modules;
     }
 
     public String nextScreen() {

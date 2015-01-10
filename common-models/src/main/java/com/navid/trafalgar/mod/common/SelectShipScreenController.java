@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.common;
 
+import static com.google.common.collect.Lists.newArrayList;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.ModelBuilder;
@@ -13,7 +14,10 @@ import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public final class SelectShipScreenController implements ScreenController {
@@ -129,12 +133,22 @@ public final class SelectShipScreenController implements ScreenController {
         ListBox shipList = screen.findNiftyControl("shipList", ListBox.class);
 
         Collection<BuilderInterface> builders = builder.getBuilder(ModelBuilder.Category.ship);
+        List<ListItem> listItems = newArrayList();
 
         for (BuilderInterface currentBuilder : builders) {
             ListItem item1 = new ListItem();
             item1.setName(currentBuilder.getType());
-            shipList.addItem(item1);
+            listItems.add(item1);
         }
+
+        Collections.sort(listItems, new Comparator<ListItem>() {
+            @Override
+            public int compare(ListItem o1, ListItem o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        shipList.addAllItems(listItems);
 
         selectedItem = (ListItem) shipList.getItems().get(0);
     }

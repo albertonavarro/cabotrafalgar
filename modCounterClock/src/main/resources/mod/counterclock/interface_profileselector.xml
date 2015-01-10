@@ -12,16 +12,16 @@
                 <text text="Select your profile.." font="Interface/Fonts/Default.fnt" width="100%" height="100%" />
             </panel>
             <panel id="panel_list" height="70%" width="75%" align="center" childLayout="vertical" style="nifty-panel-red">       
-                <panel id="panel_mid_left" align="center" childLayout="vertical">   
+                <panel id="panel_mid_left" align="center" childLayout="vertical" width="95%">   
                     <text text="Profiles" font="Interface/Fonts/Default.fnt" />
-                    <control id="profileList" name="listBox" displayItems="15" forceSelection="true" horizontal="off" width="90%"  >
+                    <control id="profileList" name="listBox" displayItems="15" forceSelection="true" horizontal="off"   >
                     </control>
                 </panel> 
-                <panel id="panel_newprofile" align="center" childLayout="horizontal" style="nifty-panel-red">   
-                    <text text="Profiles" font="Interface/Fonts/Default.fnt" />    
-                    <control id="newprofile" name="textfield" horizontal="off" width="50%"  >
+                <panel id="panel_newprofile" align="center" childLayout="horizontal" style="nifty-panel-red" width="96%">   
+                    <text text="New profile" font="Interface/Fonts/Default.fnt" width="20%" />    
+                    <control id="newprofile" name="textfield" text="Please add your email here." horizontal="off" width="60%"  >
                     </control>
-                    <control name="button" label="Add" id="addProfile" align="center" valign="center" visibleToMouse="true" > 
+                    <control name="button" label="Add" id="addProfile" align="center" valign="center" visibleToMouse="true" width="20%" > 
                         <interact onClick="add()"/>
                     </control>
                 </panel>

@@ -18,8 +18,8 @@ public interface ProfileManager {
     ProfileStatus createProfile(String email);
 
     Properties getProperties();
-    
+
     void updateProperties(Map<String,String> p);
-    
+
     boolean isOnline();
 }

@@ -22,7 +22,7 @@ public final class RootScreenGenerator implements ScreenGenerator {
     @Override
     public void buildScreen() {
 
-        final PanelBuilder panelBuilder = new PanelBuilder("Panel_ID") {
+        final PanelBuilder panelModules = new PanelBuilder("Panel_Modules") {
             {
                 childLayoutVertical();
                 alignCenter();
@@ -31,12 +31,12 @@ public final class RootScreenGenerator implements ScreenGenerator {
         };
 
         for (final String moduleName : screenFlowManager.getModuleNames()) {
-            panelBuilder.control(new ButtonBuilder(moduleName + "Button", moduleName + "ButtonLabel") {
+            panelModules.control(new ButtonBuilder(moduleName + "Button", moduleName + "ButtonLabel") {
                 {
                     alignCenter();
                     valignCenter();
-                    height("30px");
-                    width("200px");
+                    height("11%");
+                    width("20%");
                     interactOnClick("executeModule(" + moduleName + ")");
                 }
             });
@@ -45,16 +45,16 @@ public final class RootScreenGenerator implements ScreenGenerator {
         final PanelBuilder panelQuit = new PanelBuilder("Panel_Quit") {
             {
                 childLayoutVertical();
-                height("5%");
+                height("10%");
             }
         };
 
         panelQuit.control(new ButtonBuilder("QuitButton", "Quit") {
             {
-                alignCenter();
+                alignRight();
                 valignCenter();
-                height("30px");
-                width("200px");
+                height("100%");
+                width("20%");
                 interactOnClick("quit()");
             }
         });
@@ -62,11 +62,11 @@ public final class RootScreenGenerator implements ScreenGenerator {
         new ScreenBuilder("start") {
             {
                 controller(startScreenController);
-                layer(new LayerBuilder("Panel_ID") {
+                layer(new LayerBuilder("Layer_Main") {
                     {
                         backgroundColor(Color.randomColor());
                         childLayoutVertical();
-                        panel(panelBuilder);
+                        panel(panelModules);
                         panel(panelQuit);
                     }
                 });
