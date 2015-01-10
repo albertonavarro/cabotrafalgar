@@ -14,7 +14,6 @@ import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.util.FileUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.batch.spi.BatchRenderBackend.Image;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;

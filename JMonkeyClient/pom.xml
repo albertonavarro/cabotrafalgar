@@ -89,7 +89,6 @@
             <artifactId>jme3-plugins</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
         <dependency>
             <groupId>lessvoid</groupId>
             <artifactId>nifty</artifactId>

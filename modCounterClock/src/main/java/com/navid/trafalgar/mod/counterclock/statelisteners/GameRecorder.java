@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
+import com.google.common.util.concurrent.MoreExecutors;
 import com.navid.trafalgar.manager.AbortedState;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
@@ -12,10 +13,16 @@ import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
 import com.navid.trafalgar.model.StepRecord;
+import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,6 +49,14 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
     private RecordServerPersistenceService recordServerPersistenceService;
 
     private List<String> eventList = new ArrayList<String>();
+
+    int corePoolSize = 4;
+    int maximumPoolSize = 8;
+    int keepAliveTime = 5000;
+
+    private final ExecutorService executorService = new ThreadPoolExecutor(corePoolSize, maximumPoolSize,
+            keepAliveTime, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<Runnable>());
 
     @PostConstruct
     public void init() {
@@ -72,7 +87,12 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
     @Override
     public void onSuccess(float tpf) {
         fileRecordPersistenceService.addCandidate(candidateRecord);
-        recordServerPersistenceService.addCandidate(candidateRecord);
+        executorService.submit(new Callable<CandidateInfo>() {
+            @Override
+            public CandidateInfo call() throws Exception {
+                return recordServerPersistenceService.addCandidate(candidateRecord);
+            }
+        });
     }
 
     @Override

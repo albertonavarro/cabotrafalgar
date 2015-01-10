@@ -11,14 +11,6 @@
     
     <artifactId>modWindTunnel</artifactId>
     <name>Trafalgar - WindTunnel</name>
-    
-    <repositories>
-        <repository>
-            <id>sonatype-public</id>
-            <name>sonatype public</name>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -115,11 +107,6 @@
         <dependency>
             <groupId>lessvoid</groupId>
             <artifactId>nifty-default-controls</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>lessvoid</groupId>
-            <artifactId>nifty-style-black</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
