@@ -2,7 +2,7 @@ package com.navid.trafalgar.mod.counterclock.statelisteners;
 
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
-import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
+import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
 import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
@@ -54,7 +54,7 @@ public final class StartedListener implements PrestartState, StartedState {
      */
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
-        eventManager.registerListener(new MilestoneEventHandler(), new String[]{MILLESTONE_REACHED});
+        eventManager.registerListener(new MilestoneEventHandler(), new String[]{MILESTONE_REACHED});
     }
 
     /**
@@ -70,7 +70,7 @@ public final class StartedListener implements PrestartState, StartedState {
 
         @Override
         public void onEvent(final String event) {
-            if (MILLESTONE_REACHED.equals(event)) {
+            if (MILESTONE_REACHED.equals(event)) {
                 counter++;
             }
 

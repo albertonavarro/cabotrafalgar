@@ -12,7 +12,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
-import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
+import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
 import static com.navid.trafalgar.manager.EventManager.VIEW_NEXTTARGET;
 import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.AShipModel;
@@ -30,7 +30,7 @@ public final class TargetCamera implements Control, EventListener {
     public TargetCamera(Camera cam, AShipModel reference, EventManager eventManager) {
         this.cam = cam;
         this.reference = reference;
-        eventManager.registerListener(this, new String[]{VIEW_NEXTTARGET, MILLESTONE_REACHED});
+        eventManager.registerListener(this, new String[]{VIEW_NEXTTARGET, MILESTONE_REACHED});
     }
 
     public TargetCamera(Camera cam, AShipModel reference, List<Node> target, EventManager eventManager) {
@@ -110,7 +110,7 @@ public final class TargetCamera implements Control, EventListener {
     public void onEvent(String event) {
         if (targets != null && !targets.isEmpty()) {
 
-            if (event.equals(MILLESTONE_REACHED)) {
+            if (event.equals(MILESTONE_REACHED)) {
                 selectNextUnreachedMilestone();
             } else if (event.equals(VIEW_NEXTTARGET)) {
                 selectNextMilestone();

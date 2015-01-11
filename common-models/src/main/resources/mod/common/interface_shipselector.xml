@@ -34,7 +34,7 @@
                     </control>
                 </panel>
                 <panel id="panel_bottom_right3" height="50%" width="25%" valign="center" childLayout="center">  
-                    <control name="button" label="Play!" id="PlayButton" align="center" valign="center" 
+                    <control name="button" label="Select ship" id="PlayButton" align="center" valign="center" 
                              visibleToMouse="true" > 
                         <interact onClick="next()"/>
                     </control>

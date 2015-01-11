@@ -47,29 +47,26 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
     @Autowired
     private RecordServerPersistenceService recordServerPersistenceService;
 
-    private List<String> eventList = new ArrayList<String>();
+    private List<String> eventList = new ArrayList<>();
 
-    int corePoolSize = 4;
-    int maximumPoolSize = 8;
-    int keepAliveTime = 5000;
+    private final int corePoolSize = 4;
+    private final int maximumPoolSize = 8;
+    private final int keepAliveTime = 5000;
 
     private final ExecutorService executorService = new ThreadPoolExecutor(corePoolSize, maximumPoolSize,
             keepAliveTime, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<Runnable>());
 
-    @PostConstruct
-    public void init() {
+    @Override
+    public void onPrestart(float tpf) {
         eventManager.registerListener(new EventListener() {
 
             @Override
             public void onEvent(String event) {
                 eventList.add(event);
             }
-        }, new String[]{"MILLESTONE_REACHED"});
-    }
+        }, new String[]{"MILESTONE_REACHED"});
 
-    @Override
-    public void onPrestart(float tpf) {
         candidateRecord = ((AShipModel) model.getShip()).getCandidateRecordInstance();
         candidateRecord.setMap(gameConfiguration.getMap());
     }
@@ -80,7 +77,7 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
         newRecord.setTimestamp(gameStatus.getTime().getValue());
         newRecord.setEventList(eventList);
         candidateRecord.addStepRecord(newRecord);
-        eventList = new ArrayList<String>();
+        eventList = new ArrayList<>();
     }
 
     @Override

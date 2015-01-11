@@ -38,13 +38,13 @@ public final class EventManager {
     /**
      *
      */
-    public static final String MILLESTONE_REACHED = "MILLESTONE_REACHED";
+    public static final String MILESTONE_REACHED = "MILLESTONE_REACHED";
     /**
      *
      */
     public static final String UNLOAD = "UNLOAD";
 
-    private Map<String, Set<EventListener>> eventListeners = new HashMap<String, Set<EventListener>>();
+    private Map<String, Set<EventListener>> eventListeners = new HashMap<>();
 
     /**
      *
@@ -52,17 +52,16 @@ public final class EventManager {
      * @param events
      */
     public void registerListener(EventListener eventListener, String[] events) {
-
         for (String currentEvent : events) {
             Set<EventListener> listeners = eventListeners.get(currentEvent);
             if (listeners == null) {
-                listeners = new HashSet<EventListener>();
+                listeners = new HashSet<>();
                 eventListeners.put(currentEvent, listeners);
             }
             listeners.add(eventListener);
         }
-
     }
+    
 
     /**
      *
@@ -79,7 +78,7 @@ public final class EventManager {
         }
 
         if (event.equals(UNLOAD)) {
-            eventListeners = new HashMap<String, Set<EventListener>>();
+            eventListeners = new HashMap<>();
         }
 
         LOG.debug("Finished firing event: {}", event);

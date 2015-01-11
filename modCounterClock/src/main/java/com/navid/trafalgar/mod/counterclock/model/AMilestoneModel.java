@@ -5,7 +5,7 @@ import com.jme3.material.Material;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.Control;
 import com.navid.trafalgar.manager.EventManager;
-import static com.navid.trafalgar.manager.EventManager.MILLESTONE_REACHED;
+import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
 import java.util.Collection;
 
 public abstract class AMilestoneModel extends Node implements Control {
@@ -42,7 +42,7 @@ public abstract class AMilestoneModel extends Node implements Control {
 
             if (!state && results.size() > 0) {
                 state = true;
-                eventManager.fireEvent(MILLESTONE_REACHED);
+                eventManager.fireEvent(MILESTONE_REACHED);
             }
         }
 
