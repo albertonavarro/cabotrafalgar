@@ -25,6 +25,8 @@
                         <interact onClick="add()"/>
                     </control>
                 </panel>
+                <text text="Create a new profile by adding your email if you want to use online features." font="Interface/Fonts/Default.fnt" />
+                <text text="Remember to verify your account. Please check your SPAM folder as well." font="Interface/Fonts/Default.fnt" />
             </panel>
             <panel id="panel_bottom" height="15%" width="75%" align="center" childLayout="horizontal">  
                 <panel id="panel_bottom_right1" height="50%" width="25%" valign="center" childLayout="center">  

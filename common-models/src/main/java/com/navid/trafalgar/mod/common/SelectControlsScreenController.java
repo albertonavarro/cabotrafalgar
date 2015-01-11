@@ -47,23 +47,22 @@ public final class SelectControlsScreenController implements ScreenController {
     @Autowired
     private ScreenFlowManager screenFlowManager;
 
-    @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
+    
     private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler;
     private final Map<String, String> generated = new HashMap<>();
     private Map<String, Command> commandsMap;
     private Map<String, CommandGenerator> generatorMap;
 
     @Override
+    public void bind(Nifty nifty, Screen screen) {
+        this.nifty = nifty;
+        this.screen = screen;
+    }
+
+    @Override
     public void onStartScreen() {
-
         generated.clear();
-
         gameConfiguration.getPreGameModel().removeFromModel(CommandStateListener.class);
-
         eventHandler = new EventTopicSubscriber<RadioButtonStateChangedEvent>() {
             @Override
             public void onEvent(String string, RadioButtonStateChangedEvent t) {

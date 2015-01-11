@@ -66,7 +66,7 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
 
         final PanelBuilder outerPanelBuilder = new PanelBuilder("Panel_ID") {
             {
-                height("80%");
+                height("60%");
                 childLayoutHorizontal();
             }
         };
@@ -136,6 +136,14 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
                     {
                         childLayoutVertical(); // layer properties, add more...
 
+                        panel(new PanelBuilder(){{
+                            childLayoutVertical();
+                            height("15%");
+                            text(new TextBuilder(){{
+                                text("Assign available commands to your prefered option.");
+                                style("nifty-label");
+                            }});
+                        }});
                         // <panel>
                         panel(outerPanelBuilder);
                         // </panel>
@@ -161,6 +169,15 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
                             }
                         });
 
+                        panel(new PanelBuilder(){{
+                            childLayoutVertical();
+                            height("5%");
+                            text(new TextBuilder(){{
+                                text("Just skip this screen..");
+                                style("nifty-label");
+                                color("#ffff00ff");
+                            }});
+                        }});
                     }
                 });
                 // </layer>

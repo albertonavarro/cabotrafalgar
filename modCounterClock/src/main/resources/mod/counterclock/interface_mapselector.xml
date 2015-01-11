@@ -19,8 +19,8 @@
                 </panel> 
                 <panel id="panel_mid_center"  width="42%" align="center" childLayout="vertical">      
                     <panel id="panel_mid_center_description"  height="20%" width="90%" childLayout="vertical">    
-                        <text text="Description:" font="Interface/Fonts/Default.fnt"  align="right" />
-                        <control id="mapDescription" name="label" font="Interface/Fonts/Default.fnt" wrap="true" width="90%" height="90%" text="" align="right" />
+                        <text text="Description:" font="Interface/Fonts/Default.fnt"  align="left" />
+                        <control id="mapDescription" name="label" font="Interface/Fonts/Default.fnt" wrap="true" width="90%" height="90%" text="" align="left" />
                     </panel>
                     <panel id="panel_mid_center_description" height="80%" width="90%" childLayout="vertical" valign="center" align="center">    
                         <image id="mapImage" />
