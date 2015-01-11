@@ -48,6 +48,11 @@ http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schema
                 </bean>
             </list>
         </property>
+        <property name="headers">
+            <map>
+                <entry key="User-Agent" value="JMonkeyClient-CounterClock-0.9"/>
+            </map>
+        </property>
     </bean>
     
 </beans>

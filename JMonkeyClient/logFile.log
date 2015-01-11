@@ -1,0 +1,136 @@
+6105 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.games.Main - Loading MapAssetLoader
+6481 [LWJGL Renderer Thread] INFO  org.reflections.Reflections - Reflections took 101 ms to scan 7 urls, producing 73 keys and 239 values 
+6668 [LWJGL Renderer Thread] ERROR com.navid.trafalgar.games.Main - Error loading module class com.navid.trafalgar.modapi.GenericModRegisterer
+java.lang.InstantiationException: com.navid.trafalgar.modapi.GenericModRegisterer
+	at java.lang.Class.newInstance(Class.java:364) ~[na:1.7.0_71]
+	at com.navid.trafalgar.games.Main.loadModules(Main.java:117) [classes/:na]
+	at com.navid.trafalgar.games.Main.initialize(Main.java:91) [classes/:na]
+	at com.jme3.system.lwjgl.LwjglAbstractDisplay.initInThread(LwjglAbstractDisplay.java:130) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
+	at com.jme3.system.lwjgl.LwjglAbstractDisplay.run(LwjglAbstractDisplay.java:209) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
+	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
+7187 [LWJGL Renderer Thread] INFO  c.n.t.input.GeneratorBuilder - Registring builder Keyboard
+7262 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodely.ShipModelTwoBuilder@3e13bdf5
+7262 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodely.ShipModelTwoBuilder@3e13bdf5 done
+7285 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelz.ShipModelZBuilder@8384aed
+7285 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelz.ShipModelZBuilder@8384aed done
+7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.RotateSimpleWindBuilder@5f37f5c0
+7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.RotateSimpleWindBuilder@5f37f5c0 done
+7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.ContextBuilder@52e74116
+7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.ContextBuilder@52e74116 done
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.WaterBuilder@4c6235df
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.WaterBuilder@4c6235df done
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.TidalWaterBuilder@43beeaa6
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.TidalWaterBuilder@43beeaa6 done
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.NoWaterBuilder@2b1f5b09
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.NoWaterBuilder@2b1f5b09 done
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SunBuilder@1791c1fd
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SunBuilder@1791c1fd done
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SkyBuilder@6256d521
+7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SkyBuilder@6256d521 done
+7354 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.counterclock.model.builder.MilestoneBuilder@7cf2ab87
+7354 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.counterclock.model.builder.MilestoneBuilder@7cf2ab87 done
+7377 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.windtunnel.model.builder.HarnessBuilder@54efdd29
+7377 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.windtunnel.model.builder.HarnessBuilder@54efdd29 done
+7561 [LWJGL Renderer Thread] INFO  o.a.c.w.s.f.ReflectionServiceFactoryBean - Creating Service {http://lazylogin.navid.com/}UserCommandsService from class com.lazylogin.client.user.v0.UserCommands
+7886 [LWJGL Renderer Thread] INFO  o.a.c.c.injection.ResourceInjector - failed to resolve resource com.navid.lazylogin.context.interceptors.RequestIdHandler/requestContextContainer
+8021 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context created: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
+8635 [LWJGL Renderer Thread] ERROR c.n.t.profiles.FileProfileManager - Error loading info for DEFAULT
+javax.xml.ws.soap.SOAPFaultException: The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!
+	at org.apache.cxf.jaxws.JaxWsClientProxy.invoke(JaxWsClientProxy.java:159) ~[cxf-rt-frontend-jaxws-3.0.1.jar:3.0.1]
+	at com.sun.proxy.$Proxy57.getInfo(Unknown Source) ~[na:na]
+	at com.navid.trafalgar.profiles.FileProfileManager$3.apply(FileProfileManager.java:284) [classes/:na]
+	at com.navid.trafalgar.profiles.FileProfileManager$3.apply(FileProfileManager.java:275) [classes/:na]
+	at com.navid.trafalgar.profiles.FileProfileManager.loadFromFile(FileProfileManager.java:155) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_71]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[na:1.7.0_71]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.7.0_71]
+	at java.lang.reflect.Method.invoke(Method.java:606) ~[na:1.7.0_71]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1612) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1553) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1483) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:524) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:295) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:292) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:270) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:873) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:815) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:730) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1105) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:522) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:295) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:292) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:873) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:815) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:730) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1105) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:522) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:295) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:292) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+	at com.navid.trafalgar.screenflow.ScreenFlowUnit.<init>(ScreenFlowUnit.java:20) [classes/:na]
+	at com.navid.trafalgar.modapi.GenericModRegisterer.registerScreens(GenericModRegisterer.java:92) [classes/:na]
+	at com.navid.trafalgar.games.Main.loadModules(Main.java:134) [classes/:na]
+	at com.navid.trafalgar.games.Main.initialize(Main.java:91) [classes/:na]
+	at com.jme3.system.lwjgl.LwjglAbstractDisplay.initInThread(LwjglAbstractDisplay.java:130) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
+	at com.jme3.system.lwjgl.LwjglAbstractDisplay.run(LwjglAbstractDisplay.java:209) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
+	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
+Caused by: org.apache.cxf.binding.soap.SoapFault: The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!
+	at org.apache.cxf.binding.soap.interceptor.Soap11FaultInInterceptor.unmarshalFault(Soap11FaultInInterceptor.java:84) ~[cxf-rt-bindings-soap-3.0.1.jar:3.0.1]
+	at org.apache.cxf.binding.soap.interceptor.Soap11FaultInInterceptor.handleMessage(Soap11FaultInInterceptor.java:51) ~[cxf-rt-bindings-soap-3.0.1.jar:3.0.1]
+	at org.apache.cxf.binding.soap.interceptor.Soap11FaultInInterceptor.handleMessage(Soap11FaultInInterceptor.java:40) ~[cxf-rt-bindings-soap-3.0.1.jar:3.0.1]
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:307) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.interceptor.AbstractFaultChainInitiatorObserver.onMessage(AbstractFaultChainInitiatorObserver.java:113) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.jaxws.handler.soap.SOAPHandlerInterceptor.handleMessage(SOAPHandlerInterceptor.java:140) ~[cxf-rt-frontend-jaxws-3.0.1.jar:3.0.1]
+	at org.apache.cxf.jaxws.handler.soap.SOAPHandlerInterceptor.handleMessage(SOAPHandlerInterceptor.java:71) ~[cxf-rt-frontend-jaxws-3.0.1.jar:3.0.1]
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:307) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.endpoint.ClientImpl.onMessage(ClientImpl.java:798) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.transport.http.HTTPConduit$WrappedOutputStream.handleResponseInternal(HTTPConduit.java:1636) ~[cxf-rt-transports-http-3.0.1.jar:3.0.1]
+	at org.apache.cxf.transport.http.HTTPConduit$WrappedOutputStream.handleResponse(HTTPConduit.java:1525) ~[cxf-rt-transports-http-3.0.1.jar:3.0.1]
+	at org.apache.cxf.transport.http.HTTPConduit$WrappedOutputStream.close(HTTPConduit.java:1330) ~[cxf-rt-transports-http-3.0.1.jar:3.0.1]
+	at org.apache.cxf.transport.AbstractConduit.close(AbstractConduit.java:56) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.transport.http.HTTPConduit.close(HTTPConduit.java:638) ~[cxf-rt-transports-http-3.0.1.jar:3.0.1]
+	at org.apache.cxf.interceptor.MessageSenderInterceptor$MessageSenderEndingInterceptor.handleMessage(MessageSenderInterceptor.java:62) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:307) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.endpoint.ClientImpl.doInvoke(ClientImpl.java:514) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.endpoint.ClientImpl.invoke(ClientImpl.java:423) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.endpoint.ClientImpl.invoke(ClientImpl.java:326) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.endpoint.ClientImpl.invoke(ClientImpl.java:279) ~[cxf-core-3.0.1.jar:3.0.1]
+	at org.apache.cxf.frontend.ClientProxy.invokeSync(ClientProxy.java:96) ~[cxf-rt-frontend-simple-3.0.1.jar:3.0.1]
+	at org.apache.cxf.jaxws.JaxWsClientProxy.invoke(JaxWsClientProxy.java:137) ~[cxf-rt-frontend-jaxws-3.0.1.jar:3.0.1]
+	... 48 common frames omitted
+19042 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context deleted: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
+26298 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Extracting files from real directory.
+26299 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+26300 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Gybing-1.map]
+26308 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
+26309 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Milestones-1.map]
+26310 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
+26310 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Milestones-2.map]
+26311 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
+26311 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Tidal-1.map]
+26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
+26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
+26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
+26313 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+26316 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context created: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
+26321 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding SID header with value 1-1771000262-4926fd09-d3e8-4c34-81de-9a664ba0749b
+26321 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Generating a new correlationId with value ce5b563b-066a-49cb-8c23-ddd1618fc3f9
+26321 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding RID header with value ce5b563b-066a-49cb-8c23-ddd1618fc3f9
+26730 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding SID header with value 1-1771000262-4926fd09-d3e8-4c34-81de-9a664ba0749b
+26730 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Generating a new correlationId with value 20e37a59-1519-4efd-9672-41fed4b49cea
+26730 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding RID header with value 20e37a59-1519-4efd-9672-41fed4b49cea
+348965 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding SID header with value 1-1771000262-4926fd09-d3e8-4c34-81de-9a664ba0749b
+348965 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Generating a new correlationId with value 33d1511d-8e14-4f3c-9bf3-44f65670e1cc
+348965 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding RID header with value 33d1511d-8e14-4f3c-9bf3-44f65670e1cc
