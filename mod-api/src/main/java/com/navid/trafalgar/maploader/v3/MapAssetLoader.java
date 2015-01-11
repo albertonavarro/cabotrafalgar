@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 public final class MapAssetLoader implements AssetLoader {
 
     private static final Logger LOG = LoggerFactory.getLogger(MapAssetLoader.class);
+
     /**
      *
      * @param assetInfo
@@ -25,7 +26,7 @@ public final class MapAssetLoader implements AssetLoader {
     @Override
     public Object load(AssetInfo assetInfo) throws IOException {
         LOG.debug("Loading {}", assetInfo);
-        
+
         Reader r = new InputStreamReader(assetInfo.openStream());
         MapDefinition game = new Gson().fromJson(r, MapDefinition.class);
         r.close();

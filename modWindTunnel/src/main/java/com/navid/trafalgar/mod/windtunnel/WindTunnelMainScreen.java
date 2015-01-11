@@ -49,6 +49,7 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
 
     /**
      * Nifty GUI ScreenControl methods
+     *
      * @param nifty
      * @param screen
      */

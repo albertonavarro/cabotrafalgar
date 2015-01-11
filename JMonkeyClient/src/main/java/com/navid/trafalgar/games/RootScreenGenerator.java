@@ -31,7 +31,7 @@ public final class RootScreenGenerator implements ScreenGenerator {
         };
 
         for (final String moduleName : screenFlowManager.getModuleNames()) {
-            panelModules.control(new ButtonBuilder(moduleName + "Button", moduleName + "ButtonLabel") {
+            panelModules.control(new ButtonBuilder(moduleName + "ButtonLabel", moduleName) {
                 {
                     alignCenter();
                     valignCenter();

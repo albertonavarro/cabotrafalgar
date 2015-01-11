@@ -65,7 +65,7 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
                 childLayoutHorizontal();
             }
         };
-        
+
         final PopupBuilder popupBuilder = new PopupBuilder("popup") {
             {
                 text("some text");
@@ -123,7 +123,6 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
             outerPanelBuilder.panel(partitionPanelBuilder);
         }
 
-        
         Screen screen = new ScreenBuilder("selectKeys") {
             {
                 controller(controller); // Screen properties
@@ -155,15 +154,17 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
                                         interactOnClick("next()");
                                     }
                                 });
-                                
-                                control(new LabelBuilder("RepeatError"){{
-                                    alignRight();
-                                    valignCenter();
-                                    text("");
-                                    width("50%");
-                                    color(new Color("#ff0"));
-                                }});
-                                
+
+                                control(new LabelBuilder("RepeatError") {
+                                    {
+                                        alignRight();
+                                        valignCenter();
+                                        text("");
+                                        width("50%");
+                                        color(new Color("#ff0"));
+                                    }
+                                });
+
                             }
                         });
 
@@ -173,7 +174,6 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
             }
         }.build(nifty);
     }
-
 
     /**
      * @param nifty the nifty to set

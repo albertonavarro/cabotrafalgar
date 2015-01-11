@@ -39,7 +39,6 @@ public final class ShipModelZBuilder implements BuilderInterface {
 
         model.setName(instanceName);
 
-
         if (customValues.containsKey("position")) {
             model.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
         }

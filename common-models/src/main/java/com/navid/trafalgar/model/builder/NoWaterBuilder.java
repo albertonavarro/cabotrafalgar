@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-
 public final class NoWaterBuilder implements BuilderInterface {
 
     @Override

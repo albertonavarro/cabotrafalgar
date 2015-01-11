@@ -52,6 +52,7 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     private enum ShowGhost {
+
         noGhost, bestLocal, bestRemote
     };
 
@@ -103,7 +104,7 @@ public final class ScreenSelectMap implements ScreenController {
         mapDropDown = screen.findNiftyControl("dropDown1", ListBox.class);
         mapDescription = screen.findNiftyControl("mapDescription", Label.class);
         mapDropDown.addAllItems(getMaps());
-        if(mapDropDown.itemCount()>0){
+        if (mapDropDown.itemCount() > 0) {
             mapDropDown.selectItemByIndex(0);
             setSelectedMap((ListItem) mapDropDown.getSelection().get(0));
         }
@@ -197,7 +198,7 @@ public final class ScreenSelectMap implements ScreenController {
             listRemoteTimes.addItem(currentTime);
         }
 
-        if(map.getMapDefinition().getDescription()==null){
+        if (map.getMapDefinition().getDescription() == null) {
             mapDescription.setText("Description not available.");
         } else {
             mapDescription.setText(map.getMapDefinition().getDescription());
@@ -208,13 +209,13 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     NiftyImage getImageForMap(MapDefinition mapDefinition) {
-        if(mapDefinition.getPicture() == null) {
+        if (mapDefinition.getPicture() == null) {
             return null;
         }
 
         String picturePath = mapDefinition.getPicture();
 
-        if(loadedImages.containsKey(picturePath)){
+        if (loadedImages.containsKey(picturePath)) {
             return loadedImages.get(picturePath);
         } else {
             NiftyImage newImage = nifty.getRenderEngine().createImage(screen, picturePath, false);
@@ -252,6 +253,7 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     private static class ListItem {
+
         private final String name;
         private final String path;
         private final MapDefinition mapDefinition;

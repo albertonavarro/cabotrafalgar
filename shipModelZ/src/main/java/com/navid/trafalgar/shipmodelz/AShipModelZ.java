@@ -153,8 +153,6 @@ public abstract class AShipModelZ extends AShipModel {
         return mainsheetSailHandler;
     }
 
-    
-    
     /**
      * Sail representation
      */
@@ -278,6 +276,5 @@ public abstract class AShipModelZ extends AShipModel {
             this.lastRotation = lastRotation;
         }
     }
-    
-    
+
 }

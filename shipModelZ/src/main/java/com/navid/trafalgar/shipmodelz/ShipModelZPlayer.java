@@ -100,7 +100,7 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
         float sailRegulation = (float) ((angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection);
         velaOverShip = (float) Math.cos(angleBetween + sailRegulation);
 
-        float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing / ((1+Math.abs(inclination)) / 2));
+        float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing / ((1 + Math.abs(inclination)) / 2));
 
         acceleration = force / mass;
         friction = localSpeed * localSpeed / 80 * Math.signum(localSpeed);
@@ -150,9 +150,9 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
                 //Sail adjusts to the limit
                 getSail().rotateY(
                         -Math.signum(resMultVectSailShip.y)
-                                * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght)
-                                * tpf
-                                * sailRotateSpeed);
+                        * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght)
+                        * tpf
+                        * sailRotateSpeed);
                 sailForcing = 0f;
             }
         } else {
@@ -160,9 +160,9 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
                 //Sail adjusts to the limit
                 getSail().rotateY(
                         -Math.signum(resMultVectSailShip.y)
-                                * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght)
-                                * tpf
-                                * sailRotateSpeed);
+                        * Math.abs(helperDirection.angleBetween(vectorshipDirection) - ropeLenght)
+                        * tpf
+                        * sailRotateSpeed);
                 sailForcing = 0f;
             } else {
                 //Sail is moving backwards
@@ -189,7 +189,7 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
         double velaOverShipPitch = Math.sin(angleBetween);
 
         float windForce = (float) windOverVelaPitch * (float) velaOverShipPitch * sailForcing;
-        float weightForce = horizontalPosition/10;
+        float weightForce = horizontalPosition / 10;
         float keelForce = (float) Math.sin(inclination);
         float totalForce = (windForce + weightForce) - keelForce;
 
@@ -218,7 +218,7 @@ public final class ShipModelZPlayer extends AShipModelZ implements AShipModelPla
     private void updatePosition(float tpf) {
         Vector3f shipOrientation3f = this.getGlobalDirection();
         this.move(shipOrientation3f.x * localSpeed * tpf, 0, shipOrientation3f.z * localSpeed * tpf);
-        this.move(getContext().getWater().getMovement(this.getGlobalDirection()).mult(-30*tpf));
+        this.move(getContext().getWater().getMovement(this.getGlobalDirection()).mult(-30 * tpf));
         shipDirection.setValue(shipOrientation3f);
     }
 

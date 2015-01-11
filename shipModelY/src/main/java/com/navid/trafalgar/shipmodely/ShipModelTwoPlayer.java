@@ -173,7 +173,7 @@ public final class ShipModelTwoPlayer extends AShipModelTwo implements AShipMode
                 new Quaternion().fromAngles(0, getRudder().getRudderValue()
                         * speed
                         * tpf / 100, 0)
-                        .mult(this.getLocalRotation()));
+                .mult(this.getLocalRotation()));
     }
 
     /**

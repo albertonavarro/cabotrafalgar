@@ -54,5 +54,4 @@ public final class MapDefinition {
         this.picture = picture;
     }
 
-    
 }

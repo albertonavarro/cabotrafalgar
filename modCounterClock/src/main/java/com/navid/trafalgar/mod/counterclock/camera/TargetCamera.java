@@ -125,7 +125,7 @@ public final class TargetCamera implements Control, EventListener {
     }
 
     private void selectNextUnreachedMilestone() {
-        for(int counter = 0; counter < targets.size(); counter++) {
+        for (int counter = 0; counter < targets.size(); counter++) {
             AMilestoneModel candidate = (AMilestoneModel) targets.get(counter);
             if (!candidate.getState()) {
                 currentTarget = candidate;

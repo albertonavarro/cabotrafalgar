@@ -177,10 +177,10 @@ public final class SelectShipScreenController implements ScreenController {
         entry.setType(selectedItem.getName());
         entry.setName("player1");
         entry.setValues(new HashMap<String, Object>() {
-                    {
-                        put("role", "ControlProxy");
-                    }
-                });
+            {
+                put("role", "ControlProxy");
+            }
+        });
 
         Collection c = builder.build(entry);
 

@@ -17,14 +17,14 @@ public final class StartScreenController implements ScreenController {
     private Application application;
     @Autowired
     private ScreenFlowManager screenFlowManager;
-    
+
     /*
-    From Bind
-    */
+     From Bind
+     */
     private Nifty nifty;
     /*
-    From Bind
-    */
+     From Bind
+     */
     private Screen screen;
 
     @Override

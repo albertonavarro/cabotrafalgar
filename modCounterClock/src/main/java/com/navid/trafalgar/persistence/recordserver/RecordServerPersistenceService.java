@@ -57,7 +57,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
         String sampleReal = gson.toJson(candidateRecord);
         AddRecordRequest addRecordRequest = new AddRecordRequest();
         addRecordRequest.setPayload(sampleReal);
-        
+
         LOG.info("Trying with size " + sampleReal.length());
         try {
             AddRecordResponse addRecordResponse = rankingClient.postRanking(addRecordRequest);

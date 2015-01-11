@@ -61,7 +61,6 @@ public final class EventManager {
             listeners.add(eventListener);
         }
     }
-    
 
     /**
      *

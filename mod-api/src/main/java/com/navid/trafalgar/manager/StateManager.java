@@ -61,7 +61,7 @@ public final class StateManager implements EventListener {
          */
         PAUSED
     };
-    
+
     private final EnumMap<STATES, List<StateListener>> stateListener = new EnumMap<STATES, List<StateListener>>(STATES.class);
     private STATES currentState = STATES.INIT;
 

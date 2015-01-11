@@ -225,7 +225,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
             showMenu();
         }
     }
-    
+
     public void showMenu() {
         Label label = screen.findNiftyControl("RepeatError", Label.class);
         label.setText("You cannot use the same key for more than one command");

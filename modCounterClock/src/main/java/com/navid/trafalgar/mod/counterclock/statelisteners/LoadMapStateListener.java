@@ -50,11 +50,11 @@ public final class LoadMapStateListener implements LoadModelState {
             entry.setType(gameConfiguration.getShipName());
             entry.setName("ghost1");
             entry.setValues(new HashMap<String, Object>() {
-                        {
-                            put("role", "Ghost");
-                            put("record", cr);
-                        }
-                    });
+                {
+                    put("role", "Ghost");
+                    put("record", cr);
+                }
+            });
             Collection c = builder2.buildWithDependencies(entry, gameModel);
 
             gameModel.addToModel(c);

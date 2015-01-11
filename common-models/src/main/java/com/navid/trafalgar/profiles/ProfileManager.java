@@ -19,7 +19,7 @@ public interface ProfileManager {
 
     Properties getProperties();
 
-    void updateProperties(Map<String,String> p);
+    void updateProperties(Map<String, String> p);
 
     boolean isOnline();
 }

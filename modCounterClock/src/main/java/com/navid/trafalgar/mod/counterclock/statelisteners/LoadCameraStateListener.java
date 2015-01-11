@@ -140,7 +140,7 @@ public final class LoadCameraStateListener implements LoadCamState, StartedState
 
         inputManager.addListener(actionListener, mappings); // load my custom keybinding
 
-        eventManager. registerListener(this,
+        eventManager.registerListener(this,
                 new String[]{"DEACTIVATE_CAM", "ACTIVATE_CAM1", "ACTIVATE_CAM2", "ACTIVATE_CAM3", "PAUSE", "RESUME"});
         eventManager.fireEvent("DEACTIVATE_CAM");
         eventManager.fireEvent("ACTIVATE_CAM3");

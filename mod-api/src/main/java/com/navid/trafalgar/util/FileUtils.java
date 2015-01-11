@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public final class FileUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileUtils.class);
-    
+
     private static final String MAP_EXTENSION = ".map";
 
     private FileUtils() {

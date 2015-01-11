@@ -59,7 +59,7 @@ public final class SelectControlsScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        
+
         generated.clear();
 
         gameConfiguration.getPreGameModel().removeFromModel(CommandStateListener.class);
