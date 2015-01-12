@@ -1,4 +1,4 @@
-{ "description" : "Practice gybing, the straight line is not the faster way to reach the only milestone",
+{ "description" : "Practice gybing",
   "picture" : "Maps/CounterClock/Gybing-1.png",
   "entries" : [ { "type" : "Context" },
       { "type" : "RotateSimpleWind" },

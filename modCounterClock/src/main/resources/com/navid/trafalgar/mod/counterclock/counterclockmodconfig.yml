@@ -1,4 +1,4 @@
-modName: counterclock
+modName: CounterClock Game
 modPreGameSpringConfig: mod/counterclock/application-context.xml
 modGameSpringConfig: mod/counterclock/game-context.xml
 buildersSpringConfig: mod/counterclock/builders-declaration.xml

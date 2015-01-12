@@ -22,7 +22,7 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive {
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "rudderLeft";
+                        return "tiller - to port";
                     }
 
                     @Override
@@ -33,7 +33,7 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive {
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "rudderRight";
+                        return "tiller - to starboard";
                     }
 
                     @Override
@@ -44,7 +44,7 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive {
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "sailTrim";
+                        return "mainsail - bring in";
                     }
 
                     @Override
@@ -55,7 +55,7 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive {
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "sailLoose";
+                        return "mainsail - let go";
                     }
 
                     @Override

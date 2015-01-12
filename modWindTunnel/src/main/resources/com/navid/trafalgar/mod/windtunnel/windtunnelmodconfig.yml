@@ -1,4 +1,4 @@
-modName: windtunnel
+modName: Windtunnel (Development Mode)
 modPreGameSpringConfig: mod/windtunnel/application-context.xml
 modGameSpringConfig: mod/windtunnel/game-context.xml
 buildersSpringConfig: mod/windtunnel/builders-declaration.xml

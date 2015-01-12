@@ -66,7 +66,7 @@ public final class ShipModelZControlProxy implements AShipModelInteractive {
                 add(new Command() {
                     @Override
                     public String toString() {
-                        return "weight- move to port";
+                        return "weight - move to port";
                     }
 
                     @Override

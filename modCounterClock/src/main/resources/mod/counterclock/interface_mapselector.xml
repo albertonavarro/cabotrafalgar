@@ -22,7 +22,7 @@
                         <text text="Description:" font="Interface/Fonts/Default.fnt"  align="left" />
                         <control id="mapDescription" name="label" font="Interface/Fonts/Default.fnt" wrap="true" width="90%" height="90%" text="" align="left" />
                     </panel>
-                    <panel id="panel_mid_center_description" height="80%" width="90%" childLayout="vertical" valign="center" align="center">    
+                    <panel id="panel_mid_center_description" height="80%" width="90%" childLayout="vertical">    
                         <image id="mapImage" />
                     </panel>
                 </panel> 

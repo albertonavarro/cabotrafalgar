@@ -56,7 +56,7 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
     }
 
     public void buildScreenNow() {
-        panels = new HashMap<String, PanelBuilder>();
+        panels = new HashMap<>();
 
         AShipModelInteractive ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class);
 
@@ -136,14 +136,6 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
                     {
                         childLayoutVertical(); // layer properties, add more...
 
-                        panel(new PanelBuilder(){{
-                            childLayoutVertical();
-                            height("15%");
-                            text(new TextBuilder(){{
-                                text("Assign available commands to your prefered option.");
-                                style("nifty-label");
-                            }});
-                        }});
                         // <panel>
                         panel(outerPanelBuilder);
                         // </panel>

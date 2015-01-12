@@ -1,4 +1,4 @@
-{ "description" : "Hit both milestones, in any order. Use key 3 to change camera target",
+{ "description" : "Hit all five milestones, in any order. Use key 3 to change camera target",
   "picture" : "Maps/CounterClock/Milestones-2.png",
   "entries" : [ { "type" : "Context" },
       { "type" : "RotateSimpleWind" },
