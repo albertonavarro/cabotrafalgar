@@ -16,6 +16,7 @@
         <module>shipModelY</module>
         <module>shipModelZ</module>
         <module>modCounterClock-maps</module>
+        <module>shipModelLeyton</module>
     </modules>
     
     <properties>
@@ -159,6 +160,11 @@
             <dependency>
                 <groupId>com.navid.trafalgar</groupId>
                 <artifactId>shipModelZ</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.navid.trafalgar</groupId>
+                <artifactId>shipModelLeyton</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

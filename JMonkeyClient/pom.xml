@@ -133,6 +133,11 @@
             <artifactId>shipModelZ</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.navid.trafalgar</groupId>
+            <artifactId>shipModelLeyton</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
   
     <build>

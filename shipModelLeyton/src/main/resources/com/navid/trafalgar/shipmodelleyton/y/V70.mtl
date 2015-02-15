@@ -1,0 +1,81 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 21.01.2015 17:43:04
+
+newmtl Azul_gloss
+	Ns 56.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.1961 0.4627 0.6157
+	Kd 0.1961 0.4627 0.6157
+	Ks 0.8460 0.8460 0.8460
+	Ke 0.0000 0.0000 0.0000
+
+newmtl Madera_bump
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\2.19 Ciudadela Olivenza\materiallibraries\madera\free-wood-texture-002.jpg
+	map_Kd D:\2.19 Ciudadela Olivenza\materiallibraries\madera\free-wood-texture-002.jpg
+	map_bump -bm 0.3000 D:\2.19 Ciudadela Olivenza\materiallibraries\madera\free-wood-texture-002 byn.jpg
+	bump -bm 0.3000 D:\2.19 Ciudadela Olivenza\materiallibraries\madera\free-wood-texture-002 byn.jpg
+
+newmtl Rojo_transparente
+	Ns 29.0000
+	Ni 1.5000
+	d 0.8000
+	Tr 0.2000
+	Tf 0.8000 0.8000 0.8000 
+	illum 2
+	Ka 0.6157 0.1843 0.1843
+	Kd 0.6157 0.1843 0.1843
+	Ks 0.4860 0.4860 0.4860
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\2.20 Juego saling\export\18012015\V70.1\Barco V70 mastil fijo.mtl
+	map_Kd D:\2.20 Juego saling\export\18012015\V70.1\Barco V70 mastil fijo.mtl
+
+newmtl Amarillo_specular
+	Ns 6.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.7333 0.7529 0.1765
+	Kd 0.7333 0.7529 0.1765
+	Ks 0.4140 0.4140 0.4140
+	Ke 0.0000 0.0000 0.0000
+
+newmtl Gris_celular
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_bump -bm 0.3000 Map__5_Cellular.tga
+
+newmtl Verde
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.1961 0.5686 0.1765
+	Kd 0.1961 0.5686 0.1765
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
