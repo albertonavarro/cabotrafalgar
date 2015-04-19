@@ -1,0 +1,52 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '1.2.1'
+}
+
+mainClassName = 'com.navid.trafalgar.games.Main'
+
+dependencies {
+    compile(
+            project(':mod-api'),
+            libs.reflections,
+            libs.jme3_core,
+            libs.jme3_niftygui,
+            libs.jme3_desktop,
+            libs.jme3_jbullet,
+            libs.nifty,
+            libs.nifty_default_controls,
+            libs.spring_core,
+            libs.spring_beans,
+            libs.spring_context
+    )
+
+    runtime(
+            project(':common-models'),
+            project(':modCounterClock'),
+            project(':modWindTunnel'),
+            project(':shipModelY'),
+            project(':shipModelZ'),
+            project(':shipModelLeyton'),
+            libs.jme3_lwjgl,
+            libs.jwjgl,
+            libs.lwjgl_natives,
+            libs.eventbus,
+            libs.j_ogg_all,
+            libs.jme3_jogg,
+            libs.xpp3,
+            libs.jme3_plugins,
+            libs.nifty_style_black,
+            libs.logback
+    )
+
+    shadowJar {
+        append('META-INF/spring.handlers')
+        append('META-INF/spring.schemas')
+        append('META-INF/cxf/bus-extensions.txt')
+    }
+
+
+
+}
+

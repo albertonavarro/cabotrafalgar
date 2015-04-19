@@ -73,11 +73,13 @@ public abstract class AShipModelTwo extends AShipModel {
         super(role, new Vector3f(1, 0, 0), assetManager, eventManager);
 
         spatial = assetManager.loadModel("com/navid/trafalgar/shipmodelleyton/y/V70.obj");
-        spatial.rotate(0f, (float) -Math.PI / 2, 0f);
+        spatial.rotate(0f, (float) Math.PI / 2, 0f);
         this.attachChild(spatial);
 
         sail = new Sail(assetManager, eventManager);
         rudder = new Rudder(assetManager, eventManager);
+
+
 
         this.attachChild(sail);
         this.attachChild(rudder);
@@ -99,13 +101,13 @@ public abstract class AShipModelTwo extends AShipModel {
     @Override
     public final void setTransparent(boolean b) {
         if (!previousTransparent && b) {
-            matHull.getAdditionalRenderState().setBlendMode(BlendMode.Color);
-            matSail.getAdditionalRenderState().setBlendMode(BlendMode.Color);
+            //matHull.getAdditionalRenderState().setBlendMode(BlendMode.Color);
+            //matSail.getAdditionalRenderState().setBlendMode(BlendMode.Color);
             previousTransparent = true;
 
         } else if (!b && previousTransparent) {
-            matHull.getAdditionalRenderState().setBlendMode(BlendMode.Off);
-            matSail.getAdditionalRenderState().setBlendMode(BlendMode.Off);
+            //matHull.getAdditionalRenderState().setBlendMode(BlendMode.Off);
+            //matSail.getAdditionalRenderState().setBlendMode(BlendMode.Off);
             previousTransparent = false;
         }
     }
@@ -134,11 +136,21 @@ public abstract class AShipModelTwo extends AShipModel {
 
         protected Sail(AssetManager assetManager, EventManager eventManager) {
             super(new Vector3f(0, 0, 1), assetManager, eventManager);
+            super.setDebug(true);
             helperDirection = new Node();
             helperDirection.rotateUpTo(new Vector3f(1, 0, 0));
             this.attachChild(helperDirection);
-            //Spatial s = ((Node) spatial).getChild("Cube.001");
-            //this.attachChild(s);
+            Spatial mast = ((Node) spatial).getChild("V70-geom-4");
+            Spatial spatialSail = assetManager.loadModel("com/navid/trafalgar/shipmodelleyton/y/Vela.obj");
+            
+            this.attachChild(spatialSail);
+            mast.setLocalTranslation(new Vector3f(1.3f, 10f, 34.5f));
+            mast.rotate(0f, (float) Math.PI, 0f);
+            spatialSail.setLocalTranslation(new Vector3f(1.3f, 10f, 34.5f));
+            spatialSail.rotate(0f, (float) Math.PI, 0f);
+            this.attachChild(mast);
+
+
         }
 
         public Vector3f getHelperDirection() {

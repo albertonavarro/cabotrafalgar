@@ -1,0 +1,38 @@
+apply plugin: 'java'
+
+dependencies {
+    compile (
+            project(':mod-api'),
+            project(':common-models'),
+            project(':modCounterClock-maps'),
+            libs.opencsv,
+            libs.jme3_core,
+            libs.jme3_jbullet,
+            libs.nifty,
+            libs.nifty_default_controls,
+            libs.spring_beans,
+            libs.spring_core,
+            libs.cxf_frontend_jaxws,
+            libs.jackson_jaxrs,
+            libs.jackson_mapper_asl,
+            libs.gson,
+            libs.cxf_rt_rs_client,
+            libs.jackson_core_asl,
+            libs.lazylogin_common_context
+            )
+
+    testCompile (
+
+    )
+
+    runtime(
+            libs.jbullet,
+            libs.vecmath,
+            libs.jme3_terrain,
+            libs.jackson2_core,
+            libs.jackson2_jaxrs_json_provider,
+            libs.jackson2_databind,
+            libs.jackson2_annotations
+    )
+}
+

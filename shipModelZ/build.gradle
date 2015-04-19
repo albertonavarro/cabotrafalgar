@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+dependencies {
+    compile (
+            project(':mod-api')
+            )
+
+    testCompile (
+
+    )
+}
+
