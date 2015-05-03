@@ -1,1 +1,1 @@
-package com.navid.trafalgar.input;
+package com.navid.trafalgar.util;
