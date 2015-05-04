@@ -13,3 +13,5 @@ modWindTunnel/target
 /shipModelZ/target/
 /modCounterClock-maps/target/
 /shipModelLeyton/target/
+.idea
+*.iml
