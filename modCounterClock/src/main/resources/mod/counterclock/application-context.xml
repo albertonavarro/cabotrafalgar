@@ -1,0 +1,58 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+
+    <http-conf:conduit name="*.http-conduit">
+        <http-conf:client ConnectionTimeout="100" AsyncExecuteTimeout="100" ReceiveTimeout="100"  />
+    </http-conf:conduit>
+
+    <bean id="mod.counterclock.mainscreencontroller" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreen" autowire="byType"/>
+    <bean id="mod.counterclock.mainscreengenerator" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreenGenerator" autowire="byType" />
+
+    <bean id="mod.counterclock.mapselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMap" autowire="byType"/>
+    <bean id="mod.counterclock.mapselectorgenerator" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMapGenerator" autowire="byType"/>
+    
+    <bean id="mod.counterclock.profileselector" class="com.navid.trafalgar.mod.counterclock.SelectProfileScreenController" autowire="byType"/>
+    <bean id="mod.counterclock.profileselectorgenerator" class="com.navid.trafalgar.mod.counterclock.SelectProfileScreenGenerator" autowire="byType"/>
+    
+    
+    <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService" autowire="byType" />
+    <bean id="mod.counterclock.persistenceOnline" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService" autowire="byType">
+        <property name="rankingClient" ref="mod.counterclock.clientRecordServer"></property>
+        <property name="container" ref="mod.counterclock.requestContextContainer" />
+    </bean>
+
+    <bean id="mod.counterclock.clientRecordServer" class="com.navid.recordserver.v2.V2Resource" factory-bean="mod.counterclock.clientFactoryRecordServer" factory-method="create" />
+    <bean id="mod.counterclock.clientFactoryRecordServer" class="org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean">
+        <property name="address" value="http://recordserver.trafalgar.ws:8080/rest"/>
+        <property name="serviceClass" value="com.navid.recordserver.v2.V2Resource"/>
+        <property name="providers">
+            <list>
+                <bean id="jacksonMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+                <bean id="jacksonProvider" class=" com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+            </list>
+        </property>
+        <property name="outInterceptors">
+            <list>
+                <bean class="com.navid.lazylogin.context.interceptors.RequestIdInterceptor">
+                    <property name="requestContextContainer" ref="mod.counterclock.requestContextContainer"/>
+                </bean>
+            </list>
+        </property>
+        <property name="headers">
+            <map>
+                <entry key="User-Agent" value="JMonkeyClient-CounterClock-0.9"/>
+            </map>
+        </property>
+    </bean>
+    
+</beans>

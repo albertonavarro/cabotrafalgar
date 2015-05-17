@@ -1,0 +1,21 @@
+modName: CounterClock Game
+modPreGameSpringConfig: mod/counterclock/application-context.xml
+modGameSpringConfig: mod/counterclock/game-context.xml
+buildersSpringConfig: mod/counterclock/builders-declaration.xml
+screenDeclarations:
+  - screenName: selectMap
+    interfaceConstructor: mod.counterclock.mapselectorgenerator
+    controller: mod.counterclock.mapselector
+  - screenName: counterclockScreen
+    interfaceConstructor: mod.counterclock.mainscreengenerator
+    controller: mod.counterclock.mainscreencontroller
+  - screenName: selectProfile
+    interfaceConstructor: mod.counterclock.profileselectorgenerator
+    controller: mod.counterclock.profileselector
+moduleScreenFlow:
+  - selectProfile  
+  - selectShip  
+  - selectMap
+  - selectControl
+  - selectKeys
+  - counterclockScreen

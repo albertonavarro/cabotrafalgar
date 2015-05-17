@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+    
+    <screen id="selectMap" controller="com.navid.trafalgar.mod.counterclock.ScreenSelectMap" >    
+        <layer id="background" childLayout="center">
+        </layer>
+        <layer id="foreground" childLayout="vertical" style="nifty-panel-no-shadow">
+            <panel id="panel_top" height="15%" align="center" childLayout="center">  
+                <text text="Select map" font="Interface/Fonts/Default.fnt" width="100%" height="100%" />
+            </panel>
+            <panel id="panel_mid" height="70%" align="center" childLayout="horizontal" style="nifty-panel-red">       
+                <panel id="panel_mid_left" width="33%" align="center" childLayout="vertical">   
+                    <text text="Maps" font="Interface/Fonts/Default.fnt" />
+                    <control id="dropDown1" name="listBox" displayItems="15" forceSelection="true" horizontal="off" width="90%" height="100%" >
+                    </control>
+                </panel> 
+                <panel id="panel_mid_center"  width="42%" align="center" childLayout="vertical">      
+                    <panel id="panel_mid_center_description"  height="20%" width="90%" childLayout="vertical">    
+                        <text text="Description:" font="Interface/Fonts/Default.fnt"  align="left" />
+                        <control id="mapDescription" name="label" font="Interface/Fonts/Default.fnt" wrap="true" width="90%" height="90%" text="" align="left" />
+                    </panel>
+                    <panel id="panel_mid_center_description" height="80%" width="90%" childLayout="vertical">    
+                        <image id="mapImage" />
+                    </panel>
+                </panel> 
+                <panel id="panel_mid_right"  width="25%" align="center" childLayout="vertical" valign="center"  >  
+                    <panel id="panel_mid_right_description"  height="5%" childLayout="vertical">    
+                        <text text="Ghost configuration" font="Interface/Fonts/Default.fnt"  />
+                    </panel>
+                    <panel childLayout="horizontal" align="center" height="20%">
+                        <control id="RadioGroupGhostConfig" name="radioButtonGroup" />
+                        <panel childLayout="vertical" paddingLeft="7px" paddingRight="7px" paddingTop="4px" paddingBottom="4px">
+                            <effect>
+                                <onActive name="border" color="#0008" />
+                            </effect>
+                            <panel childLayout="horizontal">
+                                <control name="label" text="Best local" width="100px" />
+                                <control name="radioButton" id="bestLocal" group="RadioGroupGhostConfig" />
+                            </panel>
+                            <panel childLayout="horizontal">
+                                <control name="label" text="Best remote" width="100px" />
+                                <control name="radioButton" id="bestRemote" group="RadioGroupGhostConfig" />
+                            </panel>
+                            <panel childLayout="horizontal">
+                                <control name="label" text="No ghost" width="100px" />
+                                <control name="radioButton" id="noGhost" group="RadioGroupGhostConfig" />
+                            </panel>
+                        </panel>
+                    </panel>
+                    <panel id="panel_mid_right_ranking" childLayout="vertical" height="48%">    
+                         
+                        <panel id="panel_mid_center_ranking_local"  height="48%" childLayout="vertical">    
+                            <text text="Local:" font="Interface/Fonts/Default.fnt"  />
+                            <control id="listLocalTimes" name="listBox" width="90%" displayItems="5" selectionMode="Disabled" horizontal="off" vertical="off" >
+                            </control>
+                        </panel>
+                        
+                        <panel height="30px" childLayout="vertical"/>    
+                        
+                        <panel id="panel_mid_center_ranking_online"  height="48%" childLayout="vertical">    
+                            <text text="Online:" font="Interface/Fonts/Default.fnt"  />
+                            <control id="listRemoteTimes" name="listBox" width="90%" displayItems="5" selectionMode="Disabled" horizontal="off" vertical="off" >
+                            </control>
+                        </panel>
+                       
+                    </panel>
+                </panel> 
+            </panel>
+            <panel id="panel_bottom" height="15%" align="center" childLayout="horizontal">  
+                <panel id="panel_bottom_right1" height="50%" width="25%" valign="center" childLayout="center">  
+                    <control name="button" label="Back" id="QuitButton" align="center" valign="center" 
+                             visibleToMouse="true" > 
+                        <interact onClick="back()"/>
+                    </control>
+                </panel>
+                <panel id="panel_bottom_right2" height="50%" width="25%" valign="center" childLayout="center">  
+                    <control name="button" label="Select map" id="MilestoneGame2" align="center" valign="center" 
+                             visibleToMouse="true" > 
+                        <interact onClick="next()"/>
+                    </control>
+                </panel>
+                <panel id="panel_bottom_right3" height="50%" width="25%" valign="center" childLayout="center">  
+                </panel>
+            </panel>
+        </layer>
+        <layer id="help" childLayout="center">
+        </layer>
+    </screen>
+</nifty>

@@ -1,0 +1,33 @@
+{ "description" : "Hit all five milestones, in any order. Use key 3 to change camera target",
+  "picture" : "Maps/CounterClock/Milestones-2.png",
+  "entries" : [ { "type" : "Context" },
+      { "type" : "RotateSimpleWind" },
+      { "type" : "Sun" },
+      { "type" : "SimpleWater" },
+      { "name" : "player",
+        "values" : { "position" : "0,0,0",
+            "role" : "Player"
+          }
+      },
+      { "name" : "mil1",
+        "type" : "Milestone",
+        "values" : { "position" : "500,0,0" }
+      },
+      { "name" : "mil2",
+        "type" : "Milestone",
+        "values" : { "position" : "400,0,400" }
+      },
+      { "name" : "mil3",
+        "type" : "Milestone",
+        "values" : { "position" : "0,0,400" }
+      },
+      { "name" : "mil4",
+        "type" : "Milestone",
+        "values" : { "position" : "100,0,-400" }
+      },
+      { "name" : "mil5",
+        "type" : "Milestone",
+        "values" : { "position" : "-300,0,-800" }
+      },
+      { "type" : "Sky" }
+    ] }

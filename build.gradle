@@ -1,0 +1,80 @@
+ext{
+    v = [
+            spring: '3.2.0.RELEASE',
+            jackson2: '2.4.4',
+            jackson: '1.9.13',
+            lazylogin: '1.3.266',
+            recordserver: '1.2.105',
+            jme3: '3.1.0-snapshot-github',
+            nifty: '1.3.3',
+            cxf: '3.0.1',
+            lwjgl: '2.9.0'
+    ]
+
+    libs = [
+            //SPRING
+            spring_core: 'org.springframework:spring-core:'+v.spring,
+            spring_beans: 'org.springframework:spring-beans:'+v.spring,
+            spring_context: 'org.springframework:spring-context:'+v.spring,
+            //JME3
+            jme3_core: 'com.jme3:jme3-core:' + v.jme3,
+            jme3_effects: 'com.jme3:jme3-effects:' + v.jme3,
+            jme3_terrain: 'com.jme3:jme3-terrain:' + v.jme3,
+            jme3_jbullet: 'com.jme3:jme3-jbullet:' + v.jme3,
+            jme3_niftygui: 'com.jme3:jme3-niftygui:' + v.jme3,
+            jme3_desktop: 'com.jme3:jme3-desktop:' + v.jme3,
+            jme3_lwjgl: 'com.jme3:jme3-lwjgl:' + v.jme3,
+            jme3_jogg : 'com.jme3:jme3-jogg:' + v.jme3,
+            jme3_plugins : 'com.jme3:jme3-plugins:' + v.jme3,
+            //JACKSON2
+            jackson2_core: 'com.fasterxml.jackson.core:jackson-core:' + v.jackson2,
+            jackson2_databind: 'com.fasterxml.jackson.core:jackson-databind:'+v.jackson2,
+            jackson2_dataformat_yaml: 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:'+v.jackson2,
+            jackson2_jaxrs_json_provider: 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:' +v.jackson2,
+            jackson2_annotations: 'com.fasterxml.jackson.core:jackson-annotations:' +v.jackson2,
+            //JACKSON
+            jackson_jaxrs: 'org.codehaus.jackson:jackson-jaxrs:' + v.jackson,
+            jackson_mapper_asl: 'org.codehaus.jackson:jackson-mapper-asl:' +v.jackson,
+            jackson_core_asl: 'org.codehaus.jackson:jackson-core-asl:' +v.jackson,
+            //org.lwjgl.lwjgl
+            jwjgl: 'org.lwjgl.lwjgl:lwjgl:' + v.lwjgl,
+            lwjgl_natives: 'net.sf.sociaal:jME3-lwjgl-natives:3.0.0.20130526',
+            //NIFTY
+            nifty: 'lessvoid:nifty:'+ v.nifty,
+            nifty_default_controls: 'lessvoid:nifty-default-controls:' + v.nifty,
+            nifty_style_black: 'lessvoid:nifty-style-black:' + v.nifty,
+            //LAZYLOGIN
+            lazylogin_common_context: 'com.navid.lazylogin:common-context:' + v.lazylogin,
+            //RECORDSERVER
+            recordserver_contract: 'com.navid.record-server:contract:' + v.recordserver,
+            //CXF
+            cxf_frontend_jaxws: 'org.apache.cxf:cxf-rt-frontend-jaxws:' + v.cxf,
+            cxf_rt_rs_client: 'org.apache.cxf:cxf-rt-rs-client:' + v.cxf,
+            //OTHERS
+            junit: 'junit:junit:4.10',
+            guava: 'com.google.guava:guava:17.0',
+            slf4j_api: 'org.slf4j:slf4j-api:1.7.2',
+            reflections: 'org.reflections:reflections:0.9.9',
+            gson: 'com.google.code.gson:gson:2.2.4',
+            eventbus: 'org.bushe:eventbus:1.4',
+            auto_value: 'com.google.auto.value:auto-value:1.0-rc1',
+            opencsv: 'net.sf.opencsv:opencsv:2.3',
+            jbullet: 'cz.advel.jbullet:jbullet:20101010',
+            vecmath: 'java3d:vecmath:1.3.1',
+            eventbus: 'org.bushe:eventbus:1.4',
+            j_ogg_all: 'de.jarnbjo:j-ogg-all:1.0.0',
+            xpp3: 'xpp3:xpp3:1.1.4c',
+            logback: 'ch.qos.logback:logback-classic:1.0.9'
+    ]
+}
+
+subprojects {
+
+    repositories {
+        maven {
+            url 'http://repo.cabotrafalgar.mooo.com/repo'
+        }
+    }
+
+
+}

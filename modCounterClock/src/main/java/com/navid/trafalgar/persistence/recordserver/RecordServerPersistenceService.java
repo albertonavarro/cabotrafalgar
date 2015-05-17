@@ -1,0 +1,183 @@
+package com.navid.trafalgar.persistence.recordserver;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
+import static com.google.common.collect.Lists.newArrayList;
+import com.google.gson.Gson;
+import com.navid.lazylogin.context.RequestContextContainer;
+import com.navid.recordserver.v2.AddRecordRequest;
+import com.navid.recordserver.v2.AddRecordResponse;
+import com.navid.recordserver.v2.GetMapRecordsResponse;
+import com.navid.recordserver.v2.GetMapRecordsResponse.RankingEntry;
+import com.navid.recordserver.v2.GetRecordResponse;
+import com.navid.recordserver.v2.V2Resource;
+import com.navid.trafalgar.maploader.v3.EntryDefinition;
+import com.navid.trafalgar.profiles.ProfileManager;
+import com.navid.trafalgar.model.ModelBuilder;
+import com.navid.trafalgar.model.CandidateRecord;
+import com.navid.trafalgar.persistence.CandidateInfo;
+import com.navid.trafalgar.persistence.CompetitorInfo;
+import com.navid.trafalgar.persistence.RecordPersistenceService;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public final class RecordServerPersistenceService implements RecordPersistenceService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RecordServerPersistenceService.class);
+
+    private final Gson gson = new Gson();
+
+    @Autowired
+    private ProfileManager profileManager;
+
+    @Autowired
+    private ModelBuilder builder2;
+
+    @Resource(name = "mod.counterclock.clientRecordServer")
+    private V2Resource rankingClient;
+
+    @Resource(name = "mod.counterclock.requestContextContainer")
+    private RequestContextContainer container;
+
+    @Override
+    public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
+        if (!setUpSession()) {
+            CandidateInfo returned = new CandidateInfo();
+            returned.setAccepted(false);
+            return returned;
+        }
+
+        candidateRecord.setMap(candidateRecord.getHeader().getMap().replace("/", "_"));
+        String sampleReal = gson.toJson(candidateRecord);
+        AddRecordRequest addRecordRequest = new AddRecordRequest();
+        addRecordRequest.setPayload(sampleReal);
+
+        LOG.info("Trying with size " + sampleReal.length());
+        try {
+            AddRecordResponse addRecordResponse = rankingClient.postRanking(addRecordRequest);
+            CandidateInfo returned = new CandidateInfo();
+            returned.setAccepted(true);
+            returned.setPosition(addRecordResponse.getPosition());
+            return returned;
+        } catch (Exception e) {
+            CandidateInfo returned = new CandidateInfo();
+            returned.setAccepted(false);
+            return returned;
+        }
+    }
+
+    @Override
+    public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship) {
+        if (!setUpSession()) {
+            return newArrayList();
+        }
+
+        String newMapName = map.replace("/", "_");
+        GetMapRecordsResponse response;
+
+        try {
+            response = rankingClient.getRankingshipshipmapsmap(newMapName, ship);
+        } catch (Exception e) {
+            LOG.info("Connectivity problem retrieving top competitors, returning empty", e);
+            return newArrayList();
+        }
+        return Lists.transform(response.getRankingEntry(), new Function<RankingEntry, CompetitorInfo>() {
+            @Override
+            public CompetitorInfo apply(RankingEntry f) {
+                CompetitorInfo result = new CompetitorInfo();
+                result.setLocal(false);
+                result.setPosition(f.getPosition());
+                result.setTime(f.getTime());
+                result.setUserName(f.getUsername());
+                result.setGameId(f.getId());
+                return result;
+            }
+        });
+    }
+
+    private boolean setUpSession() {
+        if (profileManager.isOnline()) {
+            if (container.get().getSessionId() == null) {
+
+                container.get().setSessionId(profileManager.getSessionId());
+
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public CandidateRecord getGhost(int number, String map, String ship) {
+        if (!setUpSession()) {
+            return null;
+        }
+
+        final CandidateRecord candidate;
+        GetRecordResponse response;
+        try {
+            List<CompetitorInfo> competitorInfos = getTopCompetitors(number, map, ship);
+            if (competitorInfos.size() > 0) {
+                response = rankingClient.getRankingidid(competitorInfos.get(0).getGameId());
+                candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
+            } else {
+                return null;
+            }
+
+        } catch (Exception e) {
+            LOG.error("Error loading ghost {} from map {}", ship, map);
+            return null;
+        }
+
+        EntryDefinition entry = new EntryDefinition();
+        entry.setType(candidate.getHeader().getShipModel());
+        entry.setValues(new HashMap<String, Object>() {
+            {
+                put("role", "CandidateRecord");
+            }
+        });
+        Collection cr = builder2.build(entry);
+
+        CandidateRecord finalcandidate
+                = (CandidateRecord) gson.fromJson(response.getPayload(), Iterators.getOnlyElement(cr.iterator()).getClass());
+
+        return finalcandidate;
+
+    }
+
+    /**
+     * @param rankingClient the rankingClient to set
+     */
+    public void setRankingClient(V2Resource rankingClient) {
+        this.rankingClient = rankingClient;
+    }
+
+    /**
+     * @param container the container to set
+     */
+    public void setContainer(RequestContextContainer container) {
+        this.container = container;
+    }
+
+    /**
+     * @param builder2 the builder2 to set
+     */
+    public void setModelBuilder(ModelBuilder builder2) {
+        this.builder2 = builder2;
+    }
+
+    /**
+     * @param profileManager the profileManager to set
+     */
+    public void setProfileManager(ProfileManager profileManager) {
+        this.profileManager = profileManager;
+    }
+
+}

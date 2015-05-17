@@ -1,0 +1,10 @@
+build
+.idea
+*.iml
+.gradle
+.directory
+nbactions.xml
+pom.xml.versionsBackup
+*.so
+dependency-reduced-pom.xml
+target

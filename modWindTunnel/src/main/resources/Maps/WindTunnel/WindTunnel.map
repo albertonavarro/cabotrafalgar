@@ -1,0 +1,8 @@
+{ "entries" : [ 
+{"type" : "Context"},
+{"type" : "RotateSimpleWind"},
+{"name" : "player", "values" : { "position" : "-205,0,-200" } },
+{"type" : "Sun"},
+{"type" : "Harness"},
+{"type" : "NoWater"}
+] }

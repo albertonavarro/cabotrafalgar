@@ -1,0 +1,20 @@
+apply plugin: 'java'
+
+dependencies {
+    compile (
+            libs.jme3_core,
+            libs.nifty,
+            libs.guava,
+            libs.slf4j_api,
+            libs.spring_context,
+            libs.reflections,
+            libs.gson,
+            libs.jackson2_databind,
+            libs.jackson2_dataformat_yaml
+            )
+
+    testCompile (
+            libs.junit
+    )
+}
+
