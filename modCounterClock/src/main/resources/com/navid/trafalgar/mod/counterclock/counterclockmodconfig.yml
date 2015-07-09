@@ -4,17 +4,18 @@ modGameSpringConfig: mod/counterclock/game-context.xml
 buildersSpringConfig: mod/counterclock/builders-declaration.xml
 screenDeclarations:
   - screenName: selectMap
-    interfaceConstructor: mod.counterclock.mapselectorgenerator
-    controller: mod.counterclock.mapselector
+    interfaceConstructor: static:/mod/counterclock/interface_mapselector.xml
+    controller: spring:mod.counterclock.mapselector
   - screenName: counterclockScreen
-    interfaceConstructor: mod.counterclock.mainscreengenerator
-    controller: mod.counterclock.mainscreencontroller
+    interfaceConstructor: static:/mod/counterclock/interface_counterclock.xml
+    controller: spring:mod.counterclock.mainscreencontroller
   - screenName: selectProfile
-    interfaceConstructor: mod.counterclock.profileselectorgenerator
-    controller: mod.counterclock.profileselector
+    interfaceConstructor: static:/mod/counterclock/interface_profileselector.xml
+    controller: spring:mod.counterclock.profileselector
+moduleFlowRoot: root:root
 moduleScreenFlow:
-  - selectProfile  
-  - selectShip  
+  - selectProfile
+  - selectShip
   - selectMap
   - selectControl
   - selectKeys

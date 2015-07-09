@@ -2,27 +2,26 @@ package com.navid.trafalgar.mod.common;
 
 import com.google.common.collect.Lists;
 import static com.google.common.collect.Lists.newArrayList;
+
+import com.navid.nifty.flow.ScreenGenerator;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.PopupBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.builder.TextBuilder;
-import de.lessvoid.nifty.controls.Menu;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.controls.listbox.builder.ListBoxBuilder;
-import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.tools.Color;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import javax.swing.colorchooser.ColorChooserComponentFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public final class SelectKeyboardControlsScreenGenerator implements ScreenGenerator {
@@ -38,14 +37,14 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
     private GameConfiguration gameConfiguration;
 
     @Override
-    public void buildScreen() {
-        if (nifty.getScreen("selectKeys") != null) {
-            nifty.removeScreen("selectKeys");
+    public void buildScreen(String screenUniqueId) {
+        if (nifty.getScreen(screenUniqueId) != null) {
+            nifty.removeScreen(screenUniqueId);
         }
-        buildScreenNow();
+        buildScreenNow(screenUniqueId);
     }
 
-    public void buildScreenNow() {
+    public void buildScreenNow(String screenUniqueId) {
 
         Collection<KeyboardCommandStateListener> keyListeners
                 = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
@@ -123,7 +122,7 @@ public final class SelectKeyboardControlsScreenGenerator implements ScreenGenera
             outerPanelBuilder.panel(partitionPanelBuilder);
         }
 
-        Screen screen = new ScreenBuilder("selectKeys") {
+        Screen screen = new ScreenBuilder(screenUniqueId) {
             {
                 controller(controller); // Screen properties
 

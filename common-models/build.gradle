@@ -11,7 +11,8 @@ dependencies {
             libs.jackson2_databind,
             libs.nifty_default_controls,
             libs.eventbus,
-            libs.auto_value
+            libs.auto_value,
+            libs.cxf_rt_rs_client
             )
 
     testCompile (

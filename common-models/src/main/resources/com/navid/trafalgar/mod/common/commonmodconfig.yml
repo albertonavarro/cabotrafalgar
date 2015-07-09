@@ -2,12 +2,12 @@ buildersSpringConfig: mod/common/builders-declaration.xml
 modPreGameSpringConfig: mod/common/application-context.xml
 screenDeclarations:
   - screenName: selectShip
-    interfaceConstructor: mod.common.selectshipgenerator
-    controller: mod.common.selectshipcontroller
+    interfaceConstructor: static:/mod/common/interface_shipselector.xml
+    controller: spring:mod.common.selectshipcontroller
   - screenName: selectControl
-    interfaceConstructor: mod.common.selectcontrolgenerator
-    controller: mod.common.selectcontrolcontroller
+    interfaceConstructor: spring:mod.common.selectcontrolgenerator
+    controller: spring:mod.common.selectcontrolcontroller
   - screenName: selectKeys
-    interfaceConstructor: mod.common.selectkeysgenerator
-    controller: mod.common.selectkeyscontroller
+    interfaceConstructor: spring:mod.common.selectkeysgenerator
+    controller: spring:mod.common.selectkeyscontroller
 

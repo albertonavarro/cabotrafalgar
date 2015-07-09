@@ -5,7 +5,7 @@
 package com.navid.trafalgar.games;
 
 import com.jme3.app.Application;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
+import com.navid.nifty.flow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -42,7 +42,7 @@ public final class StartScreenController implements ScreenController {
     }
 
     public void executeModule(String moduleName) {
-        screenFlowManager.changeFlow(moduleName);
+        screenFlowManager.setNextScreenHint(moduleName);
         nifty.gotoScreen("redirector");
     }
 

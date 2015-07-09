@@ -2,10 +2,10 @@ package com.navid.trafalgar.mod.windtunnel;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.mod.windtunnel.statelisteners.LoadCameraStateListener;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
@@ -141,7 +141,7 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
-        screenFlowManager.changeNextScreen("windTunnelScreen");
+        screenFlowManager.setNextScreenHint("windTunnelScreen");
         nifty.gotoScreen("redirector");
     }
 
@@ -149,7 +149,7 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
-        screenFlowManager.changeNextScreen("selectShip");
+        screenFlowManager.setNextScreenHint("selectShip");
         nifty.gotoScreen("redirector");
     }
 

@@ -1,21 +1,25 @@
 package com.navid.trafalgar.games;
 
+import com.google.common.base.Optional;
 import com.jme3.app.Application;
 import com.jme3.app.state.VideoRecorderAppState;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import com.jme3.system.JmeSystem;
+import com.navid.nifty.flow.RedirectorScreenController;
+import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.nifty.flow.dto.ScreenDefinition;
+import com.navid.nifty.flow.resolutors.DefaultInstanceResolutor;
+import com.navid.nifty.flow.resolutors.InstanceResolutionException;
+import com.navid.nifty.flow.template.ftl.StaticScreenGeneratorResolutor;
 import com.navid.trafalgar.maploader.v3.MapAssetLoader;
 import com.navid.trafalgar.modapi.ModRegisterer;
-import com.navid.trafalgar.screenflow.RedirectorScreenController;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
-import com.navid.trafalgar.screenflow.ScreenFlowUnit;
-import com.navid.trafalgar.screenflow.ScreenGenerator;
+import com.navid.trafalgar.modapi.SpringBeanResolutor;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -27,6 +31,8 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public final class Main extends Application {
 
@@ -81,6 +87,7 @@ public final class Main extends Application {
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
                 assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
+        resolutorChain.addResolutor("static", new StaticScreenGeneratorResolutor(nifty));
 
         nifty.loadStyleFile("nifty-default-styles.xml");
         nifty.loadControlFile("nifty-default-controls.xml");
@@ -88,18 +95,20 @@ public final class Main extends Application {
 
         guiViewPort.addProcessor(niftyDisplay);
 
-        loadModules(nifty, nifty.getScreen("start"), settings, this);
-        initScreen(nifty, ctx);
+        try {
+            initScreen(nifty, ctx);
+        } catch (InstanceResolutionException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initScreen(Nifty nifty, final BeanFactory beanFactory) {
+    private void initScreen(Nifty nifty, final BeanFactory beanFactory) throws InstanceResolutionException {
 
         ScreenFlowManager screenFlowManager = beanFactory.getBean(ScreenFlowManager.class);
-        screenFlowManager.addRootFlowGraph("root").addScreen(
-                new ScreenFlowUnit("start",
-                        beanFactory.getBean("common.RootScreenGenerator", ScreenGenerator.class),
-                        beanFactory.getBean("common.RootScreenController", ScreenController.class)));
-        screenFlowManager.changeFlow("root");
+        screenFlowManager.addScreenDefinition(new ScreenDefinition("root", "spring:common.RootScreenController", "spring:common.RootScreenGenerator"));
+        screenFlowManager.addFlowDefinition("root", Optional.<String>absent(), newArrayList("root"));
+
+        loadModules(nifty, nifty.getScreen("start"), settings, this);
 
         nifty.addScreen("redirector", new ScreenBuilder("start", beanFactory.getBean(RedirectorScreenController.class)).build(nifty));
         nifty.gotoScreen("redirector");
@@ -155,7 +164,13 @@ public final class Main extends Application {
         renderManager.render(tpf, context.isRenderable());
     }
 
-    private static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
+    static XmlBeanFactory ctx = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
+    static DefaultInstanceResolutor resolutorChain = null;
+
+    static {
+        resolutorChain = ctx.getBean(DefaultInstanceResolutor.class);
+        resolutorChain.addResolutor("spring", new SpringBeanResolutor(ctx));
+    }
 
     public static void registerSingletonBeanDefinition(String name, String className) {
         GenericBeanDefinition beanDefinition = new GenericBeanDefinition();

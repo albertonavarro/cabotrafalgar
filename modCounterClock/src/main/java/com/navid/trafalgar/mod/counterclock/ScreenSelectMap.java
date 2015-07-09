@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.counterclock;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.jme3.asset.AssetManager;
+import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.CandidateRecord;
@@ -10,7 +11,6 @@ import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import com.navid.trafalgar.util.FileUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
@@ -173,12 +173,12 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     public void back() {
-        screenFlowManager.changePreviousScreen();
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
         nifty.gotoScreen("redirector");
     }
 
     public void next() {
-        screenFlowManager.changeNextScreen();
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
         goTo("redirector");
     }
 
