@@ -11,8 +11,13 @@
     <bean id="common.EventManager" class="com.navid.trafalgar.manager.EventManager" autowire="byType"/>
     <bean id="common.Builder" class="com.navid.trafalgar.model.ModelBuilder" autowire="byType" />
     <bean id="common.InputBuilder" class="com.navid.trafalgar.input.GeneratorBuilder" autowire="byType" />
-    <bean id="common.ScreenFlowManager" class="com.navid.trafalgar.screenflow.ScreenFlowManager" autowire="byType"/> 
-    <bean id="common.RedirectorScreenController" class="com.navid.trafalgar.screenflow.RedirectorScreenController" autowire="byType" />  
+    <bean id="common.InstanceResolutor" class="com.navid.nifty.flow.resolutors.DefaultInstanceResolutor"/>
+    <bean id="common.ScreenFlowManager" class="com.navid.nifty.flow.ScreenFlowManagerImpl">
+        <constructor-arg><ref bean="common.nifty"/></constructor-arg>
+        <constructor-arg><ref bean="common.InstanceResolutor"/></constructor-arg>
+    </bean>
+
+    <bean id="common.RedirectorScreenController" class="com.navid.nifty.flow.RedirectorScreenController" autowire="byType" />
     
     <bean id="common.RootScreenGenerator" class="com.navid.trafalgar.games.RootScreenGenerator" autowire="byType" />
     <bean id="common.RootScreenController" class="com.navid.trafalgar.games.StartScreenController" autowire="byType"/>

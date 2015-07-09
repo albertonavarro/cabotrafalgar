@@ -4,8 +4,9 @@ modGameSpringConfig: mod/windtunnel/game-context.xml
 buildersSpringConfig: mod/windtunnel/builders-declaration.xml
 screenDeclarations:
   - screenName: windTunnelScreen
-    interfaceConstructor: mod.windtunnel.mainscreengenerator
-    controller: mod.windtunnel.mainscreencontroller
+    interfaceConstructor: static:/mod/windtunnel/interface_windtunnel.xml
+    controller: spring:mod.windtunnel.mainscreencontroller
+moduleFlowRoot: root:root
 moduleScreenFlow:
   - selectShip
   - selectControl

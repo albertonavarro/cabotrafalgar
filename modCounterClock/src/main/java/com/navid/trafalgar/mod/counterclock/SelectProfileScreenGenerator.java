@@ -1,6 +1,6 @@
 package com.navid.trafalgar.mod.counterclock;
 
-import com.navid.trafalgar.screenflow.ScreenGenerator;
+import com.navid.nifty.flow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,8 +10,8 @@ public final class SelectProfileScreenGenerator implements ScreenGenerator {
     private Nifty nifty;
 
     @Override
-    public void buildScreen() {
-        if (nifty.getScreen("selectProfile") == null) {
+    public void buildScreen(String screenUniqueId) {
+        if (nifty.getScreen(screenUniqueId) == null) {
             nifty.addXml("mod/counterclock/interface_profileselector.xml");
         }
     }

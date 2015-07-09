@@ -2,12 +2,13 @@ package com.navid.trafalgar.mod.common;
 
 import com.google.common.collect.HashMultimap;
 import static com.google.common.collect.Lists.newArrayList;
+
+import com.navid.nifty.flow.ScreenGenerator;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.screenflow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
@@ -48,14 +49,14 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
     private Map<String, PanelBuilder> panels;
 
     @Override
-    public void buildScreen() {
-        if (nifty.getScreen("selectControl") != null) {
-            nifty.removeScreen("selectControl");
+    public void buildScreen(String screenUniqueId) {
+        if (nifty.getScreen(screenUniqueId) != null) {
+            nifty.removeScreen(screenUniqueId);
         }
-        buildScreenNow();
+        buildScreenNow(screenUniqueId);
     }
 
-    public void buildScreenNow() {
+    public void buildScreenNow(String screenUniqueId) {
         panels = new HashMap<>();
 
         AShipModelInteractive ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class);
@@ -127,7 +128,7 @@ public final class SelectControlsScreenGenerator implements ScreenGenerator {
             }
         }
 
-        Screen screen = new ScreenBuilder("selectControl") {
+        Screen screen = new ScreenBuilder(screenUniqueId) {
             {
                 controller(screenControlScreenController); // Screen properties
 

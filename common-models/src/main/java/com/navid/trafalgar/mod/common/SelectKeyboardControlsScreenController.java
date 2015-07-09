@@ -6,11 +6,11 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.jme3.input.KeyInput;
+import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.profiles.ProfileManager;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
@@ -219,7 +219,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
 
     public void next() {
         if (validateKeys()) {
-            screenFlowManager.changeNextScreen();
+            screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
             goTo("redirector");
         } else {
             showMenu();
@@ -244,7 +244,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     }
 
     public void back() {
-        screenFlowManager.changePreviousScreen();
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
         nifty.gotoScreen("redirector");
     }
 

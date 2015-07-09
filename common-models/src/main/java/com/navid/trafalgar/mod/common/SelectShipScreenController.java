@@ -1,12 +1,13 @@
 package com.navid.trafalgar.mod.common;
 
 import static com.google.common.collect.Lists.newArrayList;
+
+import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
@@ -190,12 +191,12 @@ public final class SelectShipScreenController implements ScreenController {
     }
 
     public void next() {
-        screenFlowManager.changeNextScreen();
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
         goTo("redirector");
     }
 
     public void back() {
-        screenFlowManager.changePreviousScreen();
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
         nifty.gotoScreen("redirector");
     }
 }

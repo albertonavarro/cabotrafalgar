@@ -4,7 +4,7 @@
     <useStyles filename="nifty-default-styles.xml" />
     <useControls filename="nifty-default-controls.xml" />
     
-    <screen id="windTunnelScreen" controller="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen">
+    <screen id="${screenUniqueId}" controller="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen">
         <layer id="foreground" childLayout="horizontal">
             <panel id="panel_left" width="3%" height="100%" childLayout="vertical" backgroundColor="#ffffff30" > 
             </panel>

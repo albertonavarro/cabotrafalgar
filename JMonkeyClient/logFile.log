@@ -1,90 +1,96 @@
-6105 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.games.Main - Loading MapAssetLoader
-6481 [LWJGL Renderer Thread] INFO  org.reflections.Reflections - Reflections took 101 ms to scan 7 urls, producing 73 keys and 239 values 
-6668 [LWJGL Renderer Thread] ERROR com.navid.trafalgar.games.Main - Error loading module class com.navid.trafalgar.modapi.GenericModRegisterer
+3644 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.games.Main - Loading MapAssetLoader
+3982 [LWJGL Renderer Thread] INFO  org.reflections.Reflections - Reflections took 81 ms to scan 8 urls, producing 74 keys and 260 values 
+3997 [LWJGL Renderer Thread] ERROR com.navid.trafalgar.games.Main - Error loading module class com.navid.trafalgar.modapi.GenericModRegisterer
 java.lang.InstantiationException: com.navid.trafalgar.modapi.GenericModRegisterer
-	at java.lang.Class.newInstance(Class.java:364) ~[na:1.7.0_71]
-	at com.navid.trafalgar.games.Main.loadModules(Main.java:117) [classes/:na]
-	at com.navid.trafalgar.games.Main.initialize(Main.java:91) [classes/:na]
+	at java.lang.Class.newInstance(Class.java:427) ~[na:1.8.0_45]
+	at com.navid.trafalgar.games.Main.loadModules(Main.java:117) [main/:na]
+	at com.navid.trafalgar.games.Main.initialize(Main.java:91) [main/:na]
 	at com.jme3.system.lwjgl.LwjglAbstractDisplay.initInThread(LwjglAbstractDisplay.java:130) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
 	at com.jme3.system.lwjgl.LwjglAbstractDisplay.run(LwjglAbstractDisplay.java:209) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
-7187 [LWJGL Renderer Thread] INFO  c.n.t.input.GeneratorBuilder - Registring builder Keyboard
-7262 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodely.ShipModelTwoBuilder@3e13bdf5
-7262 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodely.ShipModelTwoBuilder@3e13bdf5 done
-7285 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelz.ShipModelZBuilder@8384aed
-7285 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelz.ShipModelZBuilder@8384aed done
-7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.RotateSimpleWindBuilder@5f37f5c0
-7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.RotateSimpleWindBuilder@5f37f5c0 done
-7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.ContextBuilder@52e74116
-7316 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.ContextBuilder@52e74116 done
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.WaterBuilder@4c6235df
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.WaterBuilder@4c6235df done
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.TidalWaterBuilder@43beeaa6
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.TidalWaterBuilder@43beeaa6 done
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.NoWaterBuilder@2b1f5b09
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.NoWaterBuilder@2b1f5b09 done
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SunBuilder@1791c1fd
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SunBuilder@1791c1fd done
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SkyBuilder@6256d521
-7317 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SkyBuilder@6256d521 done
-7354 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.counterclock.model.builder.MilestoneBuilder@7cf2ab87
-7354 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.counterclock.model.builder.MilestoneBuilder@7cf2ab87 done
-7377 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.windtunnel.model.builder.HarnessBuilder@54efdd29
-7377 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.windtunnel.model.builder.HarnessBuilder@54efdd29 done
-7561 [LWJGL Renderer Thread] INFO  o.a.c.w.s.f.ReflectionServiceFactoryBean - Creating Service {http://lazylogin.navid.com/}UserCommandsService from class com.lazylogin.client.user.v0.UserCommands
-7886 [LWJGL Renderer Thread] INFO  o.a.c.c.injection.ResourceInjector - failed to resolve resource com.navid.lazylogin.context.interceptors.RequestIdHandler/requestContextContainer
-8021 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context created: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
-8635 [LWJGL Renderer Thread] ERROR c.n.t.profiles.FileProfileManager - Error loading info for DEFAULT
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
+Caused by: java.lang.NoSuchMethodException: com.navid.trafalgar.modapi.GenericModRegisterer.<init>()
+	at java.lang.Class.getConstructor0(Class.java:3082) ~[na:1.8.0_45]
+	at java.lang.Class.newInstance(Class.java:412) ~[na:1.8.0_45]
+	... 5 common frames omitted
+5029 [LWJGL Renderer Thread] INFO  c.n.t.input.GeneratorBuilder - Registring builder Keyboard
+5183 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.counterclock.model.builder.MilestoneBuilder@2ff65ce1
+5183 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.counterclock.model.builder.MilestoneBuilder@2ff65ce1 done
+5255 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelz.ShipModelZBuilder@5c553834
+5255 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelz.ShipModelZBuilder@5c553834 done
+5296 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodely.ShipModelTwoBuilder@7c423247
+5296 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodely.ShipModelTwoBuilder@7c423247 done
+5353 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelleyton.ShipModelTwoBuilder@925540d
+5353 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.shipmodelleyton.ShipModelTwoBuilder@925540d done
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.RotateSimpleWindBuilder@3322947c
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.RotateSimpleWindBuilder@3322947c done
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.ContextBuilder@3e8214ab
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.ContextBuilder@3e8214ab done
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.WaterBuilder@25b5ff22
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.WaterBuilder@25b5ff22 done
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.TidalWaterBuilder@1fe9b7a3
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.TidalWaterBuilder@1fe9b7a3 done
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.NoWaterBuilder@38cf4156
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.NoWaterBuilder@38cf4156 done
+5381 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SunBuilder@16c63da8
+5382 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SunBuilder@16c63da8 done
+5382 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SkyBuilder@1c808cbd
+5382 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.model.builder.SkyBuilder@1c808cbd done
+5429 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.windtunnel.model.builder.HarnessBuilder@57223bbd
+5429 [LWJGL Renderer Thread] INFO  c.n.trafalgar.model.ModelBuilder - Registring builder com.navid.trafalgar.mod.windtunnel.model.builder.HarnessBuilder@57223bbd done
+5667 [LWJGL Renderer Thread] INFO  o.a.c.w.s.f.ReflectionServiceFactoryBean - Creating Service {http://lazylogin.navid.com/}UserCommandsService from class com.lazylogin.client.user.v0.UserCommands
+5956 [LWJGL Renderer Thread] INFO  o.a.c.c.injection.ResourceInjector - failed to resolve resource com.navid.lazylogin.context.interceptors.RequestIdHandler/requestContextContainer
+6178 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context created: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
+6934 [LWJGL Renderer Thread] ERROR c.n.t.profiles.FileProfileManager - Error loading info for DEFAULT
 javax.xml.ws.soap.SOAPFaultException: The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!
 	at org.apache.cxf.jaxws.JaxWsClientProxy.invoke(JaxWsClientProxy.java:159) ~[cxf-rt-frontend-jaxws-3.0.1.jar:3.0.1]
-	at com.sun.proxy.$Proxy57.getInfo(Unknown Source) ~[na:na]
-	at com.navid.trafalgar.profiles.FileProfileManager$3.apply(FileProfileManager.java:284) [classes/:na]
-	at com.navid.trafalgar.profiles.FileProfileManager$3.apply(FileProfileManager.java:275) [classes/:na]
-	at com.navid.trafalgar.profiles.FileProfileManager.loadFromFile(FileProfileManager.java:155) [classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_71]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[na:1.7.0_71]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.7.0_71]
-	at java.lang.reflect.Method.invoke(Method.java:606) ~[na:1.7.0_71]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1612) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1553) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1483) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:524) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:295) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:292) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:270) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:873) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:815) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:730) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1105) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:522) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:295) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:292) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:873) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:815) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:730) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1105) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:522) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:295) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:292) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:198) [spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
-	at com.navid.trafalgar.screenflow.ScreenFlowUnit.<init>(ScreenFlowUnit.java:20) [classes/:na]
-	at com.navid.trafalgar.modapi.GenericModRegisterer.registerScreens(GenericModRegisterer.java:92) [classes/:na]
-	at com.navid.trafalgar.games.Main.loadModules(Main.java:134) [classes/:na]
-	at com.navid.trafalgar.games.Main.initialize(Main.java:91) [classes/:na]
+	at com.sun.proxy.$Proxy59.getInfo(Unknown Source) ~[na:na]
+	at com.navid.trafalgar.profiles.FileProfileManager$3.apply(FileProfileManager.java:284) [common-models.jar:na]
+	at com.navid.trafalgar.profiles.FileProfileManager$3.apply(FileProfileManager.java:275) [common-models.jar:na]
+	at com.navid.trafalgar.profiles.FileProfileManager.loadFromFile(FileProfileManager.java:155) [common-models.jar:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
+	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1694) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1562) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:272) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1127) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1051) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:949) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1280) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1187) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1127) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1051) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:949) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1280) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1187) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at com.navid.trafalgar.screenflow.ScreenFlowUnit.<init>(ScreenFlowUnit.java:21) [mod-api.jar:na]
+	at com.navid.trafalgar.modapi.GenericModRegisterer.registerScreens(GenericModRegisterer.java:92) [mod-api.jar:na]
+	at com.navid.trafalgar.games.Main.loadModules(Main.java:134) [main/:na]
+	at com.navid.trafalgar.games.Main.initialize(Main.java:91) [main/:na]
 	at com.jme3.system.lwjgl.LwjglAbstractDisplay.initInThread(LwjglAbstractDisplay.java:130) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
 	at com.jme3.system.lwjgl.LwjglAbstractDisplay.run(LwjglAbstractDisplay.java:209) [jme3-lwjgl-3.1.0-snapshot-github.jar:na]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
 Caused by: org.apache.cxf.binding.soap.SoapFault: The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!
 	at org.apache.cxf.binding.soap.interceptor.Soap11FaultInInterceptor.unmarshalFault(Soap11FaultInInterceptor.java:84) ~[cxf-rt-bindings-soap-3.0.1.jar:3.0.1]
 	at org.apache.cxf.binding.soap.interceptor.Soap11FaultInInterceptor.handleMessage(Soap11FaultInInterceptor.java:51) ~[cxf-rt-bindings-soap-3.0.1.jar:3.0.1]
@@ -109,28 +115,58 @@ Caused by: org.apache.cxf.binding.soap.SoapFault: The given id must not be null!
 	at org.apache.cxf.frontend.ClientProxy.invokeSync(ClientProxy.java:96) ~[cxf-rt-frontend-simple-3.0.1.jar:3.0.1]
 	at org.apache.cxf.jaxws.JaxWsClientProxy.invoke(JaxWsClientProxy.java:137) ~[cxf-rt-frontend-jaxws-3.0.1.jar:3.0.1]
 	... 48 common frames omitted
-19042 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context deleted: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
-26298 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Extracting files from real directory.
-26299 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
-26300 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Gybing-1.map]
-26308 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
-26309 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Milestones-1.map]
-26310 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
-26310 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Milestones-2.map]
-26311 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
-26311 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Tidal-1.map]
-26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
-26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
-26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
-26312 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
-26313 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
-26316 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context created: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
-26321 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding SID header with value 1-1771000262-4926fd09-d3e8-4c34-81de-9a664ba0749b
-26321 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Generating a new correlationId with value ce5b563b-066a-49cb-8c23-ddd1618fc3f9
-26321 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding RID header with value ce5b563b-066a-49cb-8c23-ddd1618fc3f9
-26730 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding SID header with value 1-1771000262-4926fd09-d3e8-4c34-81de-9a664ba0749b
-26730 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Generating a new correlationId with value 20e37a59-1519-4efd-9672-41fed4b49cea
-26730 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding RID header with value 20e37a59-1519-4efd-9672-41fed4b49cea
-348965 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding SID header with value 1-1771000262-4926fd09-d3e8-4c34-81de-9a664ba0749b
-348965 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Generating a new correlationId with value 33d1511d-8e14-4f3c-9bf3-44f65670e1cc
-348965 [LWJGL Renderer Thread] INFO  c.n.l.c.i.RequestIdInterceptor - Adding RID header with value 33d1511d-8e14-4f3c-9bf3-44f65670e1cc
+9526 [LWJGL Renderer Thread] DEBUG c.n.l.c.RequestContextContainer - Request context deleted: RequestContext{userName=null, userId=null, sessionId=null, correlationId=null}
+16480 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Extracting files from JAR/ZIP file.
+16480 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Milestones-1.map to map finding.
+16480 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Tidal-1.map to map finding.
+16480 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Gybing-1.map to map finding.
+16480 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Milestones-2.map to map finding.
+16481 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+16481 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Gybing-1.map]
+16489 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
+16490 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Milestones-1.map]
+16490 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
+16490 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Milestones-2.map]
+16491 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
+16492 [LWJGL Renderer Thread] DEBUG c.n.t.maploader.v3.MapAssetLoader - Loading com.jme3.asset.plugins.UrlAssetInfo[key=Maps/CounterClock/Tidal-1.map]
+16492 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+16492 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
+16492 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
+16492 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
+16493 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+22213 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: RESUME
+23715 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event DEACTIVATE_CAM to listener: com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener@2eada3fd
+23716 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: DEACTIVATE_CAM
+23716 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event ACTIVATE_CAM3 to listener: com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener@2eada3fd
+23716 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: ACTIVATE_CAM3
+27360 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event DEACTIVATE_CAM to listener: com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener@2eada3fd
+27360 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: DEACTIVATE_CAM
+27360 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event ACTIVATE_CAM1 to listener: com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener@2eada3fd
+27360 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: ACTIVATE_CAM1
+86405 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event PAUSE to listener: com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener@2eada3fd
+86406 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event PAUSE to listener: com.navid.trafalgar.manager.StateManager@18c76fff
+86406 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: PAUSE
+88388 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event RESUME to listener: com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener@2eada3fd
+88388 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event RESUME to listener: com.navid.trafalgar.manager.StateManager@18c76fff
+88388 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: RESUME
+88388 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event FAILED to listener: com.navid.trafalgar.manager.StateManager@18c76fff
+88388 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: FAILED
+88429 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Extracting files from JAR/ZIP file.
+88429 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Milestones-1.map to map finding.
+88429 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Tidal-1.map to map finding.
+88429 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Gybing-1.map to map finding.
+88429 [LWJGL Renderer Thread] DEBUG com.navid.trafalgar.util.FileUtils - Adding entry Maps/CounterClock/Milestones-2.map to map finding.
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-1.map
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Milestones-2.map
+88430 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Tidal-1.map
+88431 [LWJGL Renderer Thread] DEBUG c.n.t.m.c.ScreenSelectMap - Loading map Maps/CounterClock/Gybing-1.map
+88433 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event UNLOAD to listener: com.navid.trafalgar.manager.StateManager@18c76fff
+88434 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Firing event DEACTIVATE_CAM to listener: com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener@2eada3fd
+88435 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: DEACTIVATE_CAM
+88435 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: UNLOAD
+88435 [LWJGL Renderer Thread] DEBUG c.n.trafalgar.manager.EventManager - Finished firing event: UNLOAD
