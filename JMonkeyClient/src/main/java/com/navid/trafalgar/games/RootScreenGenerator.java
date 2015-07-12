@@ -1,7 +1,7 @@
 package com.navid.trafalgar.games;
 
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
-import com.navid.trafalgar.screenflow.ScreenGenerator;
+import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.nifty.flow.ScreenGenerator;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
@@ -21,7 +21,7 @@ public final class RootScreenGenerator implements ScreenGenerator {
     private ScreenFlowManager screenFlowManager;
 
     @Override
-    public void buildScreen() {
+    public void buildScreen(String screenUniqueId) {
 
         final PanelBuilder panelModules = new PanelBuilder("Panel_Modules") {
             {
@@ -31,7 +31,7 @@ public final class RootScreenGenerator implements ScreenGenerator {
             }
         };
 
-        for (final String moduleName : screenFlowManager.getModuleNames()) {
+        for (final String moduleName : screenFlowManager.getChildren()) {
             panelModules.control(new ButtonBuilder(moduleName + "ButtonLabel", moduleName) {
                 {
                     alignCenter();
@@ -73,7 +73,7 @@ public final class RootScreenGenerator implements ScreenGenerator {
             }
         });
 
-        new ScreenBuilder("start") {
+        new ScreenBuilder(screenUniqueId) {
             {
                 controller(startScreenController);
                 layer(new LayerBuilder("Layer_Main") {

@@ -8,7 +8,6 @@
     <context:annotation-config/>
   
     <bean id="mod.common.selectshipcontroller" class="com.navid.trafalgar.mod.common.SelectShipScreenController" autowire="byType"/>
-    <bean id="mod.common.selectshipgenerator" class="com.navid.trafalgar.mod.common.SelectShipScreenGenerator" autowire="byType" />
     <bean id="mod.common.selectcontrolcontroller" class="com.navid.trafalgar.mod.common.SelectControlsScreenController" autowire="byType" />
     <bean id="mod.common.selectcontrolgenerator" class="com.navid.trafalgar.mod.common.SelectControlsScreenGenerator" autowire="byType" />
     <bean id="mod.common.selectkeyscontroller" class="com.navid.trafalgar.mod.common.SelectKeyboardControlsScreenController" autowire="byType" />

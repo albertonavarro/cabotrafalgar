@@ -3,13 +3,13 @@ package com.navid.trafalgar.mod.common;
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
+import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.CommandStateListener;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.controls.radiobutton.RadioButtonControl;
@@ -121,12 +121,12 @@ public final class SelectControlsScreenController implements ScreenController {
     }
 
     public void next() {
-        screenFlowManager.changeNextScreen();
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
         goTo("redirector");
     }
 
     public void back() {
-        screenFlowManager.changePreviousScreen();
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
         nifty.gotoScreen("redirector");
     }
 

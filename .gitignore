@@ -15,3 +15,5 @@ modWindTunnel/target
 /shipModelLeyton/target/
 .idea
 *.iml
+*/build/*
+.gradle

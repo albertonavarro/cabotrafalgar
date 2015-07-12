@@ -5,13 +5,13 @@ import com.jme3.input.controls.ActionListener;
 import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
-import com.navid.trafalgar.mod.counterclock.CounterClockMainScreen;
+import com.navid.trafalgar.mod.counterclock.CounterClockMainScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public final class GUIUpdater implements StartedState, PrestartState {
 
     @Autowired
-    private CounterClockMainScreen mainScreen;
+    private CounterClockMainScreenController mainScreen;
     @Autowired
     private InputManager inputManager;
     @Autowired
@@ -62,7 +62,7 @@ public final class GUIUpdater implements StartedState, PrestartState {
     /**
      * @param mainScreen the mainScreen to set
      */
-    public void setMainScreen(CounterClockMainScreen mainScreen) {
+    public void setMainScreen(CounterClockMainScreenController mainScreen) {
         this.mainScreen = mainScreen;
     }
 

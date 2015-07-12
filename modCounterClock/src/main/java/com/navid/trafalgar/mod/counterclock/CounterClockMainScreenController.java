@@ -2,10 +2,10 @@ package com.navid.trafalgar.mod.counterclock;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener;
-import com.navid.trafalgar.screenflow.ScreenFlowManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-public final class CounterClockMainScreen implements ScreenController, BeanFactoryAware {
+public final class CounterClockMainScreenController implements ScreenController, BeanFactoryAware {
 
     /*
      * Comes from bind
@@ -141,14 +141,14 @@ public final class CounterClockMainScreen implements ScreenController, BeanFacto
     public synchronized void restart() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        screenFlowManager.changeNextScreen("counterclockScreen");
+        screenFlowManager.setNextScreenHint("counterclockScreen");
         nifty.gotoScreen("redirector");
     }
 
     public synchronized void quit() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
-        screenFlowManager.changeNextScreen("selectMap");
+        screenFlowManager.setNextScreenHint("selectMap");
         nifty.gotoScreen("redirector");
     }
 

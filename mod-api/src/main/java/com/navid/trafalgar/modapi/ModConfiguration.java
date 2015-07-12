@@ -17,6 +17,8 @@ public final class ModConfiguration {
 
     private List<ModScreenConfiguration> screenDeclarations;
 
+    private String moduleFlowRoot;
+
     private List<String> moduleScreenFlow;
 
     private BeanFactory beanFactory;
@@ -131,6 +133,14 @@ public final class ModConfiguration {
      */
     public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
+    }
+
+    public String getModuleFlowRoot() {
+        return moduleFlowRoot;
+    }
+
+    public void setModuleFlowRoot(String moduleFlowRoot) {
+        this.moduleFlowRoot = moduleFlowRoot;
     }
 
     @Override
