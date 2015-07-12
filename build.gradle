@@ -65,7 +65,7 @@ ext{
             j_ogg_all: 'de.jarnbjo:j-ogg-all:1.0.0',
             xpp3: 'xpp3:xpp3:1.1.4c',
             logback: 'ch.qos.logback:logback-classic:1.0.9',
-            nifty_flow : 'com.navid.nifty:nifty-flow:0.3.0'
+            nifty_flow : 'com.navid.nifty:nifty-flow:0.3.1'
     ]
 }
 
