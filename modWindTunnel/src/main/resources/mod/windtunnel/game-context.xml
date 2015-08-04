@@ -23,5 +23,6 @@
     <bean id="mod.windtunnel.AnnotationToStatsManagerStartedListener" class="com.navid.trafalgar.mod.windtunnel.statelisteners.AnnotationToStatsManagerStartedListener" autowire="byType"/>
     <bean id="mod.windtunnel.GUIUpdater" class="com.navid.trafalgar.mod.windtunnel.statelisteners.GUIUpdater" autowire="byType"/>
     <!--<bean id="mod.windtunnel.CSVRecorder" class="com.navid.trafalgar.mod.windtunnel.statelisteners.CSVRecorder" autowire="byType"/>-->
-    
+    <bean id="mod.windtunnel.RemoteEventsManager" class="com.navid.trafalgar.input.RemoteEventsManager" autowire="byType" />
+
 </beans>

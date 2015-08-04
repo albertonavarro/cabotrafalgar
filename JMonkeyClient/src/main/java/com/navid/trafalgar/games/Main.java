@@ -13,6 +13,7 @@ import com.navid.nifty.flow.dto.ScreenDefinition;
 import com.navid.nifty.flow.resolutors.DefaultInstanceResolutor;
 import com.navid.nifty.flow.resolutors.InstanceResolutionException;
 import com.navid.nifty.flow.template.ftl.StaticScreenGeneratorResolutor;
+import com.navid.trafalgar.input.RemoteEventsManager;
 import com.navid.trafalgar.maploader.v3.MapAssetLoader;
 import com.navid.trafalgar.modapi.ModRegisterer;
 import com.navid.trafalgar.modapi.SpringBeanResolutor;
@@ -75,6 +76,7 @@ public final class Main extends Application {
         registerBean("common.stateManager", stateManager);
         registerBean("common.renderManager", renderManager);
         registerBean("common.appSettings", settings);
+        registerBean("common.remoteEventsManager", new RemoteEventsManager());
         registerBean("common.app", this);
 
         if (record) {

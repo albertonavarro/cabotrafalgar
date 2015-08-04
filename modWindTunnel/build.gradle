@@ -16,7 +16,7 @@ dependencies {
             libs.cxf_rt_rs_client,
             libs.jackson_core_asl,
             libs.lazylogin_common_context
-            )
+    )
 
     testCompile (
 

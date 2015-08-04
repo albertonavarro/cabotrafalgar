@@ -1,6 +1,6 @@
 ext{
     v = [
-            spring: '3.2.0.RELEASE',
+            spring: '4.1.0.RELEASE',
             jackson2: '2.4.4',
             jackson: '1.9.13',
             lazylogin: '1.3.266',
@@ -16,6 +16,7 @@ ext{
             spring_core: 'org.springframework:spring-core:'+v.spring,
             spring_beans: 'org.springframework:spring-beans:'+v.spring,
             spring_context: 'org.springframework:spring-context:'+v.spring,
+            spring_jms: 'org.springframework:spring-jms:'+v.spring,
             //JME3
             jme3_core: 'com.jme3:jme3-core:' + v.jme3,
             jme3_effects: 'com.jme3:jme3-effects:' + v.jme3,
@@ -50,6 +51,8 @@ ext{
             //CXF
             cxf_frontend_jaxws: 'org.apache.cxf:cxf-rt-frontend-jaxws:' + v.cxf,
             cxf_rt_rs_client: 'org.apache.cxf:cxf-rt-rs-client:' + v.cxf,
+            //AMQ
+            activemq_all: 'org.apache.activemq:activemq-all:5.11.1',
             //OTHERS
             junit: 'junit:junit:4.10',
             guava: 'com.google.guava:guava:17.0',

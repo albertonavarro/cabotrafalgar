@@ -16,4 +16,6 @@
     <bean id="mod.counterclock.SkyBuilder" class="com.navid.trafalgar.model.builder.SkyBuilder" autowire="byType" />
     
     <bean id="common.input.Keyboard" class="com.navid.trafalgar.input.KeyboardCommandGenerator" autowire="byType" />
+    <bean id="common.input.RemoteCommands" class="com.navid.trafalgar.input.RemoteInputCommandGenerator" autowire="byType" />
+
 </beans>

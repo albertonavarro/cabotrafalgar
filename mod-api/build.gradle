@@ -9,7 +9,9 @@ dependencies {
             libs.gson,
             libs.jackson2_databind,
             libs.jackson2_dataformat_yaml,
-            libs.nifty_flow
+            libs.nifty_flow,
+            libs.spring_jms,
+            libs.activemq_all
             )
 
     testCompile (

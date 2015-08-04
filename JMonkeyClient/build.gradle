@@ -36,7 +36,9 @@ dependencies {
             libs.xpp3,
             libs.jme3_plugins,
             libs.nifty_style_black,
-            libs.logback
+            libs.logback,
+            libs.activemq_all,
+            libs.spring_jms
     )
 
     shadowJar {
