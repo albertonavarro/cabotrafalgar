@@ -19,6 +19,8 @@ public class RemoteInputCommandStateListener implements CommandStateListener, Pr
     private final Command key;
 
     private float value = 0;
+    private String userId;
+    private Long gameId;
 
     public RemoteInputCommandStateListener(Command key, RemoteEventsManager remoteEventsManager) {
         this.key = key;
@@ -33,12 +35,11 @@ public class RemoteInputCommandStateListener implements CommandStateListener, Pr
     @Override
     public void onPrestart(float tpf) {
         try {
-            remoteEventsManager.listenMessages("user", key.toString().replace(' ', '_'), new RemoteEventsManager.StructureConsumer<Transport>(Transport.class){
+            remoteEventsManager.listenMessages(gameId, userId, key.toString().replace(' ', '_'), new RemoteEventsManager.StructureConsumer<Transport>(Transport.class){
 
                 @Override
                 protected void onMessage(Transport message) {
                     logger.info("received message {} for key {}", message, key);
-                    System.out.println("received message "+message+" for key " + key);
                     value = message.getValue();
                 }
             });
@@ -52,6 +53,14 @@ public class RemoteInputCommandStateListener implements CommandStateListener, Pr
         if(value != 0) {
             key.execute(value*tpf);
         }
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public static class Transport {

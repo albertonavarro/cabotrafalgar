@@ -22,7 +22,6 @@ public class RemoteInputCommandGenerator implements CommandGenerator {
         return new RemoteInputCommandStateListener( key, remoteEventsManager);
     }
 
-
     @Override
     public String toString() {
         return "Remote Shared Screen";

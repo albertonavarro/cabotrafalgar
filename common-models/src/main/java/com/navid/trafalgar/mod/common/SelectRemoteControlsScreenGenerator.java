@@ -91,6 +91,8 @@ public class SelectRemoteControlsScreenGenerator implements ScreenGenerator {
 
         final File qrcode = generateQRCode(url);
 
+        enrichWithGameAndUser(keyListeners, game.getId(), "user");
+
         //sorting commands in alphabetical order of command name
         List<RemoteInputCommandStateListener> sortedCommands = newArrayList(keyListeners);
         Collections.sort(sortedCommands, new Comparator<RemoteInputCommandStateListener>() {
@@ -219,6 +221,13 @@ public class SelectRemoteControlsScreenGenerator implements ScreenGenerator {
                 // </layer>
             }
         }.build(nifty);
+    }
+
+    private void enrichWithGameAndUser(Collection<RemoteInputCommandStateListener> keyListeners, Long id, String user) {
+        for(RemoteInputCommandStateListener current : keyListeners) {
+            current.setGameId(id);
+            current.setUserId(user);
+        }
     }
 
     private File generateQRCode(URL url)  {

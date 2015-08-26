@@ -23,20 +23,8 @@ public class RemoteEventsManager implements ExceptionListener {
 
     private final Map<String, MessageConsumer> consumers = new HashMap<>();
 
-    /*@Override
-    public void onUnload() {
-        consumers.clear();
-        System.out.println("onUnload");
-        try {
-            connection.close();
-        } catch (JMSException e) {
-            System.out.println("Caught: " + e);
-        }
-
-    }*/
 
     public  RemoteEventsManager() {
-        System.out.println("onInit");
 
         try {
             connectionFactory = new ActiveMQConnectionFactory("tcp://lazylogin.ws:61616");
@@ -59,8 +47,8 @@ public class RemoteEventsManager implements ExceptionListener {
         System.out.println("onException" + exception.getMessage());
     }
 
-    public void listenMessages(String user, String control, StructureConsumer messageListener) throws JMSException {
-        Topic topic = session.createTopic("game/1/" + user + "/" + control);
+    public void listenMessages(Long gameId, String user, String control, StructureConsumer messageListener) throws JMSException {
+        Topic topic = session.createTopic("game/" + gameId + "/" + user + "/" + control);
 
         MessageConsumer consumer = session.createConsumer(topic);
         consumer.setMessageListener(messageListener);
