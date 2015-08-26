@@ -3,8 +3,11 @@ package com.navid.trafalgar.input;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.navid.trafalgar.manager.InitState;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.apache.activemq.command.ActiveMQMessage;
 import org.apache.activemq.command.ActiveMQTextMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
 import java.io.IOException;
@@ -13,6 +16,7 @@ import java.util.Map;
 
 public class RemoteEventsManager implements ExceptionListener {
 
+    private final static Logger logger = LoggerFactory.getLogger(RemoteEventsManager.class);
     private ActiveMQConnectionFactory connectionFactory;
     private Connection connection;
     private Session session;
@@ -35,7 +39,7 @@ public class RemoteEventsManager implements ExceptionListener {
         System.out.println("onInit");
 
         try {
-            connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+            connectionFactory = new ActiveMQConnectionFactory("tcp://lazylogin.ws:61616");
             // Create a Connection
             connection = connectionFactory.createConnection();
             connection.start();
@@ -83,11 +87,10 @@ public class RemoteEventsManager implements ExceptionListener {
         public void onMessage(Message message) {
             ObjectMapper om = new ObjectMapper();
             try {
-                T result = om.reader().withType(type).readValue(((ActiveMQTextMessage) message).getText());
+                T result = om.reader().withType(type).readValue(((ActiveMQBytesMessage) message).getContent().data);
                 onMessage(result);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JMSException e) {
+                logger.info("Received event {}", result);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

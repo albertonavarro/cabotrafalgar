@@ -11,4 +11,5 @@ moduleScreenFlow:
   - selectShip
   - selectControl
   - selectKeys
+  - selectRemoteControl
   - windTunnelScreen

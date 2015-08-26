@@ -3,6 +3,7 @@ package com.navid.trafalgar.games;
 import com.google.common.base.Optional;
 import com.jme3.app.Application;
 import com.jme3.app.state.VideoRecorderAppState;
+import com.jme3.asset.plugins.FileLocator;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
@@ -21,6 +22,8 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.screen.Screen;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -70,6 +73,13 @@ public final class Main extends Application {
         super.setPauseOnLostFocus(false);
         LOG.debug("Loading MapAssetLoader");
         assetManager.registerLoader(MapAssetLoader.class, "map");
+
+        try {
+            String tempDir = File.createTempFile("something","something").getParent();
+            assetManager.registerLocator(tempDir, FileLocator.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         registerBean("common.assetManager", assetManager);
         registerBean("common.inputManager", inputManager);

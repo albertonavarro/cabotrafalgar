@@ -1,21 +1,23 @@
 dependencies {
-    compile (
-            project(':mod-api'),
-            libs.lazylogin_common_context,
-            libs.nifty,
-            libs.jme3_core,
-            libs.jme3_effects,
-            libs.spring_beans,
-            libs.spring_core,
-            libs.jackson2_dataformat_yaml,
-            libs.jackson2_databind,
-            libs.nifty_default_controls,
-            libs.eventbus,
-            libs.auto_value,
-            libs.cxf_rt_rs_client
-            )
+    compile(
+        project(':mod-api'),
+        libs.lazylogin_common_context,
+        libs.nifty,
+        libs.jme3_core,
+        libs.jme3_effects,
+        libs.spring_beans,
+        libs.spring_core,
+        libs.jackson2_dataformat_yaml,
+        libs.jackson2_databind,
+        libs.nifty_default_controls,
+        libs.eventbus,
+        libs.auto_value,
+        libs.cxf_rt_rs_client,
+        libs.zxing,
+        libs.cabotrafalgar_gamemanager_client
+    )
 
-    testCompile (
+    testCompile(
 
     )
 }

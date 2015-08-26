@@ -12,5 +12,7 @@
     <bean id="mod.common.selectcontrolgenerator" class="com.navid.trafalgar.mod.common.SelectControlsScreenGenerator" autowire="byType" />
     <bean id="mod.common.selectkeyscontroller" class="com.navid.trafalgar.mod.common.SelectKeyboardControlsScreenController" autowire="byType" />
     <bean id="mod.common.selectkeysgenerator" class="com.navid.trafalgar.mod.common.SelectKeyboardControlsScreenGenerator" autowire="byType" />
-    
+    <bean id="mod.common.selectremotecontrolgenerator" class="com.navid.trafalgar.mod.common.SelectRemoteControlsScreenGenerator" autowire="byType" />
+    <bean id="mod.common.selectremotecontrolcontroller" class="com.navid.trafalgar.mod.common.SelectRemoteControlsScreenController" autowire="byType" />
+
 </beans>

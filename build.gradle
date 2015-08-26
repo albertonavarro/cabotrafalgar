@@ -68,7 +68,9 @@ ext{
             j_ogg_all: 'de.jarnbjo:j-ogg-all:1.0.0',
             xpp3: 'xpp3:xpp3:1.1.4c',
             logback: 'ch.qos.logback:logback-classic:1.0.9',
-            nifty_flow : 'com.navid.nifty:nifty-flow:0.3.1'
+            nifty_flow : 'com.navid.nifty:nifty-flow:0.3.1',
+            zxing: 'com.google.zxing:core:3.1.0',
+            cabotrafalgar_gamemanager_client: 'gamemanager:rest-client:1.1.1'
     ]
 }
 
@@ -84,9 +86,10 @@ subprojects {
     repositories {
         mavenLocal()
         jcenter()
-        maven {
+        maven { url "http://dl.bintray.com/albertonavarro/maven" }
+        /*maven {
             url 'http://repo.cabotrafalgar.mooo.com/repo'
-        }
+        }*/
     }
 
 
