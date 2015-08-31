@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
@@ -52,6 +53,18 @@ public final class Main extends Application {
 
         Main app = new Main();
         app.start();
+    }
+
+    @Override
+    public void destroy() {
+        Map<String, AutoCloseable> autocloseables = ctx.getBeansOfType(AutoCloseable.class);
+        for(AutoCloseable autoCloseable : autocloseables.values()) {
+            try {
+                autoCloseable.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

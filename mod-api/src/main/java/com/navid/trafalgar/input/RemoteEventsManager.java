@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RemoteEventsManager implements ExceptionListener {
+public class RemoteEventsManager implements ExceptionListener, AutoCloseable {
 
     private final static Logger logger = LoggerFactory.getLogger(RemoteEventsManager.class);
     private ActiveMQConnectionFactory connectionFactory;
@@ -61,6 +61,11 @@ public class RemoteEventsManager implements ExceptionListener {
         } catch (JMSException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        connection.close();
     }
 
     public static abstract class StructureConsumer<T> implements MessageListener {
