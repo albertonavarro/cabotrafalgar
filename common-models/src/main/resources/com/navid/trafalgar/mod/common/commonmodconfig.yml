@@ -11,7 +11,7 @@ screenDeclarations:
     interfaceConstructor: spring:mod.common.selectkeysgenerator
     controller: spring:mod.common.selectkeyscontroller
   - screenName: selectRemoteControl
-    interfaceConstructor: spring:mod.common.selectremotecontrolgenerator
+    interfaceConstructor: static:/mod/common/interface_remoteselector.xml
     controller: spring:mod.common.selectremotecontrolcontroller
 
 

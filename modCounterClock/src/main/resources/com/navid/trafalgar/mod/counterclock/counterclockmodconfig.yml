@@ -19,4 +19,5 @@ moduleScreenFlow:
   - selectMap
   - selectControl
   - selectKeys
+  - selectRemoteControl
   - counterclockScreen
