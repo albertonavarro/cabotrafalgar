@@ -4,7 +4,7 @@
     <useStyles filename="nifty-default-styles.xml" />
     <useControls filename="nifty-default-controls.xml" />
 
-    <screen id="${screenUniqueId}" controller="com.navid.trafalgar.mod.common.SelectKeyboardControlsScreenController">
+    <screen id="${screenUniqueId}" controller="com.navid.trafalgar.mod.common.SelectControlsScreenController">
         <layer id="background" childLayout="center">
         </layer>
         <layer id="foreground" childLayout="vertical" style="nifty-panel-no-shadow">
@@ -17,6 +17,7 @@
                     <text text="" font="Interface/Fonts/Default.fnt" />
                     <#list sortedCommands as commands>
                     <text text="${commands}" font="Interface/Fonts/Default.fnt" />
+                    <control id="${commands}" name="radioButtonGroup" />
                     </#list>
                 </panel>
                 <#list sortedGenerators as generators>
@@ -24,7 +25,9 @@
                     <text text="${generators}" font="Interface/Fonts/Default.fnt" />
                     <text text="" font="Interface/Fonts/Default.fnt" />
                     <#list sortedCommands as commands>
-                    <text text="${mapOfMapsOfGenerators[commands][generators]}" font="Interface/Fonts/Default.fnt" />
+                    <#if mapOfMapsOfGenerators[commands][generators]>
+                    <control name="radioButton" id="${generators}" group="${commands}" />
+                    </#if>
                     </#list>
                 </panel>
                 </#list>

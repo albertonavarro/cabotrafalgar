@@ -84,7 +84,7 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
             Map<String, Boolean> mapForGenerator = new HashMap<>();
 
             for (CommandGenerator commandGenerator : input.get(command)) {
-                mapForGenerator.put(commandGenerator.toString(), true);
+                mapForGenerator.put(commandGenerator.toString(), Boolean.TRUE);
             }
 
             result.put(command.toString(), mapForGenerator);
