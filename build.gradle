@@ -5,7 +5,7 @@ ext{
             jackson: '1.9.13',
             lazylogin: '1.3.266',
             recordserver: '1.2.105',
-            jme3: '3.1.0-snapshot-github',
+            jme3: '3.1.0-SNAPSHOT',
             nifty: '1.3.3',
             cxf: '3.0.1',
             lwjgl: '2.9.0'
@@ -68,7 +68,7 @@ ext{
             j_ogg_all: 'de.jarnbjo:j-ogg-all:1.0.0',
             xpp3: 'xpp3:xpp3:1.1.4c',
             logback: 'ch.qos.logback:logback-classic:1.0.9',
-            nifty_flow : 'com.navid.nifty:nifty-flow:0.3.1',
+            nifty_flow : 'com.navid.nifty:nifty-flow:0.4.0',
             zxing: 'com.google.zxing:core:3.1.0',
             cabotrafalgar_gamemanager_client: 'gamemanager:rest-client:1.1.1'
     ]
@@ -84,12 +84,17 @@ subprojects {
     targetCompatibility = 1.7
 
     repositories {
-        mavenLocal()
+        //mavenLocal()
         jcenter()
-        maven { url "http://dl.bintray.com/albertonavarro/maven" }
-        /*maven {
-            url 'http://repo.cabotrafalgar.mooo.com/repo'
-        }*/
+        maven {
+            url "http://dl.bintray.com/albertonavarro/maven"
+        }
+        maven {
+            url 'http://updates.jmonkeyengine.org/maven/'
+        }
+        maven {
+            url 'http://nifty-gui.sourceforge.net/nifty-maven-repo'
+        }
     }
 
 
