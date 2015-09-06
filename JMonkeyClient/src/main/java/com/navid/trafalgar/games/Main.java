@@ -68,15 +68,14 @@ public final class Main extends Application {
     }
 
     @Override
-    public void start(JmeContext.Type contextType) {
-
+    public void start(JmeContext.Type contextType, boolean waitFor) {
         settings = new AppSettings(true);
         if (!JmeSystem.showSettingsDialog(settings, true)) {
             return;
         }
 
         setSettings(settings);
-        super.start(contextType);
+        super.start(contextType, waitFor);
     }
 
     @Override
