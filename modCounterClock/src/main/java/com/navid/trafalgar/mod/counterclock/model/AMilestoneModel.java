@@ -38,7 +38,7 @@ public abstract class AMilestoneModel extends Node implements Control {
 
         CollisionResults results = new CollisionResults();
         for (Node currentCollidable : collidables) {
-            currentCollidable.collideWith(this.getWorldBound(), results);
+            this.collideWith(currentCollidable.getWorldBound(), results);
 
             if (!state && results.size() > 0) {
                 state = true;

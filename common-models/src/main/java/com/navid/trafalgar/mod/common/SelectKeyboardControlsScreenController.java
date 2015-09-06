@@ -121,6 +121,11 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
                             }
                         });
 
+        if(keyListeners.isEmpty()){
+            screenFlowManager.setNextScreenHint(ScreenFlowManager.SKIP);
+            nifty.gotoScreen("redirector");
+        }
+
         eventHandler = new EventTopicSubscriber<ListBoxSelectionChangedEvent>() {
             @Override
             public void onEvent(String string, ListBoxSelectionChangedEvent t) {

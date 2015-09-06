@@ -20,11 +20,6 @@
              <ref bean="common.nifty"/>
          </constructor-arg>
      </bean>
-     <bean id="mod.common.selectremotecontrolgenerator" class="com.navid.trafalgar.mod.common.SelectRemoteControlsScreenGeneratorFTL" autowire="byType" >
-         <constructor-arg>
-             <ref bean="common.nifty"/>
-         </constructor-arg>
-     </bean>
      <bean id="mod.common.selectremotecontrolcontroller" class="com.navid.trafalgar.mod.common.SelectRemoteControlsScreenController" autowire="byType" />
 
  </beans>

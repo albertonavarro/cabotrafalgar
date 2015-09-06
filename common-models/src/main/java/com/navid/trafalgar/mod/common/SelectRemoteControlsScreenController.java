@@ -61,13 +61,18 @@ public class SelectRemoteControlsScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        Collection<RemoteInputCommandStateListener> keyListeners
+        Collection<RemoteInputCommandStateListener> remoteListeners
                 = gameConfiguration.getPreGameModel().getByType(RemoteInputCommandStateListener.class);
+
+        if(remoteListeners.isEmpty()){
+            screenFlowManager.setNextScreenHint(ScreenFlowManager.SKIP);
+            nifty.gotoScreen("redirector");
+        }
 
         GameManagerClient gameManagerClient = new GameManagerClient("http://gamemanager.trafalgar.ws");
 
         RestGame game = gameManagerClient.createNewGame(RestScope.PUBLIC, "mode1", "map01");
-        URL url = gameManagerClient.addPlayer(game, "helper", "helper", Lists.transform(newArrayList(keyListeners), new Function<RemoteInputCommandStateListener, RestControl>() {
+        URL url = gameManagerClient.addPlayer(game, "helper", "helper", Lists.transform(newArrayList(remoteListeners), new Function<RemoteInputCommandStateListener, RestControl>() {
             @Nullable
             @Override
             public RestControl apply(RemoteInputCommandStateListener input) {
@@ -78,12 +83,11 @@ public class SelectRemoteControlsScreenController implements ScreenController {
 
         final File qrcode = generateQRCode(url);
 
-        enrichWithGameAndUser(keyListeners, game.getId(), "user");
+        enrichWithGameAndUser(remoteListeners, game.getId(), "user");
 
         NiftyImage newImage = nifty.createImage(qrcode.getName(), false);
         Element qrCodeImage = screen.findElementByName("qrCodeImage");
         qrCodeImage.getRenderer(ImageRenderer.class).setImage(newImage);
-
     }
 
     @Override

@@ -29,7 +29,7 @@ dependencies {
             project(':shipModelLeyton'),
             libs.jme3_lwjgl,
             libs.jwjgl,
-            libs.lwjgl_natives,
+            //libs.lwjgl_natives,
             libs.eventbus,
             libs.j_ogg_all,
             libs.jme3_jogg,
