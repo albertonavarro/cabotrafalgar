@@ -52,7 +52,6 @@ public final class ScreenSelectMap implements ScreenController {
     }
 
     private enum ShowGhost {
-
         noGhost, bestLocal, bestRemote
     };
 
@@ -102,6 +101,7 @@ public final class ScreenSelectMap implements ScreenController {
         listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
         listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
         mapDropDown = screen.findNiftyControl("dropDown1", ListBox.class);
+
         mapDescription = screen.findNiftyControl("mapDescription", Label.class);
         mapDropDown.addAllItems(getMaps());
         if (mapDropDown.itemCount() > 0) {
@@ -135,8 +135,10 @@ public final class ScreenSelectMap implements ScreenController {
 
     @NiftyEventSubscriber(id = "dropDown1")
     public void onMapSelectionChanged(final String id, final ListBoxSelectionChangedEvent<ListItem> event) {
-        List<ListItem> selection = event.getSelection();
-        setSelectedMap(selection.get(0));
+        if(!event.getSelection().isEmpty()) {
+            List<ListItem> selection = event.getSelection();
+            setSelectedMap(selection.get(0));
+        }
     }
 
     @NiftyEventSubscriber(id = "noGhost")

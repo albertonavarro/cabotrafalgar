@@ -27,7 +27,7 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive {
 
                     @Override
                     public void execute(float tpf) {
-                        rudderRight(tpf);
+                        rudderRight(tpf*100);
                     }
                 });
                 add(new Command() {
@@ -38,7 +38,7 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive {
 
                     @Override
                     public void execute(float tpf) {
-                        rudderLeft(tpf);
+                        rudderLeft(tpf*100);
                     }
                 });
                 add(new Command() {

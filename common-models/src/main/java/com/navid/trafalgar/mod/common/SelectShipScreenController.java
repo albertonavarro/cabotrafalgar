@@ -168,7 +168,11 @@ public final class SelectShipScreenController implements ScreenController {
      */
     @NiftyEventSubscriber(id = "shipList")
     public void onShipChanged(final String id, final ListBoxSelectionChangedEvent<ListItem> event) {
-        selectedItem = event.getSelection().get(0);
+        if(!event.getSelection().isEmpty()){
+            selectedItem = event.getSelection().get(0);
+        } else {
+            selectedItem = null;
+        }
     }
 
     public void goTo(String nextScreen) {
