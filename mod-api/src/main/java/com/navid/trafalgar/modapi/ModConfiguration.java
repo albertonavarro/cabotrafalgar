@@ -21,6 +21,8 @@ public final class ModConfiguration {
 
     private List<String> moduleScreenFlow;
 
+    private List<ModMusicScenario> musicAmbients;
+
     private BeanFactory beanFactory;
 
     /**
@@ -148,4 +150,11 @@ public final class ModConfiguration {
         return "Module:" + modName;
     }
 
+    public List<ModMusicScenario> getMusicAmbients() {
+        return musicAmbients;
+    }
+
+    public void setMusicAmbients(List<ModMusicScenario> musicAmbients) {
+        this.musicAmbients = musicAmbients;
+    }
 }

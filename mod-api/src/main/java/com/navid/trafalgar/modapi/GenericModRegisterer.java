@@ -2,10 +2,13 @@ package com.navid.trafalgar.modapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioNode;
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.nifty.flow.dto.ScreenDefinition;
 import com.navid.nifty.flow.resolutors.DefaultInstanceResolutor;
 import com.navid.nifty.flow.resolutors.InstanceResolutionException;
+import com.navid.trafalgar.audio.MusicManager;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.ModelBuilder;
@@ -116,6 +119,20 @@ public abstract class GenericModRegisterer implements ModRegisterer {
             ScreenFlowManager screenFlowManager = ctx.getBean("common.ScreenFlowManager", ScreenFlowManager.class);
             screenFlowManager.addFlowDefinition(modConfiguration.getModName(), of(modConfiguration.getModuleFlowRoot()), modConfiguration.getModuleScreenFlow());
 
+        }
+    }
+
+    @Override
+    public void registerMusic(MusicManager musicManager) {
+        AssetManager assetManager = modConfiguration.getBeanFactory().getBean(AssetManager.class);
+        if (modConfiguration.getMusicAmbients() != null) {
+            for (ModMusicScenario config : modConfiguration.getMusicAmbients() ) {
+                for (String musicFile : config.getFiles()) {
+                    AudioNode audioNode = new AudioNode(assetManager, musicFile, true, true);
+                    audioNode.setPositional(false);
+                    musicManager.setAmbientMusic(config.getAmbient(), audioNode);
+                }
+            }
         }
     }
 }

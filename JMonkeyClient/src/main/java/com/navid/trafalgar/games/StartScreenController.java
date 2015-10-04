@@ -6,6 +6,7 @@ package com.navid.trafalgar.games;
 
 import com.jme3.app.Application;
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.audio.MusicManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -17,6 +18,8 @@ public final class StartScreenController implements ScreenController {
     private Application application;
     @Autowired
     private ScreenFlowManager screenFlowManager;
+    @Autowired
+    private MusicManager musicManager;
 
     /*
      From Bind
@@ -35,6 +38,7 @@ public final class StartScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        musicManager.setCurrentAmbient("menu");
     }
 
     @Override
@@ -65,4 +69,7 @@ public final class StartScreenController implements ScreenController {
         this.application = application;
     }
 
+    public void setMusicManager(MusicManager musicManager) {
+        this.musicManager = musicManager;
+    }
 }

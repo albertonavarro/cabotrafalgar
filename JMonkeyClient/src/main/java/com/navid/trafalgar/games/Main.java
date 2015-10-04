@@ -4,6 +4,8 @@ import com.google.common.base.Optional;
 import com.jme3.app.Application;
 import com.jme3.app.state.VideoRecorderAppState;
 import com.jme3.asset.plugins.FileLocator;
+import com.jme3.audio.*;
+import com.jme3.input.Input;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
@@ -14,6 +16,7 @@ import com.navid.nifty.flow.dto.ScreenDefinition;
 import com.navid.nifty.flow.resolutors.DefaultInstanceResolutor;
 import com.navid.nifty.flow.resolutors.InstanceResolutionException;
 import com.navid.nifty.flow.template.ftl.StaticScreenGeneratorResolutor;
+import com.navid.trafalgar.audio.MusicManager;
 import com.navid.trafalgar.input.RemoteEventsManager;
 import com.navid.trafalgar.maploader.v3.MapAssetLoader;
 import com.navid.trafalgar.modapi.ModRegisterer;
@@ -24,6 +27,8 @@ import de.lessvoid.nifty.screen.Screen;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.SequenceInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -65,6 +70,7 @@ public final class Main extends Application {
                 e.printStackTrace();
             }
         }
+        System.exit(0);
     }
 
     @Override
@@ -168,6 +174,9 @@ public final class Main extends Application {
         }
         for (ModRegisterer currentRegisterer : resultInstances) {
             currentRegisterer.registerFlow(nifty);
+        }
+        for (ModRegisterer currentRegisterer : resultInstances) {
+            currentRegisterer.registerMusic(ctx.getBean(MusicManager.class));
         }
 
     }

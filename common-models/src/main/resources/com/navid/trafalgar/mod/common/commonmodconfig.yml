@@ -13,5 +13,8 @@ screenDeclarations:
   - screenName: selectRemoteControl
     interfaceConstructor: static:/mod/common/interface_remoteselector.xml
     controller: spring:mod.common.selectremotecontrolcontroller
-
-
+musicAmbients:
+  - ambient: menu
+    files:
+      - /mod/common/music/AMemoryAway.ogg
+      - /mod/common/music/Ocean Waves.ogg
