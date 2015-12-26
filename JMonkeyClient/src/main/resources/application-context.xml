@@ -31,7 +31,7 @@
     <bean id="mod.counterclock.clientUser" class="com.lazylogin.client.user.v0.UserCommands" factory-bean="mod.counterclock.clientUserFactory" factory-method="create"/>
     <bean id="mod.counterclock.clientUserFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
         <property name="serviceClass" value="com.lazylogin.client.user.v0.UserCommands"/>
-        <property name="address" value="http://lazylogin.ws/services/user"/>
+        <property name="address" value="http://lazylogin.trafalgar.ws/services/user"/>
         <property name="handlers">
             <list>
                 <bean class="com.navid.lazylogin.context.interceptors.RequestIdHandler">

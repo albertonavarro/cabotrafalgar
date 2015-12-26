@@ -27,7 +27,7 @@ public class RemoteEventsManager implements ExceptionListener, AutoCloseable {
     public  RemoteEventsManager() {
 
         try {
-            connectionFactory = new ActiveMQConnectionFactory("tcp://lazylogin.ws:61616");
+            connectionFactory = new ActiveMQConnectionFactory("tcp://trafalgar.ws:61616");
             // Create a Connection
             connection = connectionFactory.createConnection();
             connection.start();
