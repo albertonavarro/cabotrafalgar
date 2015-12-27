@@ -65,7 +65,9 @@ public class RemoteEventsManager implements ExceptionListener, AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        connection.close();
+        if(connection!=null){
+            connection.close();
+        }
     }
 
     public static abstract class StructureConsumer<T> implements MessageListener {
