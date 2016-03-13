@@ -36,7 +36,7 @@ public final class FileUtils {
      */
     public static List<String> findFilesInFolder(String folder, boolean recursive) {
 
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
 
         URL url = FileUtils.class.getResource("/" + folder);
 

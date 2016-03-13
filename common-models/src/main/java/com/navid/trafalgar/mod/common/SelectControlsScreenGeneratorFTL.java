@@ -39,7 +39,7 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
 
     @Override
     protected Map injectProperties() {
-        HashMap properties = new HashMap<>();
+        HashMap properties = new HashMap();
 
         AShipModelInteractive ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class);
         HashMultimap<Command, CommandGenerator> generatorsForCommands = generatorBuilder.getGeneratorsFor(ship.getCommands());
@@ -57,7 +57,7 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
         });
 
         //getting all different generators
-        Set<CommandGenerator> generators = new HashSet<>();
+        Set<CommandGenerator> generators = new HashSet<CommandGenerator>();
         for(CommandGenerator generator : generatorsForCommands.values()) {
             generators.add(generator);
         }
@@ -78,10 +78,10 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
     }
 
     private Map<String, Map<String, Boolean>> generateMapOfMaps(HashMultimap<Command, CommandGenerator> input) {
-        Map<String, Map<String, Boolean>> result = new HashMap<>();
+        Map<String, Map<String, Boolean>> result = new HashMap<String, Map<String, Boolean>>();
 
         for(Command command : input.keySet()) {
-            Map<String, Boolean> mapForGenerator = new HashMap<>();
+            Map<String, Boolean> mapForGenerator = new HashMap<String, Boolean>();
 
             for (CommandGenerator commandGenerator : input.get(command)) {
                 mapForGenerator.put(commandGenerator.toString(), Boolean.TRUE);

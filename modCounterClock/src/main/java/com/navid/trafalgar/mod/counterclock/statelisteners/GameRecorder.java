@@ -47,7 +47,7 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
     @Autowired
     private RecordServerPersistenceService recordServerPersistenceService;
 
-    private List<String> eventList = new ArrayList<>();
+    private List<String> eventList = new ArrayList<String>();
 
     private final int corePoolSize = 4;
     private final int maximumPoolSize = 8;
@@ -77,7 +77,7 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
         newRecord.setTimestamp(gameStatus.getTime().getValue());
         newRecord.setEventList(eventList);
         candidateRecord.addStepRecord(newRecord);
-        eventList = new ArrayList<>();
+        eventList = new ArrayList<String>();
     }
 
     @Override

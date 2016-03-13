@@ -21,13 +21,13 @@ public class RemoteEventsManager implements ExceptionListener, AutoCloseable {
     private Connection connection;
     private Session session;
 
-    private final Map<String, MessageConsumer> consumers = new HashMap<>();
+    private final Map<String, MessageConsumer> consumers = new HashMap<String, MessageConsumer>();
 
 
     public  RemoteEventsManager() {
 
         try {
-            connectionFactory = new ActiveMQConnectionFactory("tcp://trafalgar.ws:61616");
+            connectionFactory = new ActiveMQConnectionFactory("tcp://trafalgar.ws:7001");
             // Create a Connection
             connection = connectionFactory.createConnection();
             connection.start();

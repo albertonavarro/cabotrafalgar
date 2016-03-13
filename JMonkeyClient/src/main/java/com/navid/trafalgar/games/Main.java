@@ -155,7 +155,7 @@ public final class Main extends Application {
             try {
                 ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
                 resultInstances.add(currentLoader);
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            } catch (Exception ex) {
                 LOG.error("Error loading module {}", currentClass, ex);
             }
         }

@@ -44,7 +44,7 @@ public final class EventManager {
      */
     public static final String UNLOAD = "UNLOAD";
 
-    private Map<String, Set<EventListener>> eventListeners = new HashMap<>();
+    private Map<String, Set<EventListener>> eventListeners = new HashMap<String, Set<EventListener>>();
 
     /**
      *
@@ -55,7 +55,7 @@ public final class EventManager {
         for (String currentEvent : events) {
             Set<EventListener> listeners = eventListeners.get(currentEvent);
             if (listeners == null) {
-                listeners = new HashSet<>();
+                listeners = new HashSet<EventListener>();
                 eventListeners.put(currentEvent, listeners);
             }
             listeners.add(eventListener);
@@ -77,7 +77,7 @@ public final class EventManager {
         }
 
         if (event.equals(UNLOAD)) {
-            eventListeners = new HashMap<>();
+            eventListeners = new HashMap<String, Set<EventListener>>();
         }
 
         LOG.debug("Finished firing event: {}", event);

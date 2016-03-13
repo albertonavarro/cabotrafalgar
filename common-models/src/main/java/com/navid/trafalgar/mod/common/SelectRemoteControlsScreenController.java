@@ -69,7 +69,7 @@ public class SelectRemoteControlsScreenController implements ScreenController {
             nifty.gotoScreen("redirector");
         }
 
-        GameManagerClient gameManagerClient = new GameManagerClient("http://gamemanager.trafalgar.ws");
+        GameManagerClient gameManagerClient = new GameManagerClient("http://gamemanager.trafalgar.ws:8080");
 
         RestGame game = gameManagerClient.createNewGame(RestScope.PUBLIC, "mode1", "map01");
         URL url = gameManagerClient.addPlayer(game, "helper", "helper", Lists.transform(newArrayList(remoteListeners), new Function<RemoteInputCommandStateListener, RestControl>() {

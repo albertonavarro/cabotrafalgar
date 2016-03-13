@@ -40,7 +40,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     @Autowired
     private ProfileManager profileManager;
 
-    private static final Map<Integer, String> REVERSE_MAP = new HashMap<>();
+    private static final Map<Integer, String> REVERSE_MAP = new HashMap<Integer, String>();
 
     static {
         REVERSE_MAP.put(KeyInput.KEY_0, "0");
@@ -209,7 +209,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
 
     @Override
     public void onEndScreen() {
-        Map<String, String> userProperties = new HashMap<>();
+        Map<String, String> userProperties = new HashMap<String, String>();
 
         for (KeyboardCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class)) {
             userProperties.put(listener.toString(), Integer.toString(listener.getKeycode()));
@@ -239,7 +239,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     private boolean validateKeys() {
         List<KeyboardCommandStateListener> commands
                 = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
-        Set<Integer> commandsByKey = new HashSet<>();
+        Set<Integer> commandsByKey = new HashSet<Integer>();
         for (KeyboardCommandStateListener command : commands) {
             if (!commandsByKey.add(command.getKeycode())) {
                 return false;

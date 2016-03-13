@@ -54,21 +54,24 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
     }
 
     private void saveQualification(Qualification qualification) {
+        FileWriter fw;
         try {
-            try (FileWriter fw = new FileWriter(qualification.getFileName())) {
-                gson.toJson(qualification, Qualification.class, fw);
-            }
+            fw = new FileWriter(qualification.getFileName());
+            gson.toJson(qualification, Qualification.class, fw);
+            fw.close();
         } catch (IOException ex) {
             LOG.error("Error saving qualification record with qualification {}", qualification, ex);
             throw new IOError(ex);
+        } finally {
+
         }
     }
 
     private void saveRecord(CandidateRecord candidateRecord, Qualification qualification) {
         try {
-            try (JsonWriter fw = new JsonWriter(new FileWriter(qualification.getMapName()))) {
-                gson.toJson(candidateRecord, CandidateRecord.class, fw);
-            }
+            JsonWriter fw = new JsonWriter(new FileWriter(qualification.getMapName()));
+            gson.toJson(candidateRecord, CandidateRecord.class, fw);
+            fw.close();
         } catch (IOException ex) {
             LOG.error("Error saving candidate record with qualification {}", qualification, ex);
             throw new IOError(ex);
@@ -78,9 +81,9 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
     private CandidateRecord loadRecord(Qualification qualification) {
         try {
             CandidateRecord candidate;
-            try (JsonReader fr = new JsonReader(new FileReader(qualification.getMapName()))) {
-                candidate = gson.fromJson(fr, qualification.getShipClass());
-            }
+            JsonReader fr = new JsonReader(new FileReader(qualification.getMapName()));
+            candidate = gson.fromJson(fr, qualification.getShipClass());
+            fr.close();
             return candidate;
         } catch (FileNotFoundException e) {
             return null;
@@ -120,9 +123,10 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
 
         try {
             Qualification q;
-            try (FileReader fr = new FileReader(qualificationFile)) {
-                q = gson.fromJson(fr, Qualification.class);
-            }
+            FileReader fr;
+            fr = new FileReader(qualificationFile);
+            q = gson.fromJson(fr, Qualification.class);
+            fr.close();
             if (q == null) {
                 return new Qualification(qualificationFile);
             }
@@ -139,7 +143,7 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
         //TODO use ship
         Qualification q = returnCurrentQualificationForMap(map, ship);
 
-        List<CompetitorInfo> result = new ArrayList<>();
+        List<CompetitorInfo> result = new ArrayList<CompetitorInfo>();
         for (int index = 0; index < q.getTimes().size() && index < number; index++) {
 
             CompetitorInfo currentCompetitor = new CompetitorInfo();

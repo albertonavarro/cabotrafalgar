@@ -59,7 +59,7 @@ public final class ScreenSelectMap implements ScreenController {
     private Screen screen;
     private ListItem selectedMap;
     private ShowGhost ghostOptions = ShowGhost.bestLocal;
-    private final Map<String, NiftyImage> loadedImages = new HashMap<>();
+    private final Map<String, NiftyImage> loadedImages = new HashMap<String, NiftyImage>();
     private static final Logger LOG = LoggerFactory.getLogger(ScreenSelectMap.class);
 
     /**

@@ -49,7 +49,7 @@ public final class SelectControlsScreenController implements ScreenController {
 
     
     private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler;
-    private final Map<String, String> generated = new HashMap<>();
+    private final Map<String, String> generated = new HashMap<String, String>();
     private Map<String, Command> commandsMap;
     private Map<String, CommandGenerator> generatorMap;
 
@@ -107,7 +107,7 @@ public final class SelectControlsScreenController implements ScreenController {
     }
 
     public void goTo(String nextScreen) {
-        Map<Command, CommandGenerator> assignments = new HashMap<>();
+        Map<Command, CommandGenerator> assignments = new HashMap<Command, CommandGenerator>();
 
         for (Map.Entry<String, String> entry : generated.entrySet()) {
             assignments.put(commandsMap.get(entry.getKey()), generatorMap.get(entry.getValue()));
