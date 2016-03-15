@@ -24,6 +24,7 @@ dependencies {
             project(':common-models'),
             project(':modCounterClock'),
             project(':modWindTunnel'),
+            project(':modTutorial'),
             project(':shipModelY'),
             project(':shipModelZ'),
             project(':shipModelLeyton'),

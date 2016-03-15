@@ -1,0 +1,9 @@
+modName: Tutorial
+modPreGameSpringConfig: mod/tutorial/application-context.xml
+screenDeclarations:
+  - screenName: tutorialMainScreen
+    interfaceConstructor: static:/mod/tutorial/tutorial_screen.xml
+    controller: spring:mod.tutorial.mainscreencontroller
+moduleFlowRoot: root:root
+moduleScreenFlow:
+  - tutorialMainScreen
