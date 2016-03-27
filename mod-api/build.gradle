@@ -11,7 +11,14 @@ dependencies {
             libs.jackson2_dataformat_yaml,
             libs.nifty_flow,
             libs.spring_jms,
-            libs.activemq_all
+            //libs.geronimo_specs_j2ee_management,
+           // libs.geronimo_specs_jms_spec,
+           // libs.hawtbuf,
+           // libs.commons_net,
+           // libs.jmdns,
+           // libs.activemq,
+            libs.activemq_client
+            //libs.activemq_all
             )
 
     testCompile (

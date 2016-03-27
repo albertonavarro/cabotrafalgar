@@ -52,6 +52,14 @@ ext{
             cxf_rt_rs_client: 'org.apache.cxf:cxf-rt-rs-client:' + v.cxf,
             //AMQ
             activemq_all: 'org.apache.activemq:activemq-all:5.11.1',
+            activemq_client: 'org.apache.activemq:activemq-client:5.11.1',
+            geronimo_specs_j2ee_management: 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1',
+            geronimo_specs_jms_spec: 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1',
+            hawtbuf: 'org.fusesource.hawtbuf:hawtbuf:1.9',
+            commons_net: 'commons-net:commons-net:3.2',
+            jmdns: 'javax.jmdns:jmdns:3.4.1',
+            activemq: 'org.apache.activemq:activemq-openwire-generator:5.11.1',
+
             //OTHERS
             junit: 'junit:junit:4.10',
             guava: 'com.google.guava:guava:17.0',
@@ -67,6 +75,8 @@ ext{
             j_ogg_all: 'de.jarnbjo:j-ogg-all:1.0.0',
             xpp3: 'xpp3:xpp3:1.1.4c',
             logback: 'ch.qos.logback:logback-classic:1.0.9',
+            log4j_over_slf4j: 'org.slf4j:log4j-over-slf4j:1.7.10',
+            jul_to_slf4j: 'org.slf4j:jul-to-slf4j:1.7.10',
             nifty_flow : 'com.navid.nifty:nifty-flow:0.5.1',
             zxing: 'com.google.zxing:core:3.1.0',
             cabotrafalgar_gamemanager_client: 'gamemanager:rest-client:1.1.1'

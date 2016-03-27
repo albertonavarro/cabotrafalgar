@@ -33,9 +33,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -51,6 +55,11 @@ public final class Main extends Application {
     private static boolean record = false;
 
     public static void main(String[] args) {
+        LogManager.getLogManager().reset();
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
+        java.util.logging.Logger.getLogger("global").setLevel(Level.FINEST);
+
 
         if (args.length == 1 && args[0].equals("record")) {
             record = true;
@@ -155,7 +164,9 @@ public final class Main extends Application {
             try {
                 ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
                 resultInstances.add(currentLoader);
-            } catch (Exception ex) {
+            } catch(InstantiationException e) {
+                LOG.info("Error instantiating module {}", currentClass.toString());
+            } catch(Exception ex) {
                 LOG.error("Error loading module {}", currentClass, ex);
             }
         }

@@ -26,8 +26,8 @@
     </appender>
 
     <logger name="com.jme3" level="ERROR" additivity="false"/>
-    <logger name="de.lessvoid.nifty" level="ERROR" additivity="false"/>
-    <logger name="com.navid" level="DEBUG"/>
+    <logger name="de.lessvoid.nifty" level="INFO" additivity="false"/>
+    <logger name="com.navid" level="INFO"/>
     
     <root level="INFO">          
         <appender-ref ref="STDOUT" />

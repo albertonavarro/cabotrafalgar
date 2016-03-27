@@ -17,7 +17,15 @@ dependencies {
             libs.nifty_default_controls,
             libs.spring_core,
             libs.spring_beans,
-            libs.spring_context
+            libs.spring_context,
+            libs.jul_to_slf4j,
+            libs.activemq_client
+            //libs.geronimo_specs_j2ee_management,
+            //libs.geronimo_specs_jms_spec,
+            //libs.hawtbuf,
+            //libs.commons_net,
+            //libs.jmdns,
+            //libs.activemq,
     )
 
     runtime(
@@ -30,7 +38,6 @@ dependencies {
             project(':shipModelLeyton'),
             libs.jme3_lwjgl,
             libs.jwjgl,
-            //libs.lwjgl_natives,
             libs.eventbus,
             libs.j_ogg_all,
             libs.jme3_jogg,
@@ -38,7 +45,7 @@ dependencies {
             libs.jme3_plugins,
             libs.nifty_style_black,
             libs.logback,
-            libs.activemq_all,
+            libs.log4j_over_slf4j,
             libs.spring_jms
     )
 

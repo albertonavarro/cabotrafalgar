@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Resource;
+import javax.xml.ws.soap.SOAPFaultException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,12 +81,15 @@ public final class FileProfileManager implements ProfileManager {
             try {
                 LoginWithTokenResponse response
                         = userCommandsClient.loginWithToken(
-                                new LoginWithTokenRequest().withToken(
-                                        new Token().withToken(profile.getToken())));
+                        new LoginWithTokenRequest().withToken(
+                                new Token().withToken(profile.getToken())));
                 profile.setSessionId(response.getResponse().getSessionid());
                 return profile.getSessionId();
+            } catch (SOAPFaultException ex) {
+                LOG.warn("Error validating session: {}", ex.getMessage());
+                return null;
             } catch (Exception e) {
-                LOG.info("Connectivity problem validating session, returning null", e);
+                LOG.error("Connectivity problem validating session, returning null", e);
                 return null;
             }
         } else {
@@ -281,6 +286,10 @@ public final class FileProfileManager implements ProfileManager {
 
                     try {
                         String sessionId = getSessionId(result);
+                        if(sessionId == null) {
+                            LOG.info("No session id found for profile {}, skipping authentication.", f.getName());
+                            return result;
+                        }
                         GetInfoResponse response = userCommandsClient.getInfo(new GetInfoRequest().withSessionid(sessionId));
                         result.setName(response.getName());
                     } catch (Exception e) {
