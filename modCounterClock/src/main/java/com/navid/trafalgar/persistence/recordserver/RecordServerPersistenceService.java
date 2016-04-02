@@ -39,7 +39,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     @Autowired
     private ModelBuilder builder2;
 
-    @Resource(name = "mod.counterclock.clientRecordServer")
+    @Resource(name = "mod.counterclock.clientRecordServer-hystrixProxy")
     private V2Resource rankingClient;
 
     @Resource(name = "mod.counterclock.requestContextContainer")

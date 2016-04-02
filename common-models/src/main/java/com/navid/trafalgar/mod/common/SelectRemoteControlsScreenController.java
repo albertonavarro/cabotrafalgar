@@ -67,6 +67,7 @@ public class SelectRemoteControlsScreenController implements ScreenController {
         if(remoteListeners.isEmpty()){
             screenFlowManager.setNextScreenHint(ScreenFlowManager.SKIP);
             nifty.gotoScreen("redirector");
+            return;
         }
 
         GameManagerClient gameManagerClient = new GameManagerClient("http://gamemanager.trafalgar.ws:8080");

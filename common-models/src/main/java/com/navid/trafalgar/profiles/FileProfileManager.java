@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import javax.annotation.Nullable;
 import javax.annotation.Resource;
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -43,7 +44,7 @@ public final class FileProfileManager implements ProfileManager {
 
     private File configFile;
 
-    @Resource(name = "mod.counterclock.clientUser")
+    @Resource(name = "mod.counterclock.hystrixclientUser")
     private UserCommands userCommandsClient;
 
     @Resource(name = "mod.counterclock.requestContextContainer")
@@ -74,6 +75,15 @@ public final class FileProfileManager implements ProfileManager {
         return getSessionId(activeProfile);
     }
 
+    @Override
+    public String getSessionId(String profile) {
+        if(profiles.containsKey(profile)){
+            return getSessionId(profiles.get(profile));
+        } else {
+            return null;
+        }
+    }
+
     private String getSessionId(ProfileInternal profile) {
         if (profile.getSessionId() != null) {
             return profile.getSessionId();
@@ -89,7 +99,7 @@ public final class FileProfileManager implements ProfileManager {
                 LOG.warn("Error validating session: {}", ex.getMessage());
                 return null;
             } catch (Exception e) {
-                LOG.error("Connectivity problem validating session, returning null", e);
+                LOG.error("Connectivity problem validating session, returning null: {}", e.getMessage());
                 return null;
             }
         } else {
@@ -127,7 +137,7 @@ public final class FileProfileManager implements ProfileManager {
         CreateTokenRequest ctr = new CreateTokenRequest();
         ctr.setEmail(email);
         CreateTokenResponse response = userCommandsClient.createToken(ctr);
-        return new AutoValue_Pair_TokenSession(response.getToken().getToken(), response.getSessionid().getSessionid());
+        return Pair.TokenSession.create(response.getToken().getToken(), response.getSessionid().getSessionid());
     }
 
     private void initConfigFile() {

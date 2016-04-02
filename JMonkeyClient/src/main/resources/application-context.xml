@@ -25,7 +25,10 @@
     <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
     
     <bean id="mod.counterclock.profilemanager" class="com.navid.trafalgar.profiles.FileProfileManager" autowire="byType" init-method="loadFromFile">
-        <property name="userCommandsClient" ref="mod.counterclock.clientUser"></property>
+    </bean>
+
+    <bean id="mod.counterclock.hystrixclientUser" class="com.navid.trafalgar.profiles.UserCommandsHyxtrix" autowire="byType">
+        <property name="userCommands" ref="mod.counterclock.clientUser"></property>
     </bean>
     
     <bean id="mod.counterclock.clientUser" class="com.lazylogin.client.user.v0.UserCommands" factory-bean="mod.counterclock.clientUserFactory" factory-method="create"/>

@@ -15,6 +15,8 @@ public interface ProfileManager {
 
     String getSessionId();
 
+    String getSessionId(String profile);
+
     ProfileStatus createProfile(String email);
 
     Properties getProperties();

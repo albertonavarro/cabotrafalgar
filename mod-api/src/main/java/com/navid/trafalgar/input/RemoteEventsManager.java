@@ -17,28 +17,32 @@ import java.util.Map;
 public class RemoteEventsManager implements ExceptionListener/*, AutoCloseable*/ {
 
     private final static Logger logger = LoggerFactory.getLogger(RemoteEventsManager.class);
-    private ActiveMQConnectionFactory connectionFactory;
-    private Connection connection;
-    private Session session;
+    private volatile ActiveMQConnectionFactory connectionFactory;
+    private volatile Connection connection;
+    private volatile Session session;
 
     private final Map<String, MessageConsumer> consumers = new HashMap<String, MessageConsumer>();
 
+    public synchronized Session getSession() {
+        if(session == null) {
+            try {
+                connectionFactory = new ActiveMQConnectionFactory("tcp://trafalgar.ws:7001");
+                // Create a Connection
+                connection = connectionFactory.createConnection();
+                connection.start();
 
-    public  RemoteEventsManager() {
+                connection.setExceptionListener(this);
 
-        try {
-            connectionFactory = new ActiveMQConnectionFactory("tcp://trafalgar.ws:7001");
-            // Create a Connection
-            connection = connectionFactory.createConnection();
-            connection.start();
+                // Create a Session
+                session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-            connection.setExceptionListener(this);
-
-            // Create a Session
-            session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
-        } catch (Exception e) {
-            System.out.println("Caught: " + e);
+                return session;
+            } catch (Exception e) {
+                System.out.println("Caught: " + e);
+                return null;
+            }
+        } else {
+            return session;
         }
     }
 
@@ -48,9 +52,9 @@ public class RemoteEventsManager implements ExceptionListener/*, AutoCloseable*/
     }
 
     public void listenMessages(Long gameId, String user, String control, StructureConsumer messageListener) throws JMSException {
-        Topic topic = session.createTopic("game/" + gameId + "/" + user + "/" + control);
+        Topic topic = getSession().createTopic("game/" + gameId + "/" + user + "/" + control);
 
-        MessageConsumer consumer = session.createConsumer(topic);
+        MessageConsumer consumer = getSession().createConsumer(topic);
         consumer.setMessageListener(messageListener);
         consumers.put(user + "_" + control, consumer);
     }

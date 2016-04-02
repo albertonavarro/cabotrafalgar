@@ -37,12 +37,12 @@ public final class SelectControlsScreenController implements ScreenController {
     @Autowired
     private GameConfiguration gameConfiguration;
     /**
-     *
+     * Singleton
      */
     @Autowired
     private GeneratorBuilder generatorBuilder;
     /**
-     *
+     * Singleton
      */
     @Autowired
     private ScreenFlowManager screenFlowManager;
