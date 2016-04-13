@@ -116,12 +116,11 @@ public final class ModelBuilder {
     public void registerBuilder(BuilderInterface builder) {
         LOG.info("Registring builder " + builder);
 
+        if (buildersByName.containsKey(builder.getType())) {
+            throw new IllegalStateException("Builder " + builder.getType() + " already exists");
+        }
         for (Category currentCategory : builder.getCategories()) {
             buildersByCategory.get(currentCategory).add(builder);
-        }
-
-        if (buildersByName.get(builder.getType()) != null) {
-            throw new IllegalStateException("Builder " + builder.getType() + " already exists");
         }
 
         buildersByName.put(builder.getType(), builder);
@@ -129,12 +128,21 @@ public final class ModelBuilder {
     }
 
     /**
-     *
+     * Get builder by category
      * @param category
      * @return
      */
     public Collection<BuilderInterface> getBuilder(Category category) {
         return buildersByCategory.get(category);
+    }
+
+    /**
+     * Get builder by name
+     * @param builderName
+     * @return
+     */
+    public BuilderInterface getBuilder(String builderName) {
+        return buildersByName.get(builderName);
     }
 
     /**

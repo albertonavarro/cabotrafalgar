@@ -16,11 +16,11 @@ public abstract class SimpleController implements ScreenController {
     /**
      * From bind
      */
-    private Nifty nifty;
+    protected Nifty nifty;
     /**
      * From bind
      */
-    private Screen screen;
+    protected Screen screen;
     /**
      * Singleton
      */
@@ -33,16 +33,6 @@ public abstract class SimpleController implements ScreenController {
         this.screen = screen;
     }
 
-    @Override
-    public void onStartScreen() {
-
-    }
-
-    @Override
-    public void onEndScreen() {
-
-    }
-
     public void next() {
         screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
         nifty.gotoScreen("redirector");
@@ -51,5 +41,9 @@ public abstract class SimpleController implements ScreenController {
     public void back() {
         screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
         nifty.gotoScreen("redirector");
+    }
+
+    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
+        this.screenFlowManager = screenFlowManager;
     }
 }

@@ -1,6 +1,7 @@
 package com.navid.trafalgar.input;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.navid.trafalgar.util.ReflexionUtils;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,7 +34,7 @@ public final class GeneratorBuilder {
         return generatorOnlyMap;
     }
 
-    public HashMultimap<Command, CommandGenerator> getGeneratorsFor(Set<Command> commands) {
+    public Multimap<Command, CommandGenerator> getGeneratorsFor(Set<Command> commands) {
 
         HashMultimap<Command, CommandGenerator> result = HashMultimap.create();
 
@@ -51,7 +52,11 @@ public final class GeneratorBuilder {
         Set<CommandStateListener> commandStateListeners = new HashSet<CommandStateListener>();
 
         for (Map.Entry<Command, CommandGenerator> entry : assignments.entrySet()) {
-            commandStateListeners.add(entry.getValue().generateCommandStateListener(entry.getKey()));
+            if(entry.getValue() != null) {
+                commandStateListeners.add(entry.getValue().generateCommandStateListener(entry.getKey()));
+            } else {
+                LOG.error("Unknown generator for entry {}", entry.getKey());
+            }
         }
 
         return commandStateListeners;

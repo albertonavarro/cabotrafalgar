@@ -8,5 +8,7 @@
     <context:annotation-config/>
   
     <bean id="mod.tutorial.mainscreencontroller" class="com.navid.trafalgar.mod.tutorial.TutorialMainScreen" autowire="byType"/>
+    <bean id="mod.tutorial.chapter1" class="com.navid.trafalgar.mod.tutorial.chapters.Chapter1" autowire="byType" />
+    <bean id="mod.tutorial.chapter2" class="com.navid.trafalgar.mod.tutorial.chapters.Chapter2" autowire="byType" />
 
 </beans>

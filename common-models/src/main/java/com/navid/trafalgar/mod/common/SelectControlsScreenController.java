@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.common;
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
@@ -84,7 +85,7 @@ public final class SelectControlsScreenController implements ScreenController {
 
         generatorMap = generatorBuilder.getGenerators();
 
-        HashMultimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
+        Multimap<Command, CommandGenerator> gens = generatorBuilder.getGeneratorsFor(commands);
 
         for (final Command currentCommand : gens.keySet()) {
             for (final CommandGenerator currentGenerator : gens.get(currentCommand)) {

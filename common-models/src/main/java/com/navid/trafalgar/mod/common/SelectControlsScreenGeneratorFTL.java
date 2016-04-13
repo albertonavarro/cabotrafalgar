@@ -1,6 +1,7 @@
 package com.navid.trafalgar.mod.common;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.navid.nifty.flow.template.ftl.FtlTemplateGenerator;
 import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandGenerator;
@@ -42,7 +43,7 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
         HashMap properties = new HashMap();
 
         AShipModelInteractive ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class);
-        HashMultimap<Command, CommandGenerator> generatorsForCommands = generatorBuilder.getGeneratorsFor(ship.getCommands());
+        Multimap<Command, CommandGenerator> generatorsForCommands = generatorBuilder.getGeneratorsFor(ship.getCommands());
 
         //getting a map of maps
         Map<String, Map<String, Boolean>> mapOfMapsOfGenerators = generateMapOfMaps(generatorsForCommands);
@@ -77,7 +78,7 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
 
     }
 
-    private Map<String, Map<String, Boolean>> generateMapOfMaps(HashMultimap<Command, CommandGenerator> input) {
+    private Map<String, Map<String, Boolean>> generateMapOfMaps(Multimap<Command, CommandGenerator> input) {
         Map<String, Map<String, Boolean>> result = new HashMap<String, Map<String, Boolean>>();
 
         for(Command command : input.keySet()) {
