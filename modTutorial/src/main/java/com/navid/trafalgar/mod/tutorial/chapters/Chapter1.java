@@ -27,7 +27,7 @@ public class Chapter1 implements TutorialChapter {
     }
 
     public String getMap() {
-        return "chapter1";
+        return "mod/tutorial/chapter1/chapter1.map";
     }
 
     @Override
