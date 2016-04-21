@@ -5,6 +5,7 @@ import com.jme3.app.state.AppStateManager;
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
+import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 import com.navid.trafalgar.mod.tutorial.statelisteners.LoadCameraStateListener;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
@@ -22,7 +23,7 @@ import java.util.concurrent.Callable;
 /**
  * Created by alberto on 16/04/16.
  */
-public class NavigationScreenController implements ScreenController, BeanFactoryAware {
+public class NavigationScreenController implements ScreenController, BeanFactoryAware, ScriptInterpreter {
 
     /*
      * Comes from bind
@@ -196,4 +197,13 @@ public class NavigationScreenController implements ScreenController, BeanFactory
         this.screenFlowManager = screenFlowManager;
     }
 
+    @Override
+    public void printMessage(String[] message) {
+        eventManager.fireEvent("SCRIPT_STEP_ACTIONED");
+    }
+
+    @Override
+    public void cleanUpMessage() {
+        System.out.println("");
+    }
 }

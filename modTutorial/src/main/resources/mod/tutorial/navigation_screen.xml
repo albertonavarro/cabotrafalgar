@@ -76,6 +76,13 @@
                 </panel>
             </panel>
         </layer>
+        <layer id="tutorialLayer" childLayout="center" visible="true">
+            <panel childLayout="vertical" align="center" valign="center">
+                <panel childLayout="center" height="70%" width="100%">
+                    <text id="tutorialText" text="Finished! Do you want to retry?" style="base-font" align="center" valign="center" color="#ffff"/>
+                </panel>
+            </panel>
+        </layer>
     </screen>
     
 </nifty>

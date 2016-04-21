@@ -22,5 +22,7 @@
     <bean id="mod.tutorial.InitListener" class="com.navid.trafalgar.mod.tutorial.statelisteners.InitStateListener" autowire="byType"/>
     <bean id="mod.tutorial.LoadEventListener" class="com.navid.trafalgar.mod.tutorial.statelisteners.LoadEventsListener" autowire="byType"/>
     <bean id="mod.tutorial.GUIUpdater" class="com.navid.trafalgar.mod.tutorial.statelisteners.GUIUpdater" autowire="byType"/>
+    <bean id="mod.tutorial.Script" class="com.navid.trafalgar.mod.tutorial.statelisteners.ScriptStateListener" autowire="byType"/>
+
 
 </beans>

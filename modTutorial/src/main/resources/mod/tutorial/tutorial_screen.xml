@@ -4,7 +4,7 @@
     <useStyles filename="nifty-default-styles.xml" />
     <useControls filename="nifty-default-controls.xml" />
 
-    <screen id="${screenUniqueId}" controller="com.navid.trafalgar.mod.tutorial.TutorialMainScreen">
+    <screen id="${screenUniqueId}" controller="com.navid.trafalgar.mod.tutorial.TutorialMainScreenController">
         <layer id="foreground" childLayout="vertical" style="nifty-panel-no-shadow">
             <panel id="panel_top" height="15%" align="center" childLayout="center">
                 <text text="Select tutorial chapter:" font="Interface/Fonts/Default.fnt" width="100%" height="100%" />

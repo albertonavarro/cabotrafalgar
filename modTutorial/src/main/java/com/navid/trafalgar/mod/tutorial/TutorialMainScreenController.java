@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 
-public class TutorialMainScreen extends SimpleController {
+public class TutorialMainScreenController extends SimpleController {
 
     @Autowired
     private List<TutorialChapter> chapters;

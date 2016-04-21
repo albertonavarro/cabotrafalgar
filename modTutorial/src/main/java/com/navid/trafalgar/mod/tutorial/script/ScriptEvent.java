@@ -1,30 +1,12 @@
 package com.navid.trafalgar.mod.tutorial.script;
 
-import com.google.common.base.Optional;
+import java.util.concurrent.Callable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-/**
- * Created by alberto on 17/04/16.
- */
 public class ScriptEvent {
-
-    private Collection<String> messages = new ArrayList<String>();
 
     private Trigger trigger;
 
-    private Optional<Timeout> timeoutInfo = Optional.absent();
-
-    private Collection<String> onSuccessThrowEvents = new ArrayList<String>();
-
-    public Collection<String> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Collection<String> messages) {
-        this.messages = messages;
-    }
+    private Actionable action;
 
     public Trigger getTrigger() {
         return trigger;
@@ -34,19 +16,11 @@ public class ScriptEvent {
         this.trigger = trigger;
     }
 
-    public Optional<Timeout> getTimeoutInfo() {
-        return timeoutInfo;
+    public Actionable getAction() {
+        return action;
     }
 
-    public void setTimeoutInfo(Optional<Timeout> timeoutInfo) {
-        this.timeoutInfo = timeoutInfo;
-    }
-
-    public Collection<String> getOnSuccessThrowEvents() {
-        return onSuccessThrowEvents;
-    }
-
-    public void setOnSuccessThrowEvents(Collection<String> onSuccessThrowEvents) {
-        this.onSuccessThrowEvents = onSuccessThrowEvents;
+    public void setAction(Actionable action) {
+        this.action = action;
     }
 }

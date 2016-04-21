@@ -51,7 +51,7 @@ public final class EventManager {
      * @param eventListener
      * @param events
      */
-    public void registerListener(EventListener eventListener, String[] events) {
+    public EventListener registerListener(EventListener eventListener, String[] events) {
         for (String currentEvent : events) {
             Set<EventListener> listeners = eventListeners.get(currentEvent);
             if (listeners == null) {
@@ -59,6 +59,14 @@ public final class EventManager {
                 eventListeners.put(currentEvent, listeners);
             }
             listeners.add(eventListener);
+        }
+
+        return eventListener;
+    }
+
+    public void unregister(EventListener eventListener) {
+        for(Map.Entry<String,Set<EventListener>> values : eventListeners.entrySet()) {
+                values.getValue().remove(eventListener);
         }
     }
 
