@@ -8,6 +8,7 @@ import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 import com.navid.trafalgar.mod.tutorial.statelisteners.LoadCameraStateListener;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -199,11 +200,16 @@ public class NavigationScreenController implements ScreenController, BeanFactory
 
     @Override
     public void printMessage(String[] message) {
-        eventManager.fireEvent("SCRIPT_STEP_ACTIONED");
+        screen.findElementByName("tutorialLayer").setVisible(true);
+        screen.findNiftyControl("tutorialText", Label.class).setText(message[0]);
     }
 
     @Override
     public void cleanUpMessage() {
-        System.out.println("");
+        screen.findElementByName("tutorialLayer").setVisible(false);
+    }
+
+    public void tutorialContinue() {
+        eventManager.fireEvent("SCRIPT_STEP_ACTIONED");
     }
 }

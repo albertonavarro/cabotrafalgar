@@ -46,10 +46,11 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
         this.eventManager = eventManager;
     }
 
+    Optional<ScriptEvent> nextScript = getNextScript();
 
     @Override
     public void onPrestart(float tpf) {
-        Optional<ScriptEvent> nextScript = getNextScript();
+        nextScript = getNextScript();
 
         if(!nextScript.isPresent()) {
             eventManager.fireEvent(EventManager.SUCCESSFUL);
@@ -69,9 +70,10 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
                 scriptEvent.getAction().cleanUpAction();
                 scriptEvent.getTrigger().unregister();
                 eventManager.unregister(this);
+                eventManager.fireEvent("RESUME");
+                processNextScript(getNextScript().get());
             }
         }, new String[]{"SCRIPT_STEP_ACTIONED"});
-
 
     }
 

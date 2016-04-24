@@ -27,16 +27,34 @@ public class ScriptBuilder {
         ScriptEvent event1 = new ScriptEvent(){{
             setAction(
                     new MessageActionable(
-                        scriptInterpreter,
+                        scriptInterpreter, eventManager,
                         new String[] {
-                                "Welcome to chapter 1 of this tutorial.",
-                                "Hopefully thi is so basic that you won't need to replay it ever.",
-                                "Your first lesson is to continue with the tutorial, click OK"}));
+                                "Welcome to chapter 1 of this tutorial."}));
 
             setTrigger(new EventTrigger(eventManager, "FRAME_STEP"));
         }};
 
-        return newArrayList(event1);
+        ScriptEvent event2 = new ScriptEvent(){{
+            setAction(
+                    new MessageActionable(
+                            scriptInterpreter, eventManager,
+                            new String[] {
+                                    "Hopefully thi is so basic that you won't need to replay it ever."}));
+
+            setTrigger(new EventTrigger(eventManager, "FRAME_STEP"));
+        }};
+
+        ScriptEvent event3 = new ScriptEvent(){{
+            setAction(
+                    new MessageActionable(
+                            scriptInterpreter, eventManager,
+                            new String[] {
+                                    "Your first lesson is to continue with the tutorial, click OK"}));
+
+            setTrigger(new EventTrigger(eventManager, "FRAME_STEP"));
+        }};
+
+        return newArrayList(event1, event2, event3);
     }
 
     public ScriptBuilder withScriptInterpreter(ScriptInterpreter scriptInterpreter) {

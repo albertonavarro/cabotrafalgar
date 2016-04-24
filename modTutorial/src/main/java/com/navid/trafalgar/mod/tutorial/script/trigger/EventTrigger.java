@@ -33,6 +33,7 @@ public class EventTrigger implements Trigger {
             @Override
             public void onEvent(String event) {
                 callable.action();
+                eventManager.unregister(this);
             }
         }, events);
     }
