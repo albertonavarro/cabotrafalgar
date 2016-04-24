@@ -5,6 +5,7 @@ import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 import com.navid.trafalgar.mod.tutorial.script.action.MessageActionable;
 import com.navid.trafalgar.mod.tutorial.script.trigger.EventTrigger;
 import com.navid.trafalgar.mod.tutorial.script.ScriptEvent;
+import com.navid.trafalgar.mod.tutorial.script.trigger.TimeSinceLastEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class ScriptBuilder {
                             new String[] {
                                     "Your first lesson is to continue with the tutorial, click OK"}));
 
-            setTrigger(new EventTrigger(eventManager, "FRAME_STEP"));
+            setTrigger(new TimeSinceLastEvent(eventManager, 10000));
         }};
 
         return newArrayList(event1, event2, event3);
