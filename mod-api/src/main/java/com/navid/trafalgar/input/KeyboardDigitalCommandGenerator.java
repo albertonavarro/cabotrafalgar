@@ -1,18 +1,19 @@
 package com.navid.trafalgar.input;
 
 import com.jme3.input.InputManager;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public final class KeyboardCommandGenerator implements CommandGenerator {
+public final class KeyboardDigitalCommandGenerator implements CommandGenerator {
 
     @Autowired
     private InputManager inputManager;
 
-    private Map<String, KeyboardCommandStateListener> report = new HashMap<String, KeyboardCommandStateListener>();
+    private Map<String, KeyboardDigitalCommandStateListener> report = new HashMap<String, KeyboardDigitalCommandStateListener>();
 
     @Override
     public Set<Class<Command>> getPossibleCommands() {
@@ -21,7 +22,7 @@ public final class KeyboardCommandGenerator implements CommandGenerator {
 
     @Override
     public CommandStateListener generateCommandStateListener(final Command key) {
-        KeyboardCommandStateListener generated = new KeyboardCommandStateListener(inputManager, key);
+        KeyboardDigitalCommandStateListener generated = new KeyboardDigitalCommandStateListener(inputManager, key);
         report.put(key.toString(), generated);
         return generated;
     }
@@ -29,7 +30,7 @@ public final class KeyboardCommandGenerator implements CommandGenerator {
     @Override
     public Map<String, String> commandReport() {
         Map<String, String> result = new HashMap<String, String>();
-        for (Map.Entry<String, KeyboardCommandStateListener> entry: report.entrySet()) {
+        for (Map.Entry<String, KeyboardDigitalCommandStateListener> entry: report.entrySet()) {
             result.put(entry.getKey(), entry.getValue().getKeyname());
         }
         return result;
@@ -41,7 +42,7 @@ public final class KeyboardCommandGenerator implements CommandGenerator {
 
     @Override
     public String toString() {
-        return "Keyboard";
+        return "Keyboard-Digital";
     }
 
 }

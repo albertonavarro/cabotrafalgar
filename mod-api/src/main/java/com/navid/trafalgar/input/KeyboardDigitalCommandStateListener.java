@@ -1,19 +1,20 @@
 package com.navid.trafalgar.input;
 
 import com.jme3.input.InputManager;
+import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.navid.trafalgar.manager.PrestartState;
 
-public final class KeyboardCommandStateListener implements CommandStateListener, PrestartState {
+public final class KeyboardDigitalCommandStateListener implements CommandStateListener, PrestartState {
 
     private final InputManager inputManager;
     private final Command key;
-    private AnalogListener listener;
+    private ActionListener listener;
     private String keyname;
     private int keycode;
 
-    public KeyboardCommandStateListener(InputManager inputManager, Command key) {
+    public KeyboardDigitalCommandStateListener(InputManager inputManager, Command key) {
         this.inputManager = inputManager;
         this.key = key;
     }
@@ -39,10 +40,12 @@ public final class KeyboardCommandStateListener implements CommandStateListener,
 
     @Override
     public void onPrestart(float tpf) {
-        listener = new AnalogListener() {
+        listener = new ActionListener() {
             @Override
-            public void onAnalog(String string, float f, float f1) {
-                key.execute(f);
+            public void onAction(String name, boolean isPressed, float tpf) {
+                if(isPressed){
+                    key.execute(tpf);
+                }
             }
         };
 

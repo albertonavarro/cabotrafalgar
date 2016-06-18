@@ -1,6 +1,7 @@
 package com.navid.trafalgar.shipmodelleyton;
 
 import com.navid.trafalgar.input.Command;
+import com.navid.trafalgar.input.CommandBuilder;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.AShipModelPlayer;
 import java.util.HashSet;
@@ -9,6 +10,8 @@ import java.util.Set;
 public final class ShipModelTwoControlProxy implements AShipModelInteractive {
 
     private ShipModelTwoPlayer target;
+
+
 
     @Override
     public void setTarget(AShipModelPlayer target) {

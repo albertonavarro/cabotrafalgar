@@ -72,4 +72,9 @@ public abstract class AHarnessModel extends Node implements Control, Dependent {
     public final void resolveDependencies(GameModel gameModel) {
         this.target = (Node) gameModel.getSingleByType(AShipModel.class);
     }
+
+    @Override
+    public final void commitDependencies() {
+
+    }
 }

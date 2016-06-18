@@ -5,10 +5,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.navid.nifty.flow.ScreenFlowManager;
-import com.navid.trafalgar.input.Command;
-import com.navid.trafalgar.input.CommandGenerator;
-import com.navid.trafalgar.input.CommandStateListener;
-import com.navid.trafalgar.input.GeneratorBuilder;
+import com.navid.trafalgar.input.*;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
 import de.lessvoid.nifty.Nifty;
@@ -46,6 +43,11 @@ public final class SelectControlsScreenController implements ScreenController {
      * Singleton
      */
     @Autowired
+    private CommandBuilder commandBuilder;
+    /**
+     * Singleton
+     */
+    @Autowired
     private ScreenFlowManager screenFlowManager;
 
     
@@ -74,7 +76,7 @@ public final class SelectControlsScreenController implements ScreenController {
         };
 
         AShipModelInteractive ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class);
-        Set<Command> commands = ship.getCommands();
+        Set<Command> commands = ship.getCommands(commandBuilder);
 
         commandsMap = Maps.uniqueIndex(commands, new Function<Command, String>() {
             @Override
@@ -150,5 +152,9 @@ public final class SelectControlsScreenController implements ScreenController {
      */
     public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
         this.generatorBuilder = generatorBuilder;
+    }
+
+    public void setCommandBuilder(CommandBuilder commandBuilder) {
+        this.commandBuilder = commandBuilder;
     }
 }

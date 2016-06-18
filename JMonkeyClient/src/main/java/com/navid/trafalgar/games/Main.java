@@ -2,6 +2,7 @@ package com.navid.trafalgar.games;
 
 import com.google.common.base.Optional;
 import com.jme3.app.Application;
+import com.jme3.app.LegacyApplication;
 import com.jme3.app.state.VideoRecorderAppState;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.audio.*;
@@ -48,7 +49,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public final class Main extends Application {
+public final class Main extends LegacyApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 

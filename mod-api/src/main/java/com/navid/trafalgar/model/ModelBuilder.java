@@ -106,6 +106,10 @@ public final class ModelBuilder {
             currentDependant.resolveDependencies(gameModel);
         }
 
+        for (Dependent currentDependant : (List<Dependent>) gameModel.getByType(Dependent.class)) {
+            currentDependant.commitDependencies();
+        }
+
         return gameModel;
     }
 

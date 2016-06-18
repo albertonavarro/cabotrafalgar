@@ -39,6 +39,10 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
     @Override
     public final void resolveDependencies(GameModel gameModel) {
         this.context = (IContext) gameModel.getSingleByType(IContext.class);
+    }
+
+    @Override
+    public final void commitDependencies() {
         windGeometry = this.getContext().getWind().createWindGeometryNode();
         windGeometry.setLocalTranslation(-20, 20, 0);
         this.attachChild(windGeometry);

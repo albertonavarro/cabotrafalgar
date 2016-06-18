@@ -10,6 +10,9 @@ screenDeclarations:
   - screenName: selectKeys
     interfaceConstructor: spring:mod.common.selectkeysgenerator
     controller: spring:mod.common.selectkeyscontroller
+  - screenName: selectKeysDigital
+    interfaceConstructor: spring:mod.common.selectkeysdigitalgenerator
+    controller: spring:mod.common.selectkeysdigitalcontroller
   - screenName: selectRemoteControl
     interfaceConstructor: static:/mod/common/interface_remoteselector.xml
     controller: spring:mod.common.selectremotecontrolcontroller

@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.navid.nifty.flow.template.ftl.FtlTemplateGenerator;
 import com.navid.trafalgar.input.Command;
+import com.navid.trafalgar.input.CommandBuilder;
 import com.navid.trafalgar.input.CommandGenerator;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.model.AShipModelInteractive;
@@ -32,6 +33,11 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
 
     @Autowired
     private SelectControlsScreenController screenControlScreenController;
+    /**
+     * Singleton
+     */
+    @Autowired
+    private CommandBuilder commandBuilder;
 
 
     public SelectControlsScreenGeneratorFTL(Nifty nifty) throws IOException {
@@ -43,7 +49,7 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
         HashMap properties = new HashMap();
 
         AShipModelInteractive ship = gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class);
-        Multimap<Command, CommandGenerator> generatorsForCommands = generatorBuilder.getGeneratorsFor(ship.getCommands());
+        Multimap<Command, CommandGenerator> generatorsForCommands = generatorBuilder.getGeneratorsFor(ship.getCommands(commandBuilder));
 
         //getting a map of maps
         Map<String, Map<String, Boolean>> mapOfMapsOfGenerators = generateMapOfMaps(generatorsForCommands);

@@ -1,9 +1,6 @@
 package com.navid.trafalgar.mod.tutorial.chapters;
 
-import com.navid.trafalgar.mod.tutorial.CommandWrapper;
-import com.navid.trafalgar.mod.tutorial.AIWrapper;
-import com.navid.trafalgar.mod.tutorial.KeyboardWrapper;
-import com.navid.trafalgar.mod.tutorial.TutorialChapter;
+import com.navid.trafalgar.mod.tutorial.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +34,8 @@ public class Chapter1 implements TutorialChapter {
         map.put("tiller - to starboard", new KeyboardWrapper());
         map.put("mainsail - bring in", new AIWrapper());
         map.put("mainsail - let go", new AIWrapper());
+        map.put("system - show menu", new KeyboardDigitalWrapper());
+        map.put("system - show controls", new KeyboardDigitalWrapper());
         return map;
     }
 

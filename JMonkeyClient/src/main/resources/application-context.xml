@@ -10,6 +10,7 @@
 
     <bean id="common.MusicManager" class="com.navid.trafalgar.audio.MusicManager" autowire="byType"/>
     <bean id="common.EventManager" class="com.navid.trafalgar.manager.EventManager" autowire="byType"/>
+    <bean id="common.CommandBuilder" class="com.navid.trafalgar.input.CommandBuilder" autowire="byType" />
     <bean id="common.Builder" class="com.navid.trafalgar.model.ModelBuilder" autowire="byType" />
     <bean id="common.InputBuilder" class="com.navid.trafalgar.input.GeneratorBuilder" autowire="byType" />
     <bean id="common.InstanceResolutor" class="com.navid.nifty.flow.resolutors.DefaultInstanceResolutor"/>

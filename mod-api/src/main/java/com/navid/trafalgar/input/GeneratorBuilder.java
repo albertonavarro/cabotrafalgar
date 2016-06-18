@@ -62,4 +62,14 @@ public final class GeneratorBuilder {
         return commandStateListeners;
     }
 
+    public Map<String, String> generateReport() {
+        Map<String, String> result = new HashMap<>();
+
+        for(CommandGenerator cg : generatorOnlyMap.values()) {
+            result.putAll(cg.commandReport());
+        }
+
+        return result;
+    }
+
 }

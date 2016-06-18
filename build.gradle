@@ -5,7 +5,7 @@ ext{
             jackson: '1.9.13',
             lazylogin: '1.3.266',
             recordserver: '1.2.105',
-            jme3: '3.1.0-SNAPSHOT',
+            jme3: '3.1.0-beta1',
             nifty: '1.4.1',
             cxf: '3.0.1',
             lwjgl: '2.9.0'
@@ -18,15 +18,15 @@ ext{
             spring_context: 'org.springframework:spring-context:'+v.spring,
             spring_jms: 'org.springframework:spring-jms:'+v.spring,
             //JME3
-            jme3_core: 'com.jme3:jme3-core:' + v.jme3,
-            jme3_effects: 'com.jme3:jme3-effects:' + v.jme3,
-            jme3_terrain: 'com.jme3:jme3-terrain:' + v.jme3,
-            jme3_jbullet: 'com.jme3:jme3-jbullet:' + v.jme3,
-            jme3_niftygui: 'com.jme3:jme3-niftygui:' + v.jme3,
-            jme3_desktop: 'com.jme3:jme3-desktop:' + v.jme3,
-            jme3_lwjgl: 'com.jme3:jme3-lwjgl:' + v.jme3,
-            jme3_jogg : 'com.jme3:jme3-jogg:' + v.jme3,
-            jme3_plugins : 'com.jme3:jme3-plugins:' + v.jme3,
+            jme3_core: 'org.jmonkeyengine:jme3-core:' + v.jme3,
+            jme3_effects: 'org.jmonkeyengine:jme3-effects:' + v.jme3,
+            jme3_terrain: 'org.jmonkeyengine:jme3-terrain:' + v.jme3,
+            jme3_jbullet: 'org.jmonkeyengine:jme3-jbullet:' + v.jme3,
+            jme3_niftygui: 'org.jmonkeyengine:jme3-niftygui:' + v.jme3,
+            jme3_desktop: 'org.jmonkeyengine:jme3-desktop:' + v.jme3,
+            jme3_lwjgl: 'org.jmonkeyengine:jme3-lwjgl:' + v.jme3,
+            jme3_jogg : 'org.jmonkeyengine:jme3-jogg:' + v.jme3,
+            jme3_plugins : 'org.jmonkeyengine:jme3-plugins:' + v.jme3,
             //JACKSON2
             jackson2_core: 'com.fasterxml.jackson.core:jackson-core:' + v.jackson2,
             jackson2_databind: 'com.fasterxml.jackson.core:jackson-databind:'+v.jackson2,
@@ -89,14 +89,17 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
 
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 
     repositories {
         //mavenLocal()
         jcenter()
         maven {
             url "http://dl.bintray.com/albertonavarro/maven"
+        }
+        maven {
+            url "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine"
         }
         maven {
             url 'http://updates.jmonkeyengine.org/maven/'

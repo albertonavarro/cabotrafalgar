@@ -6,10 +6,17 @@ import java.util.List;
 public interface GameModelInterface {
 
     /**
-     *
+     * Adds objects
      * @param collection
      */
     void addToModel(Collection collection);
+
+    /**
+     * Adds objects with a given name for all them
+     * @param collection
+     * @param name
+     */
+    void addToModel(Collection collection, String name);
 
     /**
      *
@@ -26,6 +33,15 @@ public interface GameModelInterface {
      * @return
      */
     <T> T getSingleByType(Class<T> className);
+
+    /**
+     *
+     * @param tClass
+     * @param name
+     * @param <T>
+     * @return
+     */
+    <T> T getSingleByTypeAndName(Class<T> tClass, String name);
 
     void removeFromModel(Class className);
 

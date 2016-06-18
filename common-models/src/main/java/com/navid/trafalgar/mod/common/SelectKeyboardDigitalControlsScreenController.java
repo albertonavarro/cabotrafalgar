@@ -9,6 +9,7 @@ import com.jme3.input.KeyInput;
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
+import com.navid.trafalgar.input.KeyboardDigitalCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.profiles.ProfileManager;
 import de.lessvoid.nifty.Nifty;
@@ -17,22 +18,18 @@ import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.Set;
 import org.bushe.swing.event.EventTopicSubscriber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class SelectKeyboardControlsScreenController implements ScreenController {
+import java.util.*;
+import java.util.Map.Entry;
+
+public final class SelectKeyboardDigitalControlsScreenController implements ScreenController {
 
     private static final Logger LOG
-            = LoggerFactory.getLogger(SelectKeyboardControlsScreenController.class);
+            = LoggerFactory.getLogger(SelectKeyboardDigitalControlsScreenController.class);
 
     @Autowired
     private ScreenFlowManager screenFlowManager;
@@ -111,12 +108,12 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
 
         EventTopicSubscriber<ListBoxSelectionChangedEvent> eventHandler;
 
-        final Map<String, KeyboardCommandStateListener> keyListeners
+        final Map<String, KeyboardDigitalCommandStateListener> keyListeners
                 = Maps.uniqueIndex(
-                        gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class),
-                        new Function<KeyboardCommandStateListener, String>() {
+                        gameConfiguration.getPreGameModel().getByType(KeyboardDigitalCommandStateListener.class),
+                        new Function<KeyboardDigitalCommandStateListener, String>() {
                             @Override
-                            public String apply(KeyboardCommandStateListener input) {
+                            public String apply(KeyboardDigitalCommandStateListener input) {
                                 return input.toString();
                             }
                         });
@@ -134,7 +131,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
             }
         };
 
-        for (final Entry<String, KeyboardCommandStateListener> currentListener : keyListeners.entrySet()) {
+        for (final Entry<String, KeyboardDigitalCommandStateListener> currentListener : keyListeners.entrySet()) {
             ListBox listBoxController = screen.findNiftyControl(currentListener.getKey(), ListBox.class);
 
             List<ListItem> itemList = generateKeys();
@@ -215,7 +212,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     public void onEndScreen() {
         Map<String, String> userProperties = new HashMap<String, String>();
 
-        for (KeyboardCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class)) {
+        for (KeyboardDigitalCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardDigitalCommandStateListener.class)) {
             userProperties.put(listener.toString(), Integer.toString(listener.getKeycode()));
         }
 
@@ -241,10 +238,10 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     }
 
     private boolean validateKeys() {
-        List<KeyboardCommandStateListener> commands
-                = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
+        List<KeyboardDigitalCommandStateListener> commands
+                = gameConfiguration.getPreGameModel().getByType(KeyboardDigitalCommandStateListener.class);
         Set<Integer> commandsByKey = new HashSet<Integer>();
-        for (KeyboardCommandStateListener command : commands) {
+        for (KeyboardDigitalCommandStateListener command : commands) {
             if (!commandsByKey.add(command.getKeycode())) {
                 return false;
             }

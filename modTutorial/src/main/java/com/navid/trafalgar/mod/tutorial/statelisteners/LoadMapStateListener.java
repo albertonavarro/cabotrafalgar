@@ -9,6 +9,7 @@ import com.navid.trafalgar.manager.LoadModelState;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
+import com.navid.trafalgar.mod.tutorial.NavigationScreenController;
 import com.navid.trafalgar.mod.tutorial.TutorialGameModel;
 import com.navid.trafalgar.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public final class LoadMapStateListener implements LoadModelState {
 
@@ -33,7 +36,9 @@ public final class LoadMapStateListener implements LoadModelState {
     @Autowired
     private ModelBuilder builder2;
     @Autowired
-    private TutorialGameModel counterClockGameModel;
+    private TutorialGameModel tutorialGameModel;
+    @Autowired
+    private NavigationScreenController navigationScreenController;
 
     @Override
     public void onLoadModel(float tpf) {
@@ -59,20 +64,21 @@ public final class LoadMapStateListener implements LoadModelState {
             gameModel.addToModel(c);
         }
 
-        counterClockGameModel.init(gameModel, gameConfiguration.getPreGameModel());
+        gameConfiguration.getPreGameModel().addToModel(newArrayList(navigationScreenController), "system");
+        tutorialGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
-        IContext iContext = counterClockGameModel.getIContext();
+        IContext iContext = tutorialGameModel.getIContext();
         gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());
 
-        AShipModelPlayer currentShip = counterClockGameModel.getShip();
+        AShipModelPlayer currentShip = tutorialGameModel.getShip();
         gameStatus.getGameNode().addControl((Control) currentShip);
         currentShip.setStatisticsManager(statisticsManager);
 
-        if (counterClockGameModel.getGhost() != null) {
-            gameStatus.getGameNode().addControl((Control) counterClockGameModel.getGhost());
+        if (tutorialGameModel.getGhost() != null) {
+            gameStatus.getGameNode().addControl((Control) tutorialGameModel.getGhost());
         }
 
-        List<AMilestoneModel> milestones = counterClockGameModel.getMilestones();
+        List<AMilestoneModel> milestones = tutorialGameModel.getMilestones();
         for (AMilestoneModel currentMilestone : milestones) {
             currentMilestone.setEventManager(eventManager);
             currentMilestone.setCollidable(Collections.singleton((AShipModel) currentShip));
@@ -80,23 +86,23 @@ public final class LoadMapStateListener implements LoadModelState {
         }
 
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);
-        for (Filter currentFilter : counterClockGameModel.getFpp()) {
+        for (Filter currentFilter : tutorialGameModel.getFpp()) {
             fpp.addFilter(currentFilter);
         }
 
         gameStatus.getViewPort().addProcessor(fpp);
 
-        gameStatus.getGameNode().attachChild(counterClockGameModel.getGameNode());
+        gameStatus.getGameNode().attachChild(tutorialGameModel.getGameNode());
     }
 
     @Override
     public void onUnload() {
-        gameStatus.getGameNode().removeControl((Control) counterClockGameModel.getShip());
+        gameStatus.getGameNode().removeControl((Control) tutorialGameModel.getShip());
         if (gameStatus.getGameNode() != null) {
-            gameStatus.getGameNode().removeControl((Control) counterClockGameModel.getGhost());
+            gameStatus.getGameNode().removeControl((Control) tutorialGameModel.getGhost());
         }
 
-        List<AMilestoneModel> milestones = counterClockGameModel.getMilestones();
+        List<AMilestoneModel> milestones = tutorialGameModel.getMilestones();
         for (AMilestoneModel currentMilestone : milestones) {
             gameStatus.getGameNode().removeControl(currentMilestone);
         }
@@ -148,9 +154,13 @@ public final class LoadMapStateListener implements LoadModelState {
     }
 
     /**
-     * @param counterClockGameModel the counterClockGameModel to set
+     * @param tutorialGameModel the tutorialGameModel to set
      */
-    public void setCounterClockGameModel(TutorialGameModel counterClockGameModel) {
-        this.counterClockGameModel = counterClockGameModel;
+    public void setTutorialGameModel(TutorialGameModel tutorialGameModel) {
+        this.tutorialGameModel = tutorialGameModel;
+    }
+
+    public void setNavigationScreenController(NavigationScreenController navigationScreenController) {
+        this.navigationScreenController = navigationScreenController;
     }
 }

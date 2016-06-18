@@ -55,7 +55,17 @@ public class ScriptBuilder {
             setTrigger(new TimeSinceLastEvent(eventManager, 10000));
         }};
 
-        return newArrayList(event1, event2, event3);
+        ScriptEvent event4 = new ScriptEvent(){{
+            setAction(
+                    new MessageActionable(
+                            scriptInterpreter, eventManager,
+                            new String[] {
+                                    "Thanks for invoking ESC."}));
+
+            setTrigger(new EventTrigger(eventManager, "pre-tiller - to port"));
+        }};
+
+        return newArrayList(event1, event2, event3, event4);
     }
 
     public ScriptBuilder withScriptInterpreter(ScriptInterpreter scriptInterpreter) {

@@ -31,7 +31,7 @@ public final class GUIUpdater implements StartedState, PrestartState {
 
     @Override
     public void onPrestart(float tpf) {
-        inputManager.addListener(actionListener, "Menu"); // load my custom keybinding
+        //inputManager.addListener(actionListener, "Menu"); // load my custom keybinding
         mainScreen.fillShipStats(statisticsManager.getAllStatistics().values());
     }
 

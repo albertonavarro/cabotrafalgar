@@ -3,8 +3,11 @@ package com.navid.trafalgar.mod.tutorial;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.input.GeneratorBuilder;
+import com.navid.trafalgar.input.SystemInterpreter;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
+import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 import com.navid.trafalgar.mod.tutorial.statelisteners.LoadCameraStateListener;
 import de.lessvoid.nifty.Nifty;
@@ -24,7 +27,7 @@ import java.util.concurrent.Callable;
 /**
  * Created by alberto on 16/04/16.
  */
-public class NavigationScreenController implements ScreenController, BeanFactoryAware, ScriptInterpreter {
+public class NavigationScreenController implements ScreenController, BeanFactoryAware, ScriptInterpreter, SystemInterpreter {
 
     /*
      * Comes from bind
@@ -53,6 +56,8 @@ public class NavigationScreenController implements ScreenController, BeanFactory
      */
     private BeanFactory beanFactory;
 
+    @Autowired
+    private GeneratorBuilder generatorBuilder;
     /**
      * Nifty GUI ScreenControl methods
      */
@@ -101,6 +106,11 @@ public class NavigationScreenController implements ScreenController, BeanFactory
 
     public void showMenu() {
         toggleMenu();
+    }
+
+    @Override
+    public void showControls() {
+
     }
 
     public void clickCamera2() {
@@ -211,5 +221,14 @@ public class NavigationScreenController implements ScreenController, BeanFactory
 
     public void tutorialContinue() {
         eventManager.fireEvent("SCRIPT_STEP_ACTIONED");
+    }
+
+    @Override
+    public void setStatisticsManager(StatisticsManager statisticsManager) {
+
+    }
+
+    public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
+        this.generatorBuilder = generatorBuilder;
     }
 }
