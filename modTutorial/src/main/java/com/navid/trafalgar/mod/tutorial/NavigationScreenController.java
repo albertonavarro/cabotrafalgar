@@ -21,7 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 /**
@@ -50,6 +54,7 @@ public class NavigationScreenController implements ScreenController, BeanFactory
 
     private TutorialMainGame game;
     private boolean showMenu;
+    private boolean showControls;
     private XmlBeanFactory ctx;
     /*
      * From BeanFactoryAware
@@ -110,7 +115,7 @@ public class NavigationScreenController implements ScreenController, BeanFactory
 
     @Override
     public void showControls() {
-
+        toggleShowControls();
     }
 
     public void clickCamera2() {
@@ -149,9 +154,38 @@ public class NavigationScreenController implements ScreenController, BeanFactory
         }
     }
 
+    private String prettyPrintReport(Map<String, String> commands ) {
+        List<String> keys = new ArrayList<>(commands.keySet());
+        Collections.sort(keys);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (String key : keys) {
+            sb.append(key + ": " + commands.get(key) + "\n");
+        }
+
+        return sb.toString();
+    }
+
+    public void showControlLayer(boolean value) {
+        screen.findNiftyControl("showControlText", Label.class).setText(prettyPrintReport(generatorBuilder.generateReport()));
+        screen.findElementByName("showControlLayer").setVisible(value);
+        showMenu = value;
+        if (value) {
+            eventManager.fireEvent("PAUSE");
+        } else {
+            eventManager.fireEvent("RESUME");
+        }
+    }
+
     public synchronized void toggleMenu() {
         showMenu = !showMenu;
         showMenuFunction(showMenu);
+    }
+
+    public synchronized void toggleShowControls() {
+        showControls = !showControls;
+        showControlLayer(showControls);
     }
 
     public synchronized void restart() {

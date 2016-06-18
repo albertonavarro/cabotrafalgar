@@ -76,6 +76,11 @@
                 </panel>
             </panel>
         </layer>
+        <layer id="showControlLayer" childLayout="center" visible="false">
+            <panel style="nifty-panel" childLayout="center" padding="18px,28px,40px,16px" width="40%" height="20%" align="center" valign="center">
+                <control id="showControlText" name="label" font="Interface/Fonts/Default.fnt" wrap="true" height="90%" text="" align="left" />
+            </panel>
+        </layer>
         <layer id="tutorialLayer" childLayout="center" visible="true">
             <panel style="nifty-panel" childLayout="horizontal" align="center" valign="bottom">
                     <control id="tutorialText" name="label" font="Interface/Fonts/Default.fnt" wrap="true" height="90%" text="" align="left" />
