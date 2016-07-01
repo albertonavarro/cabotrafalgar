@@ -25,8 +25,9 @@
         </encoder>
     </appender>
 
-    <logger name="com.jme3" level="DEBUG" additivity="false"/>
-    <logger name="de.lessvoid.nifty" level="INFO" additivity="false"/>
+    <logger name="org.springboot" level="DEBUG" />
+    <logger name="com.jme3" level="DEBUG" />
+    <logger name="de.lessvoid.nifty" level="INFO" />
     <logger name="com.navid" level="DEBUG"/>
     <logger name="org.bushe" level="INFO" />
     
