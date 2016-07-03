@@ -181,6 +181,12 @@ public final class ModelBuilder {
             }
         }
 
+        for (Object o : objects) {
+            if (o instanceof Dependent) {
+                ((Dependent) o).commitDependencies();
+            }
+        }
+
         return objects;
     }
 }

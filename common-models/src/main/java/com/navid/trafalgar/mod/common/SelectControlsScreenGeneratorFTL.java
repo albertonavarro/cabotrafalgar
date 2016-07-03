@@ -33,10 +33,12 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
 
     @Autowired
     private SelectControlsScreenController screenControlScreenController;
+
     /**
      * Singleton
      */
     @Autowired
+
     private CommandBuilder commandBuilder;
 
 
@@ -110,5 +112,9 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
 
     public void setScreenControlScreenController(SelectControlsScreenController screenControlScreenController) {
         this.screenControlScreenController = screenControlScreenController;
+    }
+
+    public void setCommandBuilder(CommandBuilder commandBuilder) {
+        this.commandBuilder = commandBuilder;
     }
 }

@@ -25,14 +25,15 @@
         </encoder>
     </appender>
 
-    <logger name="com.jme3" level="DEBUG" additivity="false"/>
-    <logger name="de.lessvoid.nifty" level="INFO" additivity="false"/>
+    <logger name="com.jme3" level="DEBUG"/>
     <logger name="com.navid" level="DEBUG"/>
+    <logger name="com.navid.trafalgar.manager" level="INFO"/>
+    <logger name="de.lessvoid.nifty" level="INFO"/>
     <logger name="org.bushe" level="INFO" />
     
     <root level="INFO">
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
+        <!--<appender-ref ref="FILE" />-->
     </root>  
   
 </configuration>
