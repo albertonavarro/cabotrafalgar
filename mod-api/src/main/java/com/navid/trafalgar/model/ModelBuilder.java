@@ -96,7 +96,7 @@ public final class ModelBuilder {
                     }
                 });
                 Collection c = build(entryInput);
-                gameModel.addToModel(c);
+                gameModel.addToModel(c, "player1");
             } else {
                 gameModel.addToModel(build(entry));
             }

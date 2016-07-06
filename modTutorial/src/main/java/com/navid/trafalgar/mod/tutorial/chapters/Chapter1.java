@@ -11,11 +11,13 @@ import java.util.Map;
 public class Chapter1 implements TutorialChapter {
 
     public String toString() {
-        return "Chapter 1";
+        return "01 - Screen basics";
     }
 
     public String getDescription() {
-        return "Get used to weight controls.";
+        return "Learn how to run the tutorials, basic instructions, no gameplay.\n" +
+                "Ship: ShipModelOneY\n" +
+                "Choose and remember the keys for the commands!";
     }
 
     @Override

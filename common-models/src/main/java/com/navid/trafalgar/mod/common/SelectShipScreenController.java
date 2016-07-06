@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.common;
 import static com.google.common.collect.Lists.newArrayList;
 
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.ModelBuilder;
@@ -121,6 +122,7 @@ public final class SelectShipScreenController implements ScreenController {
     public void onStartScreen() {
         gameConfiguration.reset();
         gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
+        gameConfiguration.getPreGameModel().addToModel(newArrayList(new SystemInteractions()), "system");
 
         fillListWithShips();
     }
@@ -189,7 +191,7 @@ public final class SelectShipScreenController implements ScreenController {
 
         Collection c = builder.build(entry);
 
-        gameConfiguration.getPreGameModel().addToModel(c);
+        gameConfiguration.getPreGameModel().addToModel(c, "player1");
 
         nifty.gotoScreen(nextScreen);
     }

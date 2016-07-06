@@ -4,6 +4,7 @@ import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.*;
 import java.util.ArrayList;
@@ -33,9 +34,11 @@ public final class CounterClockGameModel {
 
         inited = true;
 
-        ship = gameModel.getSingleByType(AShipModelPlayer.class);
+        ship = gameModel.getSingleByTypeAndName(AShipModelPlayer.class, "player1");
         gameNode.attachChild((Spatial) ship);
-        preGameModel.getSingleByType(AShipModelInteractive.class).setTarget(ship);
+
+        SystemInteractions systemInteractions = preGameModel.getSingleByTypeAndName(SystemInteractions.class, "system");
+        systemInteractions.setTarget(preGameModel.getSingleByTypeAndName(AShipModelPlayer.class, "system"));
 
         if (gameModel.contains(AShipModelGhost.class)) {
             ghost = gameModel.getSingleByType(AShipModelGhost.class);
