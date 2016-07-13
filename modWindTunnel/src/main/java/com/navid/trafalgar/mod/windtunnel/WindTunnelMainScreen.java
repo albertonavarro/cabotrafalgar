@@ -3,8 +3,10 @@ package com.navid.trafalgar.mod.windtunnel;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.input.SystemInterpreter;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
+import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.windtunnel.statelisteners.LoadCameraStateListener;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
@@ -19,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-public final class WindTunnelMainScreen implements ScreenController, BeanFactoryAware {
+public final class WindTunnelMainScreen implements ScreenController, BeanFactoryAware, SystemInterpreter {
     /*
      * Comes from bind
      */
@@ -98,6 +100,11 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
 
     public void showMenu() {
         toggleMenu();
+    }
+
+    @Override
+    public void showControls() {
+
     }
 
     public void clickCamera2() {
@@ -193,4 +200,8 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         this.screenFlowManager = screenFlowManager;
     }
 
+    @Override
+    public void setStatisticsManager(StatisticsManager statisticsManager) {
+
+    }
 }

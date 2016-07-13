@@ -4,6 +4,7 @@ import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 import com.navid.trafalgar.model.*;
 import java.util.ArrayList;
@@ -34,7 +35,10 @@ public final class WindTunnelGameModel {
         inited = true;
 
         ship = (AShipModelPlayer) gameModel.getSingleByType(AShipModelPlayer.class);
-        preGameModel.getSingleByType(AShipModelInteractive.class).setTarget(ship);
+        preGameModel.getSingleByTypeAndName(AShipModelInteractive.class, "player1").setTarget(ship);
+
+        SystemInteractions systemInteractions = preGameModel.getSingleByTypeAndName(SystemInteractions.class, "system");
+        systemInteractions.setTarget(preGameModel.getSingleByTypeAndName(AShipModelPlayer.class, "system"));
 
         context = (IContext) gameModel.getSingleByType(IContext.class);
         harness = (AHarnessModel) gameModel.getSingleByType(AHarnessModel.class);

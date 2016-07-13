@@ -35,6 +35,8 @@ public final class CounterClockGameModel {
         inited = true;
 
         ship = gameModel.getSingleByTypeAndName(AShipModelPlayer.class, "player1");
+        preGameModel.getSingleByTypeAndName(AShipModelInteractive.class, "player1").setTarget(ship);
+
         gameNode.attachChild((Spatial) ship);
 
         SystemInteractions systemInteractions = preGameModel.getSingleByTypeAndName(SystemInteractions.class, "system");
