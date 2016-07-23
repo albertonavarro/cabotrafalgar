@@ -6,35 +6,20 @@
 
     <screen id="${screenUniqueId}" controller="${controllerClassName}">
         <layer id="foreground" childLayout="horizontal">
-            <panel id="panel_left" width="3%" height="100%" childLayout="vertical" backgroundColor="#ffffff30" >
-            </panel>
+
             <panel id="panel_center" width="94%" height="100%" childLayout="vertical"  >
                 <panel id="panel_top" width="100%" height="5%" childLayout="horizontal"   backgroundColor="#ffffff30">
                     <control name="button" label="Menu" id="StartButton2" align="center" valign="center"
                              visibleToMouse="true" >
-                        <interact onClick="showMenu()" />
+                        <interact onClick="toggleMenu()" />
                     </control>
                 </panel>
 
                 <panel id="separator" width="20%" height="1%" childLayout="vertical"   backgroundColor="#ffffff00"/>
 
-                <panel id="panel_controls" width="20%" height="20%" childLayout="vertical"   backgroundColor="#ffffff30">
-                    <text style="nifty-label" text="Turn right: R" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Turn left: T" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Sail right: F" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Sail left: G" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Rotate platform right: J" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
-                    <text style="nifty-label" text="Rotate platform right: K" color="#000f" align="left" textHAlign="left" textVAlign="center" width="100%"/>
+                <panel id="panel_stats" width="20%" height="50%" childLayout="vertical"   backgroundColor="#ffffff30" visible="false">
+                    <control id="statsLists" name="listBox" vertical="optional" horizontal="optional" displayItems="20" selection="Multiple" />
                 </panel>
-
-                <panel id="separator" width="20%" height="1%" childLayout="vertical"   backgroundColor="#ffffff00"/>
-
-                <panel id="panel_stats" width="20%" height="22%" childLayout="vertical"   backgroundColor="#ffffff30">
-                    <control id="statsLists" name="listBox" vertical="optional" horizontal="optional" displayItems="10" selection="Multiple" />
-                </panel>
-
-            </panel>
-            <panel id="panel_right" width="3%" height="100%" childLayout="vertical" backgroundColor="#ffffff30">
 
             </panel>
         </layer>
@@ -62,8 +47,8 @@
         <layer id="menuLayer" childLayout="center" visible="false">
             <panel style="nifty-panel" childLayout="center" padding="18px,28px,40px,16px" width="40%" height="20%" align="center" valign="center">
                 <panel childLayout="vertical" align="center" valign="center">
-                    <panel childLayout="center" height="70%" width="100%" >
-                        <text text="Milestones menu" style="base-font" align="center" valign="center" color="#ffff"/>
+                    <panel childLayout="center" height="20%" width="100%" >
+                        <text text="Gameplay Menu" style="base-font" align="center" valign="center" color="#ffff"/>
                     </panel>
                     <panel childLayout="horizontal" align="center" height="30%">
                         <panel childLayout="center" width="33%">
@@ -85,12 +70,12 @@
                     <panel childLayout="horizontal" align="center" height="30%">
                         <panel childLayout="center" width="33%">
                             <control id="showControls" name="button" label="Show Controls" width="100px" align="center">
-                                <interact onClick="showControls()" />
+                                <interact onClick="toggleControls()" />
                             </control>
                         </panel>
                         <panel childLayout="center" width="33%">
                             <control id="restartButton" name="button" label="Show Stats" width="100px" align="center">
-                                <interact onClick="showStats()" />
+                                <interact onClick="toggleStats()" />
                             </control>
                         </panel>
                         <panel childLayout="center" width="33%">

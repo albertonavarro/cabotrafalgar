@@ -11,9 +11,9 @@ public interface GamePlayScreenCommands {
 
     void quitGame();
 
-    void showControls();
+    void toggleControls();
 
-    void showStats();
+    void toggleStats();
 
     void toggleMusic();
 }

@@ -70,13 +70,14 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     }
 
     @Override
-    public void showControls() {
+    public void toggleControls() {
 
     }
 
     @Override
-    public void showStats() {
-
+    public void toggleStats() {
+        boolean newVisibility = !screen.findElementByName("panel_stats").isVisible();
+        screen.findElementByName("panel_stats").setVisible(newVisibility);
     }
 
     @Override
