@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 /**
  * Created by alberto on 28/03/16.
  */
-public abstract class SimpleController implements ScreenController {
+public abstract class WorkflowMenuController implements ScreenController {
 
     /**
      * From bind

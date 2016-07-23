@@ -1,32 +1,22 @@
 package com.navid.trafalgar.mod.tutorial;
 
-import com.google.common.collect.HashMultimap;
 import com.navid.trafalgar.input.*;
-import com.navid.trafalgar.manager.statistics.StatisticsManager;
-import com.navid.trafalgar.mod.common.SimpleController;
-import com.navid.trafalgar.model.AShipModel;
+import com.navid.trafalgar.mod.common.WorkflowMenuController;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.ModelBuilder;
-import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 
-public class TutorialMainScreenController extends SimpleController {
+public class TutorialMainScreenController extends WorkflowMenuController {
 
     @Autowired
     private List<TutorialChapter> chapters;

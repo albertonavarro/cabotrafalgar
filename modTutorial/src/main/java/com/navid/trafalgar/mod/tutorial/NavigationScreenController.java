@@ -113,11 +113,6 @@ public class NavigationScreenController implements ScreenController, BeanFactory
         toggleMenu();
     }
 
-    @Override
-    public void showControls() {
-        toggleShowControls();
-    }
-
     public void clickCamera2() {
         cameraManager.setCamera2();
     }

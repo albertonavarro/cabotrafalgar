@@ -77,7 +77,7 @@ ext{
             logback: 'ch.qos.logback:logback-classic:1.0.9',
             log4j_over_slf4j: 'org.slf4j:log4j-over-slf4j:1.7.10',
             jul_to_slf4j: 'org.slf4j:jul-to-slf4j:1.7.10',
-            nifty_flow : 'com.navid.nifty:nifty-flow:0.5.1',
+            nifty_flow : 'com.navid.nifty:nifty-flow:0.6.0',
             zxing: 'com.google.zxing:core:3.1.0',
             cabotrafalgar_gamemanager_client: 'gamemanager:rest-client:1.1.1'
     ]

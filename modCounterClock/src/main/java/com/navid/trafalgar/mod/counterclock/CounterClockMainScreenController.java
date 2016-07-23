@@ -99,11 +99,6 @@ public final class CounterClockMainScreenController implements ScreenController,
         toggleMenu();
     }
 
-    @Override
-    public void showControls() {
-
-    }
-
     public void clickCamera2() {
         cameraManager.setCamera2();
     }

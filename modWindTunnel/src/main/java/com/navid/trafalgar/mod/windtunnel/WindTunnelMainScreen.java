@@ -7,6 +7,7 @@ import com.navid.trafalgar.input.SystemInterpreter;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
+import com.navid.trafalgar.mod.common.GamePlayController;
 import com.navid.trafalgar.mod.windtunnel.statelisteners.LoadCameraStateListener;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
@@ -21,50 +22,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-public final class WindTunnelMainScreen implements ScreenController, BeanFactoryAware, SystemInterpreter {
-    /*
-     * Comes from bind
-     */
+public final class WindTunnelMainScreen extends GamePlayController implements BeanFactoryAware {
 
-    private Nifty nifty;
-    /*
-     * Comes from bind
-     */
-    private Screen screen;
     @Autowired
     private AppStateManager appStateManager;
     @Autowired
     private Application app;
     @Autowired
     private LoadCameraStateListener cameraManager;
-    @Autowired
-    private EventManager eventManager;
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
+
     private WindTunnelMainGame game;
-    private boolean showMenu;
     private XmlBeanFactory ctx;
     /*
      * From BeanFactoryAware
      */
     private BeanFactory beanFactory;
 
-    /**
-     * Nifty GUI ScreenControl methods
-     *
-     * @param nifty
-     * @param screen
-     */
-    @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
-
     @Override
     public void onStartScreen() {
-        showMenu = false;
-        showMenuFunction(showMenu); //nifty keeps the status, we need to reset it.
+        showMenuFunction(false); //nifty keeps the status, we need to reset it.
 
         app.enqueue(new Callable<Void>() {
 
@@ -98,14 +74,6 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         });
     }
 
-    public void showMenu() {
-        toggleMenu();
-    }
-
-    @Override
-    public void showControls() {
-
-    }
 
     public void clickCamera2() {
         cameraManager.setCamera2();
@@ -129,36 +97,8 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         listBox.clear();
     }
 
-    public void showMenuFunction(boolean value) {
-        screen.findElementByName("menuLayer").setVisible(value);
-        showMenu = value;
-        if (value) {
-            eventManager.fireEvent("PAUSE");
-        } else {
-            eventManager.fireEvent("RESUME");
-        }
-    }
 
-    public synchronized void toggleMenu() {
-        showMenu = !showMenu;
-        showMenuFunction(showMenu);
-    }
 
-    public synchronized void restart() {
-        showMenuFunction(false);
-        eventManager.fireEvent(EventManager.FAILED);
-
-        screenFlowManager.setNextScreenHint("windTunnelScreen");
-        nifty.gotoScreen("redirector");
-    }
-
-    public synchronized void quit() {
-        showMenuFunction(false);
-        eventManager.fireEvent(EventManager.FAILED);
-
-        screenFlowManager.setNextScreenHint("selectShip");
-        nifty.gotoScreen("redirector");
-    }
 
     /**
      * @param cameraManager the cameraManager to set
@@ -186,19 +126,6 @@ public final class WindTunnelMainScreen implements ScreenController, BeanFactory
         this.appStateManager = appStateManager;
     }
 
-    /**
-     * @param eventManager the eventManager to set
-     */
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
-    }
 
     @Override
     public void setStatisticsManager(StatisticsManager statisticsManager) {

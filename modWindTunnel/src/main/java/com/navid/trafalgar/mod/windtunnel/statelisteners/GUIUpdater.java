@@ -52,11 +52,11 @@ public final class GUIUpdater implements StartedState, PrestartState {
     }
 
     public void restart() {
-        mainScreen.restart();
+        mainScreen.restartGame();
     }
 
     public void quit() {
-        mainScreen.quit();
+        mainScreen.quitGame();
     }
 
     /**

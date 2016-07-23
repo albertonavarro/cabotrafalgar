@@ -20,15 +20,10 @@ public class SystemInteractions implements AShipModelInteractive {
                 add(commandBuilder.createCommand("system - show menu", new Command() {
                     @Override
                     public void execute(float tpf) {
-                        systemInteractionsPlayer.showMenu();
+                        systemInteractionsPlayer.toggleMenu();
                     }
                 }));
-                add(commandBuilder.createCommand("system - show controls", new Command() {
-                    @Override
-                    public void execute(float tpf) {
-                        systemInteractionsPlayer.showControls();
-                    }
-                }));
+
             }
         };
     }
