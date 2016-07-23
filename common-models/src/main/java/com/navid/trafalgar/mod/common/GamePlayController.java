@@ -1,6 +1,7 @@
 package com.navid.trafalgar.mod.common;
 
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.audio.MusicManager;
 import com.navid.trafalgar.input.SystemInterpreter;
 import com.navid.trafalgar.manager.EventManager;
 import de.lessvoid.nifty.Nifty;
@@ -12,6 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by alberto on 17/07/16.
  */
 public abstract class GamePlayController implements ScreenController, SystemInterpreter, GamePlayScreenCommands {
+
+    private final String restartScreen;
+
+    private final String quitScreen;
+
+    protected GamePlayController(String restartScreen, String quitScreen) {
+        this.restartScreen = restartScreen;
+        this.quitScreen = quitScreen;
+    }
 
     /**
      * From bind
@@ -30,10 +40,8 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     @Autowired
     protected EventManager eventManager;
 
-
-    private boolean showMenu;
-
-
+    @Autowired
+    protected MusicManager musicManager;
 
     @Override
     public final void bind(Nifty nifty, Screen screen) {
@@ -48,7 +56,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
-        screenFlowManager.setNextScreenHint("windTunnelScreen");
+        screenFlowManager.setNextScreenHint(restartScreen);
         nifty.gotoScreen("redirector");
     }
 
@@ -57,7 +65,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
-        screenFlowManager.setNextScreenHint("selectShip");
+        screenFlowManager.setNextScreenHint(quitScreen);
         nifty.gotoScreen("redirector");
     }
 
@@ -73,21 +81,20 @@ public abstract class GamePlayController implements ScreenController, SystemInte
 
     @Override
     public void toggleMusic() {
-
+        musicManager.toggleMute();
     }
 
     @Override
     public void toggleMenu() {
-        showMenu = !showMenu;
-        showMenuFunction(showMenu);
+        boolean newVisibility = !screen.findElementByName("menuLayer").isVisible();
+        showMenuFunction(newVisibility);
     }
 
     //PRIVATE SUPPORT METHODS
 
-    public void showMenuFunction(boolean value) {
-        screen.findElementByName("menuLayer").setVisible(value);
-        showMenu = value;
-        if (value) {
+    public void showMenuFunction(boolean newVisibility) {
+        screen.findElementByName("menuLayer").setVisible(newVisibility);
+        if (newVisibility) {
             eventManager.fireEvent("PAUSE");
         } else {
             eventManager.fireEvent("RESUME");
@@ -114,4 +121,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     }
 
 
+    public void setMusicManager(MusicManager musicManager) {
+        this.musicManager = musicManager;
+    }
 }

@@ -2,20 +2,15 @@ package com.navid.trafalgar.mod.windtunnel;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.navid.nifty.flow.ScreenFlowManager;
-import com.navid.trafalgar.input.SystemInterpreter;
-import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.common.GamePlayController;
 import com.navid.trafalgar.mod.windtunnel.statelisteners.LoadCameraStateListener;
-import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
+
 import java.util.Collection;
 import java.util.concurrent.Callable;
-import org.springframework.beans.BeansException;
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +32,10 @@ public final class WindTunnelMainScreen extends GamePlayController implements Be
      * From BeanFactoryAware
      */
     private BeanFactory beanFactory;
+
+    public WindTunnelMainScreen() {
+        super("windTunnelScreen", "selectShip");
+    }
 
     @Override
     public void onStartScreen() {
