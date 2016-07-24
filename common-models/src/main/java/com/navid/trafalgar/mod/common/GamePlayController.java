@@ -2,12 +2,19 @@ package com.navid.trafalgar.mod.common;
 
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.audio.MusicManager;
+import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.input.SystemInterpreter;
 import com.navid.trafalgar.manager.EventManager;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by alberto on 17/07/16.
@@ -43,6 +50,9 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     @Autowired
     protected MusicManager musicManager;
 
+    @Autowired
+    private GeneratorBuilder generatorBuilder;
+
     @Override
     public final void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
@@ -71,7 +81,10 @@ public abstract class GamePlayController implements ScreenController, SystemInte
 
     @Override
     public void toggleControls() {
+        boolean newVisibility = !screen.findElementByName("showControlLayer").isVisible();
 
+        screen.findNiftyControl("showControlText", Label.class).setText(prettyPrintReport(generatorBuilder.generateReport()));
+        screen.findElementByName("showControlLayer").setVisible(newVisibility);
     }
 
     @Override
@@ -102,6 +115,20 @@ public abstract class GamePlayController implements ScreenController, SystemInte
         }
     }
 
+    private String prettyPrintReport(Map<String, String> commands ) {
+        List<String> keys = new ArrayList<>(commands.keySet());
+        Collections.sort(keys);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (String key : keys) {
+            sb.append(key + ": " + commands.get(key) + "\n");
+        }
+
+        return sb.toString();
+    }
+
+
 
     //VARIABLE SETTERS
 
@@ -124,5 +151,9 @@ public abstract class GamePlayController implements ScreenController, SystemInte
 
     public void setMusicManager(MusicManager musicManager) {
         this.musicManager = musicManager;
+    }
+
+    public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
+        this.generatorBuilder = generatorBuilder;
     }
 }
