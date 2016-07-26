@@ -28,7 +28,7 @@
     <logger name="com.jme3" level="DEBUG"/>
     <logger name="com.navid" level="DEBUG"/>
     <logger name="com.navid.trafalgar.manager" level="INFO"/>
-    <logger name="de.lessvoid.nifty" level="INFO"/>
+    <logger name="de.lessvoid.nifty" level="ERROR"/>
     <logger name="org.bushe" level="INFO" />
     
     <root level="INFO">
