@@ -6,7 +6,7 @@ screenDeclarations:
     interfaceConstructor: static:/mod/tutorial/tutorial_screen.xml
     controller: spring:mod.tutorial.mainscreencontroller
   - screenName: tutorialSailingScreen
-    interfaceConstructor: static:/mod/tutorial/navigation_screen.xml
+    interfaceConstructor: static:screen-snippets/gameplayLayout.xml
     controller: spring:mod.tutorial.navigationscreencontroller
 moduleFlowRoot: root:root
 moduleScreenFlow:

@@ -90,6 +90,14 @@
                 <control id="showControlText" name="label" font="Interface/Fonts/Default.fnt" wrap="true" height="90%" text="" align="left" />
             </panel>
         </layer>
+        <layer id="tutorialLayer" childLayout="center" visible="false">
+            <panel style="nifty-panel" childLayout="horizontal" align="center" valign="bottom">
+                <control id="tutorialText" name="label" font="Interface/Fonts/Default.fnt" wrap="true" height="90%" text="" align="left" />
+                <control id="tutorialNextButton" name="button" label="Continue" align="center">
+                    <interact onClick="tutorialContinue()" />
+                </control>
+            </panel>
+        </layer>
 
     </screen>
 </nifty>

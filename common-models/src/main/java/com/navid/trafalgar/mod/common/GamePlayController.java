@@ -5,16 +5,15 @@ import com.navid.trafalgar.audio.MusicManager;
 import com.navid.trafalgar.input.GeneratorBuilder;
 import com.navid.trafalgar.input.SystemInterpreter;
 import com.navid.trafalgar.manager.EventManager;
+import com.navid.trafalgar.manager.statistics.AbstractStatistic;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by alberto on 17/07/16.
@@ -62,7 +61,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     //PUBLIC COMMANDS
 
     @Override
-    public void restartGame() {
+    public final void restartGame() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
@@ -71,7 +70,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     }
 
     @Override
-    public void quitGame() {
+    public final void quitGame() {
         showMenuFunction(false);
         eventManager.fireEvent(EventManager.FAILED);
 
@@ -80,7 +79,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     }
 
     @Override
-    public void toggleControls() {
+    public final void toggleControls() {
         boolean newVisibility = !screen.findElementByName("showControlLayer").isVisible();
 
         screen.findNiftyControl("showControlText", Label.class).setText(prettyPrintReport(generatorBuilder.generateReport()));
@@ -88,25 +87,43 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     }
 
     @Override
-    public void toggleStats() {
+    public final void toggleStats() {
         boolean newVisibility = !screen.findElementByName("panel_stats").isVisible();
         screen.findElementByName("panel_stats").setVisible(newVisibility);
     }
 
     @Override
-    public void toggleMusic() {
+    public final void toggleMusic() {
         musicManager.toggleMute();
     }
 
     @Override
-    public void toggleMenu() {
+    public final void toggleMenu() {
         boolean newVisibility = !screen.findElementByName("menuLayer").isVisible();
         showMenuFunction(newVisibility);
     }
 
+    public final void updateShipStats() {
+        ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
+        listBox.refresh();
+    }
+
+    public void fillShipStats(Collection<AbstractStatistic> stats) {
+        ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
+
+        for (AbstractStatistic currentStat : stats) {
+            listBox.addItem(currentStat);
+        }
+    }
+
+    public final void clearStats() {
+        ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
+        listBox.clear();
+    }
+
     //PRIVATE SUPPORT METHODS
 
-    public void showMenuFunction(boolean newVisibility) {
+    public final void showMenuFunction(boolean newVisibility) {
         screen.findElementByName("menuLayer").setVisible(newVisibility);
         if (newVisibility) {
             eventManager.fireEvent("PAUSE");
@@ -115,7 +132,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
         }
     }
 
-    private String prettyPrintReport(Map<String, String> commands ) {
+    private final String prettyPrintReport(Map<String, String> commands ) {
         List<String> keys = new ArrayList<>(commands.keySet());
         Collections.sort(keys);
 
@@ -149,11 +166,11 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     }
 
 
-    public void setMusicManager(MusicManager musicManager) {
+    public final void setMusicManager(MusicManager musicManager) {
         this.musicManager = musicManager;
     }
 
-    public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
+    public final void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
         this.generatorBuilder = generatorBuilder;
     }
 }

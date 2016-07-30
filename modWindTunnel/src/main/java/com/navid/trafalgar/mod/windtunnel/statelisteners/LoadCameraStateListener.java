@@ -18,43 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public final class LoadCameraStateListener implements LoadCamState, StartedState, EventListener {
 
-    /**
-     * @param gameModel the gameModel to set
-     */
-    public void setGameModel(WindTunnelGameModel gameModel) {
-        this.gameModel = gameModel;
-    }
 
-    /**
-     * @param gameStatus the gameStatus to set
-     */
-    public void setGameStatus(GameStatus gameStatus) {
-        this.gameStatus = gameStatus;
-    }
-
-    /**
-     * @param inputManager the inputManager to set
-     */
-    public void setInputManager(InputManager inputManager) {
-        this.inputManager = inputManager;
-    }
-
-    /**
-     * @param eventManager the eventManager to set
-     */
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
-    }
 
     private static enum Cameras {
 
         NONE, FLYCAM, TARGETCAM, CHASECAM
     };
-
-    @Autowired
-    public void setCounterClockMainScreen(WindTunnelMainScreen screen) {
-        screen.setCameraManager(this);
-    }
 
     @Autowired
     private GameStatus gameStatus;
@@ -162,5 +131,33 @@ public final class LoadCameraStateListener implements LoadCamState, StartedState
                 flyCamControl.setEnabled(true);
             }
         }
+    }
+
+    /**
+     * @param gameModel the gameModel to set
+     */
+    public void setGameModel(WindTunnelGameModel gameModel) {
+        this.gameModel = gameModel;
+    }
+
+    /**
+     * @param gameStatus the gameStatus to set
+     */
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
+    /**
+     * @param inputManager the inputManager to set
+     */
+    public void setInputManager(InputManager inputManager) {
+        this.inputManager = inputManager;
+    }
+
+    /**
+     * @param eventManager the eventManager to set
+     */
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
     }
 }

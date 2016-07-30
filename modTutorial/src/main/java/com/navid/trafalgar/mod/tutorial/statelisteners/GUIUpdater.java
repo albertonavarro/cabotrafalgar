@@ -47,18 +47,6 @@ public final class GUIUpdater implements StartedState, PrestartState {
         }
     };
 
-    public void resume() {
-        mainScreen.showMenuFunction(false);
-    }
-
-    public void restart() {
-        mainScreen.restart();
-    }
-
-    public void quit() {
-        mainScreen.quit();
-    }
-
     /**
      * @param mainScreen the mainScreen to set
      */

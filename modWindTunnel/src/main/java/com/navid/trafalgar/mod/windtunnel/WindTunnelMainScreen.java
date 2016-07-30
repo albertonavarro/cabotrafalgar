@@ -23,8 +23,6 @@ public final class WindTunnelMainScreen extends GamePlayController implements Be
     private AppStateManager appStateManager;
     @Autowired
     private Application app;
-    @Autowired
-    private LoadCameraStateListener cameraManager;
 
     private WindTunnelMainGame game;
     private XmlBeanFactory ctx;
@@ -74,14 +72,6 @@ public final class WindTunnelMainScreen extends GamePlayController implements Be
     }
 
 
-    public void clickCamera2() {
-        cameraManager.setCamera2();
-    }
-
-    public void updateShipStats() {
-        ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
-        listBox.refresh();
-    }
 
     public void fillShipStats(Collection<AbstractStatistic> stats) {
         ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
@@ -89,21 +79,6 @@ public final class WindTunnelMainScreen extends GamePlayController implements Be
         for (AbstractStatistic currentStat : stats) {
             listBox.addItem(currentStat);
         }
-    }
-
-    public void clearStats() {
-        ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
-        listBox.clear();
-    }
-
-
-
-
-    /**
-     * @param cameraManager the cameraManager to set
-     */
-    public void setCameraManager(LoadCameraStateListener cameraManager) {
-        this.cameraManager = cameraManager;
     }
 
     @Override
