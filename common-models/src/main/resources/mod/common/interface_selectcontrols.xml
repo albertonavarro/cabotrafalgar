@@ -13,8 +13,10 @@
             <text text="${generators}" font="Interface/Fonts/Default.fnt" />
             <text text="" font="Interface/Fonts/Default.fnt" />
             <#list sortedCommands as commands>
-                <#if mapOfMapsOfGenerators[commands][generators]>
+                <#if mapOfMapsOfGenerators[commands]?? && mapOfMapsOfGenerators[commands][generators] ?? && mapOfMapsOfGenerators[commands][generators] >
                     <control name="radioButton" id="${generators}" group="${commands}" />
+                <#else>
+                    <control name="radioButton" id="${generators}" group="${commands}" visible="false" />
                 </#if>
             </#list>
         </panel>

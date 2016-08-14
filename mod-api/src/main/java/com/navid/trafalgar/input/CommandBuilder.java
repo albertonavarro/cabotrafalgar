@@ -15,7 +15,23 @@ public class CommandBuilder {
     private EventManager eventManager;
 
     public Command createCommand(final String commandName, final Command innerCommand) {
-        return new Command() {
+        return new AnalogCommand() {
+            @Override
+            public void execute(float tpf) {
+                eventManager.fireEvent("pre-" + commandName);
+                innerCommand.execute(tpf);
+                eventManager.fireEvent("post-" + commandName);
+            }
+
+            @Override
+            public String toString() {
+                return commandName;
+            }
+        };
+    }
+
+    public DigitalCommand createDigitalCommand(final String commandName, final Command innerCommand) {
+        return new DigitalCommand() {
             @Override
             public void execute(float tpf) {
                 eventManager.fireEvent("pre-" + commandName);

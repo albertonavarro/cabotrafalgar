@@ -38,26 +38,10 @@ import static com.google.common.collect.Lists.newArrayList;
 /**
  * Created by alberto on 8/5/15.
  */
-public class SelectRemoteControlsScreenController implements ScreenController {
-
-    /**
-     * From bind
-     */
-    private Nifty nifty;
-    /**
-     * From bind
-     */
-    private Screen screen;
-
+public class SelectRemoteControlsScreenController extends GameMenuController {
 
     @Autowired
     private GameConfiguration gameConfiguration;
-
-    @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
 
     @Override
     public void onStartScreen() {
@@ -95,9 +79,6 @@ public class SelectRemoteControlsScreenController implements ScreenController {
     public void onEndScreen() {
 
     }
-
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     private void enrichWithGameAndUser(Collection<RemoteInputCommandStateListener> keyListeners, Long id, String user) {
         for(RemoteInputCommandStateListener current : keyListeners) {
@@ -143,23 +124,6 @@ public class SelectRemoteControlsScreenController implements ScreenController {
 
         return null;
 
-    }
-
-    public void next() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
-        nifty.gotoScreen("redirector");
-    }
-
-    public void back() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
-        nifty.gotoScreen("redirector");
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
     }
 
     public void setGameConfiguration(GameConfiguration gameConfiguration) {

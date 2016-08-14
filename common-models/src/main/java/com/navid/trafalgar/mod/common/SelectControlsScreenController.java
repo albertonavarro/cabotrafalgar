@@ -22,16 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public final class SelectControlsScreenController implements ScreenController {
+public final class SelectControlsScreenController extends GameMenuController {
 
-    /**
-     * From bind
-     */
-    private Nifty nifty;
-    /**
-     * From bind
-     */
-    private Screen screen;
     /**
      * Singleton
      */
@@ -47,23 +39,12 @@ public final class SelectControlsScreenController implements ScreenController {
      */
     @Autowired
     private CommandBuilder commandBuilder;
-    /**
-     * Singleton
-     */
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     
     private EventTopicSubscriber<RadioButtonStateChangedEvent> eventHandler;
     private final Map<String, String> generated = new HashMap<String, String>();
     private Map<String, Command> commandsMap;
     private Map<String, CommandGenerator> generatorMap;
-
-    @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
 
     @Override
     public void onStartScreen() {
@@ -114,12 +95,6 @@ public final class SelectControlsScreenController implements ScreenController {
 
     @Override
     public void onEndScreen() {
-    }
-
-    public void previous() {
-    }
-
-    public void goTo(String nextScreen) {
         Map<Command, CommandGenerator> assignments = new HashMap<Command, CommandGenerator>();
 
         for (Map.Entry<String, String> entry : generated.entrySet()) {
@@ -129,25 +104,6 @@ public final class SelectControlsScreenController implements ScreenController {
         Set<CommandStateListener> listeners = generatorBuilder.generateControllers(assignments);
 
         gameConfiguration.getPreGameModel().addToModel(listeners);
-
-        nifty.gotoScreen(nextScreen);
-    }
-
-    public void next() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
-        goTo("redirector");
-    }
-
-    public void back() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
-        nifty.gotoScreen("redirector");
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
     }
 
     /**

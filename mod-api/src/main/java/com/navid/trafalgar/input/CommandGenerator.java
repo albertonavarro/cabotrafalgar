@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface CommandGenerator {
 
-    Set<Class<Command>> getPossibleCommands();
+    Set<Class<? extends Command>> getPossibleCommands();
 
     CommandStateListener generateCommandStateListener(Command key);
 

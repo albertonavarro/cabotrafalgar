@@ -1,10 +1,7 @@
 package com.navid.trafalgar.input;
 
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by alberto on 7/28/15.
@@ -17,8 +14,10 @@ public class RemoteInputCommandGenerator implements CommandGenerator {
     private Map<String, String> report = new HashMap<String, String>();
 
     @Override
-    public Set<Class<Command>> getPossibleCommands() {
-        return Collections.singleton(Command.class);
+    public Set<Class<? extends Command>> getPossibleCommands() {
+        HashSet<Class<? extends Command>> result = new HashSet<>();
+        result.add(Command.class);
+        return result;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class SystemInteractions implements AShipModelInteractive {
     public Set<Command> getCommands(final CommandBuilder commandBuilder) {
         return new HashSet<Command>() {
             {
-                add(commandBuilder.createCommand("system - show menu", new Command() {
+                add(commandBuilder.createDigitalCommand("system - show menu", new Command() {
                     @Override
                     public void execute(float tpf) {
                         systemInteractionsPlayer.toggleMenu();

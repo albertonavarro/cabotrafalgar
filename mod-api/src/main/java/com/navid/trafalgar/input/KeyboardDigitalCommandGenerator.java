@@ -3,10 +3,7 @@ package com.navid.trafalgar.input;
 import com.jme3.input.InputManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public final class KeyboardDigitalCommandGenerator implements CommandGenerator {
 
@@ -16,8 +13,10 @@ public final class KeyboardDigitalCommandGenerator implements CommandGenerator {
     private Map<String, KeyboardDigitalCommandStateListener> report = new HashMap<String, KeyboardDigitalCommandStateListener>();
 
     @Override
-    public Set<Class<Command>> getPossibleCommands() {
-        return Collections.singleton(Command.class);
+    public Set<Class<? extends Command>> getPossibleCommands() {
+        HashSet<Class<? extends Command>> result = new HashSet<>();
+        result.add(DigitalCommand.class);
+        return result;
     }
 
     @Override

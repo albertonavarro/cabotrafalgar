@@ -37,7 +37,6 @@ public class Chapter1 implements TutorialChapter {
         map.put("mainsail - bring in", new AIWrapper());
         map.put("mainsail - let go", new AIWrapper());
         map.put("system - show menu", new KeyboardDigitalWrapper());
-        map.put("system - show controls", new KeyboardDigitalWrapper());
         return map;
     }
 

@@ -22,16 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class SelectShipScreenController implements ScreenController {
+public final class SelectShipScreenController extends GameMenuController {
 
-    /**
-     * From bind
-     */
-    private Nifty nifty;
-    /**
-     * From bind
-     */
-    private Screen screen;
     /**
      * Internal usage
      */
@@ -52,12 +44,6 @@ public final class SelectShipScreenController implements ScreenController {
     @Autowired
     private ScreenFlowManager screenFlowManager;
 
-    @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
-
     /**
      * @param gameConfiguration the gameConfiguration to set
      */
@@ -70,13 +56,6 @@ public final class SelectShipScreenController implements ScreenController {
      */
     public void setBuilder(ModelBuilder builder) {
         this.builder = builder;
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
     }
 
     private static class ListItem {
@@ -129,6 +108,21 @@ public final class SelectShipScreenController implements ScreenController {
 
     @Override
     public void onEndScreen() {
+        gameConfiguration.setShipName(selectedItem.getName());
+
+        EntryDefinition entry = new EntryDefinition();
+        entry.setType(selectedItem.getName());
+        entry.setName("player1");
+        entry.setValues(new HashMap<String, Object>() {
+            {
+                put("role", "ControlProxy");
+            }
+        });
+
+        Collection c = builder.build(entry);
+
+        gameConfiguration.getPreGameModel().addToModel(c, "player1");
+
         emptyList();
     }
 
@@ -177,32 +171,5 @@ public final class SelectShipScreenController implements ScreenController {
         }
     }
 
-    public void goTo(String nextScreen) {
-        gameConfiguration.setShipName(selectedItem.getName());
 
-        EntryDefinition entry = new EntryDefinition();
-        entry.setType(selectedItem.getName());
-        entry.setName("player1");
-        entry.setValues(new HashMap<String, Object>() {
-            {
-                put("role", "ControlProxy");
-            }
-        });
-
-        Collection c = builder.build(entry);
-
-        gameConfiguration.getPreGameModel().addToModel(c, "player1");
-
-        nifty.gotoScreen(nextScreen);
-    }
-
-    public void next() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
-        goTo("redirector");
-    }
-
-    public void back() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
-        nifty.gotoScreen("redirector");
-    }
 }
