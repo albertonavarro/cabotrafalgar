@@ -84,7 +84,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
         try {
             response = rankingClient.getRankingshipshipmapsmap(newMapName, ship);
         } catch (Exception e) {
-            LOG.info("Connectivity problem retrieving top competitors, returning empty", e);
+            LOG.info("Connectivity problem retrieving top competitors, returning empty", e.getMessage());
             return newArrayList();
         }
         return Lists.transform(response.getRankingEntry(), new Function<RankingEntry, CompetitorInfo>() {
