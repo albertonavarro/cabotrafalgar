@@ -13,20 +13,20 @@ import org.slf4j.LoggerFactory;
 public final class GeneratorBuilder {
 
     private static final Logger LOG = LoggerFactory.getLogger(GeneratorBuilder.class);
-    private final HashMultimap<Class<Command>, CommandGenerator> generatorMap = HashMultimap.create();
+    private final HashMultimap<Class<? extends Command>, CommandGenerator> generatorMap = HashMultimap.create();
     private final Map<String, CommandGenerator> generatorOnlyMap = new HashMap<String, CommandGenerator>();
 
     public void registerBuilder(CommandGenerator commandGenerator) {
         LOG.info("Registring builder " + commandGenerator);
         generatorOnlyMap.put(commandGenerator.toString(), commandGenerator);
 
-        Set<Class<Command>> currentClasses = commandGenerator.getPossibleCommands();
+        Set<Class<? extends Command>> currentClasses = commandGenerator.getPossibleCommands();
 
-        for (Class<Command> currentClass : currentClasses) {
+        for (Class<? extends Command> currentClass : currentClasses) {
             generatorMap.put(currentClass, commandGenerator);
-            for (Class finalClass : ReflexionUtils.getSuperTypes(currentClass)) {
+            /*for (Class finalClass : ReflexionUtils.getSuperTypes(currentClass)) {
                 generatorMap.put(finalClass, commandGenerator);
-            }
+            }*/
         }
     }
 
@@ -60,6 +60,16 @@ public final class GeneratorBuilder {
         }
 
         return commandStateListeners;
+    }
+
+    public Map<String, String> generateReport() {
+        Map<String, String> result = new HashMap<>();
+
+        for(CommandGenerator cg : generatorOnlyMap.values()) {
+            result.putAll(cg.commandReport());
+        }
+
+        return result;
     }
 
 }

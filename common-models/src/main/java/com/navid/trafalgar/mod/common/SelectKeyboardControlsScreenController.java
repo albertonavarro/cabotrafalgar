@@ -129,7 +129,8 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
         eventHandler = new EventTopicSubscriber<ListBoxSelectionChangedEvent>() {
             @Override
             public void onEvent(String string, ListBoxSelectionChangedEvent t) {
-                keyListeners.get(string).setKeycode(((ListItem) t.getSelection().get(0)).getValue());
+                ListItem selected = (ListItem) t.getSelection().get(0);
+                keyListeners.get(string).setKeycode(selected.getKeyName(), selected.getValue());
             }
         };
 
@@ -154,11 +155,14 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
                 }
 
                 listBoxController.selectItemByIndex(index);
-                currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
+                ListItem selected = (ListItem) listBoxController.getSelection().get(0);
+                currentListener.getValue().setKeycode(selected.getKeyName(), selected.getValue());
 
             } else {
                 listBoxController.selectItemByIndex(0);
-                currentListener.getValue().setKeycode(((ListItem) listBoxController.getSelection().get(0)).getValue());
+                ListItem selected = (ListItem) listBoxController.getSelection().get(0);
+
+                currentListener.getValue().setKeycode(selected.getKeyName(), selected.getValue());
             }
 
             nifty.subscribe(screen, currentListener.getKey(), ListBoxSelectionChangedEvent.class, eventHandler);

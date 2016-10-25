@@ -6,12 +6,12 @@ screenDeclarations:
   - screenName: selectMap
     interfaceConstructor: static:/mod/counterclock/interface_mapselector.xml
     controller: spring:mod.counterclock.mapselector
-  - screenName: counterclockScreen
-    interfaceConstructor: static:/mod/counterclock/interface_counterclock.xml
-    controller: spring:mod.counterclock.mainscreencontroller
   - screenName: selectProfile
     interfaceConstructor: static:/mod/counterclock/interface_profileselector.xml
     controller: spring:mod.counterclock.profileselector
+  - screenName: counterclockScreen
+    interfaceConstructor: static:screen-snippets/gameplayLayout.xml
+    controller: spring:mod.counterclock.mainscreencontroller
 moduleFlowRoot: root:root
 moduleScreenFlow:
   - selectProfile
@@ -19,5 +19,6 @@ moduleScreenFlow:
   - selectMap
   - selectControl
   - selectKeys
+  - selectKeysDigital
   - selectRemoteControl
   - counterclockScreen

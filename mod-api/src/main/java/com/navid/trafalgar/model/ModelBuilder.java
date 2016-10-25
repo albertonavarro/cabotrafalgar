@@ -96,7 +96,7 @@ public final class ModelBuilder {
                     }
                 });
                 Collection c = build(entryInput);
-                gameModel.addToModel(c);
+                gameModel.addToModel(c, "player1");
             } else {
                 gameModel.addToModel(build(entry));
             }
@@ -104,6 +104,10 @@ public final class ModelBuilder {
 
         for (Dependent currentDependant : (List<Dependent>) gameModel.getByType(Dependent.class)) {
             currentDependant.resolveDependencies(gameModel);
+        }
+
+        for (Dependent currentDependant : (List<Dependent>) gameModel.getByType(Dependent.class)) {
+            currentDependant.commitDependencies();
         }
 
         return gameModel;
@@ -174,6 +178,12 @@ public final class ModelBuilder {
         for (Object o : objects) {
             if (o instanceof Dependent) {
                 ((Dependent) o).resolveDependencies(gameModel);
+            }
+        }
+
+        for (Object o : objects) {
+            if (o instanceof Dependent) {
+                ((Dependent) o).commitDependencies();
             }
         }
 

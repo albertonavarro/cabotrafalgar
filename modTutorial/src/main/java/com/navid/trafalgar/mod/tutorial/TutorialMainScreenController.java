@@ -1,32 +1,22 @@
 package com.navid.trafalgar.mod.tutorial;
 
-import com.google.common.collect.HashMultimap;
-import com.navid.trafalgar.input.Command;
-import com.navid.trafalgar.input.CommandGenerator;
-import com.navid.trafalgar.input.CommandStateListener;
-import com.navid.trafalgar.input.GeneratorBuilder;
-import com.navid.trafalgar.mod.common.SimpleController;
-import com.navid.trafalgar.model.AShipModel;
+import com.navid.trafalgar.input.*;
+import com.navid.trafalgar.mod.common.WorkflowMenuController;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.ModelBuilder;
-import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
+import static com.google.common.collect.Lists.newArrayList;
 
-public class TutorialMainScreen extends SimpleController {
+
+public class TutorialMainScreenController extends WorkflowMenuController {
 
     @Autowired
     private List<TutorialChapter> chapters;
@@ -51,6 +41,9 @@ public class TutorialMainScreen extends SimpleController {
      */
     @Autowired
     private GeneratorBuilder generatorBuilder;
+
+    @Autowired
+    private CommandBuilder commandBuilder;
 
 
     @Override
@@ -83,20 +76,25 @@ public class TutorialMainScreen extends SimpleController {
         HashMap<String, Object> customValues = new HashMap<String, Object>();
         customValues.put("role", "ControlProxy");
 
-        gameConfiguration.getPreGameModel().addToModel(modelBuilder.getBuilder(selectedChapter.getShip()).build("tutorial", customValues));
+        gameConfiguration.getPreGameModel().addToModel(newArrayList(new SystemInteractions()), "system");
+        gameConfiguration.getPreGameModel().addToModel(modelBuilder.getBuilder(selectedChapter.getShip()).build("tutorial", customValues), "player1");
         gameConfiguration.setShipName(selectedChapter.getShip());
         gameConfiguration.setMap(selectedChapter.getMap());
 
-        Map<Command, CommandGenerator> assignments = createAssignments(selectedChapter, gameConfiguration.getPreGameModel().getSingleByType(AShipModelInteractive.class));
+        Map<Command, CommandGenerator> assignments = createAssignments(selectedChapter, gameConfiguration.getPreGameModel().getByType(AShipModelInteractive.class));
 
         Set<CommandStateListener> listeners = generatorBuilder.generateControllers(assignments);
         gameConfiguration.getPreGameModel().addToModel(listeners);
     }
 
-    private Map<Command, CommandGenerator> createAssignments(TutorialChapter selectedChapter, AShipModelInteractive singleByType) {
+    private Map<Command, CommandGenerator> createAssignments(TutorialChapter selectedChapter, List<AShipModelInteractive> interactives) {
         Map<Command, CommandGenerator> assignments = new HashMap<Command, CommandGenerator>();
+        Set<Command> commands = new HashSet<Command>();
+        for(AShipModelInteractive interactive: interactives) {
+            commands.addAll(interactive.getCommands(commandBuilder));
+        }
 
-        for(final Command command : singleByType.getCommands()) {
+        for(final Command command : commands) {
             Map<String, CommandGenerator> generators = generatorBuilder.getGenerators();
             String generatorType = selectedChapter.getCommandAssociations().get(command.toString()).getType();
             assignments.put(command, generators.get(generatorType));
@@ -125,4 +123,9 @@ public class TutorialMainScreen extends SimpleController {
     public void setGeneratorBuilder(GeneratorBuilder generatorBuilder) {
         this.generatorBuilder = generatorBuilder;
     }
+
+    public void setCommandBuilder(CommandBuilder commandBuilder) {
+        this.commandBuilder = commandBuilder;
+    }
+
 }

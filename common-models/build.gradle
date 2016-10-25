@@ -4,6 +4,7 @@ dependencies {
         'com.netflix.hystrix:hystrix-clj:1.5.1',
         libs.lazylogin_common_context,
         libs.nifty,
+        libs.jme3_jbullet,
         libs.jme3_core,
         libs.jme3_effects,
         libs.spring_beans,

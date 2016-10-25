@@ -42,4 +42,9 @@ public final class SimpleContext implements IContext, Dependent {
         setWater(gameModel.getSingleByType(IWater.class));
     }
 
+    @Override
+    public final void commitDependencies() {
+
+    }
+
 }

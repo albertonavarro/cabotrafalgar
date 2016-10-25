@@ -1,6 +1,7 @@
 package com.navid.trafalgar.shipmodelz;
 
 import com.navid.trafalgar.input.Command;
+import com.navid.trafalgar.input.CommandBuilder;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.AShipModelPlayer;
 import java.util.HashSet;
@@ -16,75 +17,45 @@ public final class ShipModelZControlProxy implements AShipModelInteractive {
     }
 
     @Override
-    public Set<Command> getCommands() {
+    public Set<Command> getCommands(final CommandBuilder commandBuilder) {
         return new HashSet<Command>() {
             {
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "tiller - to port";
-                    }
-
+                add(commandBuilder.createCommand("tiller - to port", new Command() {
                     @Override
                     public void execute(float tpf) {
                         target.rudderRight(tpf);
                     }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "tiller - to starboard";
-                    }
-
+                }));
+                add(commandBuilder.createCommand("tiller - to starboard", new Command() {
                     @Override
                     public void execute(float tpf) {
                         target.rudderLeft(tpf);
                     }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "mainsail - bring in";
-                    }
-
+                }));
+                add(commandBuilder.createCommand("mainsail - bring in", new Command() {
                     @Override
                     public void execute(float tpf) {
                         target.sailTrim(tpf);
                     }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "mainsail - let go";
-                    }
-
+                }));
+                add(commandBuilder.createCommand("mainsail - let go", new Command() {
                     @Override
                     public void execute(float tpf) {
                         target.sailLoose(tpf);
                     }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "weight - move to port";
-                    }
-
+                }));
+                add(commandBuilder.createCommand("weight - move to port", new Command() {
                     @Override
                     public void execute(float tpf) {
                         target.weightPort(tpf);
                     }
-                });
-                add(new Command() {
-                    @Override
-                    public String toString() {
-                        return "weight - move to starboard";
-                    }
-
+                }));
+                add(commandBuilder.createCommand("weight - move to starboard", new Command() {
                     @Override
                     public void execute(float tpf) {
                         target.weightStarboard(tpf);
                     }
-                });
+                }));
             }
         };
     }

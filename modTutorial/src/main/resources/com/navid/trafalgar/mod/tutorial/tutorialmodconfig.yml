@@ -1,9 +1,17 @@
 modName: Tutorial
 modPreGameSpringConfig: mod/tutorial/application-context.xml
+modGameSpringConfig: mod/tutorial/game-context.xml
 screenDeclarations:
   - screenName: tutorialMainScreen
     interfaceConstructor: static:/mod/tutorial/tutorial_screen.xml
     controller: spring:mod.tutorial.mainscreencontroller
+  - screenName: tutorialSailingScreen
+    interfaceConstructor: static:screen-snippets/gameplayLayout.xml
+    controller: spring:mod.tutorial.navigationscreencontroller
 moduleFlowRoot: root:root
 moduleScreenFlow:
   - tutorialMainScreen
+  - selectKeys
+  - selectKeysDigital
+  - selectRemoteControl
+  - tutorialSailingScreen

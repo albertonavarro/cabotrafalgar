@@ -10,9 +10,12 @@ import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
 import com.navid.trafalgar.mod.windtunnel.WindTunnelGameModel;
+import com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen;
 import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 import com.navid.trafalgar.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public final class LoadMapStateListener implements LoadModelState {
 
@@ -32,6 +35,8 @@ public final class LoadMapStateListener implements LoadModelState {
     private ModelBuilder builder2;
     @Autowired
     private WindTunnelGameModel windTunnelGameModel;
+    @Autowired
+    private WindTunnelMainScreen windTunnelMainScreen;
 
     @Override
     public void onLoadModel(float tpf) {
@@ -40,6 +45,8 @@ public final class LoadMapStateListener implements LoadModelState {
         gameStatus.setGameDefinition(gameDefinition);
 
         GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
+
+        gameConfiguration.getPreGameModel().addToModel(newArrayList(windTunnelMainScreen), "system");
 
         windTunnelGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
@@ -124,5 +131,9 @@ public final class LoadMapStateListener implements LoadModelState {
      */
     public void setCounterClockGameModel(WindTunnelGameModel windTunnelGameModel) {
         this.windTunnelGameModel = windTunnelGameModel;
+    }
+
+    public void setWindTunnelMainScreen(WindTunnelMainScreen windTunnelMainScreen) {
+        this.windTunnelMainScreen = windTunnelMainScreen;
     }
 }

@@ -12,4 +12,6 @@ public interface Dependent {
      */
     void resolveDependencies(GameModel gameModel);
 
+    void commitDependencies();
+
 }

@@ -1,9 +1,6 @@
 package com.navid.trafalgar.mod.tutorial.chapters;
 
-import com.navid.trafalgar.mod.tutorial.CommandWrapper;
-import com.navid.trafalgar.mod.tutorial.AIWrapper;
-import com.navid.trafalgar.mod.tutorial.KeyboardWrapper;
-import com.navid.trafalgar.mod.tutorial.TutorialChapter;
+import com.navid.trafalgar.mod.tutorial.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +11,13 @@ import java.util.Map;
 public class Chapter1 implements TutorialChapter {
 
     public String toString() {
-        return "Chapter 1";
+        return "01 - Screen basics";
     }
 
     public String getDescription() {
-        return "Get used to weight controls.";
+        return "Learn how to run the tutorials, basic instructions, no gameplay.\n" +
+                "Ship: ShipModelOneY\n" +
+                "Choose and remember the keys for the commands!";
     }
 
     @Override
@@ -27,7 +26,7 @@ public class Chapter1 implements TutorialChapter {
     }
 
     public String getMap() {
-        return "chapter1";
+        return "mod/tutorial/chapter1/chapter1.map";
     }
 
     @Override
@@ -37,6 +36,7 @@ public class Chapter1 implements TutorialChapter {
         map.put("tiller - to starboard", new KeyboardWrapper());
         map.put("mainsail - bring in", new AIWrapper());
         map.put("mainsail - let go", new AIWrapper());
+        map.put("system - show menu", new KeyboardDigitalWrapper());
         return map;
     }
 

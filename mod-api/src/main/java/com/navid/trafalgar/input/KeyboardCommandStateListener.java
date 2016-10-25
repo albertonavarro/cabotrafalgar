@@ -10,6 +10,7 @@ public final class KeyboardCommandStateListener implements CommandStateListener,
     private final InputManager inputManager;
     private final Command key;
     private AnalogListener listener;
+    private String keyname;
     private int keycode;
 
     public KeyboardCommandStateListener(InputManager inputManager, Command key) {
@@ -17,12 +18,17 @@ public final class KeyboardCommandStateListener implements CommandStateListener,
         this.key = key;
     }
 
-    public void setKeycode(int keycode) {
+    public void setKeycode(String keyname, int keycode) {
+        this.keyname = keyname;
         this.keycode = keycode;
     }
 
     public int getKeycode() {
         return keycode;
+    }
+
+    public String getKeyname() {
+        return keyname;
     }
 
     @Override

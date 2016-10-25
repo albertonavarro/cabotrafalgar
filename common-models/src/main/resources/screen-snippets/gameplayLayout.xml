@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty.xsd http://nifty-gui.sourceforge.net/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+    <screen id="${screenUniqueId}" controller="${controllerClassName}">
+        <layer id="foreground" childLayout="horizontal">
+
+            <panel id="panel_center" width="94%" height="100%" childLayout="vertical"  >
+                <panel id="panel_top" width="100%" height="5%" childLayout="horizontal"   backgroundColor="#ffffff30">
+                    <control name="button" label="Menu" id="StartButton2" align="center" valign="center"
+                             visibleToMouse="true" >
+                        <interact onClick="toggleMenu()" />
+                    </control>
+                </panel>
+
+                <panel id="separator" width="20%" height="1%" childLayout="vertical"   backgroundColor="#ffffff00"/>
+
+                <panel id="panel_stats" width="20%" height="50%" childLayout="vertical"   backgroundColor="#ffffff30" visible="false">
+                    <control id="statsLists" name="listBox" vertical="optional" horizontal="optional" displayItems="20" selection="Multiple" />
+                </panel>
+
+            </panel>
+        </layer>
+        <layer id="retryLayer" childLayout="center" visible="false">
+            <panel style="nifty-panel" childLayout="center" padding="18px,28px,40px,16px" width="30%" height="20%" align="center" valign="center">
+                <panel childLayout="vertical" align="center" valign="center">
+                    <panel childLayout="center" height="70%" width="100%">
+                        <text text="Finished! Do you want to retry?" style="base-font" align="center" valign="center" color="#ffff"/>
+                    </panel>
+                    <panel childLayout="horizontal" align="center" height="30%">
+                        <panel childLayout="center" width="50%">
+                            <control id="yesButton" name="button" label="Yes" width="100px" align="center">
+                                <interact onClick="restart()" />
+                            </control>
+                        </panel>
+                        <panel childLayout="center" width="50%">
+                            <control id="noButton" name="button" label="No" width="100px" align="center">
+                                <interact onClick="quit()" />
+                            </control>
+                        </panel>
+                    </panel>
+                </panel>
+            </panel>
+        </layer>
+        <layer id="menuLayer" childLayout="vertical" visible="false">
+            <panel style="nifty-panel" childLayout="center" width="40%" height="20%" align="center" valign="center">
+                <panel childLayout="vertical" align="center" valign="center">
+                    <panel childLayout="horizontal" align="center"  >
+                        <text text="Gameplay Menu" style="base-font" align="center" valign="center" color="#ffff"/>
+                    </panel>
+                    <panel childLayout="horizontal" align="center" >
+                        <panel childLayout="center" >
+                            <control id="resumeButton" name="button" label="Resume" width="150px" align="center">
+                                <interact onClick="toggleMenu()" />
+                            </control>
+                        </panel>
+                        <panel childLayout="center" >
+                            <control id="restartButton" name="button" label="Restart" width="150px" align="center">
+                                <interact onClick="restartGame()" />
+                            </control>
+                        </panel>
+                        <panel childLayout="center" >
+                            <control id="quitButton" name="button" label="Quit to menu" width="150px" align="center">
+                                <interact onClick="quitGame()" />
+                            </control>
+                        </panel>
+                    </panel>
+                    <panel childLayout="horizontal" align="center" >
+                        <panel childLayout="center" >
+                            <control id="showControls" name="button" label="Show Controls" width="150px" align="center">
+                                <interact onClick="toggleControls()" />
+                            </control>
+                        </panel>
+                        <panel childLayout="center" >
+                            <control id="restartButton" name="button" label="Show Stats" width="150px" align="center">
+                                <interact onClick="toggleStats()" />
+                            </control>
+                        </panel>
+                        <panel childLayout="center" >
+                            <control id="quitButton" name="button" label="Mute/Unmute Music" width="150px" align="center">
+                                <interact onClick="toggleMusic()" />
+                            </control>
+                        </panel>
+                    </panel>
+                </panel>
+            </panel>
+            <panel id="showControlLayer" style="nifty-panel" childLayout="center" padding="18px,28px,40px,16px" width="40%" height="20%" align="center" valign="center" visible="false">
+                <control id="showControlText" name="label" font="Interface/Fonts/Default.fnt" wrap="true" height="90%" text="" align="left" />
+            </panel>
+        </layer>
+        <layer id="tutorialLayer" childLayout="center" visible="false">
+            <panel style="nifty-panel" childLayout="horizontal" align="center" valign="bottom">
+                <control id="tutorialText" name="label" font="Interface/Fonts/Default.fnt" wrap="true" height="90%" text="" align="left" />
+                <control id="tutorialNextButton" name="button" label="Continue" align="center">
+                    <interact onClick="tutorialContinue()" />
+                </control>
+            </panel>
+        </layer>
+
+    </screen>
+</nifty>

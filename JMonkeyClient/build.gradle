@@ -20,12 +20,6 @@ dependencies {
             libs.spring_context,
             libs.jul_to_slf4j,
             libs.activemq_client
-            //libs.geronimo_specs_j2ee_management,
-            //libs.geronimo_specs_jms_spec,
-            //libs.hawtbuf,
-            //libs.commons_net,
-            //libs.jmdns,
-            //libs.activemq,
     )
 
     runtime(
@@ -35,7 +29,7 @@ dependencies {
             project(':modTutorial'),
             project(':shipModelY'),
             project(':shipModelZ'),
-            project(':shipModelLeyton'),
+            //project(':shipModelLeyton'),
             libs.jme3_lwjgl,
             libs.jwjgl,
             libs.eventbus,

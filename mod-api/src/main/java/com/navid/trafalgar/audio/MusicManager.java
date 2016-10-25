@@ -21,6 +21,9 @@ public class MusicManager {
 
     private AudioNode currentMusic = null;
 
+    private float maxGlobalVolume = 1;
+    private float currentGlobalVolume = 1;
+
     public void setAmbientMusic(String ambient, AudioNode audioNode) {
         musicPerAmbient.put(ambient, audioNode);
 
@@ -37,6 +40,7 @@ public class MusicManager {
             currentMusic = getRandomForAmbient(ambient);
 
             if (currentMusic!=null){
+                currentMusic.setVolume(currentGlobalVolume);
                 currentMusic.play();
             }
         }
@@ -51,6 +55,16 @@ public class MusicManager {
         }
 
         return null;
+    }
+
+    public AudioNode getCurrentMusic() {
+        return currentMusic;
+    }
+
+    public void toggleMute() {
+        currentGlobalVolume = currentGlobalVolume == 0 ? maxGlobalVolume : 0;
+
+        currentMusic.setVolume(currentGlobalVolume);
     }
 
 }

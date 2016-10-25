@@ -2,7 +2,6 @@ dependencies {
     compile (
             project(':mod-api'),
             project(':common-models'),
-            project(':modCounterClock-maps'),
             libs.opencsv,
             libs.jme3_core,
             libs.jme3_jbullet,

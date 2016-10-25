@@ -3,8 +3,11 @@ package com.navid.trafalgar.mod.counterclock;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.input.SystemInterpreter;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.statistics.AbstractStatistic;
+import com.navid.trafalgar.manager.statistics.StatisticsManager;
+import com.navid.trafalgar.mod.common.GamePlayController;
 import com.navid.trafalgar.mod.counterclock.statelisteners.LoadCameraStateListener;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
@@ -18,26 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-public final class CounterClockMainScreenController implements ScreenController, BeanFactoryAware {
+public final class CounterClockMainScreenController extends GamePlayController implements BeanFactoryAware {
 
-    /*
-     * Comes from bind
-     */
-    private Nifty nifty;
-    /*
-     * Comes from bind
-     */
-    private Screen screen;
+
     @Autowired
     private AppStateManager appStateManager;
     @Autowired
     private Application app;
-    @Autowired
-    private LoadCameraStateListener cameraManager;
-    @Autowired
-    private EventManager eventManager;
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     private CounterClockMainGame game;
     private boolean showMenu;
@@ -47,13 +37,8 @@ public final class CounterClockMainScreenController implements ScreenController,
      */
     private BeanFactory beanFactory;
 
-    /**
-     * Nifty GUI ScreenControl methods
-     */
-    @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
+    protected CounterClockMainScreenController() {
+        super("counterclockScreen", "selectMap");
     }
 
     @Override
@@ -93,70 +78,12 @@ public final class CounterClockMainScreenController implements ScreenController,
         });
     }
 
-    public void showMenu() {
-        toggleMenu();
-    }
-
-    public void clickCamera2() {
-        cameraManager.setCamera2();
-    }
-
-    public void clickCamera3() {
-        cameraManager.setCamera3();
-    }
-
-    public void updateShipStats() {
-        ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
-        listBox.refresh();
-    }
-
     public void fillShipStats(Collection<AbstractStatistic> stats) {
         ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
 
         for (AbstractStatistic currentStat : stats) {
             listBox.addItem(currentStat);
         }
-    }
-
-    public void clearStats() {
-        ListBox listBox = screen.findNiftyControl("statsLists", ListBox.class);
-        listBox.clear();
-    }
-
-    public void showMenuFunction(boolean value) {
-        screen.findElementByName("menuLayer").setVisible(value);
-        showMenu = value;
-        if (value) {
-            eventManager.fireEvent("PAUSE");
-        } else {
-            eventManager.fireEvent("RESUME");
-        }
-    }
-
-    public synchronized void toggleMenu() {
-        showMenu = !showMenu;
-        showMenuFunction(showMenu);
-    }
-
-    public synchronized void restart() {
-        showMenuFunction(false);
-        eventManager.fireEvent(EventManager.FAILED);
-        screenFlowManager.setNextScreenHint("counterclockScreen");
-        nifty.gotoScreen("redirector");
-    }
-
-    public synchronized void quit() {
-        showMenuFunction(false);
-        eventManager.fireEvent(EventManager.FAILED);
-        screenFlowManager.setNextScreenHint("selectMap");
-        nifty.gotoScreen("redirector");
-    }
-
-    /**
-     * @param cameraManager the cameraManager to set
-     */
-    public void setCameraManager(LoadCameraStateListener cameraManager) {
-        this.cameraManager = cameraManager;
     }
 
     @Override
@@ -178,18 +105,9 @@ public final class CounterClockMainScreenController implements ScreenController,
         this.appStateManager = appStateManager;
     }
 
-    /**
-     * @param eventManager the eventManager to set
-     */
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
-    }
 
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
-    }
+    @Override
+    public void setStatisticsManager(StatisticsManager statisticsManager) {
 
+    }
 }

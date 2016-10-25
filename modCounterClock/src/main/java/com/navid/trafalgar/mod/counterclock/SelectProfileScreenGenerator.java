@@ -10,7 +10,7 @@ public final class SelectProfileScreenGenerator implements ScreenGenerator {
     private Nifty nifty;
 
     @Override
-    public void buildScreen(String screenUniqueId) {
+    public void buildScreen(String screenUniqueId, String controllerClass) {
         if (nifty.getScreen(screenUniqueId) == null) {
             nifty.addXml("mod/counterclock/interface_profileselector.xml");
         }

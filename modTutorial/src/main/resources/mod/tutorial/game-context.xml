@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+    <!-- Game Scoped -->
+    <bean id="mod.tutorial.maingame" class="com.navid.trafalgar.mod.tutorial.TutorialMainGame" autowire="byType"></bean>
+    <bean id="mod.tutorial.stats" class="com.navid.trafalgar.manager.statistics.StatisticsManager" autowire="byType"></bean>
+    <bean id="common.GameStateManager" class="com.navid.trafalgar.manager.StateManager" autowire="byType"></bean>
+    <bean id="common.GameStatus" class="com.navid.trafalgar.model.GameStatus" autowire="byType"  ></bean>
+    <bean id="mod.tutorial.gameModel" class="com.navid.trafalgar.mod.tutorial.TutorialGameModel" autowire="byType"></bean>
+    
+    <!-- Listeners -->
+    <bean id="mod.tutorial.LoadMap" class="com.navid.trafalgar.mod.tutorial.statelisteners.LoadMapStateListener" autowire="byType"/>
+    <bean id="mod.tutorial.LoadCam" class="com.navid.trafalgar.mod.tutorial.statelisteners.LoadCameraStateListener" autowire="byType"/>
+    <bean id="mod.tutorial.Started" class="com.navid.trafalgar.mod.tutorial.statelisteners.StartedListener"  autowire="byType"/>
+    <bean id="mod.tutorial.AnnotationToStats" class="com.navid.trafalgar.mod.tutorial.statelisteners.AnnotationToStatsManagerStartedListener" autowire="byType" />
+    <bean id="mod.tutorial.InitListener" class="com.navid.trafalgar.mod.tutorial.statelisteners.InitStateListener" autowire="byType"/>
+    <bean id="mod.tutorial.LoadEventListener" class="com.navid.trafalgar.mod.tutorial.statelisteners.LoadEventsListener" autowire="byType"/>
+    <bean id="mod.tutorial.GUIUpdater" class="com.navid.trafalgar.mod.tutorial.statelisteners.GUIUpdater" autowire="byType"/>
+    <bean id="mod.tutorial.Script" class="com.navid.trafalgar.mod.tutorial.statelisteners.ScriptStateListener" autowire="byType"/>
+
+
+</beans>

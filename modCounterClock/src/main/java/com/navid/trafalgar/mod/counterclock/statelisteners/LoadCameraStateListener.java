@@ -55,11 +55,6 @@ public final class LoadCameraStateListener implements LoadCamState, StartedState
     };
 
     @Autowired
-    public void setCounterClockMainScreen(CounterClockMainScreenController screen) {
-        screen.setCameraManager(this);
-    }
-
-    @Autowired
     private GameStatus gameStatus;
     @Autowired
     private InputManager inputManager;

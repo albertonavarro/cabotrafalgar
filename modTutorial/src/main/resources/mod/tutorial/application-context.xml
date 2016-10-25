@@ -7,8 +7,10 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:annotation-config/>
   
-    <bean id="mod.tutorial.mainscreencontroller" class="com.navid.trafalgar.mod.tutorial.TutorialMainScreen" autowire="byType"/>
-    <bean id="mod.tutorial.chapter1" class="com.navid.trafalgar.mod.tutorial.chapters.Chapter1" autowire="byType" />
+    <bean id="mod.tutorial.mainscreencontroller" class="com.navid.trafalgar.mod.tutorial.TutorialMainScreenController" autowire="byType"/>
+    <bean id="mod.tutorial.navigationscreencontroller" class="com.navid.trafalgar.mod.tutorial.NavigationScreenController" autowire="byType"/>
+
+    <bean id="mod.tutorial.mod.tutorial.chapter1" class="com.navid.trafalgar.mod.tutorial.chapters.Chapter1" autowire="byType" />
     <bean id="mod.tutorial.chapter2" class="com.navid.trafalgar.mod.tutorial.chapters.Chapter2" autowire="byType" />
 
 </beans>

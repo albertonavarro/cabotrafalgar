@@ -30,7 +30,7 @@ public class Chapter2 implements TutorialChapter {
 
     @Override
     public String getMap() {
-        return "chapter1";
+        return "mod.tutorial.chapter1";
     }
 
     @Override
