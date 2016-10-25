@@ -102,9 +102,6 @@ subprojects {
             url "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine"
         }
         maven {
-            url 'http://updates.jmonkeyengine.org/maven/'
-        }
-        maven {
             url 'http://nifty-gui.sourceforge.net/nifty-maven-repo'
         }
     }
