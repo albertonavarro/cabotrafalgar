@@ -1,4 +1,4 @@
-rootProject.name = 'cabotrafalgar-gradle'
+rootProject.name = 'cabotrafalgar'
 include 'mod-api'
 include 'common-models'
 include 'modCounterClock'
@@ -9,3 +9,5 @@ include 'modWindTunnel'
 include 'shipModelY'
 include 'shipModelZ'
 include 'JMonkeyClient'
+include 'recordserver-client'
+

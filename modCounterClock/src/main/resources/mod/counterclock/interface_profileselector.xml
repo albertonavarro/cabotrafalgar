@@ -1,11 +1,10 @@
 <#macro main_content>
-<panel id="panel_list" height="70%" width="75%" align="center" childLayout="vertical" style="nifty-panel-red">
-    <panel id="panel_mid_left" align="center" childLayout="vertical" width="95%">
+<panel id="panel_list" align="center" valign="top" childLayout="vertical" >
+    <panel id="panel_mid_left" align="center" childLayout="vertical" >
         <text text="Profiles" font="Interface/Fonts/Default.fnt" />
-        <control id="profileList" name="listBox" displayItems="15" forceSelection="true" horizontal="off"   >
-        </control>
+        <control id="profileList" name="listBox" displayItems="10" forceSelection="true" horizontal="off" />
     </panel>
-    <panel id="panel_newprofile" align="center" childLayout="horizontal" style="nifty-panel-red" width="96%">
+    <panel id="panel_newprofile" align="center" childLayout="horizontal" >
         <text text="New profile" font="Interface/Fonts/Default.fnt" width="20%" />
         <control id="newprofile" name="textfield" text="Please add your email here." horizontal="off" width="60%"  >
         </control>

@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
+import com.navid.lazylogin.context.RequestContextContainer;
 import com.navid.trafalgar.manager.AbortedState;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
@@ -13,7 +14,7 @@ import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
 import com.navid.trafalgar.model.StepRecord;
 import com.navid.trafalgar.persistence.CandidateInfo;
-import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
+import com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.PostConstruct;
+
+import com.navid.trafalgar.profiles.ProfileManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public final class GameRecorder implements StartedState, PrestartState, SuccessfulState, AbortedState {
@@ -46,6 +48,9 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
 
     @Autowired
     private RecordServerPersistenceService recordServerPersistenceService;
+
+    @Autowired
+    private ProfileManager profileManager;
 
     private List<String> eventList = new ArrayList<String>();
 
@@ -77,16 +82,16 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
         newRecord.setTimestamp(gameStatus.getTime().getValue());
         newRecord.setEventList(eventList);
         candidateRecord.addStepRecord(newRecord);
-        eventList = new ArrayList<String>();
+        eventList = new ArrayList<>();
     }
 
     @Override
     public void onSuccess(float tpf) {
-        fileRecordPersistenceService.addCandidate(candidateRecord);
+        fileRecordPersistenceService.addCandidate(candidateRecord, profileManager.getSessionId());
         executorService.submit(new Callable<CandidateInfo>() {
             @Override
             public CandidateInfo call() throws Exception {
-                return recordServerPersistenceService.addCandidate(candidateRecord);
+                return recordServerPersistenceService.addCandidate(candidateRecord, profileManager.getSessionId());
             }
         });
     }
@@ -145,4 +150,7 @@ public final class GameRecorder implements StartedState, PrestartState, Successf
         this.recordServerPersistenceService = recordServerPersistenceService;
     }
 
+    public void setProfileManager(ProfileManager profileManager) {
+        this.profileManager = profileManager;
+    }
 }

@@ -40,7 +40,7 @@ publishing {
 
             artifactId "shipModelY"
             groupId "com.navid.trafalgar"
-            version "1.0"
+            version "1.1"
         }
     }
 

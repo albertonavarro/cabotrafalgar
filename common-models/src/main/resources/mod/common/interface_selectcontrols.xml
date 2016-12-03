@@ -1,6 +1,6 @@
 <#macro main_content>
-<panel id="panel_mid" height="70%" width="75%" align="center" childLayout="horizontal" style="nifty-panel-red">
-    <panel id="panel_name_commands" height="100%" width="30%" align="center" childLayout="vertical" style="nifty-panel-red">
+<panel id="panel_mid" align="center" childLayout="horizontal">
+    <panel height="100%" width="25%" align="center" childLayout="vertical" >
         <text text="Commands" font="Interface/Fonts/Default.fnt" />
         <text text="" font="Interface/Fonts/Default.fnt" />
         <#list sortedCommands as commands>
@@ -9,7 +9,7 @@
         </#list>
     </panel>
     <#list sortedGenerators as generators>
-        <panel id="panel_name_commands" height="100%" width="30%" align="center" childLayout="vertical" style="nifty-panel-red">
+        <panel height="100%" width="25%" align="center" childLayout="vertical" >
             <text text="${generators}" font="Interface/Fonts/Default.fnt" />
             <text text="" font="Interface/Fonts/Default.fnt" />
             <#list sortedCommands as commands>

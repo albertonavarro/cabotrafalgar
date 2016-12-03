@@ -4,6 +4,8 @@ public final class CandidateInfo {
 
     private boolean accepted;
 
+    private String reasonCode;
+
     private int position;
 
     /**
@@ -34,4 +36,11 @@ public final class CandidateInfo {
         this.position = position;
     }
 
+    public String getReasonCode() {
+        return reasonCode;
+    }
+
+    public void setReasonCode(String reasonCode) {
+        this.reasonCode = reasonCode;
+    }
 }

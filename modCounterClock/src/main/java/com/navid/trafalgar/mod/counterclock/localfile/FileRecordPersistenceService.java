@@ -1,4 +1,4 @@
-package com.navid.trafalgar.persistence.localfile;
+package com.navid.trafalgar.mod.counterclock.localfile;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -25,7 +25,12 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
     private ProfileManager profileManager;
 
     @Override
-    public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
+    public Status getStatus() {
+        return Status.OK;
+    }
+
+    @Override
+    public CandidateInfo addCandidate(CandidateRecord candidateRecord, String sessionId) {
 
         Qualification currentQualification
                 = returnCurrentQualificationForMap(candidateRecord.getHeader().getMap(), candidateRecord.getHeader().getShipModel());
@@ -139,7 +144,7 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
     }
 
     @Override
-    public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship) {
+    public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship, String sessionId) {
         //TODO use ship
         Qualification q = returnCurrentQualificationForMap(map, ship);
 
@@ -159,7 +164,7 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
     }
 
     @Override
-    public CandidateRecord getGhost(int number, String map, String ship) {
+    public CandidateRecord getGhost(int number, String map, String ship, String sessionId) {
         //TODO use ship
         if (number == 1) {
             return returnGhostForMap(map, ship);

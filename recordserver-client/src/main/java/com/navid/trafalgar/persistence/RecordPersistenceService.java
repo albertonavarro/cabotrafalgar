@@ -1,5 +1,6 @@
 package com.navid.trafalgar.persistence;
 
+import com.navid.codegen.recordserver.ApiException;
 import com.navid.trafalgar.model.CandidateRecord;
 import java.util.List;
 
@@ -9,6 +10,12 @@ import java.util.List;
  */
 public interface RecordPersistenceService {
 
+    public enum Status {
+        OK, BUSY, DOWN, UNKNOWN
+    }
+
+    Status getStatus();
+
     /**
      * This method asks for recording the current result. Recording is not
      * guaranteed as system could opt to discard the result.
@@ -17,7 +24,7 @@ public interface RecordPersistenceService {
      * @return CandidateInfo with the position of the record in the ranking and
      * an indication of acceptance.
      */
-    CandidateInfo addCandidate(CandidateRecord candidateRecord);
+    CandidateInfo addCandidate(CandidateRecord candidateRecord, String sessionId);
 
     /**
      * This method retrieves the top N competitors for a given map.
@@ -27,7 +34,7 @@ public interface RecordPersistenceService {
      * @param ship
      * @return List of CompetitorInfo with the info of the N better for the map.
      */
-    List<CompetitorInfo> getTopCompetitors(int number, String map, String ship);
+    List<CompetitorInfo> getTopCompetitors(int number, String map, String ship, String sessionId) throws ApiException;
 
     /**
      * This method retrieves the actual movements for a given position and map.
@@ -37,5 +44,5 @@ public interface RecordPersistenceService {
      * @param ship
      * @return CandidateRecord with these movements.
      */
-    CandidateRecord getGhost(int number, String map, String ship);
+    CandidateRecord getGhost(int number, String map, String ship, String sessionId);
 }

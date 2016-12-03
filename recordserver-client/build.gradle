@@ -1,0 +1,18 @@
+plugins {
+    id 'org.detoeuf.swagger-codegen' version '1.6.2'
+}
+
+
+apply plugin: 'java'
+apply from: 'swagger.gradle'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+dependencies {
+    compile project (':mod-api')
+    compile project (':common-models')
+    swaggerApi (group:"com.navid.record-server", name: 'contract', version:"${supported_api_version}", ext:"yml")
+}

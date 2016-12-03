@@ -3,6 +3,7 @@ dependencies {
             project(':mod-api'),
             project(':common-models'),
             project(':modCounterClock-maps'),
+            project(':recordserver-client'),
             libs.opencsv,
             libs.jme3_core,
             libs.jme3_jbullet,

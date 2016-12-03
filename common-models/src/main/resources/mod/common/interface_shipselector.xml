@@ -1,17 +1,19 @@
 <#macro main_content>
+<panel id="panel_list" align="center" valign="top" childLayout="horizontal" >
     <panel id="panel_mid_left" width="33%" align="center" childLayout="vertical">
         <text text="Ships" font="Interface/Fonts/Default.fnt" />
         <control id="shipList" name="listBox" displayItems="15" forceSelection="true" horizontal="off" width="90%"/>
     </panel>
-    <panel id="panel_mid_center"  width="33%" align="center" childLayout="vertical">
+    <panel id="panel_mid_center"  width="67%" align="center" childLayout="vertical">
         <panel id="panel_mid_center_description"  height="50%" childLayout="vertical">
             <text text="Description:" font="Interface/Fonts/Default.fnt"  />
         </panel>
-    <panel id="panel_mid_center_ranking"  height="50%" childLayout="vertical">
+        <panel id="panel_mid_center_ranking"  height="50%" childLayout="vertical">
+        </panel>
     </panel>
-    </panel>
+</panel>
 </#macro>
 
-<#assign title = "Select the keys for keyboard assigned commands">
+<#assign title = "Select the ship you want to sail..">
 
 <#include "/screen-snippets/menuLayout.xml">

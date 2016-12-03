@@ -3,29 +3,29 @@ package com.navid.trafalgar.persistence.recordserver;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
-import static com.google.common.collect.Lists.newArrayList;
 import com.google.gson.Gson;
+import com.navid.codegen.recordserver.ApiClient;
+import com.navid.codegen.recordserver.ApiException;
+import com.navid.codegen.recordserver.api.DefaultApi;
+import com.navid.codegen.recordserver.model.*;
 import com.navid.lazylogin.context.RequestContextContainer;
-import com.navid.recordserver.v2.AddRecordRequest;
-import com.navid.recordserver.v2.AddRecordResponse;
-import com.navid.recordserver.v2.GetMapRecordsResponse;
-import com.navid.recordserver.v2.GetMapRecordsResponse.RankingEntry;
-import com.navid.recordserver.v2.GetRecordResponse;
-import com.navid.recordserver.v2.V2Resource;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
-import com.navid.trafalgar.profiles.ProfileManager;
-import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.CandidateRecord;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import javax.annotation.Resource;
+import com.navid.trafalgar.profiles.ProfileManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public final class RecordServerPersistenceService implements RecordPersistenceService {
 
@@ -40,30 +40,45 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     private ModelBuilder builder2;
 
     //manually wired
-    private V2Resource rankingClient;
+    private DefaultApi defaultApi;
+
+    @Autowired
+    private RequestContextContainer requestContextContainer;
 
     @Resource(name = "mod.counterclock.requestContextContainer")
     private RequestContextContainer container;
 
+    private volatile Status currentStatus = Status.UNKNOWN;
+
+    public RecordServerPersistenceService(String recordserverUrl) {
+        defaultApi = new DefaultApi();
+        ApiClient apiClient = defaultApi.getApiClient();
+        apiClient.setBasePath(recordserverUrl);
+    }
+
     @Override
-    public CandidateInfo addCandidate(CandidateRecord candidateRecord) {
+    public Status getStatus() {
+        return currentStatus;
+    }
+
+    @Override
+    public CandidateInfo addCandidate(CandidateRecord candidateRecord, String sessionId) {
         if (!setUpSession()) {
             CandidateInfo returned = new CandidateInfo();
             returned.setAccepted(false);
             return returned;
         }
 
-        candidateRecord.setMap(candidateRecord.getHeader().getMap().replace("/", "_"));
+        candidateRecord.setMap(sanitiseMapName(candidateRecord.getHeader().getMap()));
         String sampleReal = gson.toJson(candidateRecord);
-        AddRecordRequest addRecordRequest = new AddRecordRequest();
-        addRecordRequest.setPayload(sampleReal);
+        NewMapEntryRequest newMapEntryRequest = new NewMapEntryRequest().payload(sampleReal);
 
         LOG.info("Trying with size " + sampleReal.length());
         try {
-            AddRecordResponse addRecordResponse = rankingClient.postRanking(addRecordRequest);
+            NewMapEntryResponse response = defaultApi.postRanking(newMapEntryRequest, sessionId, null);
             CandidateInfo returned = new CandidateInfo();
             returned.setAccepted(true);
-            returned.setPosition(addRecordResponse.getPosition());
+            returned.setPosition(response.getPosition());
             return returned;
         } catch (Exception e) {
             CandidateInfo returned = new CandidateInfo();
@@ -73,23 +88,17 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     }
 
     @Override
-    public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship) {
+    public List<CompetitorInfo> getTopCompetitors(int number, String map, String ship, String sessionId) throws ApiException {
         if (!setUpSession()) {
             return newArrayList();
         }
 
-        String newMapName = map.replace("/", "_");
-        GetMapRecordsResponse response;
+        RankingEntry response;
 
-        try {
-            response = rankingClient.getRankingshipshipmapsmap(newMapName, ship);
-        } catch (Exception e) {
-            LOG.info("Connectivity problem retrieving top competitors, returning empty", e.getMessage());
-            return newArrayList();
-        }
-        return Lists.transform(response.getRankingEntry(), new Function<RankingEntry, CompetitorInfo>() {
+        response  = defaultApi.getByShipAndMap(sanitiseMapName(map), ship, sessionId, null);
+        return Lists.transform(response.getRankingEntry(), new Function<RankingEntryRankingEntry, CompetitorInfo>() {
             @Override
-            public CompetitorInfo apply(RankingEntry f) {
+            public CompetitorInfo apply(RankingEntryRankingEntry f) {
                 CompetitorInfo result = new CompetitorInfo();
                 result.setLocal(false);
                 result.setPosition(f.getPosition());
@@ -102,30 +111,28 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     }
 
     private boolean setUpSession() {
-        if (profileManager.isOnline()) {
+        if (profileManager.isOnline() && (currentStatus != Status.BUSY || currentStatus != Status.DOWN)) {
             if (container.get().getSessionId() == null) {
-
                 container.get().setSessionId(profileManager.getSessionId());
-
             }
-            return true;
+            return container.get().getSessionId() != null;
         }
 
         return false;
     }
 
     @Override
-    public CandidateRecord getGhost(int number, String map, String ship) {
+    public CandidateRecord getGhost(int number, String map, String ship, String sessionId) {
         if (!setUpSession()) {
             return null;
         }
 
         final CandidateRecord candidate;
-        GetRecordResponse response;
+        MapEntry response;
         try {
-            List<CompetitorInfo> competitorInfos = getTopCompetitors(number, map, ship);
+            List<CompetitorInfo> competitorInfos = getTopCompetitors(number, map, ship, sessionId);
             if (competitorInfos.size() > 0) {
-                response = rankingClient.getRankingidid(competitorInfos.get(0).getGameId());
+                response = defaultApi.getById(competitorInfos.get(0).getGameId(), sessionId, null);
                 candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
             } else {
                 return null;
@@ -152,11 +159,8 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
 
     }
 
-    /**
-     * @param rankingClient the rankingClient to set
-     */
-    public void setRankingClient(V2Resource rankingClient) {
-        this.rankingClient = rankingClient;
+    private String sanitiseMapName(String mapName) {
+        return mapName.replace('/', '_').replace('.', '_');
     }
 
     /**
@@ -178,6 +182,10 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
      */
     public void setProfileManager(ProfileManager profileManager) {
         this.profileManager = profileManager;
+    }
+
+    public void setRequestContextContainer(RequestContextContainer requestContextContainer) {
+        this.requestContextContainer = requestContextContainer;
     }
 
 }

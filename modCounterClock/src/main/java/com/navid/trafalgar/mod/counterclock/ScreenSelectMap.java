@@ -3,14 +3,17 @@ package com.navid.trafalgar.mod.counterclock;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.jme3.asset.AssetManager;
+import com.navid.lazylogin.context.RequestContextContainer;
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.persistence.CompetitorInfo;
-import com.navid.trafalgar.persistence.localfile.FileRecordPersistenceService;
+import com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
+import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceServiceHystrixProxy;
+import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.util.FileUtils;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
@@ -72,7 +75,7 @@ public final class ScreenSelectMap implements ScreenController {
     private FileRecordPersistenceService localPersistence;
 
     @Resource
-    private RecordServerPersistenceService remotePersistence;
+    private RecordServerPersistenceServiceHystrixProxy remotePersistence;
 
     @Autowired
     private GameConfiguration gameConfiguration;
@@ -82,6 +85,9 @@ public final class ScreenSelectMap implements ScreenController {
 
     @Autowired
     private ModelBuilder builder;
+
+    @Autowired
+    private ProfileManager profileManager;
 
     private ListBox mapDropDown;
     private ListBox listLocalTimes;
@@ -121,9 +127,9 @@ public final class ScreenSelectMap implements ScreenController {
 
         CandidateRecord cr = null;
         if (ghostOptions == ShowGhost.bestLocal) {
-            cr = localPersistence.getGhost(1, selectedMap.getName(), gameConfiguration.getShipName());
+            cr = localPersistence.getGhost(1, selectedMap.getName(), gameConfiguration.getShipName(), profileManager.getSessionId());
         } else if (ghostOptions == ShowGhost.bestRemote) {
-            cr = remotePersistence.getGhost(1, selectedMap.getName(), gameConfiguration.getShipName());
+            cr = remotePersistence.getGhost(1, selectedMap.getName(), gameConfiguration.getShipName(), profileManager.getSessionId());
         }
 
         if (cr != null) {
@@ -187,14 +193,14 @@ public final class ScreenSelectMap implements ScreenController {
     private void setSelectedMap(ListItem map) {
 
         List<CompetitorInfo> listLocal
-                = localPersistence.getTopCompetitors(MAX_COMPETITORS, map.getName(), gameConfiguration.getShipName());
+                = localPersistence.getTopCompetitors(MAX_COMPETITORS, map.getName(), gameConfiguration.getShipName(), profileManager.getSessionId());
         listLocalTimes.clear();
         for (CompetitorInfo currentTime : listLocal) {
             listLocalTimes.addItem(currentTime);
         }
 
         List<CompetitorInfo> listRemote
-                = remotePersistence.getTopCompetitors(MAX_COMPETITORS, map.getName(), gameConfiguration.getShipName());
+                = remotePersistence.getTopCompetitors(MAX_COMPETITORS, map.getName(), gameConfiguration.getShipName(), profileManager.getSessionId());
         listRemoteTimes.clear();
         for (CompetitorInfo currentTime : listRemote) {
             listRemoteTimes.addItem(currentTime);
@@ -250,7 +256,7 @@ public final class ScreenSelectMap implements ScreenController {
     /**
      * @param remotePersistence the remotePersistence to set
      */
-    public void setRemotePersistence(RecordServerPersistenceService remotePersistence) {
+    public void setRemotePersistence(RecordServerPersistenceServiceHystrixProxy remotePersistence) {
         this.remotePersistence = remotePersistence;
     }
 
@@ -293,4 +299,7 @@ public final class ScreenSelectMap implements ScreenController {
         }
     }
 
+    public void setProfileManager(ProfileManager profileManager) {
+        this.profileManager = profileManager;
+    }
 }

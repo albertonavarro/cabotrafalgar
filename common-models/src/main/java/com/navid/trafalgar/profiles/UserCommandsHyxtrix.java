@@ -5,7 +5,6 @@ import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandProperties;
 
-import javax.annotation.Resource;
 import javax.jws.WebParam;
 
 /**
@@ -16,6 +15,11 @@ public class UserCommandsHyxtrix implements UserCommands {
     private UserCommands userCommands;
 
     private int TIMEOUT = 3000;
+
+    public UserCommandsHyxtrix() {
+        HystrixCommandProperties.Setter()
+                .withExecutionTimeoutInMilliseconds(30000);
+    }
 
     @Override
     public CreateTokenResponse createToken(@WebParam(partName = "parameters", name = "createTokenRequest", targetNamespace = "http://lazylogin.navid.com/") final CreateTokenRequest createTokenRequest) {
@@ -39,11 +43,13 @@ public class UserCommandsHyxtrix implements UserCommands {
 
     @Override
     public LoginWithTokenResponse loginWithToken(@WebParam(partName = "parameters", name = "loginWithTokenRequest", targetNamespace = "http://lazylogin.navid.com/") final LoginWithTokenRequest loginWithTokenRequest) {
-        return new HystrixCommand<LoginWithTokenResponse>(HystrixCommandGroupKey.Factory.asKey("UserCommands"), TIMEOUT) {
+        return  new HystrixCommand<LoginWithTokenResponse>(HystrixCommandGroupKey.Factory.asKey("UserCommands"), TIMEOUT) {
+
             @Override
             protected LoginWithTokenResponse run() throws Exception {
                 return userCommands.loginWithToken(loginWithTokenRequest);
             }
+
         }.execute();
     }
 
