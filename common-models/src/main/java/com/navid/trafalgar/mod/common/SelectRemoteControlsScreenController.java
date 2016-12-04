@@ -44,7 +44,8 @@ public class SelectRemoteControlsScreenController extends GameMenuController {
     private GameConfiguration gameConfiguration;
 
     @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
+
         Collection<RemoteInputCommandStateListener> remoteListeners
                 = gameConfiguration.getPreGameModel().getByType(RemoteInputCommandStateListener.class);
 

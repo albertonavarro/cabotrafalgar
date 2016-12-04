@@ -1,39 +1,29 @@
 package com.navid.trafalgar.mod.counterclock;
 
-import static com.google.common.collect.Lists.newArrayList;
 import com.navid.lazylogin.context.RequestContextContainer;
-import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.mod.common.GameMenuController;
 import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.profiles.ProfileStatus;
-import com.navid.trafalgar.model.GameConfiguration;
-import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.TextField;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.regex.Pattern;
-import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class SelectProfileScreenController implements ScreenController {
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import static com.google.common.collect.Lists.newArrayList;
+
+public final class SelectProfileScreenController extends GameMenuController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SelectProfileScreenController.class);
 
-    /**
-     * From bind
-     */
-    private Nifty nifty;
-    /**
-     * From bind
-     */
-    private Screen screen;
     /**
      * Internal usage
      */
@@ -42,20 +32,10 @@ public final class SelectProfileScreenController implements ScreenController {
      * Singleton
      */
     @Autowired
-    private GameConfiguration gameConfiguration;
-    /**
-     * Singleton
-     */
-    @Autowired
     private ProfileManager profileManager;
 
     @Resource(name = "mod.counterclock.requestContextContainer")
     private RequestContextContainer container;
-    /**
-     *
-     */
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     private ListBox profileListBoxContent;
 
@@ -66,27 +46,7 @@ public final class SelectProfileScreenController implements ScreenController {
     }
 
     @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
-
-    /**
-     * @param gameConfiguration the gameConfiguration to set
-     */
-    public void setGameConfiguration(GameConfiguration gameConfiguration) {
-        this.gameConfiguration = gameConfiguration;
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
-    }
-
-    @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
         profileListBoxContent = screen.findNiftyControl("profileList", ListBox.class);
 
         container.delete();
@@ -133,16 +93,6 @@ public final class SelectProfileScreenController implements ScreenController {
         profileManager.setActiveProfile(selectedItem.getEmail());
 
         nifty.gotoScreen(nextScreen);
-    }
-
-    public void next() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
-        goTo("redirector");
-    }
-
-    public void back() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
-        nifty.gotoScreen("redirector");
     }
 
     public void add() {

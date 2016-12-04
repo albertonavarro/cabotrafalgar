@@ -1,7 +1,11 @@
 package com.navid.trafalgar.mod.common;
 
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.audio.MusicManager;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.Label;
+import de.lessvoid.nifty.controls.TextField;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,9 @@ public abstract class GameMenuController implements ScreenController {
     protected Nifty nifty;
 
     protected Screen screen;
+
+    @Autowired
+    private MusicManager musicManager;
 
     /**
      * Singleton
@@ -42,11 +49,27 @@ public abstract class GameMenuController implements ScreenController {
         nifty.gotoScreen("redirector");
     }
 
+    public final void toggleVolume() {
+        musicManager.toggleMute();
+    }
+
+    public final void onStartScreen() {
+        Label element = screen.findNiftyControl("musicFileName", Label.class);
+        //element.setText(musicManager.getCurrentMusic().getKey().getName());
+        doOnStartScreen();
+    }
+
+    public abstract void doOnStartScreen();
+
     /**
      * @param screenFlowManager the screenFlowManager to set
      */
     public final void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
         this.screenFlowManager = screenFlowManager;
+    }
+
+    public final void setMusicManager(MusicManager musicManager) {
+        this.musicManager = musicManager;
     }
 
 }

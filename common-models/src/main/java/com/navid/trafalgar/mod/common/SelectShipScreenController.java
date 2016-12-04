@@ -38,11 +38,6 @@ public final class SelectShipScreenController extends GameMenuController {
      */
     @Autowired
     private ModelBuilder builder;
-    /**
-     *
-     */
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     /**
      * @param gameConfiguration the gameConfiguration to set
@@ -98,7 +93,7 @@ public final class SelectShipScreenController extends GameMenuController {
     }
 
     @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
         gameConfiguration.reset();
         gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
         gameConfiguration.getPreGameModel().addToModel(newArrayList(new SystemInteractions()), "system");

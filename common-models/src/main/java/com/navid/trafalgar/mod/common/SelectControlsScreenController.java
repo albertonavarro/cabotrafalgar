@@ -47,7 +47,7 @@ public final class SelectControlsScreenController extends GameMenuController {
     private Map<String, CommandGenerator> generatorMap;
 
     @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
         generated.clear();
 
         gameConfiguration.getPreGameModel().removeFromModel(CommandStateListener.class);
