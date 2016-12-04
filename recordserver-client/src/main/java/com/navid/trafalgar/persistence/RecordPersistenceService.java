@@ -44,5 +44,5 @@ public interface RecordPersistenceService {
      * @param ship
      * @return CandidateRecord with these movements.
      */
-    CandidateRecord getGhost(int number, String map, String ship, String sessionId);
+    CandidateRecord getGhost(int number, String map, String ship, String sessionId) throws ApiException;
 }

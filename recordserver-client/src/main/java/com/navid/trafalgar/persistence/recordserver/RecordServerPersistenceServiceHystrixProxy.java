@@ -70,7 +70,7 @@ public class RecordServerPersistenceServiceHystrixProxy implements RecordPersist
 
     @Override
     public CandidateRecord getGhost(int number, String map, String ship, String sessionId) {
-        return new HystrixCommand<CandidateRecord>(HystrixCommandGroupKey.Factory.asKey("RecordServer"), TIMEOUT) {
+        return new HystrixCommand<CandidateRecord>(HystrixCommandGroupKey.Factory.asKey("RecordServer"), 10000) {
             @Override
             public final CandidateRecord run() throws Exception {
                 return recordPersistenceService.getGhost(number, map, ship, sessionId);
@@ -78,6 +78,7 @@ public class RecordServerPersistenceServiceHystrixProxy implements RecordPersist
 
             @Override
             public final CandidateRecord getFallback() {
+                LOG.error("Error loading ghost {} from map {}", ship, map);
                 return null;
             }
         }.execute();

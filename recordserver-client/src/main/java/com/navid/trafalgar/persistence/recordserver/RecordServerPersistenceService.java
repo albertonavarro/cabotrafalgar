@@ -122,24 +122,19 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     }
 
     @Override
-    public CandidateRecord getGhost(int number, String map, String ship, String sessionId) {
+    public CandidateRecord getGhost(int number, String map, String ship, String sessionId) throws ApiException {
         if (!setUpSession()) {
             return null;
         }
 
         final CandidateRecord candidate;
         MapEntry response;
-        try {
-            List<CompetitorInfo> competitorInfos = getTopCompetitors(number, map, ship, sessionId);
-            if (competitorInfos.size() > 0) {
-                response = defaultApi.getById(competitorInfos.get(0).getGameId(), sessionId, null);
-                candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
-            } else {
-                return null;
-            }
 
-        } catch (Exception e) {
-            LOG.error("Error loading ghost {} from map {}", ship, map);
+        List<CompetitorInfo> competitorInfos = getTopCompetitors(number, map, ship, sessionId);
+        if (competitorInfos.size() > 0) {
+            response = defaultApi.getById(competitorInfos.get(0).getGameId(), sessionId, null);
+            candidate = gson.fromJson(response.getPayload(), CandidateRecord.class);
+        } else {
             return null;
         }
 
