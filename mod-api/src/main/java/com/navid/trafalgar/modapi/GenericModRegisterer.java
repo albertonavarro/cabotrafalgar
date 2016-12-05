@@ -124,13 +124,10 @@ public abstract class GenericModRegisterer implements ModRegisterer {
 
     @Override
     public void registerMusic(MusicManager musicManager) {
-        AssetManager assetManager = modConfiguration.getBeanFactory().getBean(AssetManager.class);
         if (modConfiguration.getMusicAmbients() != null) {
             for (ModMusicScenario config : modConfiguration.getMusicAmbients() ) {
                 for (String musicFile : config.getFiles()) {
-                    AudioNode audioNode = new AudioNode(assetManager, musicFile, true, true);
-                    audioNode.setPositional(false);
-                    musicManager.setAmbientMusic(config.getAmbient(), audioNode);
+                    musicManager.setAmbientMusic(config.getAmbient(), musicFile);
                 }
             }
         }

@@ -26,13 +26,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class SelectKeyboardDigitalControlsScreenController implements ScreenController {
+public final class SelectKeyboardDigitalControlsScreenController extends GameMenuController {
 
     private static final Logger LOG
             = LoggerFactory.getLogger(SelectKeyboardDigitalControlsScreenController.class);
-
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     @Autowired
     private ProfileManager profileManager;
@@ -79,14 +76,6 @@ public final class SelectKeyboardDigitalControlsScreenController implements Scre
         REVERSE_MAP.put(KeyInput.KEY_ESCAPE, "ESC");
     }
     /**
-     * From bind
-     */
-    private Nifty nifty;
-    /**
-     * From bind
-     */
-    private Screen screen;
-    /**
      * Singleton
      */
     @Autowired
@@ -98,13 +87,7 @@ public final class SelectKeyboardDigitalControlsScreenController implements Scre
     private GeneratorBuilder generatorBuilder;
 
     @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
-
-    @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
         final Properties userProperties = profileManager.getProperties();
 
         EventTopicSubscriber<ListBoxSelectionChangedEvent> eventHandler;
@@ -250,18 +233,6 @@ public final class SelectKeyboardDigitalControlsScreenController implements Scre
             }
         }
         return true;
-    }
-
-    public void back() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
-        nifty.gotoScreen("redirector");
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
     }
 
     /**

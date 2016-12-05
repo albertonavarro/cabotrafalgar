@@ -6,6 +6,7 @@ import com.jme3.asset.AssetManager;
 import com.navid.lazylogin.context.RequestContextContainer;
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
+import com.navid.trafalgar.mod.common.GameMenuController;
 import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
@@ -36,40 +37,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class ScreenSelectMap implements ScreenController {
+public final class ScreenSelectMap extends GameMenuController {
 
     private static final int MAX_COMPETITORS = 5;
-
-    /**
-     * @param builder the builder to set
-     */
-    public void setBuilder(ModelBuilder builder) {
-        this.builder = builder;
-    }
-
-    /**
-     * @param assetManager the assetManager to set
-     */
-    public void setAssetManager(AssetManager assetManager) {
-        this.assetManager = assetManager;
-    }
 
     private enum ShowGhost {
         noGhost, bestLocal, bestRemote
     };
 
-    private Nifty nifty;
-    private Screen screen;
     private ListItem selectedMap;
     private ShowGhost ghostOptions = ShowGhost.bestLocal;
     private final Map<String, NiftyImage> loadedImages = new HashMap<String, NiftyImage>();
     private static final Logger LOG = LoggerFactory.getLogger(ScreenSelectMap.class);
-
-    /**
-     *
-     */
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     @Resource
     private FileRecordPersistenceService localPersistence;
@@ -96,13 +75,7 @@ public final class ScreenSelectMap implements ScreenController {
     private Element imageMap;
 
     @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
-
-    @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
         imageMap = screen.findElementByName("mapImage");
         listRemoteTimes = screen.findNiftyControl("listRemoteTimes", ListBox.class);
         listLocalTimes = screen.findNiftyControl("listLocalTimes", ListBox.class);
@@ -120,6 +93,11 @@ public final class ScreenSelectMap implements ScreenController {
     @Override
     public void onEndScreen() {
         mapDropDown.clear();
+    }
+
+    public void next() {
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
+        goTo("redirector");
     }
 
     public void goTo(String nextScreen) {
@@ -180,16 +158,6 @@ public final class ScreenSelectMap implements ScreenController {
         });
     }
 
-    public void back() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
-        nifty.gotoScreen("redirector");
-    }
-
-    public void next() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.NEXT);
-        goTo("redirector");
-    }
-
     private void setSelectedMap(ListItem map) {
 
         List<CompetitorInfo> listLocal
@@ -237,13 +205,6 @@ public final class ScreenSelectMap implements ScreenController {
      */
     public void setGameConfiguration(GameConfiguration gameConfiguration) {
         this.gameConfiguration = gameConfiguration;
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
     }
 
     /**
@@ -302,4 +263,19 @@ public final class ScreenSelectMap implements ScreenController {
     public void setProfileManager(ProfileManager profileManager) {
         this.profileManager = profileManager;
     }
+
+    /**
+     * @param builder the builder to set
+     */
+    public void setBuilder(ModelBuilder builder) {
+        this.builder = builder;
+    }
+
+    /**
+     * @param assetManager the assetManager to set
+     */
+    public void setAssetManager(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
+
 }

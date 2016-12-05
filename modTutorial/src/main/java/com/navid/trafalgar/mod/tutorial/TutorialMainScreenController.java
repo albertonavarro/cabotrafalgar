@@ -1,7 +1,7 @@
 package com.navid.trafalgar.mod.tutorial;
 
 import com.navid.trafalgar.input.*;
-import com.navid.trafalgar.mod.common.WorkflowMenuController;
+import com.navid.trafalgar.mod.common.GameMenuController;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.ModelBuilder;
@@ -16,7 +16,7 @@ import java.util.*;
 import static com.google.common.collect.Lists.newArrayList;
 
 
-public class TutorialMainScreenController extends WorkflowMenuController {
+public class TutorialMainScreenController extends GameMenuController {
 
     @Autowired
     private List<TutorialChapter> chapters;
@@ -47,7 +47,7 @@ public class TutorialMainScreenController extends WorkflowMenuController {
 
 
     @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
         gameConfiguration.reset();
 
         listChapters = screen.findNiftyControl("listChapters", ListBox.class);

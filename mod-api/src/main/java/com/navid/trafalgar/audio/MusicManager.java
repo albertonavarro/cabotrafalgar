@@ -3,8 +3,12 @@ package com.navid.trafalgar.audio;
 import com.google.common.collect.EnumMultiset;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,9 +28,13 @@ public class MusicManager {
     private float maxGlobalVolume = 1;
     private float currentGlobalVolume = 1;
 
-    public void setAmbientMusic(String ambient, AudioNode audioNode) {
-        musicPerAmbient.put(ambient, audioNode);
+    @Autowired
+    private AssetManager assetManager;
 
+    public void setAmbientMusic(String ambient, String musicFile) {
+        AudioNode audioNode = new NamedAudioNode(assetManager, musicFile, AudioData.DataType.Stream);
+        audioNode.setPositional(false);
+        musicPerAmbient.put(ambient, audioNode);
     }
 
     public void setCurrentAmbient(String ambient) {
@@ -67,4 +75,7 @@ public class MusicManager {
         currentMusic.setVolume(currentGlobalVolume);
     }
 
+    public void setAssetManager(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
 }

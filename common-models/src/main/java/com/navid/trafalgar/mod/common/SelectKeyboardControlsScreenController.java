@@ -29,13 +29,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class SelectKeyboardControlsScreenController implements ScreenController {
+public final class SelectKeyboardControlsScreenController extends GameMenuController {
 
     private static final Logger LOG
             = LoggerFactory.getLogger(SelectKeyboardControlsScreenController.class);
-
-    @Autowired
-    private ScreenFlowManager screenFlowManager;
 
     @Autowired
     private ProfileManager profileManager;
@@ -80,14 +77,7 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
         REVERSE_MAP.put(KeyInput.KEY_Y, "Y");
         REVERSE_MAP.put(KeyInput.KEY_Z, "Z");
     }
-    /**
-     * From bind
-     */
-    private Nifty nifty;
-    /**
-     * From bind
-     */
-    private Screen screen;
+
     /**
      * Singleton
      */
@@ -99,14 +89,9 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
     @Autowired
     private GeneratorBuilder generatorBuilder;
 
-    @Override
-    public void bind(Nifty nifty, Screen screen) {
-        this.nifty = nifty;
-        this.screen = screen;
-    }
 
     @Override
-    public void onStartScreen() {
+    public void doOnStartScreen() {
         final Properties userProperties = profileManager.getProperties();
 
         EventTopicSubscriber<ListBoxSelectionChangedEvent> eventHandler;
@@ -250,18 +235,6 @@ public final class SelectKeyboardControlsScreenController implements ScreenContr
             }
         }
         return true;
-    }
-
-    public void back() {
-        screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
-        nifty.gotoScreen("redirector");
-    }
-
-    /**
-     * @param screenFlowManager the screenFlowManager to set
-     */
-    public void setScreenFlowManager(ScreenFlowManager screenFlowManager) {
-        this.screenFlowManager = screenFlowManager;
     }
 
     /**

@@ -1,26 +1,19 @@
 package com.navid.trafalgar.mod.common;
 
-import static com.google.common.collect.Lists.newArrayList;
-
-import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.model.AShipModel;
-import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
 import com.navid.trafalgar.model.GameConfiguration;
-import de.lessvoid.nifty.Nifty;
+import com.navid.trafalgar.model.ModelBuilder;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.*;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public final class SelectShipScreenController extends GameMenuController {
 

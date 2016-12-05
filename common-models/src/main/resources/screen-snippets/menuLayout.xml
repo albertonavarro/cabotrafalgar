@@ -25,18 +25,19 @@
                         <interact onClick="next()"/>
                     </control>
                 </panel>
-                <panel width="25%" valign="center" childLayout="center">
 
-                </panel>
-                <panel width="50%" valign="center" childLayout="horizontal">
-                    <panel width="75%" valign="center" childLayout="vertical">
-                        <text text="Music title:" font="Interface/Fonts/Default.fnt" height="50%" />
-                        <control id="musicFileName" name="label" text="Unknown file name (yet)." font="Interface/Fonts/Default.fnt" height="50%"  />
-                    </panel>
-                    <control name="button" label="Toggle Mute" id="MuteButton" align="center" valign="center" width="25%"
-                             visibleToMouse="true" >
+                <panel width="25%" childLayout="center"></panel>
+
+                <panel width="50%" childLayout="vertical" >
+
+                    <text text="Music title:" font="Interface/Fonts/Default.fnt" align="center" />
+
+                    <control id="musicFileName" name="label" text="Unknown file name (yet)." font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
+
+                    <control name="button" label="Toggle Mute" id="MuteButton" visibleToMouse="true" align="center">
                         <interact onClick="toggleVolume()"/>
                     </control>
+
                 </panel>
             </panel>
         </layer>
