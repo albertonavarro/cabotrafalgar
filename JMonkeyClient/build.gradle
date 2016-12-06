@@ -1,9 +1,18 @@
 plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '1.2.1'
+    id 'edu.sc.seis.launch4j' version '2.0.1'
 }
 
 mainClassName = 'com.navid.trafalgar.games.Main'
+
+launch4j {
+    mainClassName = mainClassName
+    //icon = 'icons/myApp.ico'
+    //copyConfigurable = project.tasks.shadowJar.outputs.files
+    //jar = "libs/${project.tasks.shadowJar.archiveName}"
+}
+
 
 dependencies {
     compile(
@@ -48,8 +57,6 @@ dependencies {
         append('META-INF/spring.schemas')
         append('META-INF/cxf/bus-extensions.txt')
     }
-
-
 
 }
 
