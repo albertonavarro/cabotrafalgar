@@ -89,10 +89,10 @@ public final class SelectProfileScreenController extends GameMenuController {
         }
     }
 
-    public void goTo(String nextScreen) {
+    public void next() {
         profileManager.setActiveProfile(selectedItem.getEmail());
 
-        nifty.gotoScreen(nextScreen);
+        super.next();
     }
 
     public void add() {

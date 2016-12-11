@@ -1,10 +1,13 @@
 <#macro main_content>
-<panel id="panel_mid" height="70%" width="75%" align="center" childLayout="horizontal" style="nifty-panel-red">
-    <image id="qrCodeImage" height="200" width="200"></image>
-    <panel id="panel_mid" width="50%" childLayout="vertical" >
-        <text text="Scan the QR code or type the following URL in a browser:" font="Interface/Fonts/Default.fnt" />
-        <text id="url" text="" font="Interface/Fonts/Default.fnt" />
+<panel align="center" childLayout="vertical" >
+    <panel align="center" childLayout="horizontal" >
+        <image id="qrCodeImage" height="200" width="200"></image>
+        <panel childLayout="vertical" >
+            <text text="Scan the QR code or type the following URL in a browser:" font="Interface/Fonts/Default.fnt" />
+            <text id="url" text="" font="Interface/Fonts/Default.fnt" />
+        </panel>
     </panel>
+    <control id="errorMessage" name="label" text="" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
 </panel>
 </#macro>
 

@@ -34,6 +34,10 @@ public final class FileProfileManager implements ProfileManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileProfileManager.class);
 
+    private static final String USER_KEYBOARD_FILE = "keyboardHistory.properties";
+
+    private static final String DEFAULT_KEYBOARD_FILE = "/mod/common/defaultKeyboard.properties";
+
     private ProfileInternal activeProfile;
 
     private Map<String, ProfileInternal> profiles = new HashMap<String, ProfileInternal>();
@@ -215,7 +219,7 @@ public final class FileProfileManager implements ProfileManager {
 
     @Override
     public Properties getProperties() {
-        File keyboardHistory = new File(getHome(), "keyboardHistory.properties");
+        File keyboardHistory = new File(getHome(), USER_KEYBOARD_FILE);
         final Properties properties = new Properties();
 
         if (keyboardHistory.exists()) {
@@ -226,6 +230,12 @@ public final class FileProfileManager implements ProfileManager {
             } catch (IOException ex) {
                 LOG.error("IOException loading history file: {}", keyboardHistory, ex);
             }
+        } else {
+            try {
+                properties.load(FileProfileManager.class.getResourceAsStream("/mod/common/defaultKeyboard.properties"));
+            } catch (IOException e) {
+                LOG.error("IOException loading history file: {}", DEFAULT_KEYBOARD_FILE, e);
+            }
         }
 
         return properties;
@@ -233,7 +243,7 @@ public final class FileProfileManager implements ProfileManager {
 
     @Override
     public void updateProperties(Map<String, String> userProperties) {
-        File keyboardHistory = new File(getHome(), "keyboardHistory.properties");
+        File keyboardHistory = new File(getHome(), USER_KEYBOARD_FILE);
 
         try {
             if (!keyboardHistory.exists()) {
