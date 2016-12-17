@@ -96,17 +96,14 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
         RankingEntry response;
 
         response  = defaultApi.getByShipAndMap(sanitiseMapName(map), ship, sessionId, null);
-        return Lists.transform(response.getRankingEntry(), new Function<RankingEntryRankingEntry, CompetitorInfo>() {
-            @Override
-            public CompetitorInfo apply(RankingEntryRankingEntry f) {
-                CompetitorInfo result = new CompetitorInfo();
-                result.setLocal(false);
-                result.setPosition(f.getPosition());
-                result.setTime(f.getTime());
-                result.setUserName(f.getUsername());
-                result.setGameId(f.getId());
-                return result;
-            }
+        return Lists.transform(response.getRankingEntry(), f -> {
+            CompetitorInfo result = new CompetitorInfo();
+            result.setLocal(false);
+            result.setPosition(f.getPosition());
+            result.setTime(f.getTime());
+            result.setUserName(f.getUsername());
+            result.setGameId(f.getId());
+            return result;
         });
     }
 
