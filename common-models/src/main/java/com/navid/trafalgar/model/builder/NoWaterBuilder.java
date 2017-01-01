@@ -7,11 +7,29 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singleton;
+
 public final class NoWaterBuilder implements BuilderInterface {
 
     @Override
-    public Collection build(String instanceName, Map<String, Object> customValues) {
-        return Collections.singleton(new NoWater());
+    public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
+        return singleton(new NoWater());
+    }
+
+    @Override
+    public Collection buildControls(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildCandidateRecord(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildGhost(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
     }
 
     @Override
@@ -21,7 +39,7 @@ public final class NoWaterBuilder implements BuilderInterface {
 
     @Override
     public Iterable<ModelBuilder.Category> getCategories() {
-        return Collections.singleton(ModelBuilder.Category.context);
+        return singleton(ModelBuilder.Category.context);
     }
 
 }

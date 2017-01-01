@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singleton;
+
 public final class SunBuilder implements BuilderInterface {
 
     @Autowired
@@ -24,8 +27,23 @@ public final class SunBuilder implements BuilderInterface {
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, Object> customValues) {
-        return Collections.singleton(new SunModel(new Vector3f(1, -1, 1), ColorRGBA.Yellow));
+    public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
+        return singleton(new SunModel(new Vector3f(1, -1, 1), ColorRGBA.Yellow));
+    }
+
+    @Override
+    public Collection buildControls(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildCandidateRecord(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildGhost(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
     }
 
     @Override
@@ -35,7 +53,7 @@ public final class SunBuilder implements BuilderInterface {
 
     @Override
     public Iterable<ModelBuilder.Category> getCategories() {
-        return Collections.singleton(ModelBuilder.Category.context);
+        return singleton(ModelBuilder.Category.context);
     }
 
 }

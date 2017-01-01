@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public final class GameStatus {
 
     private FloatStatistic time;
-    private MapDefinition gameDefinition;
     //Nodes
     private final Node gameNode = new Node("Model Node");
     private final Node gameGUINode = new Node("GUI Node");
@@ -27,6 +26,7 @@ public final class GameStatus {
     //InitStateListener
     private Camera camera;
     private Camera cameraGUI;
+    private MapDefinition gameDefinition;
 
     /**
      *
@@ -46,22 +46,6 @@ public final class GameStatus {
     @Autowired
     public void setStatisticsManager(StatisticsManager statisticsManager) {
         time = statisticsManager.createStatistic("root", "time", 0f);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public MapDefinition getGameDefinition() {
-        return gameDefinition;
-    }
-
-    /**
-     *
-     * @param gameDefinition
-     */
-    public void setGameDefinition(MapDefinition gameDefinition) {
-        this.gameDefinition = gameDefinition;
     }
 
     /**
@@ -154,5 +138,9 @@ public final class GameStatus {
      */
     public void setTime(FloatStatistic time) {
         this.time = time;
+    }
+
+    public void setGameDefinition(MapDefinition gameDefinition) {
+        this.gameDefinition = gameDefinition;
     }
 }

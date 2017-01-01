@@ -44,6 +44,11 @@ public abstract class GameMenuController implements ScreenController {
         nifty.gotoScreen("redirector");
     }
 
+    public void skip() {
+        screenFlowManager.setNextScreenHint(ScreenFlowManager.SKIP);
+        nifty.gotoScreen("redirector");
+    }
+
     public final void back() {
         screenFlowManager.setNextScreenHint(ScreenFlowManager.PREV);
         nifty.gotoScreen("redirector");
@@ -55,7 +60,10 @@ public abstract class GameMenuController implements ScreenController {
 
     public final void onStartScreen() {
         Label element = screen.findNiftyControl("musicFileName", Label.class);
-        element.setText(musicManager.getCurrentMusic().getName());
+        if(element != null) {
+            element.setText(musicManager.getCurrentMusic().getName());
+        }
+
         doOnStartScreen();
     }
 

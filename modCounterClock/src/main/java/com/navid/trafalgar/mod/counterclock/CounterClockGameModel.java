@@ -2,6 +2,7 @@ package com.navid.trafalgar.mod.counterclock;
 
 import com.jme3.light.AmbientLight;
 import com.jme3.post.Filter;
+import com.jme3.post.filters.TranslucentBucketFilter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.navid.trafalgar.input.SystemInteractions;
@@ -52,6 +53,7 @@ public final class CounterClockGameModel {
         milestones = gameModel.getByType(AMilestoneModel.class);
         context = (IContext) gameModel.getSingleByType(IContext.class);
         fpp = gameModel.getByType(Filter.class);
+        fpp.add(new TranslucentBucketFilter());
 
         gameNode.addLight((SunModel) gameModel.getSingleByType(SunModel.class));
 
@@ -60,6 +62,10 @@ public final class CounterClockGameModel {
         }
 
         gameNode.addLight(new AmbientLight());
+
+        IWind wind = gameModel.getSingleByType(IWind.class);
+        gameNode.attachChild(wind);
+        gameNode.addControl(wind);
     }
 
     /**

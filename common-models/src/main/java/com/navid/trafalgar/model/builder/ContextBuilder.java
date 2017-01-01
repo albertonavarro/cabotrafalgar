@@ -9,6 +9,9 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singleton;
+
 /**
  *
  * @author alberto
@@ -20,7 +23,7 @@ public final class ContextBuilder implements BuilderInterface {
 
     @Override
     public Iterable<Category> getCategories() {
-        return Collections.singleton(Category.context);
+        return singleton(Category.context);
     }
 
     /**
@@ -31,8 +34,23 @@ public final class ContextBuilder implements BuilderInterface {
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, Object> customValues) {
-        return Collections.singleton(new SimpleContext());
+    public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
+        return singleton(new SimpleContext());
+    }
+
+    @Override
+    public Collection buildControls(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildCandidateRecord(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildGhost(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
     }
 
     @Override

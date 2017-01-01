@@ -8,5 +8,6 @@
     <context:annotation-config/>
   
     <bean id="mod.windtunnel.mainscreencontroller" class="com.navid.trafalgar.mod.windtunnel.WindTunnelMainScreen" autowire="byType"/>
+    <bean id="mod.windtunnel.windtunnelconfigphase" class="com.navid.trafalgar.mod.windtunnel.ModConfigPhaseController" autowire="byType"/>
 
 </beans>

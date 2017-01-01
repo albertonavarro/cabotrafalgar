@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static java.util.Collections.singleton;
+
 public final class ShipModelZBuilder implements BuilderInterface {
 
     @Autowired
@@ -20,30 +22,34 @@ public final class ShipModelZBuilder implements BuilderInterface {
     private EventManager eventManager;
 
     @Override
-    public Collection build(String instanceName, Map<String, Object> customValues) {
-        AShipModelZ model = null;
-
-        String role = (String) customValues.get("role");
-        if (role.equals("Player")) {
-            model = new ShipModelZPlayer(assetManager, eventManager);
-        } else if (role.equals("Ghost")) {
-            model = new ShipModelZGhost(assetManager, eventManager,
-                    (CandidateRecord<ShipModelZPlayer.ShipSnapshot>) customValues.get("record"));
-        } else if (role.equals("ControlProxy")) {
-            return Collections.singleton(new ShipModelZControlProxy());
-        } else if (role.equals("CandidateRecord")) {
-            return Collections.singleton(new ShipModelZPlayer.ShipCandidateRecord());
-        } else {
-            throw new IllegalArgumentException("Illegal role: " + role);
-        }
-
+    public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
+        AShipModelZ model = new ShipModelZPlayer(assetManager, eventManager);
         model.setName(instanceName);
-
         if (customValues.containsKey("position")) {
             model.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
         }
-        return Collections.singleton(model);
+        return singleton(model);
+    }
 
+    @Override
+    public Collection buildControls(String instanceName, Map<String, Object> customValues) {
+        return singleton(new ShipModelZControlProxy());
+    }
+
+    @Override
+    public Collection buildCandidateRecord(String instanceName, Map<String, Object> customValues) {
+        return singleton(new ShipModelZPlayer.ShipCandidateRecord());
+    }
+
+    @Override
+    public Collection buildGhost(String instanceName, Map<String, Object> customValues) {
+        AShipModelZ model = new ShipModelZGhost(assetManager, eventManager,
+                (CandidateRecord<ShipModelZPlayer.ShipSnapshot>) customValues.get("record"));
+        model.setName(instanceName);
+        if (customValues.containsKey("position")) {
+            model.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
+        }
+        return singleton(model);
     }
 
     @Override
@@ -67,7 +73,7 @@ public final class ShipModelZBuilder implements BuilderInterface {
 
     @Override
     public Iterable<ModelBuilder.Category> getCategories() {
-        return Collections.singleton(ModelBuilder.Category.ship);
+        return singleton(ModelBuilder.Category.ship);
     }
 
 }

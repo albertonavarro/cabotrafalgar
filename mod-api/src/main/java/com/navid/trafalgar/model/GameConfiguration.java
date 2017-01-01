@@ -1,6 +1,7 @@
 package com.navid.trafalgar.model;
 
 import com.jme3.system.AppSettings;
+import com.navid.trafalgar.maploader.v3.MapDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -18,12 +19,18 @@ public final class GameConfiguration {
 
     private GameModel preGameModel;
 
+    private MapDefinition gameDefinition;
+    private GameModel controls;
+    private GameModel custom;
+
     public GameConfiguration() {
         reset();
     }
 
     public void reset() {
         preGameModel = new GameModel();
+        controls = new GameModel();
+        custom = new GameModel();
         shipName = null;
     }
 
@@ -94,4 +101,23 @@ public final class GameConfiguration {
         return preGameModel;
     }
 
+    public void setGameDefinition(MapDefinition gameDefinition) {
+        this.gameDefinition = gameDefinition;
+    }
+
+    public GameModel getControls() {
+        return controls;
+    }
+
+    public void setControls(GameModel controls) {
+        this.controls = controls;
+    }
+
+    public GameModel getCustom() {
+        return custom;
+    }
+
+    public void setCustom(GameModel custom) {
+        this.custom = custom;
+    }
 }

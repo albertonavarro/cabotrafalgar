@@ -3,12 +3,17 @@ modPreGameSpringConfig: mod/windtunnel/application-context.xml
 modGameSpringConfig: mod/windtunnel/game-context.xml
 buildersSpringConfig: mod/windtunnel/builders-declaration.xml
 screenDeclarations:
+  - screenName: windtunnelConfigPhase
+    interfaceConstructor: static:mod/common/empty_screen.xml
+    controller: spring:mod.windtunnel.windtunnelconfigphase
   - screenName: windTunnelScreen
     interfaceConstructor: static:screen-snippets/gameplayLayout.xml
     controller: spring:mod.windtunnel.mainscreencontroller
 moduleFlowRoot: root:root
 moduleScreenFlow:
+  - windtunnelConfigPhase
   - selectShip
+  - objectCreationPhase
   - selectControl
   - selectKeys
   - selectRemoteControl

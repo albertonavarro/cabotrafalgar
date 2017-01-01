@@ -26,6 +26,6 @@
             <ref bean="common.nifty"/>
         </constructor-arg>
     </bean>
-     <bean id="mod.common.selectremotecontrolcontroller" class="com.navid.trafalgar.mod.common.SelectRemoteControlsScreenController" autowire="byType" />
-
+    <bean id="mod.common.selectremotecontrolcontroller" class="com.navid.trafalgar.mod.common.SelectRemoteControlsScreenController" autowire="byType" />
+    <bean id="mod.common.objectcreationphasecontroller" class="com.navid.trafalgar.mod.common.ObjectCreationPhaseController" autowire="byType" />
  </beans>

@@ -77,7 +77,7 @@ public class TutorialMainScreenController extends GameMenuController {
         customValues.put("role", "ControlProxy");
 
         gameConfiguration.getPreGameModel().addToModel(newArrayList(new SystemInteractions()), "system");
-        gameConfiguration.getPreGameModel().addToModel(modelBuilder.getBuilder(selectedChapter.getShip()).build("tutorial", customValues), "player1");
+        gameConfiguration.getPreGameModel().addToModel(modelBuilder.getBuilder(selectedChapter.getShip()).buildControls("tutorial", customValues), "player1");
         gameConfiguration.setShipName(selectedChapter.getShip());
         gameConfiguration.setMap(selectedChapter.getMap());
 

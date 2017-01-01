@@ -106,8 +106,5 @@ public final class CounterClockMainScreenController extends GamePlayController i
     }
 
 
-    @Override
-    public void setStatisticsManager(StatisticsManager statisticsManager) {
 
-    }
 }

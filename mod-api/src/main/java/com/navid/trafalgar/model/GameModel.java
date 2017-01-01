@@ -109,4 +109,9 @@ public final class GameModel implements GameModelInterface {
     public boolean contains(Class className) {
         return !getByType(className).isEmpty();
     }
+
+
+    public Collection getAll() {
+        return mapByClass.get(Object.class);
+    }
 }

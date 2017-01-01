@@ -47,8 +47,7 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
     protected Map injectProperties() {
         HashMap properties = new HashMap();
 
-
-        List<AShipModelInteractive> interactives = gameConfiguration.getPreGameModel().getByType(AShipModelInteractive.class);
+        List<AShipModelInteractive> interactives = gameConfiguration.getControls().getByType(AShipModelInteractive.class);
 
         Set<Command> commands = new HashSet<>();
         for (AShipModelInteractive interactive : interactives) {

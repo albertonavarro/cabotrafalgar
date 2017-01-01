@@ -111,7 +111,7 @@ public abstract class AShipModelTwo extends AShipModel {
     }
 
     @Override
-    public final void setWindNode(IWind.WindGeometry windGeometry) {
+    public final void setWindNode(IWind windGeometry) {
         this.attachChild(windGeometry);
         this.addControl(windGeometry);
         windGeometry.move(-10, 10, 0);

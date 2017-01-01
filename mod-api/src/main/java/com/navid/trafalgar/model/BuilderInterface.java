@@ -12,7 +12,13 @@ public interface BuilderInterface {
      * @param customValues
      * @return
      */
-    Collection build(String instanceName, Map<String, Object> customValues);
+    Collection buildGeometry(String instanceName, Map<String, Object> customValues);
+
+    Collection buildControls(String instanceName, Map<String, Object> customValues);
+
+    Collection buildCandidateRecord(String instanceName, Map<String, Object> customValues);
+
+    Collection buildGhost(String instanceName, Map<String, Object> customValues);
 
     /**
      *

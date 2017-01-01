@@ -61,7 +61,7 @@ public final class SelectControlsScreenController extends GameMenuController {
         };
 
 
-        List<AShipModelInteractive> interactives = gameConfiguration.getPreGameModel().getByType(AShipModelInteractive.class);
+        List<AShipModelInteractive> interactives = gameConfiguration.getControls().getByType(AShipModelInteractive.class);
 
 
         Set<Command> commands = new HashSet<>();//ship.getCommands(commandBuilder);

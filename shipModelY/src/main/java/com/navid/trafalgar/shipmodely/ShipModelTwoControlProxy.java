@@ -4,10 +4,17 @@ import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandBuilder;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.AShipModelPlayer;
+import com.navid.trafalgar.model.Dependent;
+import com.navid.trafalgar.model.GameModel;
+
 import java.util.HashSet;
 import java.util.Set;
 
-public final class ShipModelTwoControlProxy implements AShipModelInteractive {
+public final class ShipModelTwoControlProxy implements AShipModelInteractive, Dependent {
+
+    public ShipModelTwoControlProxy() {
+
+    }
 
     private ShipModelTwoPlayer target;
 
@@ -64,4 +71,13 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive {
         target.sailTrim(tpf);
     }
 
+    @Override
+    public void resolveDependencies(GameModel gameModel) {
+        target = gameModel.getSingleByType(ShipModelTwoPlayer.class);
+    }
+
+    @Override
+    public void commitDependencies() {
+
+    }
 }

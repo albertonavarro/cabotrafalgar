@@ -41,17 +41,17 @@ public final class LoadMapStateListener implements LoadModelState {
     @Override
     public void onLoadModel(float tpf) {
 
-        MapDefinition gameDefinition = (MapDefinition) assetManager.loadAsset("Maps/WindTunnel/WindTunnel.map");
+        MapDefinition gameDefinition = (MapDefinition) assetManager.loadAsset(gameConfiguration.getMap());
         gameStatus.setGameDefinition(gameDefinition);
 
-        GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
+        gameConfiguration.getCustom().addToModel(newArrayList(windTunnelMainScreen), "system");
 
-        gameConfiguration.getPreGameModel().addToModel(newArrayList(windTunnelMainScreen), "system");
+        GameModel gameModel = builder2.buildGeometry(gameConfiguration, gameDefinition);
 
         windTunnelGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = windTunnelGameModel.getIContext();
-        gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());
+        gameStatus.getGameNode().attachChild(iContext.getWind());
 
         AShipModelPlayer currentShip = windTunnelGameModel.getShip();
         gameStatus.getGameNode().addControl((Control) currentShip);

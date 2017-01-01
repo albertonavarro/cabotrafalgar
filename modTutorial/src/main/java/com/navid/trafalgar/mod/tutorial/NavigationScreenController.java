@@ -118,8 +118,4 @@ public class NavigationScreenController extends GamePlayController implements Be
         eventManager.fireEvent("SCRIPT_STEP_ACTIONED");
     }
 
-    @Override
-    public void setStatisticsManager(StatisticsManager statisticsManager) {
-
-    }
 }

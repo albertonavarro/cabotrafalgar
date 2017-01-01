@@ -14,14 +14,12 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
 
     private IContext context;
 
-    private IWind.WindGeometry windGeometry;
-
     public AShipModel(String role, Vector3f lookAt, AssetManager assetManager, EventManager eventManager) {
         super(lookAt, assetManager, eventManager);
         this.role = role;
     }
 
-    public abstract void setWindNode(IWind.WindGeometry windGeometry);
+    public abstract void setWindNode(IWind windGeometry);
 
     @Override
     public final Control cloneForSpatial(Spatial spatial) {
@@ -43,14 +41,14 @@ public abstract class AShipModel extends TrafalgarNode implements Control, Depen
 
     @Override
     public final void commitDependencies() {
-        windGeometry = this.getContext().getWind().createWindGeometryNode();
-        windGeometry.setLocalTranslation(-20, 20, 0);
-        this.attachChild(windGeometry);
+        //windGeometry = this.getContext().getWind().createWindGeometryNode();
+        //windGeometry.setLocalTranslation(-100, -100, 0);
+        ///this.attachChild(windGeometry);
     }
 
     @Override
     public void update(float tpf) {
-        windGeometry.update(tpf);
+        //windGeometry.update(tpf);
     }
 
     public final Object getRole() {

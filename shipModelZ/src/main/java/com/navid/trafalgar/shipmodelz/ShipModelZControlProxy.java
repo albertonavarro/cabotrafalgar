@@ -4,10 +4,13 @@ import com.navid.trafalgar.input.Command;
 import com.navid.trafalgar.input.CommandBuilder;
 import com.navid.trafalgar.model.AShipModelInteractive;
 import com.navid.trafalgar.model.AShipModelPlayer;
+import com.navid.trafalgar.model.Dependent;
+import com.navid.trafalgar.model.GameModel;
+
 import java.util.HashSet;
 import java.util.Set;
 
-public final class ShipModelZControlProxy implements AShipModelInteractive {
+public final class ShipModelZControlProxy implements AShipModelInteractive, Dependent {
 
     private ShipModelZPlayer target;
 
@@ -60,4 +63,13 @@ public final class ShipModelZControlProxy implements AShipModelInteractive {
         };
     }
 
+    @Override
+    public void resolveDependencies(GameModel gameModel) {
+        target = gameModel.getSingleByType(ShipModelZPlayer.class);
+    }
+
+    @Override
+    public void commitDependencies() {
+
+    }
 }

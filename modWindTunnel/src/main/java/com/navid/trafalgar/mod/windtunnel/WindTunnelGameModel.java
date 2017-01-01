@@ -34,11 +34,11 @@ public final class WindTunnelGameModel {
 
         inited = true;
 
-        ship = (AShipModelPlayer) gameModel.getSingleByType(AShipModelPlayer.class);
-        preGameModel.getSingleByTypeAndName(AShipModelInteractive.class, "player1").setTarget(ship);
+        ship = gameModel.getSingleByType(AShipModelPlayer.class);
+        //preGameModel.getSingleByTypeAndName(AShipModelInteractive.class, "player1").setTarget(ship);
 
-        SystemInteractions systemInteractions = preGameModel.getSingleByTypeAndName(SystemInteractions.class, "system");
-        systemInteractions.setTarget(preGameModel.getSingleByTypeAndName(AShipModelPlayer.class, "system"));
+       // SystemInteractions systemInteractions = preGameModel.getSingleByTypeAndName(SystemInteractions.class, "system");
+       // systemInteractions.setTarget(preGameModel.getSingleByTypeAndName(AShipModelPlayer.class, "system"));
 
         context = (IContext) gameModel.getSingleByType(IContext.class);
         harness = (AHarnessModel) gameModel.getSingleByType(AHarnessModel.class);

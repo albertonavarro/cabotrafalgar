@@ -48,7 +48,7 @@ public final class LoadMapStateListener implements LoadModelState {
         MapDefinition gameDefinition = (MapDefinition) assetManager.loadAsset(gameConfiguration.getMap());
         gameStatus.setGameDefinition(gameDefinition);
 
-        GameModel gameModel = builder2.build(gameConfiguration, gameDefinition);
+        GameModel gameModel = builder2.build(gameConfiguration, gameDefinition, Role.geometry);
 
         if (gameConfiguration.getPreGameModel().contains(CandidateRecord.class)) {
             final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class);
@@ -70,7 +70,7 @@ public final class LoadMapStateListener implements LoadModelState {
         counterClockGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = counterClockGameModel.getIContext();
-        gameStatus.getGameNode().attachChild(iContext.getWind().getGeometry());
+        gameStatus.getGameNode().attachChild(iContext.getWind());
 
         AShipModelPlayer currentShip = counterClockGameModel.getShip();
         gameStatus.getGameNode().addControl((Control) currentShip);

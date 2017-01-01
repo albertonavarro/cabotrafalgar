@@ -1,19 +1,22 @@
 package com.navid.trafalgar.model.builder;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.scene.Spatial;
-import com.jme3.util.SkyFactory;
-import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.model.BuilderInterface;
+import com.navid.trafalgar.model.CandidateRecord;
+import com.navid.trafalgar.model.FanWind;
+import com.navid.trafalgar.model.FanWindInteractive;
+import com.navid.trafalgar.model.ModelBuilder.Category;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 
-public final class SkyBuilder implements BuilderInterface {
+public final class FanWindBuilder implements BuilderInterface {
 
     @Autowired
     private AssetManager assetManager;
@@ -27,12 +30,12 @@ public final class SkyBuilder implements BuilderInterface {
 
     @Override
     public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
-        return singleton(SkyFactory.createSky(assetManager, "Scenes/Beach/FullskiesSunset0068.dds", false));
+        return singleton(new FanWind(assetManager));
     }
 
     @Override
     public Collection buildControls(String instanceName, Map<String, Object> customValues) {
-        return emptyList();
+        return singleton(new FanWindInteractive(null));
     }
 
     @Override
@@ -47,11 +50,12 @@ public final class SkyBuilder implements BuilderInterface {
 
     @Override
     public String getType() {
-        return "Sky";
+        return "FanWind";
     }
 
     @Override
-    public Iterable<ModelBuilder.Category> getCategories() {
-        return singleton(ModelBuilder.Category.context);
+    public Iterable<Category> getCategories() {
+        return singleton(Category.context);
     }
+
 }

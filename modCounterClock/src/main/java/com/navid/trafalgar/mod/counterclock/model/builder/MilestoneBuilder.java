@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singleton;
+
 public final class MilestoneBuilder implements BuilderInterface {
 
     @Autowired
@@ -19,7 +22,7 @@ public final class MilestoneBuilder implements BuilderInterface {
 
     @Override
     public Iterable<Category> getCategories() {
-        return Collections.singleton(Category.other);
+        return singleton(Category.other);
     }
 
     /**
@@ -30,7 +33,7 @@ public final class MilestoneBuilder implements BuilderInterface {
     }
 
     @Override
-    public Collection build(String instanceName, Map<String, Object> customValues) {
+    public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
         MilestoneModel milestone = new MilestoneModel(assetManager);
 
         milestone.setMaterialOn(new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md") {
@@ -49,7 +52,22 @@ public final class MilestoneBuilder implements BuilderInterface {
             milestone.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
         }
 
-        return Collections.singleton(milestone);
+        return singleton(milestone);
+    }
+
+    @Override
+    public Collection buildControls(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildCandidateRecord(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildGhost(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
     }
 
     @Override

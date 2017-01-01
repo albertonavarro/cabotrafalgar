@@ -100,9 +100,4 @@ public final class WindTunnelMainScreen extends GamePlayController implements Be
         this.appStateManager = appStateManager;
     }
 
-
-    @Override
-    public void setStatisticsManager(StatisticsManager statisticsManager) {
-
-    }
 }

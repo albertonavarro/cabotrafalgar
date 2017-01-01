@@ -32,7 +32,7 @@ public abstract class AShipModelZ extends AShipModel {
     protected AShipModelZ(String role, AssetManager assetManager, EventManager eventManager) {
         super(role, new Vector3f(1, 0, 0), assetManager, eventManager);
 
-        spatial = assetManager.loadModel("Models/ship2g/ship2g.j3o");
+        spatial = assetManager.loadModel("Models/ship2z/ship2g.j3o");
         spatial.rotate(0f, (float) -Math.PI / 2, 0f);
         this.attachChild(spatial);
 
@@ -103,7 +103,7 @@ public abstract class AShipModelZ extends AShipModel {
     }
 
     @Override
-    public final void setWindNode(IWind.WindGeometry windGeometry) {
+    public final void setWindNode(IWind windGeometry) {
         this.attachChild(windGeometry);
         this.addControl(windGeometry);
         windGeometry.move(-10, 10, 0);

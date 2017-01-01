@@ -1,5 +1,6 @@
 package com.navid.trafalgar.maploader.v3;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,7 +22,7 @@ public final class EntryDefinition {
     /*
      * Custom parameters
      */
-    private Map<String, Object> values;
+    private Map<String, Object> values = new HashMap();
 
     /**
      * @return the name

@@ -1,8 +1,11 @@
 package com.navid.trafalgar.model.builder;
 
-import com.navid.trafalgar.model.ModelBuilder;
+import com.jme3.asset.AssetManager;
 import com.navid.trafalgar.model.BuilderInterface;
-import com.navid.trafalgar.model.SimpleWater;
+import com.navid.trafalgar.model.ModelBuilder.Category;
+import com.navid.trafalgar.model.RealConstantWind;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -10,11 +13,21 @@ import java.util.Map;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 
-public final class WaterBuilder implements BuilderInterface {
+public final class RealConstantWindBuilder implements BuilderInterface {
+
+    @Autowired
+    private AssetManager assetManager;
+
+    /**
+     * @param assetManager the assetManager to set
+     */
+    public void setAssetManager(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
 
     @Override
     public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
-        return singleton(new SimpleWater());
+        return singleton(new RealConstantWind(assetManager));
     }
 
     @Override
@@ -34,11 +47,12 @@ public final class WaterBuilder implements BuilderInterface {
 
     @Override
     public String getType() {
-        return "SimpleWater";
+        return "RotateSimpleWind";
     }
 
     @Override
-    public Iterable<ModelBuilder.Category> getCategories() {
-        return singleton(ModelBuilder.Category.context);
+    public Iterable<Category> getCategories() {
+        return singleton(Category.context);
     }
+
 }

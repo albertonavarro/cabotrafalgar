@@ -1,38 +1,35 @@
 package com.navid.trafalgar.model;
 
 import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
+import com.jme3.renderer.RenderManager;
+import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 
 /**
  *
  *
  */
-public interface IWind {
+public abstract class IWind extends Node implements Control, Dependent {
 
-    /**
-     *
-     * @return
-     */
-    Vector2f getWind();
+    public abstract Vector2f getWind();
 
-    /**
-     *
-     * @return
-     */
-    Geometry getGeometry();
+    @Override
+    public final Control cloneForSpatial(Spatial spatial) {
+        return null;
+    }
 
-    /**
-     *
-     * @return
-     */
-    WindGeometry createWindGeometryNode();
+    @Override
+    public final void setSpatial(Spatial spatial) {
 
-    /**
-     *
-     */
-    public abstract class WindGeometry extends Node implements Control {
+    }
+
+    @Override
+    public final void render(RenderManager rm, ViewPort vp) {
+
     }
 
 }

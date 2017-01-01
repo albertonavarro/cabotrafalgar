@@ -2,10 +2,7 @@ package com.navid.trafalgar.mod.common;
 
 import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
-import com.navid.trafalgar.model.AShipModel;
-import com.navid.trafalgar.model.BuilderInterface;
-import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.model.ModelBuilder;
+import com.navid.trafalgar.model.*;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
@@ -88,8 +85,6 @@ public final class SelectShipScreenController extends GameMenuController {
     @Override
     public void doOnStartScreen() {
         gameConfiguration.reset();
-        gameConfiguration.getPreGameModel().removeFromModel(AShipModel.class);
-        gameConfiguration.getPreGameModel().addToModel(newArrayList(new SystemInteractions()), "system");
 
         fillListWithShips();
     }
@@ -97,19 +92,6 @@ public final class SelectShipScreenController extends GameMenuController {
     @Override
     public void onEndScreen() {
         gameConfiguration.setShipName(selectedItem.getName());
-
-        EntryDefinition entry = new EntryDefinition();
-        entry.setType(selectedItem.getName());
-        entry.setName("player1");
-        entry.setValues(new HashMap<String, Object>() {
-            {
-                put("role", "ControlProxy");
-            }
-        });
-
-        Collection c = builder.build(entry);
-
-        gameConfiguration.getPreGameModel().addToModel(c, "player1");
 
         emptyList();
     }

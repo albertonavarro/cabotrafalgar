@@ -12,6 +12,7 @@ import com.navid.lazylogin.context.RequestContextContainer;
 import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.ModelBuilder;
+import com.navid.trafalgar.model.Role;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
@@ -142,7 +143,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
                 put("role", "CandidateRecord");
             }
         });
-        Collection cr = builder2.build(entry);
+        Collection cr = builder2.build(entry, Role.candidateRecord);
 
         CandidateRecord finalcandidate
                 = (CandidateRecord) gson.fromJson(response.getPayload(), Iterators.getOnlyElement(cr.iterator()).getClass());

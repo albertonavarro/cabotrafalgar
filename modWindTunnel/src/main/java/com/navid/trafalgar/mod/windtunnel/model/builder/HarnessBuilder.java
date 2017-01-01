@@ -10,6 +10,9 @@ import java.util.Collections;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singleton;
+
 /**
  *
  * @author alberto
@@ -23,10 +26,25 @@ public final class HarnessBuilder implements BuilderInterface {
     private InputManager inputManager;
 
     @Override
-    public Collection build(String instanceName, Map<String, Object> customValues) {
+    public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
         HarnessModel harness = new HarnessModel(assetManager);
         harness.registerInputManager(inputManager);
-        return Collections.singleton(harness);
+        return singleton(harness);
+    }
+
+    @Override
+    public Collection buildControls(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildCandidateRecord(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
+    }
+
+    @Override
+    public Collection buildGhost(String instanceName, Map<String, Object> customValues) {
+        return emptyList();
     }
 
     @Override
@@ -36,7 +54,7 @@ public final class HarnessBuilder implements BuilderInterface {
 
     @Override
     public Iterable<Category> getCategories() {
-        return Collections.singleton(Category.other);
+        return singleton(Category.other);
     }
 
     /**
