@@ -1,0 +1,20 @@
+MaterialDef Colored Textured {
+
+    MaterialParameters {
+        Texture2D ColorMap
+        Color Color (Color)
+    }
+
+    Technique {
+        VertexShader GLSL100:   shaders/SailModelY.vert
+        FragmentShader GLSL100: shaders/SailModelY.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+    }
+
+    Technique {
+    }
+
+}
