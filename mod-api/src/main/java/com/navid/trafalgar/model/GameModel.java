@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.navid.trafalgar.util.ReflexionUtils;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Sets.newHashSet;
 
@@ -113,5 +114,15 @@ public final class GameModel implements GameModelInterface {
 
     public Collection getAll() {
         return mapByClass.get(Object.class);
+    }
+
+    public void updateDependencies() {
+        for (Dependent currentDependant : this.getByType(Dependent.class)) {
+            currentDependant.resolveDependencies(this);
+        }
+
+        for (Dependent currentDependant : this.getByType(Dependent.class)) {
+            currentDependant.commitDependencies();
+        }
     }
 }

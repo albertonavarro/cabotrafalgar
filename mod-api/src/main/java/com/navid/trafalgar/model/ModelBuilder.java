@@ -42,6 +42,14 @@ public final class ModelBuilder {
         buildersByCategory.put(Category.other, new LinkedList<BuilderInterface>());
     }
 
+    public GameModel buildGhost(final GameConfiguration gameConfiguration, MapDefinition gameDef) {
+        GameModel gameModel = new GameModel();
+
+        fillGameModel(gameConfiguration, gameDef, Role.ghost, gameModel);
+
+        return gameModel;
+    }
+
     public GameModel buildControls(final GameConfiguration gameConfiguration, MapDefinition gameDef) {
         GameModel gameModel = new GameModel();
 
@@ -58,14 +66,6 @@ public final class ModelBuilder {
 
         fillGameModel(gameConfiguration, gameDef, Role.geometry, gameModel);
 
-        for (Dependent currentDependant : gameModel.getByType(Dependent.class)) {
-            currentDependant.resolveDependencies(gameModel);
-        }
-
-        for (Dependent currentDependant : gameModel.getByType(Dependent.class)) {
-            currentDependant.commitDependencies();
-        }
-
         return gameModel;
     }
 
@@ -81,14 +81,6 @@ public final class ModelBuilder {
         }
 
         fillGameModel(gameConfiguration, gameDef, role, gameModel);
-
-        for (Dependent currentDependant : gameModel.getByType(Dependent.class)) {
-            currentDependant.resolveDependencies(gameModel);
-        }
-
-        for (Dependent currentDependant : gameModel.getByType(Dependent.class)) {
-            currentDependant.commitDependencies();
-        }
 
         return gameModel;
     }
@@ -187,18 +179,6 @@ public final class ModelBuilder {
         }
 
         Collection objects = buildersByName.get(entry.getType()).buildGeometry(entry.getName(), entry.getValues());
-
-        for (Object o : objects) {
-            if (o instanceof Dependent) {
-                ((Dependent) o).resolveDependencies(gameModel);
-            }
-        }
-
-        for (Object o : objects) {
-            if (o instanceof Dependent) {
-                ((Dependent) o).commitDependencies();
-            }
-        }
 
         return objects;
     }

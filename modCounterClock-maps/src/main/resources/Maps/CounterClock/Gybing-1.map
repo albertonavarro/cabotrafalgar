@@ -1,6 +1,8 @@
 { "description" : "Practice gybing",
   "picture" : "Maps/CounterClock/Gybing-1.png",
-  "entries" : [ { "type" : "Context" },
+  "entries" : [
+      { "type" : "System" },
+      { "type" : "Context" },
       { "type" : "RotateSimpleWind" },
       { "type" : "Sun" },
       { "type" : "SimpleWater" },

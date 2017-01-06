@@ -1,10 +1,12 @@
 package com.navid.trafalgar.mod.counterclock;
 
 import com.jme3.light.AmbientLight;
+import com.jme3.light.Light;
 import com.jme3.post.Filter;
 import com.jme3.post.filters.TranslucentBucketFilter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.control.Control;
 import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.*;
@@ -36,36 +38,31 @@ public final class CounterClockGameModel {
         inited = true;
 
         ship = gameModel.getSingleByTypeAndName(AShipModelPlayer.class, "player1");
-        preGameModel.getSingleByTypeAndName(AShipModelInteractive.class, "player1").setTarget(ship);
-
-        gameNode.attachChild((Spatial) ship);
-
-        SystemInteractions systemInteractions = preGameModel.getSingleByTypeAndName(SystemInteractions.class, "system");
-        systemInteractions.setTarget(preGameModel.getSingleByTypeAndName(AShipModelPlayer.class, "system"));
 
         if (gameModel.contains(AShipModelGhost.class)) {
             ghost = gameModel.getSingleByType(AShipModelGhost.class);
-            if (ghost != null) {
-                gameNode.attachChild((Spatial) ghost);
-            }
         }
 
         milestones = gameModel.getByType(AMilestoneModel.class);
-        context = (IContext) gameModel.getSingleByType(IContext.class);
-        fpp = gameModel.getByType(Filter.class);
-        fpp.add(new TranslucentBucketFilter());
 
-        gameNode.addLight((SunModel) gameModel.getSingleByType(SunModel.class));
+        context = gameModel.getSingleByType(IContext.class);
+
+        fpp = gameModel.getByType(Filter.class);
 
         for (Spatial currentNode : gameModel.getByType(Spatial.class)) {
             gameNode.attachChild(currentNode);
         }
 
-        gameNode.addLight(new AmbientLight());
+        for (Control control : gameModel.getByType(Control.class)) {
+            gameNode.addControl(control);
+        }
 
-        IWind wind = gameModel.getSingleByType(IWind.class);
-        gameNode.attachChild(wind);
-        gameNode.addControl(wind);
+        for (Light light : gameModel.getByType(Light.class)) {
+            gameNode.addLight(light);
+        }
+
+        gameNode.addLight(new AmbientLight());
+        fpp.add(new TranslucentBucketFilter());
     }
 
     /**

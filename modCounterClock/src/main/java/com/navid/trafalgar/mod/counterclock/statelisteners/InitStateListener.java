@@ -22,8 +22,7 @@ public final class InitStateListener implements InitState {
     public void onInit(float tpf) {
 
         Camera camera = new Camera(settings.getWidth(), settings.getHeight());
-        camera.setFrustumPerspective(45f, (float) camera.getWidth() / camera.getHeight(), 1f, 1000f);
-        camera.setFrustumFar(10000);
+        camera.setFrustumPerspective(45f, (float) camera.getWidth() / camera.getHeight(), 2f, 10000f);
 
         ViewPort viewPort = renderManager.createMainView("CounterClock", camera);
         viewPort.setClearFlags(true, true, true);

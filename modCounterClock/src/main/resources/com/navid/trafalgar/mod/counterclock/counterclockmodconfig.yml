@@ -17,6 +17,7 @@ moduleScreenFlow:
   - selectProfile
   - selectShip
   - selectMap
+  - objectCreationPhase
   - selectControl
   - selectKeys
   - selectKeysDigital

@@ -73,7 +73,7 @@ public final class ShipModelTwoControlProxy implements AShipModelInteractive, De
 
     @Override
     public void resolveDependencies(GameModel gameModel) {
-        target = gameModel.getSingleByType(ShipModelTwoPlayer.class);
+        target = gameModel.getSingleByTypeAndName(ShipModelTwoPlayer.class, "player1");
     }
 
     @Override

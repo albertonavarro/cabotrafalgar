@@ -48,7 +48,9 @@ public final class LoadMapStateListener implements LoadModelState {
         MapDefinition gameDefinition = (MapDefinition) assetManager.loadAsset(gameConfiguration.getMap());
         gameStatus.setGameDefinition(gameDefinition);
 
-        GameModel gameModel = builder2.build(gameConfiguration, gameDefinition, Role.geometry);
+        gameConfiguration.getCustom().addToModel(newArrayList(counterClockMainScreenController), "system");
+
+        GameModel gameModel = builder2.buildGeometry(gameConfiguration, gameDefinition);
 
         if (gameConfiguration.getPreGameModel().contains(CandidateRecord.class)) {
             final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class);
@@ -61,12 +63,12 @@ public final class LoadMapStateListener implements LoadModelState {
                     put("record", cr);
                 }
             });
-            Collection c = builder2.buildWithDependencies(entry, gameModel);
 
-            gameModel.addToModel(c, "ghost");
+            gameModel.addToModel(builder2.getBuilder(cr.getHeader().getShipModel()).buildGhost("ghost", entry.getValues()), "ghost");
+
         }
-        gameConfiguration.getPreGameModel().addToModel(newArrayList(counterClockMainScreenController), "system");
 
+        gameModel.updateDependencies();
         counterClockGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = counterClockGameModel.getIContext();

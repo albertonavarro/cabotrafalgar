@@ -48,6 +48,7 @@ public final class LoadMapStateListener implements LoadModelState {
 
         GameModel gameModel = builder2.buildGeometry(gameConfiguration, gameDefinition);
 
+        gameModel.updateDependencies();
         windTunnelGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = windTunnelGameModel.getIContext();
@@ -68,6 +69,8 @@ public final class LoadMapStateListener implements LoadModelState {
         gameStatus.getViewPort().addProcessor(fpp);
 
         gameStatus.getGameNode().attachChild(windTunnelGameModel.getGameNode());
+
+
     }
 
     @Override

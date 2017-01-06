@@ -1,6 +1,8 @@
 { "description" : "Hit the milestone, mind the currents",
   "picture" : "Maps/CounterClock/Tidal-1.png",
-  "entries" : [ { "type" : "Context" },
+  "entries" : [
+      {"type" : "System"},
+      { "type" : "Context" },
       { "type" : "RotateSimpleWind" },
       { "type" : "Sun" },
       { "type" : "TidalWater",

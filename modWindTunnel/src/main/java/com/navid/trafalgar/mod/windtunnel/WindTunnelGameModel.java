@@ -1,9 +1,12 @@
 package com.navid.trafalgar.mod.windtunnel;
 
 import com.jme3.light.AmbientLight;
+import com.jme3.light.Light;
 import com.jme3.post.Filter;
+import com.jme3.post.filters.TranslucentBucketFilter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.control.Control;
 import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.mod.windtunnel.model.AHarnessModel;
 import com.navid.trafalgar.model.*;
@@ -35,20 +38,25 @@ public final class WindTunnelGameModel {
         inited = true;
 
         ship = gameModel.getSingleByType(AShipModelPlayer.class);
-        //preGameModel.getSingleByTypeAndName(AShipModelInteractive.class, "player1").setTarget(ship);
-
-       // SystemInteractions systemInteractions = preGameModel.getSingleByTypeAndName(SystemInteractions.class, "system");
-       // systemInteractions.setTarget(preGameModel.getSingleByTypeAndName(AShipModelPlayer.class, "system"));
-
-        context = (IContext) gameModel.getSingleByType(IContext.class);
-        harness = (AHarnessModel) gameModel.getSingleByType(AHarnessModel.class);
-
-        gameNode.addLight((SunModel) gameModel.getSingleByType(SunModel.class));
+        context = gameModel.getSingleByType(IContext.class);
+        harness = gameModel.getSingleByType(AHarnessModel.class);
 
         fpp = gameModel.getByType(Filter.class);
 
-        gameNode.attachChild((Spatial) ship);
+        for (Spatial currentNode : gameModel.getByType(Spatial.class)) {
+            gameNode.attachChild(currentNode);
+        }
+
+        for (Control control : gameModel.getByType(Control.class)) {
+            gameNode.addControl(control);
+        }
+
+        for (Light light : gameModel.getByType(Light.class)) {
+            gameNode.addLight(light);
+        }
+
         gameNode.addLight(new AmbientLight());
+        fpp.add(new TranslucentBucketFilter());
     }
 
     /**
