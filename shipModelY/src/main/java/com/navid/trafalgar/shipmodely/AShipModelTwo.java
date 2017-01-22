@@ -2,12 +2,18 @@ package com.navid.trafalgar.shipmodely;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue.Bucket;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Quad;
+import com.jme3.scene.shape.Sphere;
+import com.jme3.util.TangentBinormalGenerator;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.CandidateRecord;
@@ -69,14 +75,18 @@ public abstract class AShipModelTwo extends AShipModel {
     private Material matSail;
     private boolean previousTransparent = false;
 
+
     protected AShipModelTwo(String role, AssetManager assetManager, EventManager eventManager) {
         super(role, new Vector3f(1, 0, 0), assetManager, eventManager);
 
-        spatial = assetManager.loadModel("Models/ship2g/ship2g.j3o");
-        spatial.rotate(0f, (float) -Math.PI / 2, 0f);
+        spatial = assetManager.loadModel("Models/ship2g/sail3.j3o");
+
+        //spatial.scale(0.075f);
         this.attachChild(spatial);
 
         sail = new Sail(assetManager, eventManager);
+        sail.move(18,0,0);
+        spatial.rotate(0f, (float) -Math.PI / 2, 0f);
         rudder = new Rudder(assetManager, eventManager);
 
         this.attachChild(sail);
@@ -137,8 +147,41 @@ public abstract class AShipModelTwo extends AShipModel {
             helperDirection = new Node();
             helperDirection.rotateUpTo(new Vector3f(1, 0, 0));
             this.attachChild(helperDirection);
-            Spatial s = ((Node) spatial).getChild("Cube.001");
-            this.attachChild(s);
+            Spatial boom = ((Node) spatial).getChild("boom");
+            Spatial sail = ((Node) spatial).getChild("Plane");
+
+            Material sailMat =  new Material(assetManager,"shaders/SailModelY.j3md");
+            sailMat.getAdditionalRenderState().setWireframe(true);
+            sailMat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
+
+            Sphere sphereMesh = new Sphere(8, 8, 1f);
+            Geometry mainsheetSailHandler1, mainsheetSailHandler2, mainsheetSailHandler3;
+            mainsheetSailHandler1 = new Geometry("Mainsheet sail handler", sphereMesh);
+            mainsheetSailHandler2 = new Geometry("Mainsheet sail handler", sphereMesh);
+            mainsheetSailHandler3 = new Geometry("Mainsheet sail handler", sphereMesh);
+
+            mainsheetSailHandler1.move(0, 9, 31);
+            mainsheetSailHandler2.move(0, 57, 0);
+            mainsheetSailHandler3.move(0, 9, 0);
+            Material sphereMat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
+            mainsheetSailHandler1.setMaterial(sphereMat);
+            mainsheetSailHandler2.setMaterial(sphereMat);
+            mainsheetSailHandler3.setMaterial(sphereMat);
+            this.attachChild(mainsheetSailHandler1);
+            this.attachChild(mainsheetSailHandler2);
+            this.attachChild(mainsheetSailHandler3);
+            sailMat.setVector3("point1", mainsheetSailHandler1.getWorldTranslation());
+            sailMat.setVector3("point2", mainsheetSailHandler2.getWorldTranslation());
+            sailMat.setVector3("point3", mainsheetSailHandler3.getWorldTranslation());
+            boom.setMaterial(sphereMat);
+            boom.rotate((float) (Math.PI/2), 0, 0);
+            boom.move(0, -1, 19);
+            sail.setMaterial(sailMat);
+            sail.rotate(0, 0,(float) (Math.PI/2));
+            sail.move(-24, 0, 43);
+
+            this.attachChild(sail);
+            this.attachChild(boom);
         }
 
         public Vector3f getHelperDirection() {

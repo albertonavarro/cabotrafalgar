@@ -3,6 +3,10 @@ MaterialDef Colored Textured {
     MaterialParameters {
         Texture2D ColorMap
         Color Color (Color)
+        Vector3 point1
+        Vector3 point2
+        Vector3 point3
+        Vector3 wind
     }
 
     Technique {
@@ -11,6 +15,9 @@ MaterialDef Colored Textured {
 
         WorldParameters {
             WorldViewProjectionMatrix
+            Time
+            WorldMatrix
+            ViewProjectionMatrix
         }
     }
 
