@@ -10,6 +10,7 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
+import com.navid.trafalgar.model.GameModel;
 
 public final class Pantalan01Model extends APantalan01Model {
 
@@ -19,15 +20,12 @@ public final class Pantalan01Model extends APantalan01Model {
     public Pantalan01Model(AssetManager assetManager) {
         super();
         spatial = assetManager.loadModel("Models/pantalan01/Pantalan_completo2.obj");
-        //spatial.setMaterial(new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md"));
-        spatial.scale(3);
+        spatial.scale(5);
         this.attachChild(spatial);
 
         CollisionShape sceneShape = CollisionShapeFactory.createMeshShape(this);
         milestone = new RigidBodyControl(sceneShape, 0);
         this.addControl(milestone);
-        milestone.setPhysicsLocation(new Vector3f(-200, 0, 100));
-
     }
 
     @Override

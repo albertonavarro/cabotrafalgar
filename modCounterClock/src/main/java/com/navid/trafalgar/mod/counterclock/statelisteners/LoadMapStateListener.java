@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
+import com.google.common.collect.Lists;
 import com.jme3.asset.AssetManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
@@ -68,6 +69,7 @@ public final class LoadMapStateListener implements LoadModelState {
 
         }
 
+        gameModel.addToModel(Lists.newArrayList(eventManager));
         gameModel.updateDependencies();
         counterClockGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
@@ -76,12 +78,6 @@ public final class LoadMapStateListener implements LoadModelState {
 
         AShipModelPlayer currentShip = counterClockGameModel.getShip();
         currentShip.setStatisticsManager(statisticsManager);
-
-        List<AMilestoneModel> milestones = counterClockGameModel.getMilestones();
-        for (AMilestoneModel currentMilestone : milestones) {
-            currentMilestone.setEventManager(eventManager);
-            currentMilestone.setCollidable(Collections.singleton((AShipModel) currentShip));
-        }
 
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);
         for (Filter currentFilter : counterClockGameModel.getFpp()) {

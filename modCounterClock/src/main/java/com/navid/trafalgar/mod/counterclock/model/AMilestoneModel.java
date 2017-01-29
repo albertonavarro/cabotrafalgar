@@ -5,24 +5,21 @@ import com.jme3.material.Material;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.Control;
 import com.navid.trafalgar.manager.EventManager;
+import com.navid.trafalgar.model.AShipModelPlayer;
+import com.navid.trafalgar.model.Dependent;
+import com.navid.trafalgar.model.GameModel;
+
+import static com.google.common.collect.Lists.newArrayList;
 import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
 import java.util.Collection;
 
-public abstract class AMilestoneModel extends Node implements Control {
+public abstract class AMilestoneModel extends Node implements Control, Dependent {
 
     private EventManager eventManager;
     private boolean state = false;
     private Collection<? extends Node> collidables;
     private Material materialOn;
     private Material materialOff;
-
-    public final void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
-    }
-
-    public final void setCollidable(Collection<? extends Node> values) {
-        this.collidables = values;
-    }
 
     public final boolean getState() {
         return state;
@@ -54,5 +51,18 @@ public abstract class AMilestoneModel extends Node implements Control {
 
     public final void setMaterialOn(Material mat) {
         this.materialOn = mat;
+    }
+
+    @Override
+    public void resolveDependencies(GameModel gameModel) {
+        collidables = newArrayList((Node)gameModel.getSingleByTypeAndName(AShipModelPlayer.class, "player1"));
+        collidables.remove(this);
+
+        eventManager = gameModel.getSingleByType(EventManager.class);
+    }
+
+    @Override
+    public void commitDependencies() {
+
     }
 }

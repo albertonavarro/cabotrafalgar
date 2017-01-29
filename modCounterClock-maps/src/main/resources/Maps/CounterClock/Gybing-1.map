@@ -15,6 +15,7 @@
         "type" : "Milestone",
         "values" : { "position" : "2500,0,0" }
       },
-      { "type" : "Sky" }
+      { "type" : "Sky" },
+      {"type" : "Pantalan01", "values" : { "position" : "1000,0,100"}}
     ]
 }

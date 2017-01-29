@@ -32,13 +32,13 @@ public final class Pantalan01Builder implements BuilderInterface {
 
     @Override
     public Collection buildGeometry(String instanceName, Map<String, Object> customValues) {
-        Pantalan01Model milestone = new Pantalan01Model(assetManager);
+        Pantalan01Model pantalan01Model = new Pantalan01Model(assetManager);
 
         if (customValues.containsKey("position")) {
-            milestone.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
+            pantalan01Model.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
         }
 
-        return singleton(milestone);
+        return singleton(pantalan01Model);
     }
 
     @Override
