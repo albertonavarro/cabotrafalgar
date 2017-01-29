@@ -42,6 +42,8 @@ public final class EventManager {
     /**
      *
      */
+    public static final String ILLEGAL_COLLISION = "ILLEGAL_COLLISION";
+
     public static final String UNLOAD = "UNLOAD";
 
     private Map<String, Set<EventListener>> eventListeners = new HashMap<String, Set<EventListener>>();

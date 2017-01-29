@@ -79,10 +79,10 @@ public final class ShipModelTwoPlayer extends AShipModelTwo implements AShipMode
         windOverVela = (float) Math.cos(getSail().getGlobalDirection().angleBetween(apparentWind3f.normalize()));
 
         float angleBetween = shipOrientation3f.angleBetween(getSail().getGlobalDirection());
-        float sailRegulation = (float) ((angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection);
+        float sailRegulation = (angleBetween < (Math.PI / 2)) ? -sailCorrection : sailCorrection;
         velaOverShip = (float) Math.cos(angleBetween + sailRegulation);
 
-        float force = (float) (apparentWind3f.length() * windOverVela * velaOverShip * sailForcing);
+        float force = apparentWind3f.length() * windOverVela * velaOverShip * sailForcing;
 
         acceleration = force / mass;
         friction = speed * speed / 80 * Math.signum(speed);

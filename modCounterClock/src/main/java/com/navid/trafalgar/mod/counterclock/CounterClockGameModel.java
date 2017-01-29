@@ -49,7 +49,7 @@ public final class CounterClockGameModel {
 
         fpp = gameModel.getByType(Filter.class);
 
-        for (Spatial currentNode : gameModel.getByType(Spatial.class)) {
+       for (Spatial currentNode : gameModel.getByType(Spatial.class)) {
             gameNode.attachChild(currentNode);
         }
 

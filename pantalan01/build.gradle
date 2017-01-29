@@ -1,0 +1,67 @@
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+    }
+}
+
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
+bintray {
+    user = repositoryUser
+    key = repositoryPass
+    publications = ['jarPomAndSources']
+
+    publish = true
+
+    pkg {
+        repo = 'maven'
+        name = "mod-api"
+        desc = project.description
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/albertonavarro/cabotrafalgar'
+        labels = ["pantalan01"]
+    }
+}
+
+publish.dependsOn bintrayUpload
+
+publishing {
+    publications {
+        jarPomAndSources(MavenPublication) {
+            from components.java
+
+            artifact sourcesJar {
+                classifier "sources"
+                classifier "javadoc"
+            }
+
+            artifactId "pantalan01"
+            groupId "com.navid.trafalgar"
+            version "1.0"
+        }
+    }
+
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+dependencies {
+    compile (
+            project(':mod-api'),
+            libs.jme3_jbullet
+    )
+    runtime (
+            libs.jbullet
+    )
+}

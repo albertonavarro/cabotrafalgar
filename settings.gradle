@@ -9,5 +9,6 @@ include 'modWindTunnel'
 include 'shipModelY'
 include 'shipModelZ'
 include 'JMonkeyClient'
+include 'pantalan01'
 include 'recordserver-client'
 

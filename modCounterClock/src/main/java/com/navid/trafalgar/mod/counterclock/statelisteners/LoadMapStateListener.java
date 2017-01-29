@@ -75,18 +75,12 @@ public final class LoadMapStateListener implements LoadModelState {
         gameStatus.getGameNode().attachChild(iContext.getWind());
 
         AShipModelPlayer currentShip = counterClockGameModel.getShip();
-        gameStatus.getGameNode().addControl((Control) currentShip);
         currentShip.setStatisticsManager(statisticsManager);
-
-        if (counterClockGameModel.getGhost() != null) {
-            gameStatus.getGameNode().addControl((Control) counterClockGameModel.getGhost());
-        }
 
         List<AMilestoneModel> milestones = counterClockGameModel.getMilestones();
         for (AMilestoneModel currentMilestone : milestones) {
             currentMilestone.setEventManager(eventManager);
             currentMilestone.setCollidable(Collections.singleton((AShipModel) currentShip));
-            gameStatus.getGameNode().addControl(currentMilestone);
         }
 
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);

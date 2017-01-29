@@ -38,6 +38,7 @@ dependencies {
             project(':modTutorial'),
             project(':shipModelY'),
             project(':shipModelZ'),
+            project(':pantalan01'),
             //project(':shipModelLeyton'),
             libs.jme3_lwjgl,
             libs.jwjgl,
