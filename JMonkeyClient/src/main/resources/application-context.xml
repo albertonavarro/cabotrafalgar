@@ -21,8 +21,12 @@
 
     <bean id="common.RedirectorScreenController" class="com.navid.nifty.flow.RedirectorScreenController" autowire="byType" />
     
-    <bean id="common.RootScreenGenerator" class="com.navid.trafalgar.games.RootScreenGenerator" autowire="byType" />
-    <bean id="common.RootScreenController" class="com.navid.trafalgar.games.StartScreenController" autowire="byType"/>
+    <bean id="common.RootScreenGenerator" class="com.navid.trafalgar.games.RootScreenGeneratorFTL" autowire="byType" >
+        <constructor-arg>
+            <ref bean="common.nifty"/>
+        </constructor-arg>
+    </bean>
+    <bean id="common.RootScreenController" class="com.navid.trafalgar.games.RootScreenController" autowire="byType"/>
     <bean id="common.Configuration" class="com.navid.trafalgar.model.GameConfiguration" autowire="byType"  />
     
     <bean id="mod.counterclock.profilemanager" class="com.navid.trafalgar.profiles.FileProfileManager" autowire="byType" init-method="loadFromFile">

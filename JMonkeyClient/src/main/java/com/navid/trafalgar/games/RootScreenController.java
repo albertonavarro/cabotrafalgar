@@ -12,7 +12,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class StartScreenController implements ScreenController {
+public final class RootScreenController implements ScreenController {
 
     @Autowired
     private Application application;
