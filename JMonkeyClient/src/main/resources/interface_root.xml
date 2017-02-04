@@ -9,16 +9,17 @@
             <panel id="panel_top" height="15%" width="80%" align="center" childLayout="center">
                 <text text="Main Menu.. Select your game:" font="Interface/Fonts/Default.fnt" />
             </panel>
-            <panel id="panel_mid" height="70%" width="80%" align="center" childLayout="vertical" style="nifty-panel-red">
+            <panel id="panel_mid" height="50%" width="80%" align="center" childLayout="vertical" style="nifty-panel-red">
                 <#list partitionedMods as partition>
-                <panel id="partition_${partition?counter}" width="50%" align="center" childLayout="horizontal">
+                <panel id="partition_${partition?counter}" width="50%" align="left" childLayout="horizontal">
                     <#list partition as mod>
-                    <panel id="panel_${mod}" align="center" childLayout="horizontal">
-
-                        <control name="button" id="button_${mod}" label="${mod}" align="center" valign="center" width="200px" height="200px" >
-
+                    <panel id="panel_${mod}" align="left" childLayout="horizontal">
+                        <control name="button" id="button_${mod}" label="${mod}" align="center" valign="center" width="200px" height="200px"  >
                             <interact onClick="executeModule(${mod})"/>
                         </control>
+                    </panel>
+                    <panel id="panel_${mod}_span" align="left" childLayout="horizontal" width="20px">
+
                     </panel>
                     <text text="" font="Interface/Fonts/Default.fnt" align="right" />
                 </#list>

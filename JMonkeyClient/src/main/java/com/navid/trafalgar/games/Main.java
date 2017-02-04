@@ -37,6 +37,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 
+import de.lessvoid.nifty.screen.ScreenController;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,8 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
+
+import javax.annotation.Nonnull;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -97,11 +100,14 @@ public final class Main extends LegacyApplication {
     @Override
     public void initialize() {
 
+        LOG.info("Starting application");
+
         super.initialize();
         super.setPauseOnLostFocus(false);
-        LOG.debug("Loading MapAssetLoader");
+        LOG.info("Loading MapAssetLoader");
         assetManager.registerLoader(MapAssetLoader.class, "map");
 
+        LOG.info("Setting temp folder");
         try {
             String tempDir = File.createTempFile("something","something").getParent();
             assetManager.registerLocator(tempDir, FileLocator.class);
@@ -109,6 +115,7 @@ public final class Main extends LegacyApplication {
             e.printStackTrace();
         }
 
+        LOG.info("Registering common beans");
         registerBean("common.assetManager", assetManager);
         registerBean("common.inputManager", inputManager);
         registerBean("common.stateManager", stateManager);
@@ -118,21 +125,29 @@ public final class Main extends LegacyApplication {
         registerBean("common.app", this);
 
         if (record) {
+            LOG.info("Attaching video recorder");
             stateManager.attach(new VideoRecorderAppState());
         }
 
         /**
          * Activate the Nifty-JME integration:
          */
+        LOG.info("Creating nifty display");
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
                 assetManager, inputManager, audioRenderer, guiViewPort);
         Nifty nifty = niftyDisplay.getNifty();
-        resolutorChain.addResolutor("static", new StaticScreenGeneratorResolutor(nifty));
 
+        LOG.info("Loading loading screen");
         nifty.loadStyleFile("nifty-default-styles.xml");
         nifty.loadControlFile("nifty-default-controls.xml");
+
+        LOG.info("Adding static resource resolver");
+        resolutorChain.addResolutor("static", new StaticScreenGeneratorResolutor(nifty));
+
+        LOG.info("Registering nifty bean");
         registerBean("common.nifty", nifty);
 
+        LOG.info("Add GUI processor");
         guiViewPort.addProcessor(niftyDisplay);
 
         try {
@@ -163,6 +178,7 @@ public final class Main extends LegacyApplication {
 
         for (Class<? extends ModRegisterer> currentClass : result) {
             try {
+                LOG.info("Loading " + currentClass.getCanonicalName() + " module");
                 ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
                 resultInstances.add(currentLoader);
             } catch(InstantiationException e) {
@@ -237,4 +253,5 @@ public final class Main extends LegacyApplication {
     public static void registerBean(String name, Object object) {
         ctx.registerSingleton(name, object);
     }
+
 }

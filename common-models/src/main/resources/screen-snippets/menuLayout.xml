@@ -9,7 +9,7 @@
             <panel id="panel_top" height="15%" width="80%" align="center" childLayout="center">
                 <text text="${title}" font="Interface/Fonts/Default.fnt" />
             </panel>
-            <panel id="panel_mid" height="70%" width="80%" align="center" childLayout="horizontal" style="nifty-panel-red">
+            <panel id="panel_mid" height="50%" width="80%" align="center" childLayout="horizontal" style="nifty-panel-red">
                 <@main_content/>
             </panel>
             <panel id="panel_bottom" height="15%" width="80%" align="center" childLayout="horizontal">
