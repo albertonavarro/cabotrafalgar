@@ -11,6 +11,13 @@ import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.tools.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+
 public final class RootScreenGenerator implements ScreenGenerator {
 
     @Autowired
@@ -31,9 +38,12 @@ public final class RootScreenGenerator implements ScreenGenerator {
             }
         };
 
-        for (final String moduleName : screenFlowManager.getChildren()) {
+        List<String> unsortedChilden = newArrayList(screenFlowManager.getChildren());
+        Collections.sort(unsortedChilden);
+        for (final String moduleName : unsortedChilden) {
             panelModules.control(new ButtonBuilder(moduleName + "ButtonLabel", moduleName) {
                 {
+                    backgroundImage(moduleName + ".png");
                     alignCenter();
                     valignCenter();
                     height("11%");
