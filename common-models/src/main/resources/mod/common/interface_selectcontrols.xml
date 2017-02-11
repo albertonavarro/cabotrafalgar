@@ -23,7 +23,5 @@
     </#list>
 </panel>
 </#macro>
-
 <#assign title = "Assign controllers to commands for your ship..">
-
 <#include "/screen-snippets/menuLayout.xml">

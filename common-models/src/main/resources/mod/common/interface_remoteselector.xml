@@ -10,7 +10,5 @@
     <control id="errorMessage" name="label" text="" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
 </panel>
 </#macro>
-
 <#assign title = "Find someone that wants to play with you :)">
-
 <#include "/screen-snippets/menuLayout.xml">

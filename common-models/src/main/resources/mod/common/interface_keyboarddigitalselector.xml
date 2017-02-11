@@ -13,7 +13,5 @@
     </#list>
 </panel>
 </#macro>
-
 <#assign title = "Select the keys for keyboard assigned commands">
-
 <#include "/screen-snippets/menuLayout.xml">

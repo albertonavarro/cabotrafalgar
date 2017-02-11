@@ -16,7 +16,5 @@
     <text text="Remember to verify your account. Please check your SPAM folder as well." font="Interface/Fonts/Default.fnt" />
 </panel>
 </#macro>
-
 <#assign title = "Select your profile..">
-
 <#include "/screen-snippets/menuLayout.xml">
