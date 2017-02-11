@@ -4,8 +4,6 @@ import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.audio.MusicManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.Label;
-import de.lessvoid.nifty.controls.TextField;
-import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,16 +56,23 @@ public abstract class GameMenuController implements ScreenController {
         musicManager.toggleMute();
     }
 
+    @Override
     public final void onStartScreen() {
         Label element = screen.findNiftyControl("musicFileName", Label.class);
         if(element != null) {
             element.setText(musicManager.getCurrentMusic().getName());
         }
-
         doOnStartScreen();
     }
 
+    @Override
+    public final void onEndScreen() {
+        doOnEndScreen();
+    }
+
     public abstract void doOnStartScreen();
+
+    public abstract void doOnEndScreen();
 
     /**
      * @param screenFlowManager the screenFlowManager to set

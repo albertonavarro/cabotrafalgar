@@ -1,7 +1,5 @@
 package com.navid.trafalgar.mod.common;
 
-import com.navid.trafalgar.input.SystemInteractions;
-import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.model.*;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
@@ -12,7 +10,7 @@ import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public final class SelectShipScreenController extends GameMenuController {
+public class SelectShipScreenController extends GameMenuController {
 
     /**
      * Internal usage
@@ -90,7 +88,7 @@ public final class SelectShipScreenController extends GameMenuController {
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
         gameConfiguration.setShipName(selectedItem.getName());
 
         emptyList();

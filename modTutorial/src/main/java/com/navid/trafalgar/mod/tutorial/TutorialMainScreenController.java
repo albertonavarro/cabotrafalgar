@@ -70,7 +70,7 @@ public class TutorialMainScreenController extends GameMenuController {
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
         listChapters.clear();
 
         HashMap<String, Object> customValues = new HashMap<String, Object>();

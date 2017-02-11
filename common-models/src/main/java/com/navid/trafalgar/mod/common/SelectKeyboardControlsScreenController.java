@@ -197,7 +197,7 @@ public final class SelectKeyboardControlsScreenController extends GameMenuContro
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
         Map<String, String> userProperties = new HashMap<String, String>();
 
         for (KeyboardCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class)) {

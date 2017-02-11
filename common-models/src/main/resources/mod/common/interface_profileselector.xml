@@ -1,0 +1,22 @@
+<#macro main_content>
+<panel id="panel_list" align="center" valign="top" childLayout="vertical" >
+    <panel id="panel_mid_left" align="center" childLayout="vertical" >
+        <text text="Profiles" font="Interface/Fonts/Default.fnt" />
+        <control id="profileList" name="listBox" displayItems="10" forceSelection="true" horizontal="off" />
+    </panel>
+    <panel id="panel_newprofile" align="center" childLayout="horizontal" >
+        <text text="New profile" font="Interface/Fonts/Default.fnt" width="20%" />
+        <control id="newprofile" name="textfield" text="Please add your email here." horizontal="off" width="60%"  >
+        </control>
+        <control name="button" label="Add" id="addProfile" align="center" valign="center" visibleToMouse="true" width="20%" >
+            <interact onClick="add()"/>
+        </control>
+    </panel>
+    <text text="Create a new profile by adding your email if you want to use online features." font="Interface/Fonts/Default.fnt" />
+    <text text="Remember to verify your account. Please check your SPAM folder as well." font="Interface/Fonts/Default.fnt" />
+</panel>
+</#macro>
+
+<#assign title = "Select your profile..">
+
+<#include "/screen-snippets/menuLayout.xml">

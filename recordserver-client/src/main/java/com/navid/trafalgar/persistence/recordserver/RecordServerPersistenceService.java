@@ -1,6 +1,5 @@
 package com.navid.trafalgar.persistence.recordserver;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
@@ -16,12 +15,19 @@ import com.navid.trafalgar.model.Role;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
+import com.navid.trafalgar.persistence.RecordServerStatusChange;
 import com.navid.trafalgar.profiles.ProfileManager;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Request;
+import org.bushe.swing.event.EventService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.TaskScheduler;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -49,12 +55,40 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
     @Resource(name = "mod.counterclock.requestContextContainer")
     private RequestContextContainer container;
 
+    @Autowired
+    private TaskScheduler executor;
+
+    @Autowired
+    private EventService eventService;
+
     private volatile Status currentStatus = Status.UNKNOWN;
 
     public RecordServerPersistenceService(String recordserverUrl) {
         defaultApi = new DefaultApi();
         ApiClient apiClient = defaultApi.getApiClient();
         apiClient.setBasePath(recordserverUrl);
+    }
+
+    @PostConstruct
+    public void init(){
+        executor.scheduleAtFixedRate(new StatusChecker(), 3000);
+    }
+
+    private class StatusChecker implements Runnable {
+
+        @Override
+        public void run() {
+            try {
+                Call call = defaultApi.getApiClient().buildCall("/health", "GET", newArrayList(), null, new HashMap<>(), null, new String[0], null);
+                int status = defaultApi.getApiClient().execute(call).getStatusCode();
+                LOG.info("Recordserver: {}",  status);
+                currentStatus = status == 200? Status.OK : Status.DOWN;
+            } catch (Exception e) {
+                currentStatus = Status.DOWN;
+            }
+
+            eventService.publish(new RecordServerStatusChange(currentStatus));
+        }
     }
 
     @Override
@@ -179,6 +213,14 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
 
     public void setRequestContextContainer(RequestContextContainer requestContextContainer) {
         this.requestContextContainer = requestContextContainer;
+    }
+
+    public void setExecutor(TaskScheduler executor) {
+        this.executor = executor;
+    }
+
+    public void setEventService(EventService eventService) {
+        this.eventService = eventService;
     }
 
 }

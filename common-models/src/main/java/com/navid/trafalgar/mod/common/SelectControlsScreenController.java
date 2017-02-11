@@ -94,7 +94,7 @@ public final class SelectControlsScreenController extends GameMenuController {
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
         Map<Command, CommandGenerator> assignments = new HashMap<Command, CommandGenerator>();
 
         for (Map.Entry<String, String> entry : generated.entrySet()) {

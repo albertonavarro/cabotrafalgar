@@ -8,10 +8,10 @@
     <panel id="panel_mid_center"  width="42%" align="center" childLayout="vertical">
         <panel height="10%" width="90%" childLayout="vertical">
         </panel>
-        <panel height="40%" width="90%" childLayout="vertical">
+        <panel height="70%" width="90%" childLayout="vertical">
             <image id="mapImage" />
         </panel>
-        <panel height="50%" width="90%" childLayout="vertical" align="left">
+        <panel height="20%" width="90%" childLayout="vertical" align="left">
             <text text="Description:" font="Interface/Fonts/Default.fnt"  align="left" />
             <control id="mapDescription" name="label" font="Interface/Fonts/Default.fnt" wrap="true" width="90%" height="90%" text="" align="left" />
         </panel>
@@ -60,6 +60,23 @@
         </panel>
     </panel>
 </panel>
+</#macro>
+
+<#macro mod_extra>
+    <panel childLayout="horizontal">
+        <text text="LazyLogin status:" font="Interface/Fonts/Default.fnt" align="center" />
+        <control id="lazyLoginStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
+    </panel>
+
+    <panel childLayout="horizontal">
+        <text text="RecordServer status:" font="Interface/Fonts/Default.fnt" align="center" />
+        <control id="recordServerStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
+    </panel>
+
+    <panel childLayout="horizontal">
+        <text text="GameServer status:" font="Interface/Fonts/Default.fnt" align="center" />
+        <control id="gameServerStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
+    </panel>
 </#macro>
 
 <#assign title = "Select map..">

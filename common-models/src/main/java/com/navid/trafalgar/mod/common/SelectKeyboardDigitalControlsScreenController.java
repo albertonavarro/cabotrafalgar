@@ -195,7 +195,7 @@ public final class SelectKeyboardDigitalControlsScreenController extends GameMen
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
         Map<String, String> userProperties = new HashMap<String, String>();
 
         for (KeyboardDigitalCommandStateListener listener : gameConfiguration.getPreGameModel().getByType(KeyboardDigitalCommandStateListener.class)) {

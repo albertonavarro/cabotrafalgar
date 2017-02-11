@@ -146,6 +146,7 @@ public final class Main extends LegacyApplication {
 
         LOG.info("Registering nifty bean");
         registerBean("common.nifty", nifty);
+        registerBean( "common.eventbus", nifty.getEventService());
 
         LOG.info("Add GUI processor");
         guiViewPort.addProcessor(niftyDisplay);

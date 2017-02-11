@@ -43,7 +43,7 @@ public class ObjectCreationPhaseController extends GameMenuController {
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
 
     }
 

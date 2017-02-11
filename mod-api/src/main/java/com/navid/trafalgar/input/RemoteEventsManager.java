@@ -1,16 +1,12 @@
 package com.navid.trafalgar.input;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.navid.trafalgar.manager.InitState;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQBytesMessage;
-import org.apache.activemq.command.ActiveMQMessage;
-import org.apache.activemq.command.ActiveMQTextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,6 +1,7 @@
 package com.navid.trafalgar.persistence;
 
 import com.navid.codegen.recordserver.ApiException;
+import com.navid.trafalgar.events.ServerStatusEvent;
 import com.navid.trafalgar.model.CandidateRecord;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface RecordPersistenceService {
 
-    public enum Status {
+    enum Status {
         OK, BUSY, DOWN, UNKNOWN
     }
 
@@ -45,4 +46,5 @@ public interface RecordPersistenceService {
      * @return CandidateRecord with these movements.
      */
     CandidateRecord getGhost(int number, String map, String ship, String sessionId) throws ApiException;
+
 }

@@ -3,20 +3,17 @@ package com.navid.trafalgar.mod.counterclock;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.jme3.asset.AssetManager;
-import com.navid.lazylogin.context.RequestContextContainer;
 import com.navid.nifty.flow.ScreenFlowManager;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.mod.common.GameMenuController;
-import com.navid.trafalgar.model.ModelBuilder;
+import com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
+import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.persistence.CompetitorInfo;
-import com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService;
-import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceServiceHystrixProxy;
 import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.util.FileUtils;
-import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
@@ -25,17 +22,17 @@ import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import java.util.Collections;
-import static java.util.Collections.singleton;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Collections.singleton;
 
 public final class ScreenSelectMap extends GameMenuController {
 
@@ -91,7 +88,7 @@ public final class ScreenSelectMap extends GameMenuController {
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
         mapDropDown.clear();
     }
 

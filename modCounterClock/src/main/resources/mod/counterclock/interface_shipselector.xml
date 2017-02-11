@@ -14,4 +14,4 @@
         <control id="gameServerStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
     </panel>
 </#macro>
-<#include "/mod/common/interface_profileselector.xml">
+<#include "/mod/common/interface_shipselector.xml">

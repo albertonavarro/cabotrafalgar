@@ -101,7 +101,7 @@ public class SelectRemoteControlsScreenController extends GameMenuController {
     }
 
     @Override
-    public void onEndScreen() {
+    public void doOnEndScreen() {
 
     }
 

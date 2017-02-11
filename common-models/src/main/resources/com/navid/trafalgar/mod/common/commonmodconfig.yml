@@ -19,6 +19,9 @@ screenDeclarations:
   - screenName: objectCreationPhase
     interfaceConstructor: static:mod/common/empty_screen.xml
     controller: spring:mod.common.objectcreationphasecontroller
+  - screenName: selectProfile
+    interfaceConstructor: static:/mod/common/interface_profileselector.xml
+    controller: spring:mod.common.profileselector
 musicAmbients:
   - ambient: menu
     files:

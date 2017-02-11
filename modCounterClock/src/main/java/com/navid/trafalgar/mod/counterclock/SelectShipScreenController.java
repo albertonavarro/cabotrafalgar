@@ -1,32 +1,15 @@
 package com.navid.trafalgar.mod.counterclock;
 
-import com.navid.lazylogin.context.RequestContextContainer;
-import com.navid.trafalgar.mod.common.GameMenuController;
-import com.navid.trafalgar.persistence.RecordPersistenceService;
 import com.navid.trafalgar.persistence.RecordServerStatusChange;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
-import com.navid.trafalgar.profiles.ProfileManager;
-import com.navid.trafalgar.profiles.ProfileStatus;
-import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.Label;
-import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.controls.TextField;
 import org.bushe.swing.event.EventService;
 import org.bushe.swing.event.EventSubscriber;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.regex.Pattern;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public final class SelectProfileScreenController extends com.navid.trafalgar.mod.common.SelectProfileScreenController {
+public final class SelectShipScreenController extends com.navid.trafalgar.mod.common.SelectShipScreenController {
 
     @Autowired
     private EventService eventService;

@@ -12,20 +12,22 @@
         <http-conf:client ConnectionTimeout="100" AsyncExecuteTimeout="100" ReceiveTimeout="100"  />
     </http-conf:conduit>
 
+    <bean id="mod.counterclock.profileselector" class="com.navid.trafalgar.mod.counterclock.SelectProfileScreenController" autowire="byType"/>
     <bean id="mod.counterclock.mainscreencontroller" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreenController" autowire="byType"/>
+    <bean id="mod.counterclock.selectshipcontroller" class="com.navid.trafalgar.mod.counterclock.SelectShipScreenController" autowire="byType"/>
 
     <bean id="mod.counterclock.mapselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMap" autowire="byType"/>
-
-    <bean id="mod.counterclock.profileselector" class="com.navid.trafalgar.mod.counterclock.SelectProfileScreenController" autowire="byType"/>
-    <bean id="mod.counterclock.profileselectorgenerator" class="com.navid.trafalgar.mod.counterclock.SelectProfileScreenGenerator" autowire="byType"/>
-    
     
     <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService" autowire="byType" />
+
     <bean id="mod.counterclock.persistenceOnline" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceServiceHystrixProxy" autowire="byType">
         <constructor-arg index="0" ref="mod.counterclock.persistenceOnlineBackend" />
     </bean>
-    <bean id="mod.counterclock.persistenceOnlineBackend" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService" autowire="byType">
+
+    <bean id="mod.counterclock.persistenceOnlineBackend" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService" autowire="byType" init-method="init">
         <constructor-arg name="recordserverUrl" value="http://recordserver.trafalgar.ws:8080" />
     </bean>
-    
+
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+    </bean>
 </beans>
