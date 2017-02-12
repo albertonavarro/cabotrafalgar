@@ -19,7 +19,7 @@ import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public final class SelectKeyboardControlsScreenGeneratorFTL extends FtlTemplateGenerator {
+public class SelectKeyboardControlsScreenGeneratorFTL extends FtlTemplateGenerator {
 
     /**
      * Singleton
@@ -29,6 +29,10 @@ public final class SelectKeyboardControlsScreenGeneratorFTL extends FtlTemplateG
 
     public SelectKeyboardControlsScreenGeneratorFTL(Nifty nifty) throws IOException {
         super(nifty, "/mod/common/interface_keyboardselector.xml");
+    }
+
+    public SelectKeyboardControlsScreenGeneratorFTL(Nifty nifty, String file) throws IOException {
+        super(nifty, file);
     }
 
     @Override

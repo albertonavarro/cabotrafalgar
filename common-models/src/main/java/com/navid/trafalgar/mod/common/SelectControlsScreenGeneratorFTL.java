@@ -43,6 +43,10 @@ public class SelectControlsScreenGeneratorFTL extends FtlTemplateGenerator {
         super(nifty, "/mod/common/interface_selectcontrols.xml");
     }
 
+    public SelectControlsScreenGeneratorFTL(Nifty nifty, String file) throws IOException {
+        super(nifty, file);
+    }
+
     @Override
     protected Map injectProperties() {
         HashMap properties = new HashMap();

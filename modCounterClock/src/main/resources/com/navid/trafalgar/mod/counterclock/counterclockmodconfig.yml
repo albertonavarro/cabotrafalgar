@@ -15,14 +15,26 @@ screenDeclarations:
   - screenName: selectProfile_counterclock
     interfaceConstructor: static:/mod/counterclock/interface_profileselector.xml
     controller: spring:mod.counterclock.profileselector
+  - screenName: selectControl_counterclock
+    interfaceConstructor: spring:mod.counterclock.selectcontrolgenerator
+    controller: spring:mod.counterclock.selectcontrolcontroller
+  - screenName: selectKeys_counterclock
+    interfaceConstructor: spring:mod.counterclock.selectkeysgenerator
+    controller: spring:mod.counterclock.selectkeyscontroller
+  - screenName: selectKeysDigital_counterclock
+    interfaceConstructor: spring:mod.counterclock.selectkeysdigitalgenerator
+    controller: spring:mod.counterclock.selectkeysdigitalcontroller
+  - screenName: selectRemoteControl_counterclock
+    interfaceConstructor: static:/mod/counterclock/interface_remoteselector.xml
+    controller: spring:mod.counterclock.selectremotecontrolcontroller
 moduleFlowRoot: root:root
 moduleScreenFlow:
   - selectProfile_counterclock
   - selectShip_counterclock
   - selectMap_counterclock
   - objectCreationPhase
-  - selectControl
-  - selectKeys
-  - selectKeysDigital
+  - selectControl_counterclock
+  - selectKeys_counterclock
+  - selectKeysDigital_counterclock
   - selectRemoteControl
   - counterclockScreen

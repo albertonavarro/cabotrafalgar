@@ -5,22 +5,19 @@ import com.jme3.asset.AssetManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.control.Control;
-import com.navid.trafalgar.input.SystemInteractions;
-import com.navid.trafalgar.maploader.v3.EntryDefinition;
-import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
+import com.navid.trafalgar.maploader.v3.EntryDefinition;
+import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
 import com.navid.trafalgar.mod.counterclock.CounterClockMainScreenController;
 import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.*;
-import com.navid.trafalgar.model.AShipModel;
-import java.util.Collection;
-import java.util.Collections;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.HashMap;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.google.common.collect.Lists.newArrayList;
 

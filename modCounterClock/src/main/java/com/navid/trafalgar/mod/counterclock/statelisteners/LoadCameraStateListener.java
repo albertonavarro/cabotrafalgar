@@ -11,13 +11,13 @@ import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadCamState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
-import com.navid.trafalgar.mod.counterclock.CounterClockMainScreenController;
 import com.navid.trafalgar.mod.counterclock.camera.TargetCamera;
 import com.navid.trafalgar.model.AShipModel;
 import com.navid.trafalgar.model.GameStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public final class LoadCameraStateListener implements LoadCamState, StartedState, EventListener {
 

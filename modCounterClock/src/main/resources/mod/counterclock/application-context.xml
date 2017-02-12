@@ -16,6 +16,28 @@
     <bean id="mod.counterclock.mainscreencontroller" class="com.navid.trafalgar.mod.counterclock.CounterClockMainScreenController" autowire="byType"/>
     <bean id="mod.counterclock.selectshipcontroller" class="com.navid.trafalgar.mod.counterclock.SelectShipScreenController" autowire="byType"/>
 
+    <bean id="mod.counterclock.selectcontrolcontroller" class="com.navid.trafalgar.mod.counterclock.SelectControlsScreenController" autowire="byType" />
+    <bean id="mod.counterclock.selectcontrolgenerator" class="com.navid.trafalgar.mod.counterclock.SelectControlsScreenGeneratorFTL" autowire="byType" >
+        <constructor-arg>
+            <ref bean="common.nifty"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="mod.counterclock.selectkeyscontroller" class="com.navid.trafalgar.mod.counterclock.SelectKeyboardControlsScreenController" autowire="byType" />
+    <bean id="mod.counterclock.selectkeysgenerator" class="com.navid.trafalgar.mod.counterclock.SelectKeyboardControlsScreenGeneratorFTL" autowire="byType" >
+        <constructor-arg>
+            <ref bean="common.nifty"/>
+        </constructor-arg>
+    </bean>
+    <bean id="mod.counterclock.selectkeysdigitalcontroller" class="com.navid.trafalgar.mod.counterclock.SelectKeyboardDigitalControlsScreenController" autowire="byType" />
+    <bean id="mod.counterclock.selectkeysdigitalgenerator" class="com.navid.trafalgar.mod.counterclock.SelectKeyboardDigitalControlsScreenGeneratorFTL" autowire="byType" >
+        <constructor-arg>
+            <ref bean="common.nifty"/>
+        </constructor-arg>
+    </bean>
+    <bean id="mod.counterclock.selectremotecontrolcontroller" class="com.navid.trafalgar.mod.counterclock.SelectRemoteControlsScreenController" autowire="byType" />
+
+
     <bean id="mod.counterclock.mapselector" class="com.navid.trafalgar.mod.counterclock.ScreenSelectMap" autowire="byType"/>
     
     <bean id="mod.counterclock.persistence" class="com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService" autowire="byType" />

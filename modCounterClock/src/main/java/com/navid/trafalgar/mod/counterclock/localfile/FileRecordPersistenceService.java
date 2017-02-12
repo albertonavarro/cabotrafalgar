@@ -3,17 +3,18 @@ package com.navid.trafalgar.mod.counterclock.localfile;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.CompetitorInfo;
 import com.navid.trafalgar.persistence.RecordPersistenceService;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.navid.trafalgar.profiles.ProfileManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class FileRecordPersistenceService implements RecordPersistenceService {
 

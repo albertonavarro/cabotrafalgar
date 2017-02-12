@@ -61,22 +61,6 @@
     </panel>
 </panel>
 </#macro>
-
-<#macro mod_extra>
-    <panel childLayout="horizontal">
-        <text text="LazyLogin status:" font="Interface/Fonts/Default.fnt" align="center" />
-        <control id="lazyLoginStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
-    </panel>
-
-    <panel childLayout="horizontal">
-        <text text="RecordServer status:" font="Interface/Fonts/Default.fnt" align="center" />
-        <control id="recordServerStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
-    </panel>
-
-    <panel childLayout="horizontal">
-        <text text="GameServer status:" font="Interface/Fonts/Default.fnt" align="center" />
-        <control id="gameServerStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
-    </panel>
-</#macro>
 <#assign title = "Select map..">
+<#include "/mod/counterclock/interface_mod_common.xml">
 <#include "/screen-snippets/menuLayout.xml">

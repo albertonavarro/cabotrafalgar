@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class SelectKeyboardDigitalControlsScreenController extends GameMenuController {
+public class SelectKeyboardDigitalControlsScreenController extends GameMenuController {
 
     private static final Logger LOG
             = LoggerFactory.getLogger(SelectKeyboardDigitalControlsScreenController.class);

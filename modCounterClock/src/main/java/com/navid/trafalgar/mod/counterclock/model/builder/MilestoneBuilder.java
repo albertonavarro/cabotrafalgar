@@ -4,13 +4,13 @@ import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.navid.trafalgar.mod.counterclock.model.MilestoneModel;
-import com.navid.trafalgar.model.ModelBuilder.Category;
 import com.navid.trafalgar.model.BuilderInterface;
+import com.navid.trafalgar.model.ModelBuilder.Category;
 import com.navid.trafalgar.util.FormatUtils;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Collection;
+import java.util.Map;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;

@@ -1,31 +1,17 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
-import com.navid.lazylogin.context.RequestContextContainer;
-import com.navid.trafalgar.manager.AbortedState;
-import com.navid.trafalgar.manager.EventListener;
-import com.navid.trafalgar.manager.EventManager;
-import com.navid.trafalgar.manager.PrestartState;
-import com.navid.trafalgar.manager.StartedState;
-import com.navid.trafalgar.manager.SuccessfulState;
+import com.navid.trafalgar.manager.*;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
-import com.navid.trafalgar.model.AShipModel;
-import com.navid.trafalgar.model.CandidateRecord;
-import com.navid.trafalgar.model.GameConfiguration;
-import com.navid.trafalgar.model.GameStatus;
-import com.navid.trafalgar.model.StepRecord;
-import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService;
+import com.navid.trafalgar.model.*;
+import com.navid.trafalgar.persistence.CandidateInfo;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 import com.navid.trafalgar.profiles.ProfileManager;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 
 public final class GameRecorder implements StartedState, PrestartState, SuccessfulState, AbortedState {
 

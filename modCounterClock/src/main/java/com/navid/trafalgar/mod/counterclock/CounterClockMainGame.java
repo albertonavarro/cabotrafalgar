@@ -8,8 +8,9 @@ import com.navid.trafalgar.manager.StateListener;
 import com.navid.trafalgar.manager.StateManager;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.GameStatus;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public final class CounterClockMainGame extends AbstractAppState {
 

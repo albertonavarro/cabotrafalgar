@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.counterclock;
 
+
 import com.navid.trafalgar.persistence.RecordServerStatusChange;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import de.lessvoid.nifty.controls.Label;
@@ -7,8 +8,7 @@ import org.bushe.swing.event.EventService;
 import org.bushe.swing.event.EventSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class SelectShipScreenController extends com.navid.trafalgar.mod.common.SelectShipScreenController {
-
+public final class SelectControlsScreenController extends com.navid.trafalgar.mod.common.SelectControlsScreenController {
     @Autowired
     private EventService eventService;
 

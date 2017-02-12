@@ -13,7 +13,7 @@ import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public final class SelectKeyboardDigitalControlsScreenGeneratorFTL extends FtlTemplateGenerator {
+public class SelectKeyboardDigitalControlsScreenGeneratorFTL extends FtlTemplateGenerator {
 
     /**
      * Singleton
@@ -23,6 +23,10 @@ public final class SelectKeyboardDigitalControlsScreenGeneratorFTL extends FtlTe
 
     public SelectKeyboardDigitalControlsScreenGeneratorFTL(Nifty nifty) throws IOException {
         super(nifty, "/mod/common/interface_keyboarddigitalselector.xml");
+    }
+
+    public SelectKeyboardDigitalControlsScreenGeneratorFTL(Nifty nifty, String file) throws IOException {
+        super(nifty, file);
     }
 
     @Override

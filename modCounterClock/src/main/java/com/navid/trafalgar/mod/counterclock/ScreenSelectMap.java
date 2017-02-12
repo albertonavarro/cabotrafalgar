@@ -11,6 +11,8 @@ import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.ModelBuilder;
 import com.navid.trafalgar.persistence.CompetitorInfo;
+import com.navid.trafalgar.persistence.RecordServerStatusChange;
+import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceServiceHystrixProxy;
 import com.navid.trafalgar.profiles.ProfileManager;
 import com.navid.trafalgar.util.FileUtils;
@@ -22,6 +24,8 @@ import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
+import org.bushe.swing.event.EventService;
+import org.bushe.swing.event.EventSubscriber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +69,15 @@ public final class ScreenSelectMap extends GameMenuController {
     @Autowired
     private ProfileManager profileManager;
 
+    @Autowired
+    private EventService eventService;
+
+    private EventSubscriber<RecordServerStatusChange> subscriber = null;
+
+    @Autowired
+    private RecordServerPersistenceService recordServerPersistenceService;
+
+
     private ListBox mapDropDown;
     private ListBox listLocalTimes;
     private ListBox listRemoteTimes;
@@ -85,11 +98,28 @@ public final class ScreenSelectMap extends GameMenuController {
             setSelectedMap((ListItem) mapDropDown.getSelection().get(0));
         }
         gameConfiguration.getPreGameModel().removeFromModel(CandidateRecord.class);
+
+        final Label elementRecordServerStatus = screen.findNiftyControl("recordServerStatus", Label.class);
+        if(elementRecordServerStatus != null) {
+            elementRecordServerStatus.setText(recordServerPersistenceService.getStatus().name());
+        }
+
+        subscriber = new EventSubscriber<RecordServerStatusChange>() {
+            @Override
+            public void onEvent(RecordServerStatusChange event) {
+                if (elementRecordServerStatus != null) {
+                    elementRecordServerStatus.setText(event.getNewStatus().name());
+                }
+            }
+        };
+
+        eventService.subscribe(RecordServerStatusChange.class, subscriber);
     }
 
     @Override
     public void doOnEndScreen() {
         mapDropDown.clear();
+        eventService.unsubscribe(RecordServerStatusChange.class, subscriber);
     }
 
     public void next() {
@@ -275,4 +305,11 @@ public final class ScreenSelectMap extends GameMenuController {
         this.assetManager = assetManager;
     }
 
+    public final void setEventService(EventService eventService) {
+        this.eventService = eventService;
+    }
+
+    public void setRecordServerPersistenceService(RecordServerPersistenceService recordServerPersistenceService) {
+        this.recordServerPersistenceService = recordServerPersistenceService;
+    }
 }

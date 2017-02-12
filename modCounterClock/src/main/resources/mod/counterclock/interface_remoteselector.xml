@@ -1,2 +1,2 @@
 <#include "/mod/counterclock/interface_mod_common.xml">
-<#include "/mod/common/interface_shipselector.xml">
+<#include "/mod/common/interface_remoteselector.xml">

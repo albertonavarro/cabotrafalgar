@@ -2,14 +2,16 @@ package com.navid.trafalgar.mod.counterclock.statelisteners;
 
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
-import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
 import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
 import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.GameStatus;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Collection;
+
+import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
 
 public final class StartedListener implements PrestartState, StartedState {
 

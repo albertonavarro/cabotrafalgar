@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class SelectKeyboardControlsScreenController extends GameMenuController {
+public class SelectKeyboardControlsScreenController extends GameMenuController {
 
     private static final Logger LOG
             = LoggerFactory.getLogger(SelectKeyboardControlsScreenController.class);

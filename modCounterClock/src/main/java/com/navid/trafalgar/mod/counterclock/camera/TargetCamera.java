@@ -12,12 +12,14 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
-import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
-import static com.navid.trafalgar.manager.EventManager.VIEW_NEXTTARGET;
 import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.AShipModel;
+
 import java.io.IOException;
 import java.util.List;
+
+import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
+import static com.navid.trafalgar.manager.EventManager.VIEW_NEXTTARGET;
 
 public final class TargetCamera implements Control, EventListener {
 

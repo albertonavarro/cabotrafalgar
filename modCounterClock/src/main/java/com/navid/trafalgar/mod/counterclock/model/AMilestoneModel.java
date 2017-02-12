@@ -9,9 +9,10 @@ import com.navid.trafalgar.model.AShipModelPlayer;
 import com.navid.trafalgar.model.Dependent;
 import com.navid.trafalgar.model.GameModel;
 
+import java.util.Collection;
+
 import static com.google.common.collect.Lists.newArrayList;
 import static com.navid.trafalgar.manager.EventManager.MILESTONE_REACHED;
-import java.util.Collection;
 
 public abstract class AMilestoneModel extends Node implements Control, Dependent {
 

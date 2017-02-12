@@ -7,9 +7,12 @@ import com.jme3.post.filters.TranslucentBucketFilter;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
-import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
-import com.navid.trafalgar.model.*;
+import com.navid.trafalgar.model.AShipModelGhost;
+import com.navid.trafalgar.model.AShipModelPlayer;
+import com.navid.trafalgar.model.GameModel;
+import com.navid.trafalgar.model.IContext;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

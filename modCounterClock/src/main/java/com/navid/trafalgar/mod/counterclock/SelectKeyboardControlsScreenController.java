@@ -7,8 +7,7 @@ import org.bushe.swing.event.EventService;
 import org.bushe.swing.event.EventSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class SelectShipScreenController extends com.navid.trafalgar.mod.common.SelectShipScreenController {
-
+public final class SelectKeyboardControlsScreenController extends com.navid.trafalgar.mod.common.SelectKeyboardControlsScreenController {
     @Autowired
     private EventService eventService;
 

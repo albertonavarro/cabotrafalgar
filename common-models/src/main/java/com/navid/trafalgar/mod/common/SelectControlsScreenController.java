@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public final class SelectControlsScreenController extends GameMenuController {
+public class SelectControlsScreenController extends GameMenuController {
 
     /**
      * Singleton
