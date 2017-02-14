@@ -1,5 +1,7 @@
 package com.navid.trafalgar.mod.counterclock;
 
+import com.navid.trafalgar.lazylogin.LazyLoginService;
+import com.navid.trafalgar.mod.counterclock.statelisteners.CommonModServerControllerHelper;
 import com.navid.trafalgar.persistence.RecordServerStatusChange;
 import com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService;
 import de.lessvoid.nifty.controls.Label;
@@ -11,36 +13,24 @@ public class SelectRemoteControlsScreenController extends com.navid.trafalgar.mo
     @Autowired
     private EventService eventService;
 
-    private EventSubscriber<RecordServerStatusChange> subscriber = null;
-
     @Autowired
     private RecordServerPersistenceService recordServerPersistenceService;
+
+    @Autowired
+    private LazyLoginService lazyLoginService;
+
+    private CommonModServerControllerHelper modHelper;
 
     @Override
     public void doOnStartScreen() {
         super.doOnStartScreen();
-
-        final Label elementRecordServerStatus = screen.findNiftyControl("recordServerStatus", Label.class);
-        if(elementRecordServerStatus != null) {
-            elementRecordServerStatus.setText(recordServerPersistenceService.getStatus().name());
-        }
-
-        subscriber = new EventSubscriber<RecordServerStatusChange>() {
-            @Override
-            public void onEvent(RecordServerStatusChange event) {
-                if (elementRecordServerStatus != null) {
-                    elementRecordServerStatus.setText(event.getNewStatus().name());
-                }
-            }
-        };
-
-        eventService.subscribe(RecordServerStatusChange.class, subscriber);
+        modHelper = new CommonModServerControllerHelper(eventService, recordServerPersistenceService, lazyLoginService, screen);
     }
 
     @Override
     public void doOnEndScreen() {
         super.doOnEndScreen();
-        eventService.unsubscribe(RecordServerStatusChange.class, subscriber);
+        modHelper.destroy();
     }
 
     public final void setEventService(EventService eventService) {
@@ -49,5 +39,9 @@ public class SelectRemoteControlsScreenController extends com.navid.trafalgar.mo
 
     public void setRecordServerPersistenceService(RecordServerPersistenceService recordServerPersistenceService) {
         this.recordServerPersistenceService = recordServerPersistenceService;
+    }
+
+    public void setLazyLoginService(LazyLoginService lazyLoginService) {
+        this.lazyLoginService = lazyLoginService;
     }
 }

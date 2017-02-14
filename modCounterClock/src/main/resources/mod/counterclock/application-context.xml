@@ -48,8 +48,10 @@
 
     <bean id="mod.counterclock.persistenceOnlineBackend" class="com.navid.trafalgar.persistence.recordserver.RecordServerPersistenceService" autowire="byType" init-method="init">
         <constructor-arg name="recordserverUrl" value="http://recordserver.trafalgar.ws:8080" />
+        <property name="executor">
+            <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+            </bean>
+        </property>
     </bean>
 
-    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
-    </bean>
 </beans>

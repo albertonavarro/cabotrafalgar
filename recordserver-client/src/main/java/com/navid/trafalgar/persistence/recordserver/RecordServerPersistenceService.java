@@ -19,6 +19,9 @@ import com.navid.trafalgar.persistence.RecordServerStatusChange;
 import com.navid.trafalgar.profiles.ProfileManager;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.okhttp.ResponseBody;
+import org.apache.commons.io.IOUtils;
 import org.bushe.swing.event.EventService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +30,6 @@ import org.springframework.scheduling.TaskScheduler;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +71,6 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
         apiClient.setBasePath(recordserverUrl);
     }
 
-    @PostConstruct
     public void init(){
         executor.scheduleAtFixedRate(new StatusChecker(), 3000);
     }
@@ -78,12 +79,19 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
 
         @Override
         public void run() {
+            ResponseBody body = null;
             try {
                 Call call = defaultApi.getApiClient().buildCall("/health", "GET", newArrayList(), null, new HashMap<>(), null, new String[0], null);
-                int status = defaultApi.getApiClient().execute(call).getStatusCode();
-                currentStatus = status == 200? Status.OK : Status.DOWN;
+                final Response resp = call.execute();
+                final int code = resp.code();
+                currentStatus = code == 200? Status.OK : Status.DOWN;
+                body = resp.body();
             } catch (Exception e) {
                 currentStatus = Status.DOWN;
+            } finally {
+                if (body != null) {
+                    IOUtils.closeQuietly(body);
+                }
             }
 
             eventService.publish(new RecordServerStatusChange(currentStatus));

@@ -32,7 +32,12 @@
     <bean id="mod.counterclock.profilemanager" class="com.navid.trafalgar.profiles.FileProfileManager" autowire="byType" init-method="loadFromFile">
     </bean>
 
-    <bean id="mod.counterclock.hystrixclientUser" class="com.navid.trafalgar.profiles.UserCommandsHyxtrix" autowire="byType">
+    <bean id="mod.counterclock.lazyloginservice" class="com.navid.trafalgar.lazylogin.LazyLoginService" autowire="byType" init-method="init" lazy-init="false">
+        <constructor-arg index="0" value="http://lazylogin.trafalgar.ws:8080/health" />
+        <property name="executor">
+            <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+            </bean>
+        </property>
         <property name="userCommands" ref="mod.counterclock.clientUser"></property>
     </bean>
     
@@ -48,7 +53,7 @@
             </list>
         </property>
     </bean>
-    
+
     <bean id="mod.counterclock.requestContextContainer" class="com.navid.lazylogin.context.RequestContextContainer" />
-    
+
 </beans>

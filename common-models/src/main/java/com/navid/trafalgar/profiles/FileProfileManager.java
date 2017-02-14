@@ -48,7 +48,7 @@ public final class FileProfileManager implements ProfileManager {
 
     private File configFile;
 
-    @Resource(name = "mod.counterclock.hystrixclientUser")
+    @Resource(name = "mod.counterclock.lazyloginservice")
     private UserCommands userCommandsClient;
 
     @Resource(name = "mod.counterclock.requestContextContainer")

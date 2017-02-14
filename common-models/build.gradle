@@ -16,7 +16,8 @@ dependencies {
         libs.auto_value,
         libs.cxf_rt_rs_client,
         libs.zxing,
-        libs.cabotrafalgar_gamemanager_client
+        libs.cabotrafalgar_gamemanager_client,
+             'com.squareup.okhttp:okhttp:2.7.5'
     )
 
     testCompile(

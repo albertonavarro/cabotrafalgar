@@ -102,8 +102,9 @@ public abstract class GenericModRegisterer implements ModRegisterer {
                 //nifty.registerScreenController();
                 try {
                     screenFlowManager.addScreenDefinition(new ScreenDefinition(currentScreenConfig.getScreenName(), currentScreenConfig.getController(), currentScreenConfig.getInterfaceConstructor()));
-                } catch (InstanceResolutionException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    LOG.error("Error registering screens", e);
+                    throw new RuntimeException(e);
                 }
 
             }

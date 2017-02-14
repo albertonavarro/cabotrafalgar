@@ -4,9 +4,11 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.jme3.asset.AssetManager;
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.lazylogin.LazyLoginService;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.mod.common.GameMenuController;
 import com.navid.trafalgar.mod.counterclock.localfile.FileRecordPersistenceService;
+import com.navid.trafalgar.mod.counterclock.statelisteners.CommonModServerControllerHelper;
 import com.navid.trafalgar.model.CandidateRecord;
 import com.navid.trafalgar.model.GameConfiguration;
 import com.navid.trafalgar.model.ModelBuilder;
@@ -72,7 +74,11 @@ public final class ScreenSelectMap extends GameMenuController {
     @Autowired
     private EventService eventService;
 
-    private EventSubscriber<RecordServerStatusChange> subscriber = null;
+    @Autowired
+    private LazyLoginService lazyLoginService;
+
+    private CommonModServerControllerHelper modHelper;
+
 
     @Autowired
     private RecordServerPersistenceService recordServerPersistenceService;
@@ -99,27 +105,13 @@ public final class ScreenSelectMap extends GameMenuController {
         }
         gameConfiguration.getPreGameModel().removeFromModel(CandidateRecord.class);
 
-        final Label elementRecordServerStatus = screen.findNiftyControl("recordServerStatus", Label.class);
-        if(elementRecordServerStatus != null) {
-            elementRecordServerStatus.setText(recordServerPersistenceService.getStatus().name());
-        }
-
-        subscriber = new EventSubscriber<RecordServerStatusChange>() {
-            @Override
-            public void onEvent(RecordServerStatusChange event) {
-                if (elementRecordServerStatus != null) {
-                    elementRecordServerStatus.setText(event.getNewStatus().name());
-                }
-            }
-        };
-
-        eventService.subscribe(RecordServerStatusChange.class, subscriber);
+        modHelper = new CommonModServerControllerHelper(eventService, recordServerPersistenceService, lazyLoginService, screen);
     }
 
     @Override
     public void doOnEndScreen() {
         mapDropDown.clear();
-        eventService.unsubscribe(RecordServerStatusChange.class, subscriber);
+        modHelper.destroy();
     }
 
     public void next() {
@@ -311,5 +303,13 @@ public final class ScreenSelectMap extends GameMenuController {
 
     public void setRecordServerPersistenceService(RecordServerPersistenceService recordServerPersistenceService) {
         this.recordServerPersistenceService = recordServerPersistenceService;
+    }
+
+    public LazyLoginService getLazyLoginService() {
+        return lazyLoginService;
+    }
+
+    public void setLazyLoginService(LazyLoginService lazyLoginService) {
+        this.lazyLoginService = lazyLoginService;
     }
 }
