@@ -29,12 +29,6 @@
             <ref bean="common.nifty"/>
         </constructor-arg>
     </bean>
-    <bean id="mod.counterclock.selectkeysdigitalcontroller" class="com.navid.trafalgar.mod.counterclock.SelectKeyboardDigitalControlsScreenController" autowire="byType" />
-    <bean id="mod.counterclock.selectkeysdigitalgenerator" class="com.navid.trafalgar.mod.counterclock.SelectKeyboardDigitalControlsScreenGeneratorFTL" autowire="byType" >
-        <constructor-arg>
-            <ref bean="common.nifty"/>
-        </constructor-arg>
-    </bean>
     <bean id="mod.counterclock.selectremotecontrolcontroller" class="com.navid.trafalgar.mod.counterclock.SelectRemoteControlsScreenController" autowire="byType" />
 
 

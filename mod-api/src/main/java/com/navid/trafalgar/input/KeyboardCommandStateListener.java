@@ -5,10 +5,10 @@ import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.navid.trafalgar.manager.PrestartState;
 
-public final class KeyboardCommandStateListener implements CommandStateListener, PrestartState {
+public class KeyboardCommandStateListener implements CommandStateListener, PrestartState {
 
-    private final InputManager inputManager;
-    private final Command key;
+    protected final InputManager inputManager;
+    protected final Command key;
     private AnalogListener listener;
     private String keyname;
     private int keycode;

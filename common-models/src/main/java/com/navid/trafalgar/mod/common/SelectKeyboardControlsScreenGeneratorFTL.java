@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.navid.nifty.flow.ScreenGenerator;
 import com.navid.nifty.flow.template.ftl.FtlTemplateGenerator;
 import com.navid.trafalgar.input.KeyboardCommandStateListener;
+import com.navid.trafalgar.input.KeyboardDigitalCommandStateListener;
 import com.navid.trafalgar.model.GameConfiguration;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.*;
@@ -41,7 +42,8 @@ public class SelectKeyboardControlsScreenGeneratorFTL extends FtlTemplateGenerat
                 = gameConfiguration.getPreGameModel().getByType(KeyboardCommandStateListener.class);
 
         //sorting commands in alphabetical order of command name
-        List<KeyboardCommandStateListener> sortedCommands = newArrayList(keyListeners);
+        List sortedCommands = newArrayList(keyListeners);
+
         Collections.sort(sortedCommands, new Comparator<KeyboardCommandStateListener>() {
             @Override
             public int compare(KeyboardCommandStateListener o1, KeyboardCommandStateListener o2) {

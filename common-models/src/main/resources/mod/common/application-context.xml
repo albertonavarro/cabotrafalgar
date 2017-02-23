@@ -22,12 +22,6 @@
              <ref bean="common.nifty"/>
          </constructor-arg>
      </bean>
-    <bean id="mod.common.selectkeysdigitalcontroller" class="com.navid.trafalgar.mod.common.SelectKeyboardDigitalControlsScreenController" autowire="byType" />
-    <bean id="mod.common.selectkeysdigitalgenerator" class="com.navid.trafalgar.mod.common.SelectKeyboardDigitalControlsScreenGeneratorFTL" autowire="byType" >
-        <constructor-arg>
-            <ref bean="common.nifty"/>
-        </constructor-arg>
-    </bean>
     <bean id="mod.common.selectremotecontrolcontroller" class="com.navid.trafalgar.mod.common.SelectRemoteControlsScreenController" autowire="byType" />
     <bean id="mod.common.objectcreationphasecontroller" class="com.navid.trafalgar.mod.common.ObjectCreationPhaseController" autowire="byType" />
 

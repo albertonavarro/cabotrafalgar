@@ -6,17 +6,15 @@ import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.navid.trafalgar.manager.PrestartState;
 
-public final class KeyboardDigitalCommandStateListener implements CommandStateListener, PrestartState {
+public final class KeyboardDigitalCommandStateListener extends KeyboardCommandStateListener implements CommandStateListener, PrestartState {
 
-    private final InputManager inputManager;
-    private final Command key;
+
     private ActionListener listener;
     private String keyname;
     private int keycode;
 
     public KeyboardDigitalCommandStateListener(InputManager inputManager, Command key) {
-        this.inputManager = inputManager;
-        this.key = key;
+       super(inputManager, key);
     }
 
     public void setKeycode(String keyname, int keycode) {

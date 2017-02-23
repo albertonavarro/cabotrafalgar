@@ -12,6 +12,5 @@ moduleFlowRoot: root:root
 moduleScreenFlow:
   - tutorialMainScreen
   - selectKeys
-  - selectKeysDigital
   - selectRemoteControl
   - tutorialSailingScreen
