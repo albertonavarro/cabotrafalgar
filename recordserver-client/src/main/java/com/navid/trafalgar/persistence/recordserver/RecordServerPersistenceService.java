@@ -84,7 +84,7 @@ public final class RecordServerPersistenceService implements RecordPersistenceSe
                 Call call = defaultApi.getApiClient().buildCall("/health", "GET", newArrayList(), null, new HashMap<>(), null, new String[0], null);
                 final Response resp = call.execute();
                 final int code = resp.code();
-                currentStatus = code == 200? Status.OK : Status.DOWN;
+                currentStatus = code == 200? Status.UP : Status.DOWN;
                 body = resp.body();
             } catch (Exception e) {
                 currentStatus = Status.DOWN;

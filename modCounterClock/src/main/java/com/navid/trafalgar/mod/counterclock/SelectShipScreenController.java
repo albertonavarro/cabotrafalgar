@@ -1,5 +1,6 @@
 package com.navid.trafalgar.mod.counterclock;
 
+import com.navid.trafalgar.gamemanager.GameManagerService;
 import com.navid.trafalgar.lazylogin.LazyLoginService;
 import com.navid.trafalgar.mod.counterclock.statelisteners.CommonModServerControllerHelper;
 import com.navid.trafalgar.persistence.RecordServerStatusChange;
@@ -20,12 +21,15 @@ public final class SelectShipScreenController extends com.navid.trafalgar.mod.co
     @Autowired
     private LazyLoginService lazyLoginService;
 
+    @Autowired
+    private GameManagerService gameManagerService;
+
     private CommonModServerControllerHelper modHelper;
 
     @Override
     public void doOnStartScreen() {
         super.doOnStartScreen();
-        modHelper = new CommonModServerControllerHelper(eventService, recordServerPersistenceService, lazyLoginService, screen);
+        modHelper = new CommonModServerControllerHelper(eventService, recordServerPersistenceService, lazyLoginService, gameManagerService, screen);
     }
 
     @Override
@@ -44,5 +48,9 @@ public final class SelectShipScreenController extends com.navid.trafalgar.mod.co
 
     public void setLazyLoginService(LazyLoginService lazyLoginService) {
         this.lazyLoginService = lazyLoginService;
+    }
+
+    public void setGameManagerService(GameManagerService gameManagerService) {
+        this.gameManagerService = gameManagerService;
     }
 }

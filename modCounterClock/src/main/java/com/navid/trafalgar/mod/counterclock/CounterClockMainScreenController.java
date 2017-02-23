@@ -31,7 +31,7 @@ public final class CounterClockMainScreenController extends GamePlayController i
     private BeanFactory beanFactory;
 
     protected CounterClockMainScreenController() {
-        super("counterclockScreen", "selectMap");
+        super("counterclockScreen", "selectMap_counterclock");
     }
 
     @Override

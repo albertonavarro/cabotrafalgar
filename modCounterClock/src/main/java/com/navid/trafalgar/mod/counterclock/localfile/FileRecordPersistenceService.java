@@ -27,7 +27,7 @@ public final class FileRecordPersistenceService implements RecordPersistenceServ
 
     @Override
     public Status getStatus() {
-        return Status.OK;
+        return Status.UP;
     }
 
     @Override

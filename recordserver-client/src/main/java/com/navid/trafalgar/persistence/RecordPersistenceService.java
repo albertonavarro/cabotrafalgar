@@ -12,7 +12,7 @@ import java.util.List;
 public interface RecordPersistenceService {
 
     enum Status {
-        OK, BUSY, DOWN, UNKNOWN
+        UP, BUSY, DOWN, UNKNOWN
     }
 
     Status getStatus();

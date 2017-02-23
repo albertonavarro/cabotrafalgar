@@ -40,6 +40,14 @@
         </property>
         <property name="userCommands" ref="mod.counterclock.clientUser"></property>
     </bean>
+
+    <bean id="mod.counterclock.gamemanagerservice" class="com.navid.trafalgar.gamemanager.GameManagerService" autowire="byType" init-method="init" lazy-init="false">
+        <constructor-arg index="0" value="http://gamemanager.trafalgar.ws:8080/health" />
+        <property name="executor">
+            <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+            </bean>
+        </property>
+    </bean>
     
     <bean id="mod.counterclock.clientUser" class="com.lazylogin.client.user.v0.UserCommands" factory-bean="mod.counterclock.clientUserFactory" factory-method="create"/>
     <bean id="mod.counterclock.clientUserFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">

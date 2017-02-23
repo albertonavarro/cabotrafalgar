@@ -14,7 +14,7 @@
 </panel>
 
 <panel childLayout="horizontal">
-<text text="GameServer status:" font="Interface/Fonts/Default.fnt" align="center" />
-<control id="gameServerStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
+<text text="GameManager status:" font="Interface/Fonts/Default.fnt" align="center" />
+<control id="gameManagerStatus" name="label" text="Unknown" font="Interface/Fonts/Default.fnt" horizontal="off" width="100%" />
 </panel>
 </#macro>

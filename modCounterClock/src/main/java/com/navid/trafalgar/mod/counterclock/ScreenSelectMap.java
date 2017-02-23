@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.jme3.asset.AssetManager;
 import com.navid.nifty.flow.ScreenFlowManager;
+import com.navid.trafalgar.gamemanager.GameManagerService;
 import com.navid.trafalgar.lazylogin.LazyLoginService;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.mod.common.GameMenuController;
@@ -77,6 +78,9 @@ public final class ScreenSelectMap extends GameMenuController {
     @Autowired
     private LazyLoginService lazyLoginService;
 
+    @Autowired
+    private GameManagerService gameManagerService;
+
     private CommonModServerControllerHelper modHelper;
 
 
@@ -105,7 +109,7 @@ public final class ScreenSelectMap extends GameMenuController {
         }
         gameConfiguration.getPreGameModel().removeFromModel(CandidateRecord.class);
 
-        modHelper = new CommonModServerControllerHelper(eventService, recordServerPersistenceService, lazyLoginService, screen);
+        modHelper = new CommonModServerControllerHelper(eventService, recordServerPersistenceService, lazyLoginService, gameManagerService, screen);
     }
 
     @Override
@@ -311,5 +315,9 @@ public final class ScreenSelectMap extends GameMenuController {
 
     public void setLazyLoginService(LazyLoginService lazyLoginService) {
         this.lazyLoginService = lazyLoginService;
+    }
+
+    public void setGameManagerService(GameManagerService gameManagerService) {
+        this.gameManagerService = gameManagerService;
     }
 }

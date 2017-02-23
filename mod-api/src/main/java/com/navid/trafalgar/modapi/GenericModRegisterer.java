@@ -38,6 +38,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
             modConfiguration = mapper.readValue(configFile, ModConfiguration.class);
         } catch (IOException ex) {
             LOG.error("Error reading module configuration: {}", configFile, ex);
+            throw new RuntimeException(ex);
         }
     }
 
@@ -85,6 +86,7 @@ public abstract class GenericModRegisterer implements ModRegisterer {
                     }
                 } catch (Exception e) {
                     LOG.error("Error registering Inputs in module {}", modConfiguration, e);
+                    throw new RuntimeException(e);
                 }
 
             }

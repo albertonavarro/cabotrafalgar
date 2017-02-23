@@ -1,5 +1,7 @@
 package com.navid.trafalgar.mod.counterclock.statelisteners;
 
+import com.navid.trafalgar.gamemanager.GameManagerServerStatusChange;
+import com.navid.trafalgar.gamemanager.GameManagerService;
 import com.navid.trafalgar.lazylogin.LazyLoginServerStatusChange;
 import com.navid.trafalgar.lazylogin.LazyLoginService;
 import com.navid.trafalgar.persistence.RecordServerStatusChange;
@@ -22,10 +24,25 @@ public class CommonModServerControllerHelper {
 
     private final EventSubscriber<RecordServerStatusChange> subscriber;
     private final EventSubscriber<LazyLoginServerStatusChange> subscriberLazyLogin;
+    private final EventSubscriber<GameManagerServerStatusChange> subscriberGameManager;
 
 
-    public CommonModServerControllerHelper(EventService eventService, RecordServerPersistenceService recordServerPersistenceService, LazyLoginService lazyLoginService, Screen screen) {
+    public CommonModServerControllerHelper(EventService eventService, RecordServerPersistenceService recordServerPersistenceService, LazyLoginService lazyLoginService, GameManagerService gameManagerService, Screen screen) {
         this.eventService = eventService;
+
+        final Label elementGameManagerStatus = screen.findNiftyControl("gameManagerStatus", Label.class);
+        if(elementGameManagerStatus != null) {
+            elementGameManagerStatus.setText(gameManagerService.getStatus().name());
+        }
+
+        subscriberGameManager = new EventSubscriber<GameManagerServerStatusChange>() {
+            @Override
+            public void onEvent(GameManagerServerStatusChange event) {
+                if (elementGameManagerStatus != null) {
+                    elementGameManagerStatus.setText(event.getNewStatus().name());
+                }
+            }
+        };
 
         final Label elementLazyloginStatus = screen.findNiftyControl("lazyLoginStatus", Label.class);
         if(elementLazyloginStatus != null) {
@@ -58,11 +75,16 @@ public class CommonModServerControllerHelper {
         eventService.subscribe(LazyLoginServerStatusChange.class, subscriberLazyLogin);
 
         eventService.subscribe(RecordServerStatusChange.class, subscriber);
+
+        eventService.subscribe(GameManagerServerStatusChange.class, subscriberGameManager);
+
     }
 
     public void destroy() {
         eventService.unsubscribe(RecordServerStatusChange.class, subscriber);
         eventService.unsubscribe(LazyLoginServerStatusChange.class, subscriberLazyLogin);
+        eventService.unsubscribe(GameManagerServerStatusChange.class, subscriberGameManager);
+
     }
 
 }

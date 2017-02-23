@@ -20,6 +20,7 @@ import com.navid.nifty.flow.template.ftl.StaticScreenGeneratorResolutor;
 import com.navid.trafalgar.audio.MusicManager;
 import com.navid.trafalgar.input.RemoteEventsManager;
 import com.navid.trafalgar.maploader.v3.MapAssetLoader;
+import com.navid.trafalgar.modapi.GenericModRegisterer;
 import com.navid.trafalgar.modapi.ModRegisterer;
 import com.navid.trafalgar.modapi.SpringBeanResolutor;
 import de.lessvoid.nifty.Nifty;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -171,17 +173,30 @@ public final class Main extends LegacyApplication {
     }
 
     private void loadModules(Nifty nifty, Screen screen, AppSettings settings, Application app) {
+        Collection<ModRegisterer> resultInstances = new ArrayList();
         Reflections reflections = new Reflections("com.navid.trafalgar");
 
         Set<Class<? extends ModRegisterer>> result = reflections.getSubTypesOf(ModRegisterer.class);
-
-        Collection<ModRegisterer> resultInstances = new ArrayList();
+        result.remove(GenericModRegisterer.class);
+        try {
+            Class modCommonClassName = Class.forName("com.navid.trafalgar.mod.common.InterfaceGenerator");
+            result.remove(modCommonClassName);
+            ModRegisterer modCommonLoader = (ModRegisterer) modCommonClassName.newInstance();
+            resultInstances.add(modCommonLoader);
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            LOG.error("Error loading well known class.", e);
+        }
 
         for (Class<? extends ModRegisterer> currentClass : result) {
             try {
                 LOG.info("Loading " + currentClass.getCanonicalName() + " module");
-                ModRegisterer currentLoader = (ModRegisterer) Class.forName(currentClass.getCanonicalName()).newInstance();
-                resultInstances.add(currentLoader);
+                Class className = Class.forName(currentClass.getCanonicalName());
+                if (!Modifier.isAbstract(className.getModifiers())) {
+                    ModRegisterer currentLoader = (ModRegisterer) className.newInstance();
+                    resultInstances.add(currentLoader);
+                } else {
+                    LOG.info("Not loading {} as it's abstract.", currentClass);
+                }
             } catch(InstantiationException e) {
                 LOG.info("Error instantiating module {}", currentClass.toString());
             } catch(Exception ex) {

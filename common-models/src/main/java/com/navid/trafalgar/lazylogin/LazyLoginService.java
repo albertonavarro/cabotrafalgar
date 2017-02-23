@@ -23,7 +23,7 @@ public class LazyLoginService implements UserCommands {
     private int TIMEOUT = 3000;
 
     public enum Status {
-        OK, BUSY, DOWN, UNKNOWN
+        UP, BUSY, DOWN, UNKNOWN
     }
 
     @Autowired
@@ -58,7 +58,7 @@ public class LazyLoginService implements UserCommands {
                 Call call = client.newCall(request);
                 final Response resp = call.execute();
                 final int code = resp.code();
-                currentStatus = code == 200? Status.OK : Status.DOWN;
+                currentStatus = code == 200? Status.UP : Status.DOWN;
                 body = resp.body();
             } catch (Exception e) {
                 currentStatus = Status.DOWN;
