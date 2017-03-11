@@ -5,7 +5,7 @@ import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.PrestartState;
 import com.navid.trafalgar.manager.StartedState;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
-import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
+import com.navid.trafalgar.model.AMilestoneModel;
 import com.navid.trafalgar.model.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 

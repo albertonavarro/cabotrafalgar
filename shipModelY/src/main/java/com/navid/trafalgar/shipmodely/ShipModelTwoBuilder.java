@@ -35,7 +35,6 @@ public final class ShipModelTwoBuilder implements BuilderInterface {
     @Override
     public Collection buildControls(String instanceName, Map<String, Object> customValues) {
         return singleton(new ShipModelTwoControlProxy());
-
     }
 
     @Override

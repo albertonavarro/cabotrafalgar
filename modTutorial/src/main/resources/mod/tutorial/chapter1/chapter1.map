@@ -1,6 +1,7 @@
 { "description" : "Practice gybing",
   "picture" : "Maps/CounterClock/Gybing-1.png",
   "entries" : [ { "type" : "Context" },
+      {"type" : "System"},
       { "type" : "RotateSimpleWind" },
       { "type" : "Sun" },
       { "type" : "SimpleWater" },
@@ -13,6 +14,10 @@
         "type" : "Milestone",
         "values" : { "position" : "2500,0,0" }
       },
+      { "name" : "mil2",
+              "type" : "Milestone",
+              "values" : { "position" : "3500,0,-500" }
+            },
       { "type" : "Sky" }
     ]
 }

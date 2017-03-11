@@ -1,21 +1,24 @@
-package com.navid.trafalgar.mod.counterclock.model.builder;
+package com.navid.trafalgar.model.builder;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.navid.trafalgar.mod.counterclock.model.MilestoneModel;
 import com.navid.trafalgar.model.BuilderInterface;
+import com.navid.trafalgar.model.MilestoneModel;
 import com.navid.trafalgar.model.ModelBuilder.Category;
 import com.navid.trafalgar.util.FormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 
 public final class MilestoneBuilder implements BuilderInterface {
+
+    private static final AtomicInteger counter = new AtomicInteger();
 
     @Autowired
     private AssetManager assetManager;
@@ -51,6 +54,8 @@ public final class MilestoneBuilder implements BuilderInterface {
         if (customValues.containsKey("position")) {
             milestone.setLocalTranslation(FormatUtils.getVector3fFromString((String) customValues.get("position")));
         }
+
+        milestone.setName("Milestone " + counter.incrementAndGet());
 
         return singleton(milestone);
     }

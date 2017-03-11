@@ -4,24 +4,21 @@ import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.mod.tutorial.script.Actionable;
 import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 
-public class MessageActionable extends Actionable {
+public class MessageNotSkippeableActionable extends Actionable {
 
     private final String[] messages;
 
     private final boolean withPause;
 
-    public MessageActionable(ScriptInterpreter scriptInterpreter, EventManager eventManager, String[] messages) {
+    public MessageNotSkippeableActionable(ScriptInterpreter scriptInterpreter, EventManager eventManager, String[] messages) {
         super(scriptInterpreter, eventManager);
         this.messages = messages;
-        withPause = true;
+        withPause = false;
     }
 
     @Override
     public void action() {
-        scriptInterpreter.printMessage(messages);
-        if (withPause) {
-            eventManager.fireEvent("PAUSE");
-        }
+        scriptInterpreter.printMessageNotSkippeable(messages);
     }
 
     @Override

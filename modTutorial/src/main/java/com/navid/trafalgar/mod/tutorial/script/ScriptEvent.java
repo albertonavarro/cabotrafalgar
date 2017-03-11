@@ -1,12 +1,12 @@
 package com.navid.trafalgar.mod.tutorial.script;
 
-import java.util.concurrent.Callable;
-
 public class ScriptEvent {
 
     private Trigger trigger;
 
     private Actionable action;
+
+    private String[] successEvent = new String[] {"SCRIPT_STEP_ACTIONED"};
 
     public Trigger getTrigger() {
         return trigger;
@@ -22,5 +22,13 @@ public class ScriptEvent {
 
     public void setAction(Actionable action) {
         this.action = action;
+    }
+
+    public String[] getSuccessEvent() {
+        return successEvent;
+    }
+
+    public void setSuccessEvent(String[] successEvent) {
+        this.successEvent = successEvent;
     }
 }

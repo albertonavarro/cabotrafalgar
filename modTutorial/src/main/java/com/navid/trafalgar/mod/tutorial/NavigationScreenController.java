@@ -107,6 +107,14 @@ public class NavigationScreenController extends GamePlayController implements Be
 
     public void printMessage(String[] message) {
         screen.findElementByName("tutorialLayer").setVisible(true);
+        screen.findElementByName("tutorialNextButton").setVisible(true);
+        screen.findNiftyControl("tutorialText", Label.class).setText(message[0]);
+    }
+
+    @Override
+    public void printMessageNotSkippeable(String[] message) {
+        screen.findElementByName("tutorialLayer").setVisible(true);
+        screen.findElementByName("tutorialNextButton").setVisible(false);
         screen.findNiftyControl("tutorialText", Label.class).setText(message[0]);
     }
 
@@ -115,6 +123,7 @@ public class NavigationScreenController extends GamePlayController implements Be
     }
 
     public void tutorialContinue() {
+        eventManager.fireEvent("RESUME");
         eventManager.fireEvent("SCRIPT_STEP_ACTIONED");
     }
 

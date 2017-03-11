@@ -14,8 +14,6 @@ public class ModConfigPhaseController extends GameMenuController {
 
     @Override
     public void doOnStartScreen() {
-        gameConfiguration.setMap("Maps/WindTunnel/WindTunnel.map");
-
         skip();
     }
 

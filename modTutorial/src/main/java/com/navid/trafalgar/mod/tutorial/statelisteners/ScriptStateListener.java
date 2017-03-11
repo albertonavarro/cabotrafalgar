@@ -28,9 +28,15 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
     @Autowired
     private EventManager eventManager;
 
+    @Autowired
+    private LoadCameraStateListener loadCameraStateListener;
+
     @Override
     public void onInit(float tpf) {
-        script = new ScriptBuilder().withScriptInterpreter(navigationScreenController).withEventManager(eventManager).getScript();
+        script = new ScriptBuilder()
+                .withScriptInterpreter(navigationScreenController)
+                .withEventManager(eventManager)
+                .withLoadCameraStateListener(loadCameraStateListener).getScript();
     }
 
     @Override
@@ -44,6 +50,10 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
 
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
+    }
+
+    public void setLoadCameraStateListener(LoadCameraStateListener loadCameraStateListener) {
+        this.loadCameraStateListener = loadCameraStateListener;
     }
 
     Optional<ScriptEvent> nextScript = getNextScript();
@@ -61,6 +71,11 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
     }
 
     private void processNextScript(final ScriptEvent scriptEvent) {
+        if (scriptEvent == null) {
+            eventManager.fireEvent("SUCCESS");
+            return;
+        }
+
         //time to load a new event
         scriptEvent.getTrigger().register(scriptEvent.getAction());
 
@@ -70,10 +85,9 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
                 scriptEvent.getAction().cleanUpAction();
                 scriptEvent.getTrigger().unregister();
                 eventManager.unregister(this);
-                eventManager.fireEvent("RESUME");
-                processNextScript(getNextScript().get());
+                processNextScript(getNextScript().orNull());
             }
-        }, new String[]{"SCRIPT_STEP_ACTIONED"});
+        }, scriptEvent.getSuccessEvent());
 
     }
 

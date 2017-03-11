@@ -1,11 +1,15 @@
 package com.navid.trafalgar.mod.tutorial.script.chapter1;
 
 import com.navid.trafalgar.manager.EventManager;
+import com.navid.trafalgar.mod.tutorial.script.Actionable;
 import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
+import com.navid.trafalgar.mod.tutorial.script.action.EventActionable;
 import com.navid.trafalgar.mod.tutorial.script.action.MessageActionable;
+import com.navid.trafalgar.mod.tutorial.script.action.MessageNotSkippeableActionable;
 import com.navid.trafalgar.mod.tutorial.script.trigger.EventTrigger;
 import com.navid.trafalgar.mod.tutorial.script.ScriptEvent;
 import com.navid.trafalgar.mod.tutorial.script.trigger.TimeSinceLastEvent;
+import com.navid.trafalgar.mod.tutorial.statelisteners.LoadCameraStateListener;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -21,51 +25,92 @@ public class ScriptBuilder {
     private ScriptInterpreter scriptInterpreter;
 
     private EventManager eventManager;
+    private LoadCameraStateListener loadCameraStateListener;
 
 
     public List<ScriptEvent> getScript() {
 
-        ScriptEvent event1 = new ScriptEvent(){{
+        List<ScriptEvent> scriptEvents = newArrayList();
+
+        scriptEvents.add(new ScriptEvent(){{
             setAction(
                     new MessageActionable(
-                        scriptInterpreter, eventManager,
-                        new String[] {
-                                "Welcome to chapter 1 of this tutorial."}));
+                            scriptInterpreter, eventManager,
+                            new String[] {
+                                    "Welcome to chapter 1 of this tutorial."}));
 
-            setTrigger(new EventTrigger(eventManager, "FRAME_STEP"));
-        }};
+            setTrigger(new TimeSinceLastEvent(eventManager, 3000));
+        }});
 
-        ScriptEvent event2 = new ScriptEvent(){{
+        scriptEvents.add(new ScriptEvent(){{
             setAction(
                     new MessageActionable(
                             scriptInterpreter, eventManager,
                             new String[] {
                                     "Hopefully thi is so basic that you won't need to replay it ever."}));
 
+            setTrigger(new TimeSinceLastEvent(eventManager, 2000));
+        }});
+
+        scriptEvents.add(new ScriptEvent(){{
+            setAction(
+                    new EventActionable(scriptInterpreter, eventManager, new String[] {"DEACTIVATE_CAM", "ACTIVATE_CAM2"}));
+
             setTrigger(new EventTrigger(eventManager, "FRAME_STEP"));
-        }};
+        }});
 
-        ScriptEvent event3 = new ScriptEvent(){{
+        scriptEvents.add(new ScriptEvent(){{
             setAction(
                     new MessageActionable(
                             scriptInterpreter, eventManager,
                             new String[] {
-                                    "Your first lesson is to continue with the tutorial, click OK"}));
+                                    "Your first lesson is to continue with the tutorial, click Continue"}));
 
-            setTrigger(new TimeSinceLastEvent(eventManager, 10000));
-        }};
+            setTrigger(new TimeSinceLastEvent(eventManager, 2000));
+        }});
 
-        ScriptEvent event4 = new ScriptEvent(){{
+        scriptEvents.add(new ScriptEvent(){{
+            setAction(
+                    new EventActionable(scriptInterpreter, eventManager, new String[] {"DEACTIVATE_CAM", "ACTIVATE_CAM3"}));
+
+            setTrigger(new TimeSinceLastEvent(eventManager, 2000));
+        }});
+
+        scriptEvents.add(new ScriptEvent(){{
+            setAction(
+                    new MessageNotSkippeableActionable(
+                            scriptInterpreter, eventManager,
+                            new String[] {
+                                    "See main menu clicking 0, inspect the commands keys from there. Hide controls and resume game."}));
+
+            setTrigger(new TimeSinceLastEvent(eventManager, 1000));
+            setSuccessEvent(new String[]{"HIDE_MENU"});
+        }});
+
+        scriptEvents.add(new ScriptEvent(){{
             setAction(
                     new MessageActionable(
                             scriptInterpreter, eventManager,
                             new String[] {
-                                    "Thanks for invoking ESC."}));
+                                    "Those particles represent the direction and speed of wind, they are coming from behind you now."}));
 
-            setTrigger(new EventTrigger(eventManager, "pre-tiller - to port"));
-        }};
+            setTrigger(new TimeSinceLastEvent(eventManager, 1000));
+        }});
 
-        return newArrayList(event1, event2, event3, event4);
+        scriptEvents.add(new ScriptEvent(){{
+            setAction(
+                    new MessageActionable(
+                            scriptInterpreter, eventManager,
+                            new String[] {
+                                    "In front of you, the milestone you need to hit. Wait until you hit it."}));
+
+            setTrigger(new TimeSinceLastEvent(eventManager, 2000));
+        }});
+
+
+
+
+        return scriptEvents;
     }
 
     public ScriptBuilder withScriptInterpreter(ScriptInterpreter scriptInterpreter) {
@@ -78,4 +123,8 @@ public class ScriptBuilder {
         return this;
     }
 
+    public ScriptBuilder withLoadCameraStateListener(LoadCameraStateListener loadCameraStateListener) {
+        this.loadCameraStateListener = loadCameraStateListener;
+        return this;
+    }
 }

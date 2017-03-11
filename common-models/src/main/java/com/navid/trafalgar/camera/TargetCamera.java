@@ -101,7 +101,7 @@ public final class TargetCamera implements Control, EventListener {
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-        reference.setTransparent(enabled);
+//        reference.setTransparent(enabled);
 
     }
 

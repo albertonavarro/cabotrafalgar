@@ -1,9 +1,11 @@
 package com.navid.trafalgar.mod.tutorial.statelisteners;
 
+import com.google.common.collect.Lists;
 import com.jme3.asset.AssetManager;
 import com.jme3.post.Filter;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.control.Control;
+import com.navid.trafalgar.input.SystemInteractions;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.manager.LoadModelState;
 import com.navid.trafalgar.manager.statistics.StatisticsManager;
@@ -46,25 +48,14 @@ public final class LoadMapStateListener implements LoadModelState {
         MapDefinition gameDefinition = (MapDefinition) assetManager.loadAsset(gameConfiguration.getMap());
         gameStatus.setGameDefinition(gameDefinition);
 
-        GameModel gameModel = builder2.build(gameConfiguration, gameDefinition, Role.geometry);
+        gameConfiguration.getCustom().addToModel(newArrayList(navigationScreenController), "system");
 
-        if (gameConfiguration.getPreGameModel().contains(CandidateRecord.class)) {
-            final CandidateRecord cr = gameConfiguration.getPreGameModel().getSingleByType(CandidateRecord.class);
-            EntryDefinition entry = new EntryDefinition();
-            entry.setType(gameConfiguration.getShipName());
-            entry.setName("ghost1");
-            entry.setValues(new HashMap<String, Object>() {
-                {
-                    put("role", "Ghost");
-                    put("record", cr);
-                }
-            });
-            Collection c = builder2.buildWithDependencies(entry, gameModel);
+        GameModel gameModel = builder2.buildGeometry(gameConfiguration, gameDefinition);
 
-            gameModel.addToModel(c);
-        }
-
-        gameConfiguration.getPreGameModel().addToModel(newArrayList(navigationScreenController), "system");
+        gameModel.addToModel(Lists.newArrayList(eventManager));
+        //gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(SystemInteractions.class));
+        gameModel.addToModel(gameConfiguration.getPreGameModel().getByType(AShipModelInteractive.class));
+        gameModel.updateDependencies();
         tutorialGameModel.init(gameModel, gameConfiguration.getPreGameModel());
 
         IContext iContext = tutorialGameModel.getIContext();
@@ -77,13 +68,6 @@ public final class LoadMapStateListener implements LoadModelState {
 
         if (tutorialGameModel.getGhost() != null) {
             gameStatus.getGameNode().addControl((Control) tutorialGameModel.getGhost());
-        }
-
-        List<AMilestoneModel> milestones = tutorialGameModel.getMilestones();
-        for (AMilestoneModel currentMilestone : milestones) {
-            currentMilestone.setEventManager(eventManager);
-            currentMilestone.setCollidable(Collections.singleton((AShipModel) currentShip));
-            gameStatus.getGameNode().addControl(currentMilestone);
         }
 
         FilterPostProcessor fpp = new FilterPostProcessor(assetManager);

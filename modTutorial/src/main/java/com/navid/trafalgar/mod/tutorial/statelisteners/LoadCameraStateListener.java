@@ -186,4 +186,8 @@ public final class LoadCameraStateListener implements LoadCamState, StartedState
             }
         }
     }
+
+    public TargetCamera getTargetCamControl() {
+        return targetCamControl;
+    }
 }

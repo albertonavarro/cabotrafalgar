@@ -111,9 +111,9 @@ public final class GameModel implements GameModelInterface {
         return !getByType(className).isEmpty();
     }
 
-
     public Collection getAll() {
-        return mapByClass.get(Object.class);
+        Collection collection = mapByClass.get(Object.class);
+        return collection == null? new ArrayList(): collection;
     }
 
     public void updateDependencies() {

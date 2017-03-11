@@ -57,7 +57,7 @@ public final class EventManager {
         for (String currentEvent : events) {
             Set<EventListener> listeners = eventListeners.get(currentEvent);
             if (listeners == null) {
-                listeners = new HashSet<EventListener>();
+                listeners = new HashSet<>();
                 eventListeners.put(currentEvent, listeners);
             }
             listeners.add(eventListener);
@@ -87,7 +87,7 @@ public final class EventManager {
         }
 
         if (event.equals(UNLOAD)) {
-            eventListeners = new HashMap<String, Set<EventListener>>();
+            eventListeners = new HashMap<>();
         }
 
         LOG.debug("Finished firing event: {}", event);

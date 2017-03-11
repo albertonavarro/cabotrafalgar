@@ -84,6 +84,11 @@ public abstract class GamePlayController implements ScreenController, SystemInte
 
         screen.findNiftyControl("showControlText", Label.class).setText(prettyPrintReport(generatorBuilder.generateReport()));
         screen.findElementByName("showControlLayer").setVisible(newVisibility);
+        if (newVisibility) {
+            eventManager.fireEvent("SHOW_CONTROLS");
+        } else {
+            eventManager.fireEvent("HIDE_CONTROLS");
+        }
     }
 
     @Override
@@ -126,8 +131,10 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     public final void showMenuFunction(boolean newVisibility) {
         screen.findElementByName("menuLayer").setVisible(newVisibility);
         if (newVisibility) {
+            eventManager.fireEvent("SHOW_MENU");
             eventManager.fireEvent("PAUSE");
         } else {
+            eventManager.fireEvent("HIDE_MENU");
             eventManager.fireEvent("RESUME");
         }
     }

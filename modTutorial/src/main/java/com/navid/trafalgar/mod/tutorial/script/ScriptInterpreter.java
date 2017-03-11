@@ -7,6 +7,8 @@ public interface ScriptInterpreter {
 
     void printMessage(String[] message);
 
+    void printMessageNotSkippeable(String[] message);
+
     void cleanUpMessage();
 
 }

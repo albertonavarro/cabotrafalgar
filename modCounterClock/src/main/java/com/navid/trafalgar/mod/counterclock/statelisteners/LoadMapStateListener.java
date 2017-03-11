@@ -12,7 +12,6 @@ import com.navid.trafalgar.maploader.v3.EntryDefinition;
 import com.navid.trafalgar.maploader.v3.MapDefinition;
 import com.navid.trafalgar.mod.counterclock.CounterClockGameModel;
 import com.navid.trafalgar.mod.counterclock.CounterClockMainScreenController;
-import com.navid.trafalgar.mod.counterclock.model.AMilestoneModel;
 import com.navid.trafalgar.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
