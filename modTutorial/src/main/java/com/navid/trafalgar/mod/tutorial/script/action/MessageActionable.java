@@ -16,6 +16,12 @@ public class MessageActionable extends Actionable {
         withPause = true;
     }
 
+    public MessageActionable(ScriptInterpreter scriptInterpreter, EventManager eventManager, String[] messages, boolean pause) {
+        super(scriptInterpreter, eventManager);
+        this.messages = messages;
+        withPause = pause;
+    }
+
     @Override
     public void action() {
         scriptInterpreter.printMessage(messages);
@@ -28,5 +34,6 @@ public class MessageActionable extends Actionable {
     public void cleanUpAction() {
         scriptInterpreter.cleanUpMessage();
     }
+
 
 }

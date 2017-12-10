@@ -3,13 +3,7 @@ package com.navid.trafalgar.mod.tutorial.script.trigger;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.mod.tutorial.script.Actionable;
-import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 import com.navid.trafalgar.mod.tutorial.script.Trigger;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.concurrent.Callable;
 
 /**
  * Created by alberto on 17/04/16.

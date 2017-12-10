@@ -5,8 +5,13 @@ import com.navid.trafalgar.manager.*;
 import com.navid.trafalgar.mod.tutorial.NavigationScreenController;
 import com.navid.trafalgar.mod.tutorial.script.ScriptEvent;
 import com.navid.trafalgar.mod.tutorial.script.chapter1.ScriptBuilder;
+import org.quartz.JobBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
+import java.sql.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -22,6 +27,8 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
 
     private int scriptIndex = 0;
 
+    ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+
     @Autowired
     private NavigationScreenController navigationScreenController;
 
@@ -33,6 +40,7 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
 
     @Override
     public void onInit(float tpf) {
+        threadPoolTaskScheduler.initialize();
         script = new ScriptBuilder()
                 .withScriptInterpreter(navigationScreenController)
                 .withEventManager(eventManager)
@@ -41,7 +49,7 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
 
     @Override
     public void onUnload() {
-
+        threadPoolTaskScheduler.shutdown();
     }
 
     public void setNavigationScreenController(NavigationScreenController navigationScreenController) {
@@ -82,12 +90,32 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
         eventManager.registerListener(new EventListener() {
             @Override
             public void onEvent(String event) {
-                scriptEvent.getAction().cleanUpAction();
-                scriptEvent.getTrigger().unregister();
-                eventManager.unregister(this);
-                processNextScript(getNextScript().orNull());
+                synchronized (scriptEvent) {
+                    if(!scriptEvent.isSuccessful().isPresent()) {
+                        scriptEvent.setSuccessful(true);
+                        scriptEvent.getAction().cleanUpAction();
+                        scriptEvent.getTrigger().unregister();
+                        eventManager.unregister(this);
+                        processNextScript(getNextScript().orNull());
+                    }
+                }
             }
         }, scriptEvent.getSuccessEvent());
+
+        if(scriptEvent.getTimeoutMillis().isPresent()){
+            System.out.println(Instant.now() + "***");
+            threadPoolTaskScheduler.schedule(() -> {
+                synchronized (scriptEvent) {
+                    if(!scriptEvent.isSuccessful().isPresent()) {
+                        System.out.println(Instant.now() + "***");
+                        scriptEvent.setSuccessful(false);
+                        scriptEvent.getAction().cleanUpAction();
+                        scriptEvent.getTrigger().unregister();
+                        navigationScreenController.printMessageNotSkippeable(new String[]{"TIMEOUT!! Be faster next time. Click 0 to see menu."});
+                    }
+                }
+            }, Date.from(Instant.now().plus(scriptEvent.getTimeoutMillis().get(), ChronoUnit.MILLIS)));
+        }
 
     }
 

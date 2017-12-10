@@ -5,6 +5,8 @@ package com.navid.trafalgar.mod.tutorial.script;
  */
 public interface ScriptInterpreter {
 
+    void alert(String message);
+
     void printMessage(String[] message);
 
     void printMessageNotSkippeable(String[] message);

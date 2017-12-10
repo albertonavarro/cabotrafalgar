@@ -15,7 +15,8 @@ dependencies {
             libs.gson,
             libs.cxf_rt_rs_client,
             libs.jackson_core_asl,
-            libs.lazylogin_common_context
+            libs.lazylogin_common_context,
+            group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
             )
 
     testCompile (

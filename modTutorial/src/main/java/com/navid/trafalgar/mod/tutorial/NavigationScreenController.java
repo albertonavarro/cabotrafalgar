@@ -54,35 +54,27 @@ public class NavigationScreenController extends GamePlayController implements Be
 
     @Override
     public void onStartScreen() {
-        app.enqueue(new Callable<Void>() {
+        app.enqueue((Callable<Void>) () -> {
+            ctx = new XmlBeanFactory(new ClassPathResource("mod/tutorial/game-context.xml"), beanFactory);
+            game = (TutorialMainGame) ctx.getBean("mod.tutorial.maingame");
 
-            @Override
-            public Void call() {
-                ctx = new XmlBeanFactory(new ClassPathResource("mod/tutorial/game-context.xml"), beanFactory);
-                game = (TutorialMainGame) ctx.getBean("mod.tutorial.maingame");
+            appStateManager.attach(game);
 
-                appStateManager.attach(game);
-
-                return null;
-            }
+            return null;
         });
     }
 
     @Override
     public void onEndScreen() {
-        app.enqueue(new Callable<Void>() {
+        app.enqueue((Callable<Void>) () -> {
 
-            @Override
-            public Void call() {
+            eventManager.fireEvent("UNLOAD");
 
-                eventManager.fireEvent("UNLOAD");
+            appStateManager.detach(game);
 
-                appStateManager.detach(game);
+            ctx.destroySingletons();
 
-                ctx.destroySingletons();
-
-                return null;
-            }
+            return null;
         });
     }
 
@@ -103,6 +95,11 @@ public class NavigationScreenController extends GamePlayController implements Be
      */
     public void setAppStateManager(AppStateManager appStateManager) {
         this.appStateManager = appStateManager;
+    }
+
+    @Override
+    public void alert(String message) {
+
     }
 
     public void printMessage(String[] message) {

@@ -32,8 +32,8 @@ public class Chapter1 implements TutorialChapter {
     @Override
     public Map<String, CommandWrapper> getCommandAssociations() {
         Map<String, CommandWrapper> map = new HashMap<String, CommandWrapper>();
-        map.put("tiller - to port", new KeyboardWrapper());
-        map.put("tiller - to starboard", new KeyboardWrapper());
+        map.put("tiller - to port", new AIWrapper());
+        map.put("tiller - to starboard", new AIWrapper());
         map.put("mainsail - bring in", new AIWrapper());
         map.put("mainsail - let go", new AIWrapper());
         map.put("system - show menu", new KeyboardDigitalWrapper());
