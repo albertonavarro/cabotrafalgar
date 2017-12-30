@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.tutorial.script.trigger;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.mod.tutorial.script.Actionable;
+import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 import com.navid.trafalgar.mod.tutorial.script.Trigger;
 
 /**
@@ -19,6 +20,12 @@ public class TimeSinceLastEvent implements Trigger {
     private long delay_milliseconds;
 
     public TimeSinceLastEvent(EventManager eventManager, long milliseconds, String ... events) {
+        this.eventManager = eventManager;
+        this.events = events;
+        this.delay_milliseconds = milliseconds;
+    }
+
+    public TimeSinceLastEvent(long milliseconds, String ... events) {
         this.eventManager = eventManager;
         this.events = events;
         this.delay_milliseconds = milliseconds;
@@ -53,5 +60,10 @@ public class TimeSinceLastEvent implements Trigger {
 
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
+    }
+
+    @Override
+    public void setScriptInterpreter(ScriptInterpreter scriptInterpreter) {
+
     }
 }

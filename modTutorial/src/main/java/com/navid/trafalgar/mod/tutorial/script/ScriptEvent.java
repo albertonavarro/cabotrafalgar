@@ -1,5 +1,7 @@
 package com.navid.trafalgar.mod.tutorial.script;
 
+import com.navid.trafalgar.manager.EventManager;
+
 import java.util.Optional;
 
 public class ScriptEvent {
@@ -52,5 +54,18 @@ public class ScriptEvent {
 
     public Optional<Boolean> isSuccessful() {
         return successful;
+    }
+
+
+    public ScriptEvent setEventManager(EventManager eventManager) {
+        trigger.setEventManager(eventManager);
+        action.setEventManager(eventManager);
+        return this;
+    }
+
+    public ScriptEvent setScriptInterpreter(ScriptInterpreter scriptInterpreter) {
+        trigger.setScriptInterpreter(scriptInterpreter);
+        action.setScriptInterpreter(scriptInterpreter);
+        return this;
     }
 }

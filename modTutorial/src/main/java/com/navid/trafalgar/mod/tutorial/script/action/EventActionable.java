@@ -16,6 +16,11 @@ public class EventActionable extends Actionable {
         this.events = events;
     }
 
+    public EventActionable(String[] events) {
+        super(null, null);
+        this.events = events;
+    }
+
     @Override
     public void action() {
         for(String event : events) {

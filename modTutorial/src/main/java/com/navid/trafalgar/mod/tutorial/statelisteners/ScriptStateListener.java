@@ -4,8 +4,7 @@ import com.google.common.base.Optional;
 import com.navid.trafalgar.manager.*;
 import com.navid.trafalgar.mod.tutorial.NavigationScreenController;
 import com.navid.trafalgar.mod.tutorial.script.ScriptEvent;
-import com.navid.trafalgar.mod.tutorial.script.chapter1.ScriptBuilder;
-import org.quartz.JobBuilder;
+import com.navid.trafalgar.model.GameConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
@@ -38,10 +37,14 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
     @Autowired
     private LoadCameraStateListener loadCameraStateListener;
 
+    @Autowired
+    private GameConfiguration gameConfiguration;
+
     @Override
     public void onInit(float tpf) {
         threadPoolTaskScheduler.initialize();
         script = new ScriptBuilder()
+                .withScript(gameConfiguration.getPreGameModel().getSingleByTypeAndName(List.class, "script"))
                 .withScriptInterpreter(navigationScreenController)
                 .withEventManager(eventManager)
                 .withLoadCameraStateListener(loadCameraStateListener).getScript();
@@ -62,6 +65,10 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
 
     public void setLoadCameraStateListener(LoadCameraStateListener loadCameraStateListener) {
         this.loadCameraStateListener = loadCameraStateListener;
+    }
+
+    public void setGameConfiguration(GameConfiguration gameConfiguration) {
+        this.gameConfiguration = gameConfiguration;
     }
 
     Optional<ScriptEvent> nextScript = getNextScript();
@@ -111,7 +118,7 @@ public class ScriptStateListener implements InitState, PrestartState, StartedSta
                         scriptEvent.setSuccessful(false);
                         scriptEvent.getAction().cleanUpAction();
                         scriptEvent.getTrigger().unregister();
-                        navigationScreenController.printMessageNotSkippeable(new String[]{"TIMEOUT!! Be faster next time. Click 0 to see menu."});
+                        navigationScreenController.printMessageNotSkippeable(new String[]{"TIMEOUT!! Be faster next time. Click ::command::system - show menu:: to see menu."});
                     }
                 }
             }, Date.from(Instant.now().plus(scriptEvent.getTimeoutMillis().get(), ChronoUnit.MILLIS)));

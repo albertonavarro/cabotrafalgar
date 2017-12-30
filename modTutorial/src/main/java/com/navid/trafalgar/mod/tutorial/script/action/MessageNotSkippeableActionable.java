@@ -16,6 +16,12 @@ public class MessageNotSkippeableActionable extends Actionable {
         withPause = false;
     }
 
+    public MessageNotSkippeableActionable(String[] messages) {
+        super(null,null);
+        this.messages = messages;
+        withPause = false;
+    }
+
     @Override
     public void action() {
         scriptInterpreter.printMessageNotSkippeable(messages);

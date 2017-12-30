@@ -3,6 +3,7 @@ package com.navid.trafalgar.mod.tutorial.script.trigger;
 import com.navid.trafalgar.manager.EventListener;
 import com.navid.trafalgar.manager.EventManager;
 import com.navid.trafalgar.mod.tutorial.script.Actionable;
+import com.navid.trafalgar.mod.tutorial.script.ScriptInterpreter;
 import com.navid.trafalgar.mod.tutorial.script.Trigger;
 
 /**
@@ -17,6 +18,11 @@ public class EventTrigger implements Trigger {
     private EventListener eventListener = null;
 
     public EventTrigger(EventManager eventManager, String ... events) {
+        this.eventManager = eventManager;
+        this.events = events;
+    }
+
+    public EventTrigger(String ... events) {
         this.eventManager = eventManager;
         this.events = events;
     }
@@ -39,5 +45,10 @@ public class EventTrigger implements Trigger {
 
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
+    }
+
+    @Override
+    public void setScriptInterpreter(ScriptInterpreter scriptInterpreter) {
+
     }
 }

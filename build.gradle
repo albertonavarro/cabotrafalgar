@@ -37,6 +37,7 @@ ext{
             jackson_jaxrs: 'org.codehaus.jackson:jackson-jaxrs:' + v.jackson,
             jackson_mapper_asl: 'org.codehaus.jackson:jackson-mapper-asl:' +v.jackson,
             jackson_core_asl: 'org.codehaus.jackson:jackson-core-asl:' +v.jackson,
+            jackson_yaml:  'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:' +v.jackson,
             //org.lwjgl.lwjgl
             jwjgl: 'org.lwjgl.lwjgl:lwjgl:' + v.lwjgl,
             //NIFTY

@@ -4,8 +4,12 @@ import com.navid.trafalgar.mod.tutorial.CommandWrapper;
 import com.navid.trafalgar.mod.tutorial.AIWrapper;
 import com.navid.trafalgar.mod.tutorial.KeyboardWrapper;
 import com.navid.trafalgar.mod.tutorial.TutorialChapter;
+import com.navid.trafalgar.mod.tutorial.script.ScriptEvent;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,12 +19,12 @@ public class Chapter2 implements TutorialChapter {
 
     @Override
     public String toString() {
-        return "Chapter 2";
+        return "02 - Sail Basics";
     }
 
     @Override
     public String getDescription() {
-        return "Get used to the rudder.";
+        return "Bring in and let go mainsail.";
     }
 
     @Override
@@ -30,7 +34,7 @@ public class Chapter2 implements TutorialChapter {
 
     @Override
     public String getMap() {
-        return "mod.tutorial.chapter1";
+        return "mod.tutorial.chapter2";
     }
 
     @Override
@@ -41,5 +45,10 @@ public class Chapter2 implements TutorialChapter {
         map.put("mainsail - bring in", new KeyboardWrapper());
         map.put("mainsail - let go", new KeyboardWrapper());
         return map;
+    }
+
+    @Override
+    public List<ScriptEvent> getScript() {
+        return null;
     }
 }

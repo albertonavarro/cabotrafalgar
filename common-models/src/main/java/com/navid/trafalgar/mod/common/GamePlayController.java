@@ -50,7 +50,7 @@ public abstract class GamePlayController implements ScreenController, SystemInte
     protected MusicManager musicManager;
 
     @Autowired
-    private GeneratorBuilder generatorBuilder;
+    protected GeneratorBuilder generatorBuilder;
 
     @Override
     public final void bind(Nifty nifty, Screen screen) {

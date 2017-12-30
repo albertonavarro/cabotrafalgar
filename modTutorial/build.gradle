@@ -16,6 +16,7 @@ dependencies {
             libs.cxf_rt_rs_client,
             libs.jackson_core_asl,
             libs.lazylogin_common_context,
+            libs.jackson_yaml,
             group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
             )
 

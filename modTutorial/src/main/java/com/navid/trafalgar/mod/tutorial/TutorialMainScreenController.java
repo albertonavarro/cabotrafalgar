@@ -80,6 +80,7 @@ public class TutorialMainScreenController extends GameMenuController {
         gameConfiguration.getPreGameModel().addToModel(modelBuilder.getBuilder(selectedChapter.getShip()).buildControls("tutorial", customValues), "player1");
         gameConfiguration.setShipName(selectedChapter.getShip());
         gameConfiguration.setMap(selectedChapter.getMap());
+        gameConfiguration.getPreGameModel().addToModel(Collections.singleton(selectedChapter.getScript()), "script");
 
         Map<Command, CommandGenerator> assignments = createAssignments(selectedChapter, gameConfiguration.getPreGameModel().getByType(AShipModelInteractive.class));
 

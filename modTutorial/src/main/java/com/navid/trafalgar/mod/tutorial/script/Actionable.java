@@ -7,9 +7,9 @@ import com.navid.trafalgar.manager.EventManager;
  */
 public abstract class Actionable {
 
-    final protected ScriptInterpreter scriptInterpreter;
+    protected ScriptInterpreter scriptInterpreter;
 
-    final protected EventManager eventManager;
+    protected EventManager eventManager;
 
     public Actionable(ScriptInterpreter scriptInterpreter, EventManager eventManager) {
         this.scriptInterpreter = scriptInterpreter;
@@ -22,4 +22,11 @@ public abstract class Actionable {
     public abstract void cleanUpAction();
 
 
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
+    }
+
+    public void setScriptInterpreter(ScriptInterpreter scriptInterpreter) {
+        this.scriptInterpreter = scriptInterpreter;
+    }
 }

@@ -28,6 +28,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by alberto on 16/04/16.
@@ -105,14 +107,29 @@ public class NavigationScreenController extends GamePlayController implements Be
     public void printMessage(String[] message) {
         screen.findElementByName("tutorialLayer").setVisible(true);
         screen.findElementByName("tutorialNextButton").setVisible(true);
-        screen.findNiftyControl("tutorialText", Label.class).setText(message[0]);
+        screen.findNiftyControl("tutorialText", Label.class).setText(translateMessage(message[0]));
+    }
+
+    private static final String PATTERN = "::(.*)::(.*)::";
+    Pattern pattern = Pattern.compile(PATTERN);
+    private String translateMessage(String original) {
+        Matcher m = pattern.matcher(original);
+        if(m.find()){
+            String type = m.group(1);
+            String subtype = m.group(2);
+            if(type.equals("command")){
+                String key = generatorBuilder.generateReport().get(subtype);
+                return translateMessage(original.replaceFirst(PATTERN, key));
+            }
+        }
+        return original;
     }
 
     @Override
     public void printMessageNotSkippeable(String[] message) {
         screen.findElementByName("tutorialLayer").setVisible(true);
         screen.findElementByName("tutorialNextButton").setVisible(false);
-        screen.findNiftyControl("tutorialText", Label.class).setText(message[0]);
+        screen.findNiftyControl("tutorialText", Label.class).setText(translateMessage(message[0]));
     }
 
     public void cleanUpMessage() {

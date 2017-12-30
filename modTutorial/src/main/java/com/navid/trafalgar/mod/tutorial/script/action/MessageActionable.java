@@ -22,6 +22,18 @@ public class MessageActionable extends Actionable {
         withPause = pause;
     }
 
+    public MessageActionable(String[] messages, boolean pause) {
+        super(null,null);
+        this.messages = messages;
+        withPause = pause;
+    }
+
+    public MessageActionable(String[] messages) {
+        super(null,null);
+        this.messages = messages;
+        withPause = true;
+    }
+
     @Override
     public void action() {
         scriptInterpreter.printMessage(messages);
